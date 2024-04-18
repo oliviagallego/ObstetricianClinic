@@ -12,6 +12,7 @@ public class Obstetrician implements Serializable{
 		this.id=id;
 	}
 	private Obstetrician() {
+		super();
 		this.name=" ";
 		this.surname=" ";
 		this.id=0;
