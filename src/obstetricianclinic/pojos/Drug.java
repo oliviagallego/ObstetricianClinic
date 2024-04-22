@@ -1,5 +1,6 @@
 package obstetricianclinic.pojos;
 import java.io.Serializable;
+import java.util.Objects;
 
 public class Drug implements Serializable{
 	private int id;
@@ -52,5 +53,19 @@ public class Drug implements Serializable{
     public String toString() {
         return "Drug [id=" + id + ", name=" + name + ", type=" + type + "]";
     }
-
+    @Override
+   	public int hashCode() {
+   		return Objects.hash(id);
+   	}
+   	@Override
+   	public boolean equals(Object obj) {
+   		if (this == obj)
+   			return true;
+   		if (obj == null)
+   			return false;
+   		if (getClass() != obj.getClass())
+   			return false;
+   		Drug other = (Drug) obj;
+   		return Objects.equals(id, other.id);
+   	}
 }

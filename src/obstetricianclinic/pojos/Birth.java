@@ -1,5 +1,6 @@
 package obstetricianclinic.pojos;
 import java.io.Serializable;
+import java.util.Objects;
 
 
 public class Birth implements Serializable{
@@ -41,4 +42,19 @@ public class Birth implements Serializable{
                 ", report='" + report + '\'' +
                 '}';
     }
+    @Override
+   	public int hashCode() {
+   		return Objects.hash(id);
+   	}
+   	@Override
+   	public boolean equals(Object obj) {
+   		if (this == obj)
+   			return true;
+   		if (obj == null)
+   			return false;
+   		if (getClass() != obj.getClass())
+   			return false;
+   		Birth other = (Birth) obj;
+   		return Objects.equals(id, other.id);
+   	}
 }
