@@ -1,5 +1,7 @@
 package obstetricianclinic.pojos;
 import java.util.Date;
+import java.util.List;
+import java.util.Objects;
 import java.io.Serializable;
 
 public class Pregnancy implements Serializable{
@@ -10,6 +12,7 @@ public class Pregnancy implements Serializable{
 	private Date dateConception;
 	
 	private String laboratoryResult;
+	private List<New_Born> bebies;
 
 	    // Constructor
 	
@@ -93,6 +96,17 @@ public class Pregnancy implements Serializable{
 		this.laboratoryResult = laboratoryResult;
 	    
 	}
+	public void addBaby(New_Born baby) {
+		if (!bebies.contains(baby)) {
+			bebies.add(baby);
+		}
+	}
+	
+	public void removeBaby(New_Born baby) {
+		if (bebies.contains(baby)) {
+			bebies.remove(baby);
+		}
+	}
 	
 	@Override
     public String toString() {
@@ -103,6 +117,22 @@ public class Pregnancy implements Serializable{
                 ", laboratoryResult='" + laboratoryResult + '\'' +
                 '}';
     }
+	@Override
+	public int hashCode() {
+		return Objects.hash(id);
+	}
+
+	@Override
+	public boolean equals(Object obj) { // toby.equals(thor)
+		if (this == obj) // Checks if both objects have the same memory reference (the same piece of paper)
+			return true;
+		if (obj == null) // If not, checks if the other object is null
+			return false;
+		if (getClass() != obj.getClass()) // If not, check if both objects are of the same class
+			return false;
+		Pregnancy other = (Pregnancy) obj; // If they are, cast the other object to this class
+		return Objects.equals(id, other.id); // Compare the appropriate attributes
+	}
 
 }
 

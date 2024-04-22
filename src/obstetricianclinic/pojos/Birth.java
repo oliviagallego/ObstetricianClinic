@@ -34,7 +34,8 @@ public class Birth implements Serializable{
     public void setReport(String report) {
         this.report = report;
     }
-    
+   
+	
     @Override
     public String toString() {
         return "Birth{" +

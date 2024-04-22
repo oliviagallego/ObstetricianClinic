@@ -1,5 +1,6 @@
 package obstetricianclinic.pojos;
 import java.util.Date;
+import java.util.List;
 import java.util.Objects;
 
 import java.io.Serializable;
@@ -10,6 +11,7 @@ public class Woman implements Serializable{
     private Integer id;
     private Date dob;
     private float weight;
+    private List<Disease> diseases;
 
     // Constructor
     public Woman(String name, String surname, Integer id, Date dob, Float weight){
@@ -18,6 +20,7 @@ public class Woman implements Serializable{
         this.id = id;
         this.dob = dob;
         this.weight = weight;
+        
     }
     
     public Woman() {
@@ -70,6 +73,17 @@ public class Woman implements Serializable{
         this.weight = weight;
     }
     
+    public void addDisease(Disease disease) {
+		if (!diseases.contains(disease)) {
+			diseases.add(disease);
+		}
+	}
+	
+	public void removeDisease(Disease disease) {
+		if (diseases.contains(disease)) {
+			diseases.remove(disease);
+		}
+	}
     @Override
     public String toString() {
         return "Woman{" +

@@ -1,5 +1,6 @@
 package obstetricianclinic.pojos;
 import java.io.Serializable;
+import java.util.List;
 import java.util.Objects;
 
 
@@ -8,6 +9,7 @@ public class Obstetrician implements Serializable{
 	private String surname;
 	private String password;
 	private int id;
+	private List<Woman> women;
 	
 	private Obstetrician(String name, String surname,String password, int id) {
 		this.name=name;
@@ -63,10 +65,17 @@ public class Obstetrician implements Serializable{
         return id;
     }
     
-    public void prescribe(){
-    	
-    }
-    
+    public void addWoman(Woman woman) {
+		if (!women.contains(woman)) {
+			women.add(woman);
+		}
+	}
+	
+	public void removeWoman(Woman woman) {
+		if (women.contains(woman)) {
+			women.remove(woman);
+		}
+	}
     // Método toString para representar el objeto como cadena
     @Override
     public String toString() {
