@@ -48,7 +48,7 @@ public class LaboratoryStaff {
     // Método toString para representación de cadena
     @Override
     public String toString() {
-        return "User{" +
+        return "LaboratoryStaff{" +
                 "id=" + id +
                 ", userName='" + userName + '\'' +
                 ", password='" + password + '\'' +
