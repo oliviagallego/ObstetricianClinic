@@ -16,15 +16,18 @@ public class New_Born implements Serializable{
 	private Float weight;
 	
 	private Gender gender;
+	private Birth birth;
+	
 	
 	  // Constructor
-    public New_Born(String name, String surname, Integer id, Date dob, Float weight, Gender gender) {
+    public New_Born(String name, String surname, Integer id, Date dob, Float weight, Gender gender,Birth birth) {
         this.name = name;
         this.surname = surname;
         this.id = id;
         this.dob = dob;
         this.weight = weight;
         this.gender = gender;
+        this.birth=birth;
     }
     
     public New_Born() {
@@ -34,6 +37,7 @@ public class New_Born implements Serializable{
         this.dob = null;
         this.weight = 0F;
         this.gender = null;
+        this.birth=null;
     }
 
 
