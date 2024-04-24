@@ -1,6 +1,5 @@
 package obstetricianclinic.ifaces;
 
-import obstetricianclinic.pojos.Pregnancy;
 import obstetricianclinic.pojos.Woman;
 import java.util.List;
 
