@@ -10,23 +10,36 @@ public class Obstetrician implements Serializable{
 	private String password;
 	private int id;
 	private List<Woman> women;
+	private List<Drug> drugs;
 	
-	private Obstetrician(String name, String surname,String password, int id) {
+	private Obstetrician(String name, String surname,String password, int id, List<Drug> drugs) {
 		this.name=name;
 		this.surname=surname;
 		this.id=id;
+		this.drugs = drugs;
 	}
 	private Obstetrician() {
 		super();
 		this.name=" ";
 		this.surname=" ";
 		this.id=0;
+		this.drugs= null;
 	}
 	 // Método público para crear instancias
-    public static Obstetrician createObstetrician(String name, String surname, String password, int id) {
-        return new Obstetrician(name, surname,password, id);
+    public static Obstetrician createObstetrician(String name, String surname, String password, int id, List<Drug> drugs) {
+        return new Obstetrician(name, surname,password, id, drugs);
     }
     
+    
+    //Getter para drugs 
+    public List<Drug> getDrugs(){
+    	return drugs;
+    }
+    
+    //Setter para drugs 
+    public void setDrugs(List<Drug> drugs){
+    	this.drugs = drugs;
+    }
     // Setter para el nombre
     public void setName(String name) {
         this.name = name;
@@ -82,7 +95,8 @@ public class Obstetrician implements Serializable{
         return "Obstetrician:" +
                 "Name:'" + name + '\'' +
                 ", surname:'" + surname + '\'' +
-                ", id:" + id;
+                ", id:" + id +
+                ", drugs: "+ drugs;
     }
     @Override
 	public int hashCode() {

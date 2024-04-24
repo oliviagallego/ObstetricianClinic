@@ -8,6 +8,7 @@ public class Drug implements Serializable{
 	private DrugName name;
 	private DrugType type;
 	private List<Disease> diseases;
+	private Obstetrician obstetrician;
 	
 	public Drug() {
 		super();
@@ -18,14 +19,26 @@ public class Drug implements Serializable{
 		this.name = null;
 		this.type = null;
 		this.diseases = null;
+		this.obstetrician = null;
 	}
 	
-	public Drug(int id, DrugName name, DrugType type, List<Disease> diseases) {
+	public Drug(int id, DrugName name, DrugType type, List<Disease> diseases, Obstetrician obstetrician) {
 		super();
 		this.id=id;
 		this.name=name;
 		this.type=type;
 		this.diseases = diseases;
+		this.obstetrician = obstetrician;
+	}
+	
+	//Getter para obstetrician
+	public Obstetrician getObstetrician() {
+		return obstetrician; 
+	}
+	
+	//Setter para obstetrician
+	public void setObstetrician(Obstetrician obstetrician) {
+		this.obstetrician = obstetrician;
 	}
 	
 	//Getter para disease
@@ -71,7 +84,7 @@ public class Drug implements Serializable{
     //Método toString
     @Override
     public String toString() {
-        return "Drug [id=" + id + ", name=" + name + ", type=" + type + ", diseases=" + diseases +"]";
+        return "Drug [id=" + id + ", name=" + name + ", type=" + type + ", diseases=" + diseases +", obstetrician=" + obstetrician + "]";
     }
     @Override
    	public int hashCode() {
