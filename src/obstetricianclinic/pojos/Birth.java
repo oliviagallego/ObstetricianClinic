@@ -1,12 +1,14 @@
 package obstetricianclinic.pojos;
 import java.io.Serializable;
+import java.util.List;
 import java.util.Objects;
 
 
 public class Birth implements Serializable{
     private Integer id;
     private String report;
-
+	private List<New_Born> bebies;
+	
     // Constructor
     public Birth(Integer id, String report) {
         this.id = id;
@@ -34,7 +36,18 @@ public class Birth implements Serializable{
     public void setReport(String report) {
         this.report = report;
     }
-   
+    
+    public void addBaby(New_Born baby) {
+		if (!bebies.contains(baby)) {
+			bebies.add(baby);
+		}
+	}
+	
+	public void removeBaby(New_Born baby) {
+		if (bebies.contains(baby)) {
+			bebies.remove(baby);
+		}
+	}
 	
     @Override
     public String toString() {

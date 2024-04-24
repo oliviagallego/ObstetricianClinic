@@ -12,7 +12,7 @@ public class Pregnancy implements Serializable{
 	private Date dateConception;
 	
 	private String laboratoryResult;
-	private List<New_Born> bebies;
+
 
 	    // Constructor
 	
@@ -96,17 +96,7 @@ public class Pregnancy implements Serializable{
 		this.laboratoryResult = laboratoryResult;
 	    
 	}
-	public void addBaby(New_Born baby) {
-		if (!bebies.contains(baby)) {
-			bebies.add(baby);
-		}
-	}
 	
-	public void removeBaby(New_Born baby) {
-		if (bebies.contains(baby)) {
-			bebies.remove(baby);
-		}
-	}
 	
 	@Override
     public String toString() {
