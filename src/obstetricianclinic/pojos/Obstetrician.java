@@ -90,7 +90,7 @@ public class Obstetrician implements Serializable{
 	}
 
 	@Override
-	public boolean equals(Object obj) { // toby.equals(thor)
+	public boolean equals(Object obj) { // toby.equals(throw)
 		if (this == obj) // Checks if both objects have the same memory reference (the same piece of paper)
 			return true;
 		if (obj == null) // If not, checks if the other object is null
