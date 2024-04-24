@@ -7,7 +7,7 @@ import java.util.Objects;
 public class Birth implements Serializable{
     private Integer id;
     private String report;
-	private List<New_Born> bebies;
+	private List<New_Born> babies;
 	
     // Constructor
     public Birth(Integer id, String report) {
@@ -38,14 +38,14 @@ public class Birth implements Serializable{
     }
     
     public void addBaby(New_Born baby) {
-		if (!bebies.contains(baby)) {
-			bebies.add(baby);
+		if (!babies.contains(baby)) {
+			babies.add(baby);
 		}
 	}
 	
 	public void removeBaby(New_Born baby) {
-		if (bebies.contains(baby)) {
-			bebies.remove(baby);
+		if (babies.contains(baby)) {
+			babies.remove(baby);
 		}
 	}
 	
