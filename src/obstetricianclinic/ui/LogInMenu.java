@@ -1,5 +1,6 @@
 package obstetricianclinic.ui;
 import obstetricianclinic.ifaces.UserManager;
+import obstetricianclinic.pojos.User;
 
 
 public abstract class LogInMenu {
@@ -16,19 +17,21 @@ public abstract class LogInMenu {
 			String username = Utilities.readString(" -Username: ");
 			String password = Utilities.readString(" -Password: ");
 
-			User user = userMan.logIn(username, password);
-			// User user = userMan.logIn("manager", "default0", "manager@bloodBank.com");
+			User user = userMan.login(username, password);
+			// User user = userMan.logIn("manager", "default0", "manager@obstetricianClinic.com");
 
 			if (user != null) {
-				if (user.getRole().getName().equals("manager")) {
-					ManagerMenu.menu(user, userMan);
-				}
-				if (user.getRole().getName().equals("nurse")) {
-					NurseMenu.menu(user.getEmail());
-				}
-			} else {
-				System.out.println("Error: Wrong username or password.");
-			}
+				String roleName = user.getRole().getName();
+                if ("Obstetrician".equals(roleName)) {
+                    ManagerMenu.menu(user, userMan);
+                } else if ("Lab Staff".equals(roleName)) {
+                    labStaffMenu.menu(user.getEmail());
+                } else {
+                    System.out.println("Access Denied: Your role is not recognized.");
+                }
+            } else {
+                System.out.println("Error: Wrong username or password.");
+            }
 		}
 	}
 }

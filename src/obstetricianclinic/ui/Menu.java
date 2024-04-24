@@ -27,8 +27,6 @@ public class Menu {
 		vetMan = new JDBCVetManager(conMan.getConnection());
 		userMan = new JPAUserManager();
 		
-		/* Login*/
-		
 		
 		while (true) {
 			try {
@@ -36,14 +34,14 @@ public class Menu {
 				System.out.println("Choose an option, please:");
 				System.out.println("1. Register woman");
 				System.out.println("2. View woman");
-				System.out.println("3. Login");
+				System.out.println("3. Change Password");
 				System.out.println("0. Exit");
 
 				int choice = Integer.parseInt(r.readLine());
 
 				switch (choice) {
 				case 1: {
-					registerOwner();
+					registerWoman();
 					break;
 				}
 				case 2: {
