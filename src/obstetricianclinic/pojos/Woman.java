@@ -12,9 +12,10 @@ public class Woman implements Serializable{
     private float weight;
     private List<Disease> diseases;
     private Obstetrician obstetrician;
+    private List<Pregnancy> pregnancies;
 
     // Constructor
-    public Woman(String name, String surname, Integer id, Date dob, Float weight, Obstetrician obstetrician, List<Disease> diseases){
+    public Woman(String name, String surname, Integer id, Date dob, Float weight, Obstetrician obstetrician, List<Disease> diseases, List<Pregnancy> pregnancies){
         this.name = name;
         this.surname = surname;
         this.id = id;
@@ -22,7 +23,7 @@ public class Woman implements Serializable{
         this.weight = weight;
         this.obstetrician = obstetrician;
         this.diseases = diseases;
-        
+        this.pregnancies = pregnancies;
     }
     
     public Woman() {
@@ -33,9 +34,13 @@ public class Woman implements Serializable{
         this.weight = 0;
         this.obstetrician = null;
         this.diseases = null;
+        this.pregnancies = null;
     }
 
     // Getters
+    public List<Pregnancy> getPregnancies(){
+    	return pregnancies;
+    }
     public String getName() {
         return name;
     }
@@ -65,6 +70,10 @@ public class Woman implements Serializable{
     }
 
     // Setters
+    
+    public void setPregnancies(List<Pregnancy> pregnancies) {
+    	this.pregnancies = pregnancies;
+    }
     public void setName(String name) {
         this.name = name;
     }
@@ -112,6 +121,8 @@ public class Woman implements Serializable{
                 ", id=" + id +
                 ", dob=" + dob +
                 ", weight=" + weight +
+                ", disease=" + diseases +
+                ", pregnancy=" + pregnancies +
                 '}';
     }
     @Override
