@@ -1,21 +1,41 @@
 package obstetricianclinic.pojos;
 import java.io.Serializable;
+import java.util.List;
 import java.util.Objects;
 
 public class Drug implements Serializable{
 	private int id;
 	private DrugName name;
 	private DrugType type;
+	private List<Disease> diseases;
 	
 	public Drug() {
 		super();
 	}
+	public Drug() {
+		super();
+		this.id=0;
+		this.name = null;
+		this.type = null;
+		this.diseases = null;
+	}
 	
-	public Drug(int id, DrugName name, DrugType type) {
+	public Drug(int id, DrugName name, DrugType type, List<Disease> diseases) {
 		super();
 		this.id=id;
 		this.name=name;
 		this.type=type;
+		this.diseases = diseases;
+	}
+	
+	//Getter para disease
+	public List<Disease> getDiseases(){
+		return diseases;
+	}
+	
+	//Setter para disease
+	public void setDiseases(List<Disease> diseases) {
+		this.diseases = diseases;
 	}
 	
 	// Getter para id
@@ -51,7 +71,7 @@ public class Drug implements Serializable{
     //Método toString
     @Override
     public String toString() {
-        return "Drug [id=" + id + ", name=" + name + ", type=" + type + "]";
+        return "Drug [id=" + id + ", name=" + name + ", type=" + type + ", diseases=" + diseases +"]";
     }
     @Override
    	public int hashCode() {

@@ -1,23 +1,38 @@
 package obstetricianclinic.pojos;
 import java.io.Serializable;
+import java.util.List;
 import java.util.Objects;
 
 public class Disease implements Serializable{
     private Integer id;
-    private TypeDisease type;
+    private TypeDisease type;//opcion 1
+    private List<Drug> drugs;//opcion 2
+    private List<Woman> women;
 
     // Constructor
-    public Disease(int id, TypeDisease type) {
+    public Disease(int id, TypeDisease type, List<Woman> women, List<Drug> drugs) {
         this.id = id;
         this.type = type;
+        this.women = women;
+        this.drugs = drugs;
     }
     
     public Disease() {
         this.id = 0;
         this.type = null;
+        this.women = null;
+        this.drugs = null;
     }
 
     // Getters
+    public List<Woman> getWomen(){
+    	return women;
+    }
+    
+    public List<Drug> getDrugs(){
+    	return drugs;
+    }
+    
     public Integer getId() {
         return id;
     }
@@ -30,9 +45,17 @@ public class Disease implements Serializable{
     public void setId(Integer id) {
         this.id = id;
     }
+    
+    public void setDrugs(List<Drug> drugs) {
+    	this.drugs = drugs;
+    }
 
     public void setType(TypeDisease type) {
         this.type = type;
+    }
+    
+    public void setWomen(List<Woman> women) {
+    	this.women = women;
     }
     
     @Override
@@ -40,6 +63,7 @@ public class Disease implements Serializable{
         return "Disease{" +
                 "id=" + id +
                 ", type=" + type +
+                ", woman= "+ women +
                 '}';
     }
     @Override
