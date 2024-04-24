@@ -90,7 +90,7 @@ public class Woman implements Serializable{
     }
     
     public void setDisease(List<Disease> diseases) {
-    	this.diseases = diseases
+    	this.diseases = diseases;
     }
     
     public void addDisease(Disease disease) {

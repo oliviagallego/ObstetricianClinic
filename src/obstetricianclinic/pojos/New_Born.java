@@ -16,6 +16,7 @@ public class New_Born implements Serializable{
 	private Float weight;
 	
 	private Gender gender;
+	
 	private Birth birth;
 	
 	
