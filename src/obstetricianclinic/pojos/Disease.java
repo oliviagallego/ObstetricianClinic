@@ -18,59 +18,56 @@ public class Disease implements Serializable{
     }
     
     public Disease() {
-        this.id = 0;
-        this.type = null;
-        this.women = null;
-        this.drugs = null;
-    }
-
-    // Getters
-    public List<Woman> getWomen(){
-    	return women;
+    	super();
     }
     
-    public List<Drug> getDrugs(){
-    	return drugs;
-    }
+    //Getter and Setter 
     
     public Integer getId() {
-        return id;
-    }
+		return id;
+	}
 
-    public TypeDisease getType() {
-        return type;
-    }
+	public void setId(Integer id) {
+		this.id = id;
+	}
 
-    // Setters
-    public void setId(Integer id) {
-        this.id = id;
-    }
-    
-    public void setDrugs(List<Drug> drugs) {
-    	this.drugs = drugs;
-    }
+	public TypeDisease getType() {
+		return type;
+	}
 
-    public void setType(TypeDisease type) {
-        this.type = type;
-    }
-    
-    public void setWomen(List<Woman> women) {
-    	this.women = women;
-    }
-    
-    @Override
-    public String toString() {
-        return "Disease{" +
-                "id=" + id +
-                ", type=" + type +
-                ", woman= "+ women +
-                '}';
-    }
-    @Override
+	public void setType(TypeDisease type) {
+		this.type = type;
+	}
+
+	public List<Drug> getDrugs() {
+		return drugs;
+	}
+
+	public void setDrugs(List<Drug> drugs) {
+		this.drugs = drugs;
+	}
+
+	public List<Woman> getWomen() {
+		return women;
+	}
+
+	public void setWomen(List<Woman> women) {
+		this.women = women;
+	}
+	
+	//ToString
+ 	@Override
+	public String toString() {
+		return "Disease [id=" + id + ", type=" + type + ", drugs=" + drugs + ", women=" + women + "]";
+	}
+	
+
+	@Override
    	public int hashCode() {
    		return Objects.hash(id);
    	}
-   	@Override
+
+	@Override
    	public boolean equals(Object obj) {
    		if (this == obj)
    			return true;
