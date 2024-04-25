@@ -13,11 +13,6 @@ public class Drug implements Serializable{
 	
 	public Drug() {
 		super();
-		this.id=0;
-		this.name = null;
-		this.type = null;
-		this.diseases = null;
-		this.obstetrician = null;
 	}
 	
 	public Drug(int id, DrugName name, DrugType type, List<Disease> diseases, Obstetrician obstetrician) {
@@ -29,66 +24,65 @@ public class Drug implements Serializable{
 		this.obstetrician = obstetrician;
 	}
 	
-	//Getter para obstetrician
-	public Obstetrician getObstetrician() {
-		return obstetrician; 
-	}
 	
-	//Setter para obstetrician
+	
+	//Getter and Setter
+    public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public DrugName getName() {
+		return name;
+	}
+
+	public void setName(DrugName name) {
+		this.name = name;
+	}
+
+	public DrugType getType() {
+		return type;
+	}
+
+	public void setType(DrugType type) {
+		this.type = type;
+	}
+
+	public List<Disease> getDiseases() {
+		return diseases;
+	}
+
+	public void setDiseases(List<Disease> diseases) {
+		this.diseases = diseases;
+	}
+
+	public Obstetrician getObstetrician() {
+		return obstetrician;
+	}
+
 	public void setObstetrician(Obstetrician obstetrician) {
 		this.obstetrician = obstetrician;
 	}
 	
-	//Getter para disease
-	public List<Disease> getDiseases(){
-		return diseases;
+	//ToString
+   	@Override
+	public String toString() {
+		return "Drug [id=" + id + ", name=" + name + ", type=" + type + ", diseases=" + diseases + ", obstetrician="
+				+ obstetrician + "]";
 	}
 	
-	//Setter para disease
-	public void setDiseases(List<Disease> diseases) {
-		this.diseases = diseases;
-	}
-	
-	// Getter para id
-    public int getId() {
-        return id;
-    }
-    
-    // Setter para id
-    public void setId(int id) {
-        this.id = id;
-    }
-    
-    // Getter para name
-    public DrugName getName() {
-        return name;
-    }
-    
-    // Setter para name
-    public void setName(DrugName name) {
-        this.name = name;
-    }
-    
-    // Getter para type
-    public DrugType getType() {
-        return type;
-    }
-    
-    // Setter para type
-    public void setType(DrugType type) {
-        this.type = type;
-    }
-    
-    //Método toString
-    @Override
-    public String toString() {
-        return "Drug [id=" + id + ", name=" + name + ", type=" + type + ", diseases=" + diseases +", obstetrician=" + obstetrician + "]";
-    }
-    @Override
+
+	@Override
    	public int hashCode() {
    		return Objects.hash(id);
    	}
-   	@Override
+	
+
+
+	@Override
    	public boolean equals(Object obj) {
    		if (this == obj)
    			return true;
