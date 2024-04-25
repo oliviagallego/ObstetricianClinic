@@ -20,65 +20,54 @@ public class Obstetrician implements Serializable{
 	}
 	private Obstetrician() {
 		super();
-		this.name=" ";
-		this.surname=" ";
-		this.id=0;
-		this.drugs= null;
 	}
+	
+	
+	//Getter and Setter
+	 public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;		
+	}
+	public String getSurname() {
+		return surname;
+	}
+	public void setSurname(String surname) {
+		this.surname = surname;
+	}
+	public String getPassword() {
+		return password;
+	}
+	public void setPassword(String password) {		
+		this.password = password;
+	}
+	public int getId() {
+		return id;	
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
+	public List<Woman> getWomen() {
+		return women;
+	}
+	public void setWomen(List<Woman> women) {
+		this.women = women;
+	}
+	public List<Drug> getDrugs() {
+		return drugs;
+	}
+	public void setDrugs(List<Drug> drugs) {
+		this.drugs = drugs;
+	}
+	
 	 // Método público para crear instancias
     public static Obstetrician createObstetrician(String name, String surname, String password, int id, List<Drug> drugs) {
         return new Obstetrician(name, surname,password, id, drugs);
     }
     
-    
-    //Getter para drugs 
-    public List<Drug> getDrugs(){
-    	return drugs;
-    }
-    
-    //Setter para drugs 
-    public void setDrugs(List<Drug> drugs){
-    	this.drugs = drugs;
-    }
-    // Setter para el nombre
-    public void setName(String name) {
-        this.name = name;
-    }
- // Setter para la contraseña
-    public void setPassword(String password) {
-        this.password = password;
-    }
-    // Getter para el nombre
-    public String getName() {
-        return name;
-    }
-
-    // Setter para el apellido
-    public void setSurname(String surname) {
-        this.surname = surname;
-    }
-    
-    // Getter para el apellido
-    public String getSurname() {
-        return surname;
-    }
-    
-    // Getter para la contraseña
-    public String getP() {
-        return password;
-    }
-    
-    // Setter para el ID
-    public void setId(int id) {
-        this.id = id;
-    }
-    
-    // Getter para el ID
-    public int getId() {
-        return id;
-    }
-    
-    public void addWoman(Woman woman) {
+   
+	public void addWoman(Woman woman) {
 		if (!women.contains(woman)) {
 			women.add(woman);
 		}
@@ -89,20 +78,22 @@ public class Obstetrician implements Serializable{
 			women.remove(woman);
 		}
 	}
-    // Método toString para representar el objeto como cadena
-    @Override
-    public String toString() {
-        return "Obstetrician:" +
-                "Name:'" + name + '\'' +
-                ", surname:'" + surname + '\'' +
-                ", id:" + id +
-                ", drugs: "+ drugs;
-    }
+	
+	
+	//ToString 
+	@Override
+	public String toString() {
+		return "Obstetrician [name=" + name + ", surname=" + surname + ", password=" + password + ", id=" + id
+				+ ", women=" + women + ", drugs=" + drugs + "]";
+	}
+	
+   
     @Override
 	public int hashCode() {
 		return Objects.hash(id);
 	}
 
+	
 	@Override
 	public boolean equals(Object obj) { // toby.equals(throw)
 		if (this == obj) // Checks if both objects have the same memory reference (the same piece of paper)
