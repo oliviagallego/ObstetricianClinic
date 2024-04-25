@@ -27,105 +27,85 @@ public class Woman implements Serializable{
     }
     
     public Woman() {
-        this.name ="";
-        this.surname ="";
-        this.id = 0;
-        this.dob = null;
-        this.weight = 0;
-        this.obstetrician = null;
-        this.diseases = null;
-        this.pregnancies = null;
+    	super();
     }
-
-    // Getters
-    public List<Pregnancy> getPregnancies(){
-    	return pregnancies;
-    }
+    
+    //Getter and Setter
+   
     public String getName() {
-        return name;
-    }
+		return name;
+	}
 
-    public String getSurname() {
-        return surname;
-    }
+	public void setName(String name) {
+		this.name = name;
+	}
 
-    public Integer getId() {
-        return id;
-    }
+	public String getSurname() {
+		return surname;
+	}
 
-    public Date getDob() {
-        return dob;
-    }
+	public void setSurname(String surname) {
+		this.surname = surname;
+	}
 
-    public Float getWeight() {
-        return weight;
-    }
-    
-    public Obstetrician getObstetrician() {
-    	return obstetrician;
-    }
-    
-    public List<Disease> getDisease(){
-    	return diseases;
-    }
+	public Integer getId() {
+		return id;
+	}
 
-    // Setters
-    
-    public void setPregnancies(List<Pregnancy> pregnancies) {
-    	this.pregnancies = pregnancies;
-    }
-    public void setName(String name) {
-        this.name = name;
-    }
+	public void setId(Integer id) {
+		this.id = id;
+	}
 
-    public void setSurname(String surname) {
-        this.surname = surname;
-    }
+	public Date getDob() {
+		return dob;
+	}
 
-    public void setId(int id) {
-        this.id = id;
-    }
+	public void setDob(Date dob) {
+		this.dob = dob;
+	}
 
-    public void setDob(Date dob) {
-        this.dob = dob;
-    }
+	public float getWeight() {
+		return weight;
+	}
 
-    public void setWeight(float weight) {
-        this.weight = weight;
-    }
-    
-    public void setObstetrician(Obstetrician obstetrician) {
-    	this.obstetrician = obstetrician;
-    }
-    
-    public void setDisease(List<Disease> diseases) {
-    	this.diseases = diseases;
-    }
-    
-    public void addDisease(Disease disease) {
-		if (!diseases.contains(disease)) {
-			diseases.add(disease);
-		}
+	public void setWeight(float weight) {
+		this.weight = weight;
+	}
+
+	public List<Disease> getDiseases() {
+		return diseases;
+	}
+
+	public void setDiseases(List<Disease> diseases) {
+		this.diseases = diseases;
+	}
+
+	public Obstetrician getObstetrician() {
+		return obstetrician;
+	}
+
+	public void setObstetrician(Obstetrician obstetrician) {
+		this.obstetrician = obstetrician;
+	}
+
+	public List<Pregnancy> getPregnancies() {
+		return pregnancies;
+	}
+
+	public void setPregnancies(List<Pregnancy> pregnancies) {
+		this.pregnancies = pregnancies;
 	}
 	
-	public void removeDisease(Disease disease) {
-		if (diseases.contains(disease)) {
-			diseases.remove(disease);
-		}
+	
+	//ToString
+
+	@Override
+	public String toString() {
+		return "Woman [name=" + name + ", surname=" + surname + ", id=" + id + ", dob=" + dob + ", weight=" + weight
+				+ ", diseases=" + diseases + ", obstetrician=" + obstetrician + ", pregnancies=" + pregnancies + "]";
 	}
-    @Override
-    public String toString() {
-        return "Woman{" +
-                "name='" + name + '\'' +
-                ", surname='" + surname + '\'' +
-                ", id=" + id +
-                ", dob=" + dob +
-                ", weight=" + weight +
-                ", disease=" + diseases +
-                ", pregnancy=" + pregnancies +
-                '}';
-    }
-    @Override
+
+	@Override
 	public int hashCode() {
 		return Objects.hash(id);
 	}
