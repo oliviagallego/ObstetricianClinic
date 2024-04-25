@@ -10,9 +10,7 @@ public class Drug implements Serializable{
 	private List<Disease> diseases;
 	private Obstetrician obstetrician;
 	
-	public Drug() {
-		super();
-	}
+	
 	public Drug() {
 		super();
 		this.id=0;
