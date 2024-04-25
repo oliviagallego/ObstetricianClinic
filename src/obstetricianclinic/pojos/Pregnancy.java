@@ -30,87 +30,64 @@ public class Pregnancy implements Serializable{
 	
 	//Constructor vacio
 	public Pregnancy() {
-		
-		this.id = 0;
-	    
-		this.dateTest = null;
-	    
-		this.dateConception = null;
-	    
-		this.laboratoryResult =""; 
+		super();
 	}
-
-	    // Getters
 	
-	public int getId() {
-	        
+	//Getter and Setter
+
+	public Integer getId() {
 		return id;
-	
 	}
 
-	
-	public Date getDateTest() {
-	
-		return dateTest;
-	    
-	}
 
-	    
-	public Date getDateConception() {
-	
-		return dateConception;
-	    
-	}
-
-	
-	public String getLaboratoryResult() {
-	
-		return laboratoryResult;
-	    
-	}
-	    // Setters
-	 
 	public void setId(Integer id) {
-	
 		this.id = id;
-	    
 	}
 
-	
+
+	public Date getDateTest() {
+		return dateTest;
+	}
+
+
 	public void setDateTest(Date dateTest) {
-	
 		this.dateTest = dateTest;
-	    
 	}
 
-	
+
+	public Date getDateConception() {
+		return dateConception;
+	}
+
+
 	public void setDateConception(Date dateConception) {
-	
 		this.dateConception = dateConception;
-	    
 	}
 
-	
+
+	public String getLaboratoryResult() {
+		return laboratoryResult;
+	}
+
+
 	public void setLaboratoryResult(String laboratoryResult) {
-	
 		this.laboratoryResult = laboratoryResult;
-	    
+	}
+
+	//ToString
+	@Override
+	public String toString() {
+		return "Pregnancy [id=" + id + ", dateTest=" + dateTest + ", dateConception=" + dateConception
+				+ ", laboratoryResult=" + laboratoryResult + "]";
 	}
 	
-	
-	@Override
-    public String toString() {
-        return "Pregnancy{" +
-                "id=" + id +
-                ", dateTest=" + dateTest +
-                ", dateConception=" + dateConception +
-                ", laboratoryResult='" + laboratoryResult + '\'' +
-                '}';
-    }
+
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);
 	}
+
+
 
 	@Override
 	public boolean equals(Object obj) { // toby.equals(thor)
