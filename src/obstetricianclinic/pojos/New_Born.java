@@ -32,117 +32,80 @@ public class New_Born implements Serializable{
     }
     
     public New_Born() {
-        this.name ="";
-        this.surname ="";
-        this.id = 0;
-        this.dob = null;
-        this.weight = 0F;
-        this.gender = null;
-        this.birth=null;
+    	super();
     }
-
-
-	    // Getters
-	    
-	public String getName() {
-	    
+    
+    //Getter and Setter
+    
+    public String getName() {
 		return name;
-	    
 	}
 
-	
-	public String getSurname() {
-	
-		return surname;
-	    
-	}
-
-	
-	public Integer getId() {
-	
-		return id;
-	    
-	}
-
-	
-	public Date getDob() {
-	
-		return dob;
-	    
-	}
-
-	
-	public Float getWeight() {
-	
-		return weight;
-	    
-	}
-
-	
-	public Gender getGender() {
-	
-		return gender;
-	    
-	}
-
-	    // Setters
-	   
 	public void setName(String name) {
-	
 		this.name = name;
-	    
 	}
 
-	
+	public String getSurname() {
+		return surname;
+	}
+
 	public void setSurname(String surname) {
-	
 		this.surname = surname;
-	    
 	}
 
-	
+	public Integer getId() {
+		return id;
+	}
+
 	public void setId(Integer id) {
-	
 		this.id = id;
-	    
 	}
 
-	
+	public Date getDob() {
+		return dob;
+	}
+
 	public void setDob(Date dob) {
-	
 		this.dob = dob;
-	    
 	}
 
-	
+	public Float getWeight() {
+		return weight;
+	}
+
 	public void setWeight(Float weight) {
-	
 		this.weight = weight;
-	    
 	}
 
-	
-	public void setGender(Gender gender) {
-	
-		this.gender = gender;
-	    
+	public Gender getGender() {
+		return gender;
 	}
+
+	public void setGender(Gender gender) {
+		this.gender = gender;
+	}
+
+	public Birth getBirth() {
+		return birth;
+	}
+
+	public void setBirth(Birth birth) {
+		this.birth = birth;
+	}
+	
+	//ToString
 	
 	@Override
-    public String toString() {
-        return "New_Born{" +
-                "name='" + name + '\'' +
-                ", surname='" + surname + '\'' +
-                ", id=" + id +
-                ", dob=" + dob +
-                ", weight=" + weight +
-                ", gender=" + gender +
-                '}';
-    }
+	public String toString() {
+		return "New_Born [name=" + name + ", surname=" + surname + ", id=" + id + ", dob=" + dob + ", weight=" + weight
+				+ ", gender=" + gender + ", birth=" + birth + "]";
+	}
+    
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);
 	}
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)

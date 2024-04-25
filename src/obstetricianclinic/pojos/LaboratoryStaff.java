@@ -6,14 +6,14 @@ public class LaboratoryStaff {
     private Integer id;
     private String userName;
     private String password;
-
-    // Constructor por defecto
+    
+    
+    
     public LaboratoryStaff(){
     	super();
     }
     	
     	
-    // Constructor normal
     public LaboratoryStaff(Integer id, String userName, String password) {
         this.id = id;
         this.userName = userName;
