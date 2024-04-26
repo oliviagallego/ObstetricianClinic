@@ -15,8 +15,7 @@ public class Birth implements Serializable{
         this.report = report;
     }
     public Birth() {
-        this.id = 0;
-        this.report ="";
+    	super();
     }
 
     // Getters
@@ -48,15 +47,13 @@ public class Birth implements Serializable{
 			babies.remove(baby);
 		}
 	}
-	
+
+
     @Override
-    public String toString() {
-        return "Birth{" +
-                "id=" + id +
-                ", report='" + report + '\'' +
-                '}';
-    }
-    @Override
+	public String toString() {
+		return "Birth [id=" + id + ", report=" + report + ", babies=" + babies + "]";
+	}
+	@Override
    	public int hashCode() {
    		return Objects.hash(id);
    	}
