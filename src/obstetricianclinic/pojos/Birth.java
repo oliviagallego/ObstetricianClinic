@@ -7,7 +7,6 @@ import java.util.Objects;
 public class Birth implements Serializable{
     private Integer id;
     private String report;
-    private String ano;
 	private List<New_Born> babies;
 	
     // Constructor
