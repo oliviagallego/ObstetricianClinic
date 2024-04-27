@@ -17,11 +17,12 @@ public class Birth implements Serializable{
     public Birth() {
     	super();
     }
-
+    
     // Getters
     public Integer getId() {
         return id;
     }
+    
 
     public String getReport() {
         return report;
