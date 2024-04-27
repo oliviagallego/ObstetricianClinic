@@ -1,11 +1,16 @@
 package obstetricianclinic.pojos;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 import java.io.Serializable;
 
 public class Woman implements Serializable{
-    private String name;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 3355504574744043511L;
+	private String name;
     private String surname;
     private Integer id;
     private Date dob;
@@ -15,24 +20,24 @@ public class Woman implements Serializable{
     private List<Pregnancy> pregnancies;
 
     // Constructor
-    public Woman(String name, String surname, Integer id, Date dob, Float weight, Obstetrician obstetrician, List<Disease> diseases, List<Pregnancy> pregnancies){
+    public Woman() {
+    	super();
+    	this.diseases = new ArrayList<Disease>();
+        this.pregnancies = new ArrayList<Pregnancy>();
+    }
+    
+    public Woman(String name, String surname, Integer id, Date dob, Float weight, Obstetrician obstetrician){
         this.name = name;
         this.surname = surname;
         this.id = id;
         this.dob = dob;
         this.weight = weight;
         this.obstetrician = obstetrician;
-        this.diseases = diseases;
-        this.pregnancies = pregnancies;
+        this.diseases = new ArrayList<Disease>();
+        this.pregnancies = new ArrayList<Pregnancy>();
     }
-    
-    public Woman() {
-    	super();
-    }
-    
-    //Getter and Setter
-   
-    public String getName() {
+
+	public String getName() {
 		return name;
 	}
 
@@ -95,20 +100,12 @@ public class Woman implements Serializable{
 	public void setPregnancies(List<Pregnancy> pregnancies) {
 		this.pregnancies = pregnancies;
 	}
-	
-	
-	//ToString
-
-	@Override
-	public String toString() {
-		return "Woman [name=" + name + ", surname=" + surname + ", id=" + id + ", dob=" + dob + ", weight=" + weight
-				+ ", diseases=" + diseases + ", obstetrician=" + obstetrician + ", pregnancies=" + pregnancies + "]";
-	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(id);
+		return Objects.hash(diseases, dob, id, name, obstetrician, pregnancies, surname, weight);
 	}
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -118,8 +115,20 @@ public class Woman implements Serializable{
 		if (getClass() != obj.getClass())
 			return false;
 		Woman other = (Woman) obj;
-		return Objects.equals(id, other.id);
+		return Objects.equals(diseases, other.diseases) && Objects.equals(dob, other.dob)
+				&& Objects.equals(id, other.id) && Objects.equals(name, other.name)
+				&& Objects.equals(obstetrician, other.obstetrician) && Objects.equals(pregnancies, other.pregnancies)
+				&& Objects.equals(surname, other.surname)
+				&& Float.floatToIntBits(weight) == Float.floatToIntBits(other.weight);
 	}
-	
+
+	@Override
+	public String toString() {
+		return "Woman [name=" + name + ", surname=" + surname + ", id=" + id + ", dob=" + dob + ", weight=" + weight
+				+ ", diseases=" + diseases + ", obstetrician=" + obstetrician + ", pregnancies=" + pregnancies + "]";
+	}
+    
+ 
+   
 }
 

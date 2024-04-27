@@ -1,96 +1,113 @@
 package obstetricianclinic.pojos;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
 public class Drug implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 2639895737396554649L;
 	private int id;
-	private DrugName name;
-	private DrugType type;
+	private String drugName;
+	private String drugType;
 	private List<Disease> diseases;
 	private Obstetrician obstetrician;
 	
 	
 	public Drug() {
 		super();
+		this.diseases = new ArrayList<Disease>();
 	}
-	
-	public Drug(int id, DrugName name, DrugType type, List<Disease> diseases, Obstetrician obstetrician) {
+
+
+	public Drug(int id, String drugName, String drugType, Obstetrician obstetrician) {
 		super();
-		this.id=id;
-		this.name=name;
-		this.type=type;
-		this.diseases = diseases;
+		this.id = id;
+		this.drugName = drugName;
+		this.drugType = drugType;
+		this.diseases = new ArrayList<Disease>();
 		this.obstetrician = obstetrician;
 	}
-	
-	
-	
-	//Getter and Setter
-    public int getId() {
+
+
+	public int getId() {
 		return id;
 	}
+
 
 	public void setId(int id) {
 		this.id = id;
 	}
 
-	public DrugName getName() {
-		return name;
+
+	public String getDrugName() {
+		return drugName;
 	}
 
-	public void setName(DrugName name) {
-		this.name = name;
+
+	public void setDrugName(String drugName) {
+		this.drugName = drugName;
 	}
 
-	public DrugType getType() {
-		return type;
+
+	public String getDrugType() {
+		return drugType;
 	}
 
-	public void setType(DrugType type) {
-		this.type = type;
+
+	public void setDrugType(String drugType) {
+		this.drugType = drugType;
 	}
+
 
 	public List<Disease> getDiseases() {
 		return diseases;
 	}
 
+
 	public void setDiseases(List<Disease> diseases) {
 		this.diseases = diseases;
 	}
+
 
 	public Obstetrician getObstetrician() {
 		return obstetrician;
 	}
 
+
 	public void setObstetrician(Obstetrician obstetrician) {
 		this.obstetrician = obstetrician;
 	}
-	
-	//ToString
-   	@Override
+
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(diseases, drugName, drugType, id, obstetrician);
+	}
+
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Drug other = (Drug) obj;
+		return Objects.equals(diseases, other.diseases) && Objects.equals(drugName, other.drugName)
+				&& Objects.equals(drugType, other.drugType) && id == other.id
+				&& Objects.equals(obstetrician, other.obstetrician);
+	}
+
+
+	@Override
 	public String toString() {
-		return "Drug [id=" + id + ", name=" + name + ", type=" + type + ", diseases=" + diseases + ", obstetrician="
-				+ obstetrician + "]";
+		return "Drug [id=" + id + ", drugName=" + drugName + ", drugType=" + drugType + ", diseases=" + diseases
+				+ ", obstetrician=" + obstetrician + "]";
 	}
 	
-
-	@Override
-   	public int hashCode() {
-   		return Objects.hash(id);
-   	}
 	
-
-
-	@Override
-   	public boolean equals(Object obj) {
-   		if (this == obj)
-   			return true;
-   		if (obj == null)
-   			return false;
-   		if (getClass() != obj.getClass())
-   			return false;
-   		Drug other = (Drug) obj;
-   		return Objects.equals(id, other.id);
-   	}
 }
