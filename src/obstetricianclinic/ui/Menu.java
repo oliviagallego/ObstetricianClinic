@@ -6,7 +6,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.List;
 import obstetricianclinic.xml.XMLManagerImpl;
 import obstetricianclinic.ifaces.BirthManager;
-import obstetricianclinic.ifaces.NewBornManager;
+import obstetricianclinic.ifaces.NewbornManager;
 import obstetricianclinic.ifaces.PregnancyManager;
 import obstetricianclinic.ifaces.WomanManager;
 
@@ -14,7 +14,7 @@ public class Menu {
 	private static BufferedReader r = new BufferedReader(new InputStreamReader(System.in));
 	private static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 	private static BirthManager birthMan;
-	private static NewBornManager newBornMan;
+	private static NewbornManager newBornMan;
 	private static PregnancyManager pregnancyMan;
 	private static WomanManager WomanMan;
 	private static UserManager userMan;
