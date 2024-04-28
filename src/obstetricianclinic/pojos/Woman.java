@@ -26,6 +26,12 @@ public class Woman implements Serializable{
         this.pregnancies = new ArrayList<Pregnancy>();
     }
     
+    public Woman(Integer id, String name, String surname) {
+    	this.id=id;
+    	this.name= name;
+    	this.surname= surname;
+    }
+    
     public Woman(String name, String surname, Integer id, Date dob, Float weight, Obstetrician obstetrician){
         this.name = name;
         this.surname = surname;

@@ -5,27 +5,83 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import obstetricianclinic.ifaces.*;
+
 public class ConnectionManager {
 	
 	private Connection c;
+	private static PregnancyManager pregnancyMan;
+	private static WomanManager womanMan;
+	private static NewbornManager newbornMan;
+	private static ObstetricianManager obstetricianMan;
+	private static DiseaseManager diseaseMan;
+	private static DrugManager drugMan;
 	
 	public ConnectionManager() {
 		try {
 			Class.forName("org.sqlite.JDBC"); // establish a connection with the database
-			Connection c = DriverManager.getConnection("jdbc:sqlite:./db/BloodBank.db");
+			c = DriverManager.getConnection("jdbc:sqlite:./db/obstetricianclinic.db");
 			c.createStatement().execute("PRAGMA foreign_keys=ON");
 			System.out.println("Database connection opened.");
 			createTables();
+			
+			this.pregnancyMan = new JDBCPregnancyManager(this);
+			this.womanMan = new JDBCWomanManager(this);
+			this.newbornMan = new JDBCNewbornManager(this);
+			this.obstetricianMan = new JDBCObstetricianManager(this);
+			this.diseaseMan = new JDBCDiseaseManager(this);
+			this.drugMan = new JDBCDrugManager(this);
+			
 		}catch (Exception e) {
 			System.out.println("Database access error");
 			e.printStackTrace();
 		}
 	}
 	
+	
+	
 	public Connection getConnection() {
 		return c;
 	}
-	
+
+
+
+	public static PregnancyManager getPregnancyMan() {
+		return pregnancyMan;
+	}
+
+
+
+	public static WomanManager getWomanMan() {
+		return womanMan;
+	}
+
+
+
+	public static NewbornManager getNewbornMan() {
+		return newbornMan;
+	}
+
+
+
+	public static ObstetricianManager getObstetricianMan() {
+		return obstetricianMan;
+	}
+
+
+
+	public static DiseaseManager getDiseaseMan() {
+		return diseaseMan;
+	}
+
+
+
+	public static DrugManager getDrugMan() {
+		return drugMan;
+	}
+
+
+
 	private void createTables() {
 		try {
 			Statement createTables1= c.createStatement();
@@ -104,8 +160,13 @@ public class ConnectionManager {
 			createTables8.executeUpdate(create8);
 			createTables8.close();
 		}catch(SQLException sqlE) {
-			System.out.println("Error in query");
-			sqlE.printStackTrace();
+			if(sqlE.getMessage().contains("already exist")) {
+				System.out.println("No need to create the tables; already there");
+			}
+			else {
+				System.out.println("Error in query");
+				sqlE.printStackTrace();
+			}
 		}
 	}
 	
