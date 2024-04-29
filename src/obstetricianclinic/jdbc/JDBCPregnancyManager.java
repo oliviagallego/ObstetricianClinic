@@ -7,7 +7,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.Date;
+import java.sql.Date;
 import java.util.List;
 
 import obstetricianclinic.ifaces.PregnancyManager;
@@ -27,7 +27,7 @@ public class JDBCPregnancyManager implements PregnancyManager {
 		try {
 		String sql= "INSERT INTO pregnancy (dateConception) " + "VALUES(?);";
 		PreparedStatement insert= c.prepareStatement(sql);
-		insert.setDate(1, dateOfConception.getDateConception());//????
+		insert.setDate(1, dateOfConception);
 		
 		insert.executeUpdate();
 		insert.close();
