@@ -3,6 +3,8 @@ package obstetricianclinic.jdbc;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.List;
+
 import obstetricianclinic.pojos.Newborn;
 import obstetricianclinic.ifaces.NewbornManager;
 import java.sql.Date;
@@ -33,6 +35,12 @@ public class JDBCNewbornManager implements NewbornManager {
 			sqlE.printStackTrace();
 		}
 
+	}
+
+	@Override
+	public List<Newborn> searchNewbornByDOB(Date dob) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }
