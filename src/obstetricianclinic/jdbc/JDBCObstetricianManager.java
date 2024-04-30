@@ -51,9 +51,20 @@ public class JDBCObstetricianManager implements ObstetricianManager {
 	}
 
 	@Override
-	public void updateObstetrician(int id, String newName, String newSpecialization) {
-		// TODO Auto-generated method stub
-
+	public void updateObstetrician(Obstetrician obs){
+		try {
+			String sql = "UPDATE obstetricians SET" + " name = ?, " + " surname = ?, " + " WHERE id = ?";
+			PreparedStatement p;
+			p = c.prepareStatement(sql);
+			p.setString(1, obs.getName());
+			p.setString(2, obs.getSurname());
+			p.setInt(3, obs.getId());
+			p.executeUpdate();
+			p.close();
+		} catch (SQLException e) {
+			System.out.println("Database error.");
+			e.printStackTrace();
+		}
 	}
 
 }
