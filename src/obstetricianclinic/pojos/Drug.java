@@ -9,7 +9,7 @@ public class Drug implements Serializable{
 	 * 
 	 */
 	private static final long serialVersionUID = 2639895737396554649L;
-	private int id;
+	private Integer id;
 	private String drugName;
 	private String drugType;
 	private List<Disease> diseases;

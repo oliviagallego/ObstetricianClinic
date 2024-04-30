@@ -13,7 +13,7 @@ public class Obstetrician implements Serializable{
 	private String name;
 	private String surname;
 	private String password;
-	private int id;
+	private Integer id;
 	private List<Woman> women;
 	private List<Drug> drugs;
 	

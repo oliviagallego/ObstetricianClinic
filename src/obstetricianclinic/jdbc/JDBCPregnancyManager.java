@@ -25,7 +25,7 @@ public class JDBCPregnancyManager implements PregnancyManager {
 	@Override
 	public void addPregnancy(Date dateOfConception) {
 		try {
-		String sql= "INSERT INTO pregnancy (dateConception) " + "VALUES(?);";
+		String sql= "INSERT INTO pregnancies (dateConception) " + "VALUES(?);";
 		PreparedStatement insert= c.prepareStatement(sql);
 		insert.setDate(1, dateOfConception);
 		

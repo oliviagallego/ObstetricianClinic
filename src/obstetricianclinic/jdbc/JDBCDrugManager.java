@@ -1,8 +1,11 @@
 package obstetricianclinic.jdbc;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 
 import obstetricianclinic.ifaces.DrugManager;
+import obstetricianclinic.pojos.Drug;
 
 public class JDBCDrugManager implements DrugManager {
 	private ConnectionManager conMan;
@@ -14,8 +17,20 @@ public class JDBCDrugManager implements DrugManager {
 	}
 
 	@Override
-	public void addDrug(String name, String description) {
-		// TODO Auto-generated method stub
+	public void addDrug(Drug drug) {
+		try {
+			String sql= "INSERT INTO drugs (drugName, drugType) " + "VALUES(?,?);";
+			PreparedStatement insert= c.prepareStatement(sql);
+			insert.setString(1, drug.getDrugName());
+			insert.setString(2, drug.getDrugType());
+			
+			insert.executeUpdate();
+			insert.close();
+			
+			}catch(SQLException sqlE) {
+				System.out.println("Database exception");
+				sqlE.printStackTrace();
+			}
 
 	}
 

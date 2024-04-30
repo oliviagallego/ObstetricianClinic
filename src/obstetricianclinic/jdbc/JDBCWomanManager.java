@@ -21,7 +21,21 @@ public class JDBCWomanManager implements WomanManager {
 
 	@Override
 	public void resgisterWoman(Woman woman) {
-		// TODO Auto-generated method stub
+		try {
+			String sql= "INSERT INTO women (name, surname, dob, weight) " + "VALUES(?,?,?,?);";
+			PreparedStatement insert= c.prepareStatement(sql);
+			insert.setString(1, woman.getName());
+			insert.setString(2, woman.getSurname());
+			insert.setDate(3, woman.getDob());
+			insert.setFloat(4, woman.getWeight());
+			
+			insert.executeUpdate();
+			insert.close();
+			
+			}catch(SQLException sqlE) {
+				System.out.println("Database exception");
+				sqlE.printStackTrace();
+			}
 
 	}
 
