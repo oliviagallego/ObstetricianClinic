@@ -83,7 +83,20 @@ public class JDBCWomanManager implements WomanManager {
 
 	@Override
 	public void updateWoman(Woman woman) {
-		// TODO Auto-generated method stub
+		try {
+			String sql = "UPDATE women SET" + " name = ?, " + " surname = ?, " + " dob = ? " + " weight = ? "+ " WHERE id = ?";
+			PreparedStatement p;
+			p = c.prepareStatement(sql);
+			p.setString(1, woman.getName());
+			p.setString(2, woman.getSurname());
+			p.setDate(3, woman.getDob());
+			p.setFloat(4, woman.getWeight());
+			p.executeUpdate();
+			p.close();
+		} catch (SQLException e) {
+			System.out.println("Database error.");
+			e.printStackTrace();
+		}
 
 	}
 
