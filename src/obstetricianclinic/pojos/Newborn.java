@@ -1,6 +1,6 @@
 package obstetricianclinic.pojos;
 import java.io.Serializable;
-import java.util.Date;
+import java.sql.Date;
 import java.util.Objects;
 
 public class Newborn implements Serializable{
@@ -37,6 +37,17 @@ public class Newborn implements Serializable{
 		this.gender = gender;
 		this.pregnancy = pregnancy;
 	}
+	
+	public Newborn(String name, String surname, Date dob, Float weight, String gender) {
+		super();
+		this.name = name;
+		this.surname = surname;
+		this.dob = dob;
+		this.weight = weight;
+		this.gender = gender;
+	}
+	
+	
 	public String getName() {
 		return name;
 	}

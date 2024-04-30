@@ -1,6 +1,9 @@
 package obstetricianclinic.jdbc;
 
 import java.sql.Connection;
+import obstetricianclinic.pojos.*;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 
 import obstetricianclinic.ifaces.ObstetricianManager;
 
@@ -14,8 +17,20 @@ public class JDBCObstetricianManager implements ObstetricianManager {
 	}
 
 	@Override
-	public void addObstetrician(String name, String specialization) {
-		// TODO Auto-generated method stub
+	public void addObstetrician(Obstetrician obstetrician) {
+	try {
+		String query = "INSERT INTO obstetricians (name, surname, password, id) VALUES (?, ?, ?, ?);";
+		PreparedStatement insert = c.prepareStatement(query);
+		insert.setString(1, obstetrician.getName());
+		insert.setString(2, obstetrician.getSurname());
+		insert.setString(3, obstetrician.getPassword());
+		insert.setInt(4, obstetrician.getId());
+		insert.executeUpdate();
+		insert.close();
+	}catch(SQLException sqlE) {
+		System.out.println("Database exception");
+		sqlE.printStackTrace();
+	}
 
 	}
 
