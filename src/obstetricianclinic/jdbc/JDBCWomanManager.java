@@ -41,7 +41,17 @@ public class JDBCWomanManager implements WomanManager {
 
 	@Override
 	public void deleteWoman(int id) {
-		// TODO Auto-generated method stub
+		try {
+			String sql = "DELETE FROM womans WHERE id = ?";
+			PreparedStatement p;
+			p = c.prepareStatement(sql);
+			p.setInt(1, id);
+			p.executeUpdate();
+			p.close();
+		} catch (SQLException e) {
+			System.out.println("Database error.");
+			e.printStackTrace();
+		}
 
 	}
 
