@@ -51,7 +51,9 @@ public class Disease implements Serializable{
 	public void setWomen(List<Woman> women) {
 		this.women = women;
 	}
-
+	public String getDrug() {
+		return drug;
+	}
 	@Override
 	public int hashCode() {
 		return Objects.hash(diseaseType, id, women);
