@@ -11,13 +11,13 @@ public class Disease implements Serializable{
 	private static final long serialVersionUID = -1079965302432167439L;
 	private Integer id;
     private String diseaseType;
+    private String drug;
     private List<Woman> women;
-    private List<Drug> drugs;
     
     public Disease() {
     	super();
     	this.women = new ArrayList<Woman>();
-		this.drugs = new ArrayList<Drug>();
+    	this.drug = assignDrugBasedOnDiseaseType(this.diseaseType);
     }
     
 	public Disease(Integer id, String diseaseType) {
@@ -25,7 +25,7 @@ public class Disease implements Serializable{
 		this.id = id;
 		this.diseaseType = diseaseType;
 		this.women = new ArrayList<Woman>();
-		this.drugs = new ArrayList<Drug>();
+		this.drug = assignDrugBasedOnDiseaseType(this.diseaseType);
 	}
 
 	public Integer getId() {
@@ -52,17 +52,9 @@ public class Disease implements Serializable{
 		this.women = women;
 	}
 
-	public List<Drug> getDrugs() {
-		return drugs;
-	}
-
-	public void setDrugs(List<Drug> drugs) {
-		this.drugs = drugs;
-	}
-
 	@Override
 	public int hashCode() {
-		return Objects.hash(diseaseType, drugs, id, women);
+		return Objects.hash(diseaseType, id, women);
 	}
 
 	@Override
@@ -74,14 +66,28 @@ public class Disease implements Serializable{
 		if (getClass() != obj.getClass())
 			return false;
 		Disease other = (Disease) obj;
-		return Objects.equals(diseaseType, other.diseaseType) && Objects.equals(drugs, other.drugs)
-				&& Objects.equals(id, other.id) && Objects.equals(women, other.women);
+		return Objects.equals(diseaseType, other.diseaseType)&& Objects.equals(id, other.id) 
+				&& Objects.equals(women, other.women);
 	}
 
 	@Override
 	public String toString() {
-		return "Disease [id=" + id + ", diseaseType=" + diseaseType + ", women=" + women + ", drugs=" + drugs + "]";
+		return "Disease [id=" + id + ", diseaseType=" + diseaseType + ", women=" + women + "]";
 	}
-
+	private String assignDrugBasedOnDiseaseType(String diseaseType) {
+        if (diseaseType == null) {
+            return "";
+        }
+        switch (diseaseType.toLowerCase()) {
+            case "anemia":
+                return "Paracetamol and Fisiogen";
+            case "hypothyroidism":
+                return "Enantyum";
+            case "urinary tract infection":
+                return "Monurol";
+            default:
+                return "No drug assigned";
+        }
+    }
     
 }

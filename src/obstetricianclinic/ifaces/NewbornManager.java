@@ -5,7 +5,10 @@ import java.util.List;
 import obstetricianclinic.pojos.*;
 
 public interface NewbornManager {
-		public void addNewborn(Newborn newborn);
-		public List<Newborn> searchNewbornByDOB(Date dob);
+	public void registerNewborn(Newborn newborn);
+	public Newborn selectNewborn(int id);
+	public void updateNewborn(Newborn newborn);
+	public void deleteNewborn(int id);
+	public List<Newborn> listNewbornsForPregnancy(int pregnancyId);
 	}
 

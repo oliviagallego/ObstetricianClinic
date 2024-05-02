@@ -1,8 +1,6 @@
 package obstetricianclinic.pojos;
 import java.util.ArrayList;
-import java.sql.Date;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 import java.io.Serializable;
 
 public class Woman implements Serializable{

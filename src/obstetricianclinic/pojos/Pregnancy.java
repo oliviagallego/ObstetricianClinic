@@ -1,9 +1,6 @@
 package obstetricianclinic.pojos;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 import java.io.Serializable;
-import java.sql.Date;
 
 public class Pregnancy implements Serializable{
 	/**
@@ -17,28 +14,26 @@ public class Pregnancy implements Serializable{
 	
 	private Date dateConception;
 	
-	private String laboratoryResult;
-	
 	private String birthReport;
 	
 	private List<Newborn> newborns;
 	
 	private Woman woman;
-	
-	public Pregnancy() {
-		super();
-		this.newborns = new ArrayList<Newborn>();
-	}
 
-	public Pregnancy(Integer id, Date dateTest, Date dateConception, String laboratoryResult, String birthReport, Woman woman) {
+	public Pregnancy(Integer id, Date dateTest, Date dateConception, String birthReport, List<Newborn> newborns,
+			Woman woman) {
 		super();
 		this.id = id;
 		this.dateTest = dateTest;
 		this.dateConception = dateConception;
-		this.laboratoryResult = laboratoryResult;
 		this.birthReport = birthReport;
-		this.newborns = new ArrayList<Newborn>();
+		this.newborns = newborns;
 		this.woman = woman;
+	}
+
+	public Pregnancy(List<Newborn> newborns) {
+		super();
+		this.newborns = newborns;
 	}
 
 	public Integer getId() {
@@ -63,14 +58,6 @@ public class Pregnancy implements Serializable{
 
 	public void setDateConception(Date dateConception) {
 		this.dateConception = dateConception;
-	}
-
-	public String getLaboratoryResult() {
-		return laboratoryResult;
-	}
-
-	public void setLaboratoryResult(String laboratoryResult) {
-		this.laboratoryResult = laboratoryResult;
 	}
 
 	public String getBirthReport() {
@@ -99,7 +86,7 @@ public class Pregnancy implements Serializable{
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(birthReport, dateConception, dateTest, id, laboratoryResult, newborns, woman);
+		return Objects.hash(birthReport, dateConception, dateTest, id, newborns, woman);
 	}
 
 	@Override
@@ -113,15 +100,13 @@ public class Pregnancy implements Serializable{
 		Pregnancy other = (Pregnancy) obj;
 		return Objects.equals(birthReport, other.birthReport) && Objects.equals(dateConception, other.dateConception)
 				&& Objects.equals(dateTest, other.dateTest) && Objects.equals(id, other.id)
-				&& Objects.equals(laboratoryResult, other.laboratoryResult) && Objects.equals(newborns, other.newborns)
-				&& Objects.equals(woman, other.woman);
+				&& Objects.equals(newborns, other.newborns) && Objects.equals(woman, other.woman);
 	}
 
 	@Override
 	public String toString() {
 		return "Pregnancy [id=" + id + ", dateTest=" + dateTest + ", dateConception=" + dateConception
-				+ ", laboratoryResult=" + laboratoryResult + ", birthReport=" + birthReport + ", newborns=" + newborns
-				+ ", woman=" + woman + "]";
+				+ ", birthReport=" + birthReport + ", newborns=" + newborns + ", woman=" + woman + "]";
 	}
 	
 	

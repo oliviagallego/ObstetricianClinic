@@ -15,12 +15,10 @@ public class Obstetrician implements Serializable{
 	private String password;
 	private Integer id;
 	private List<Woman> women;
-	private List<Drug> drugs;
 	
 	public Obstetrician() {
 		super();
 		this.women = new ArrayList<Woman>();
-		this.drugs = new ArrayList<Drug>();
 	}
 	
 	public Obstetrician(String name, String surname, String password, int id) {
@@ -30,7 +28,6 @@ public class Obstetrician implements Serializable{
 		this.password = password;
 		this.id = id;
 		this.women = new ArrayList<Woman>();
-		this.drugs = new ArrayList<Drug>();
 	}
 
 	public String getName() {
@@ -73,17 +70,10 @@ public class Obstetrician implements Serializable{
 		this.women = women;
 	}
 
-	public List<Drug> getDrugs() {
-		return drugs;
-	}
-
-	public void setDrugs(List<Drug> drugs) {
-		this.drugs = drugs;
-	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(drugs, id, name, password, surname, women);
+		return Objects.hash(id, name, password, surname, women);
 	}
 
 	@Override
@@ -95,16 +85,16 @@ public class Obstetrician implements Serializable{
 		if (getClass() != obj.getClass())
 			return false;
 		Obstetrician other = (Obstetrician) obj;
-		return Objects.equals(drugs, other.drugs) && id == other.id && Objects.equals(name, other.name)
+		return Objects.equals(id, other.id) && Objects.equals(name, other.name)
 				&& Objects.equals(password, other.password) && Objects.equals(surname, other.surname)
 				&& Objects.equals(women, other.women);
 	}
 
 	@Override
 	public String toString() {
-		return "Obstetrician [name=" + name + ", surname=" + surname + ", password=" + password + ", id=" + id
-				+ ", women=" + women + ", drugs=" + drugs + "]";
+		return "obstetrician [name=" + name + ", surname=" + surname + ", password=" + password + ", id=" + id
+				+ ", women=" + women + "]";
 	}
-	
+
 	
 }
