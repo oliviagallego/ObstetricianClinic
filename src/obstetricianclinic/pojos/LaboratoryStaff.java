@@ -5,17 +5,21 @@ import java.util.Objects;
 
 public class LaboratoryStaff {
 	private static final long serialVersionUID = -1079965302432167439L;
-    private Integer id;
+    private Integer id;private String name;
+	private String surname;
     private List<LabReport> labReports;
     
-	public LaboratoryStaff() {
+    
+	public LaboratoryStaff(List<LabReport> labReports) {
 		super();
-		// TODO Auto-generated constructor stub
+		this.labReports = labReports;
 	}
 
-	public LaboratoryStaff(Integer id, List<LabReport> labReports) {
+	public LaboratoryStaff(Integer id, String name, String surname, List<LabReport> labReports) {
 		super();
 		this.id = id;
+		this.name = name;
+		this.surname = surname;
 		this.labReports = labReports;
 	}
 
@@ -27,6 +31,22 @@ public class LaboratoryStaff {
 		this.id = id;
 	}
 
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getSurname() {
+		return surname;
+	}
+
+	public void setSurname(String surname) {
+		this.surname = surname;
+	}
+
 	public List<LabReport> getLabReports() {
 		return labReports;
 	}
@@ -35,11 +55,9 @@ public class LaboratoryStaff {
 		this.labReports = labReports;
 	}
 
-	
-
 	@Override
 	public int hashCode() {
-		return Objects.hash(id, labReports);
+		return Objects.hash(id, labReports, name, surname);
 	}
 
 	@Override
@@ -51,14 +69,14 @@ public class LaboratoryStaff {
 		if (getClass() != obj.getClass())
 			return false;
 		LaboratoryStaff other = (LaboratoryStaff) obj;
-		return Objects.equals(id, other.id) && Objects.equals(labReports, other.labReports);
+		return Objects.equals(id, other.id) && Objects.equals(labReports, other.labReports)
+				&& Objects.equals(name, other.name) && Objects.equals(surname, other.surname);
 	}
 
 	@Override
 	public String toString() {
-		return "laboratoryStaff [id=" + id + ", userName=" + ", labReports="+ labReports + "]";
+		return "LaboratoryStaff [id=" + id + ", name=" + name + ", surname=" + surname + ", labReports=" + labReports
+				+ "]";
 	}
-    
-    
 
 }
