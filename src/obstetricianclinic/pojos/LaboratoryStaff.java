@@ -6,8 +6,6 @@ import java.util.Objects;
 public class LaboratoryStaff {
 	private static final long serialVersionUID = -1079965302432167439L;
     private Integer id;
-    private String userName;
-    private String password;
     private List<LabReport> labReports;
     
 	public LaboratoryStaff() {

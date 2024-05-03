@@ -7,14 +7,12 @@ public class LabReport implements Serializable{
 	private LaboratoryStaff labStaff;
 	private Date dateTest;
 	private boolean pregnant;
-	private Disease disease;
 	
-	public LabReport(LaboratoryStaff labStaff, Date dateTest, boolean pregnant, Disease disease) {
+	public LabReport(LaboratoryStaff labStaff, Date dateTest, boolean pregnant) {
 		super();
 		this.labStaff = labStaff;
 		this.dateTest = dateTest;
 		this.pregnant = pregnant;
-		this.disease = disease;
 	}
 
 	public LabReport() {
@@ -45,17 +43,9 @@ public class LabReport implements Serializable{
 		this.pregnant = pregnant;
 	}
 
-	public Disease getDisease() {
-		return disease;
-	}
-
-	public void setDisease(Disease disease) {
-		this.disease = disease;
-	}
-
 	@Override
 	public int hashCode() {
-		return Objects.hash(dateTest, disease, labStaff, pregnant);
+		return Objects.hash(dateTest, labStaff, pregnant);
 	}
 
 	@Override
@@ -67,14 +57,13 @@ public class LabReport implements Serializable{
 		if (getClass() != obj.getClass())
 			return false;
 		LabReport other = (LabReport) obj;
-		return Objects.equals(dateTest, other.dateTest) && Objects.equals(disease, other.disease)
-				&& Objects.equals(labStaff, other.labStaff) && pregnant == other.pregnant;
+		return Objects.equals(dateTest, other.dateTest)&& Objects.equals(labStaff, other.labStaff) && pregnant == other.pregnant;
 	}
 
 	@Override
 	public String toString() {
 		return "labReport [labStaff=" + labStaff + ", dateTest=" + dateTest + ", pregnant=" + pregnant + ", disease="
-				+ disease + "]";
+				+ "]";
 	}
 	
 	

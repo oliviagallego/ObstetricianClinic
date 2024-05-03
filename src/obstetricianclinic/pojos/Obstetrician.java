@@ -12,7 +12,6 @@ public class Obstetrician implements Serializable{
 	private static final long serialVersionUID = -7562122036761305186L;
 	private String name;
 	private String surname;
-	private String password;
 	private Integer id;
 	private List<Woman> women;
 	
