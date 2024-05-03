@@ -15,7 +15,6 @@ public class ConnectionManager {
 	private static NewbornManager newbornMan;
 	private static ObstetricianManager obstetricianMan;
 	private static DiseaseManager diseaseMan;
-	private static DrugManager drugMan;
 	
 	public ConnectionManager() {
 		try {
