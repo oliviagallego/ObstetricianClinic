@@ -13,11 +13,9 @@ public class LaboratoryStaff {
 		// TODO Auto-generated constructor stub
 	}
 
-	public LaboratoryStaff(Integer id, String userName, String password, List<LabReport> labReports) {
+	public LaboratoryStaff(Integer id, List<LabReport> labReports) {
 		super();
 		this.id = id;
-		this.userName = userName;
-		this.password = password;
 		this.labReports = labReports;
 	}
 
@@ -27,22 +25,6 @@ public class LaboratoryStaff {
 
 	public void setId(Integer id) {
 		this.id = id;
-	}
-
-	public String getUserName() {
-		return userName;
-	}
-
-	public void setUserName(String userName) {
-		this.userName = userName;
-	}
-
-	public String getPassword() {
-		return password;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
 	}
 
 	public List<LabReport> getLabReports() {
@@ -57,7 +39,7 @@ public class LaboratoryStaff {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(id, labReports, password, userName);
+		return Objects.hash(id, labReports);
 	}
 
 	@Override
@@ -69,14 +51,12 @@ public class LaboratoryStaff {
 		if (getClass() != obj.getClass())
 			return false;
 		LaboratoryStaff other = (LaboratoryStaff) obj;
-		return Objects.equals(id, other.id) && Objects.equals(labReports, other.labReports)
-				&& Objects.equals(password, other.password) && Objects.equals(userName, other.userName);
+		return Objects.equals(id, other.id) && Objects.equals(labReports, other.labReports);
 	}
 
 	@Override
 	public String toString() {
-		return "laboratoryStaff [id=" + id + ", userName=" + userName + ", password=" + password + ", labReports="
-				+ labReports + "]";
+		return "laboratoryStaff [id=" + id + ", userName=" + ", labReports="+ labReports + "]";
 	}
     
     
