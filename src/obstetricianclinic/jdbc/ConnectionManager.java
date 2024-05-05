@@ -15,6 +15,8 @@ public class ConnectionManager {
 	private static NewbornManager newbornMan;
 	private static ObstetricianManager obstetricianMan;
 	private static DiseaseManager diseaseMan;
+	private static LabReportManager labReportMan;
+	private static LabStaffManager labStaffMan;
 	
 	public ConnectionManager() {
 		try {
@@ -29,7 +31,8 @@ public class ConnectionManager {
 			this.newbornMan = new JDBCNewbornManager(this);
 			this.obstetricianMan = new JDBCObstetricianManager(this);
 			this.diseaseMan = new JDBCDiseaseManager(this);
-			this.drugMan = new JDBCDrugManager(this);
+			this.labReportMan= new JDBCLabReportManager();//preguntar
+			this.labStaffMan= new JDBCLabStaffManager();
 			
 		}catch (Exception e) {
 			System.out.println("Database access error");
@@ -39,9 +42,11 @@ public class ConnectionManager {
 	
 	
 	
-	public Connection getConnection() {
+
+	public Connection getC() {
 		return c;
 	}
+
 
 
 
@@ -51,9 +56,11 @@ public class ConnectionManager {
 
 
 
+
 	public static WomanManager getWomanMan() {
 		return womanMan;
 	}
+
 
 
 
@@ -63,9 +70,11 @@ public class ConnectionManager {
 
 
 
+
 	public static ObstetricianManager getObstetricianMan() {
 		return obstetricianMan;
 	}
+
 
 
 
@@ -75,9 +84,18 @@ public class ConnectionManager {
 
 
 
-	public static DrugManager getDrugMan() {
-		return drugMan;
+
+	public static LabReportManager getLabReportMan() {
+		return labReportMan;
 	}
+
+
+
+
+	public static LabStaffManager getLabStaffMan() {
+		return labStaffMan;
+	}
+
 
 
 
@@ -107,26 +125,26 @@ public class ConnectionManager {
 			Statement createTables3= c.createStatement();
 			String create3= "CREATE TABLE disease ("
 					+ "id INTEGER PRIMARY KEY AUTOINCREMENT,"
-					+ "type TEXT NOT NULL)";
+					+ "type_Disease TEXT NOT NULL,"
+					+ "drug TEXT)";
 			createTables3.executeUpdate(create3);
 			createTables3.close();
 			
 			Statement createTables4= c.createStatement();
-			String create4= "CREATE TABLE drug ("
+			String create4= "CREATE TABLE laboratoryReport ("
 					+ "id INTEGER PRIMARY KEY AUTOINCREMENT,"
-					+ "name TEXT NOT NULL,"
-					+ "type TEXT NOT NULL,"
-					+ "obstetrician_id INTEGER REFERENCES obstetrician(id))";
+					+ "date_test DATE NOT NULL,"
+					+ "pregnant TEXT NOT NULL(pregnant='positive' OR pregnant='negative',"
+					+ "laboratoryStaff_id INTEGER REFERENCES laboratoryStaff(id),"
+					+ "woman_id INTEGER REFERENCES woman(id))";
 			createTables4.executeUpdate(create4);
 			createTables4.close();
 			
 			Statement createTables5= c.createStatement();
 			String create5= "CREATE TABLE pregnancy ("
 					+ "id INTEGER PRIMARY KEY AUTOINCREMENT,"
-					+ "laboratory_results TEXT NOT NULL(laboratory_results='positive' OR laboratory_results='negative'),"
-					+ "date_conception DATE,"
-					+ "date_test DATE NOT NULL,"
-					+ "birth_report TEXT,"
+					+ "date_conception DATE NOT NULL,"
+					+ "birth_report TEXT NOT NULL,"
 					+ "woman_id INTEGER REFERENCES woman(id))";
 			createTables5.executeUpdate(create5);
 			createTables5.close();
@@ -144,20 +162,22 @@ public class ConnectionManager {
 			createTables6.close();
 			
 			Statement createTables7= c.createStatement();
-			String create7= "CREATE TABLE woman_disease ("
-					+ "woman_id INTEGER REFERENCES woman(id),"
-					+ "disease_id INTEGER REFERENCES disease(id)"
-					+ "PRIMARY KEY(woman_id, disease_id))";
+			String create7= "CREATE TABLE laboratoryStaff ("
+					+ "id INTEGER PRIMARY KEY AUTOINCREMENT,"
+					+ "name TEXT NOT NULL,"
+					+ "surname TEXT NOT NULL)";
 			createTables7.executeUpdate(create7);
 			createTables7.close();
 			
 			Statement createTables8= c.createStatement();
-			String create8= "CREATE TABLE woman_drug ("
+			String create8= "CREATE TABLE woman_disease ("
 					+ "woman_id INTEGER REFERENCES woman(id),"
-					+ "drug_id INTEGER REFERENCES drug(id)"
-					+ "PRIMARY KEY(woman_id, drug_id))";
+					+ "disease_id INTEGER REFERENCES disease(id)"
+					+ "PRIMARY KEY(woman_id, disease_id))";
 			createTables8.executeUpdate(create8);
 			createTables8.close();
+			
+			
 		}catch(SQLException sqlE) {
 			if(sqlE.getMessage().contains("already exist")) {
 				System.out.println("No need to create the tables; already there");

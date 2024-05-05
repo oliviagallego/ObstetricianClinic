@@ -72,6 +72,11 @@ public class JDBCPregnancyManager implements PregnancyManager {
 		// TODO Auto-generated method stub
 		
 	}
-	
+
+	@Override
+	public void updatePregnancy(Pregnancy pregnancy) {
+		// TODO Auto-generated method stub
+		
+	}
 
 }
