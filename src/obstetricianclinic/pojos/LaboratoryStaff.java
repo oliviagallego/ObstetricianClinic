@@ -1,26 +1,32 @@
 package obstetricianclinic.pojos;
 
+import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-public class LaboratoryStaff {
-	private static final long serialVersionUID = -1079965302432167439L;
-    private Integer id;private String name;
+public class LaboratoryStaff implements Serializable{
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -7699206787024615940L;
+	private Integer id;
+	private String name;
 	private String surname;
     private List<LabReport> labReports;
     
     
-	public LaboratoryStaff(List<LabReport> labReports) {
+	public LaboratoryStaff() {
 		super();
-		this.labReports = labReports;
+		this.labReports = new ArrayList<LabReport>();
 	}
 
-	public LaboratoryStaff(Integer id, String name, String surname, List<LabReport> labReports) {
+	public LaboratoryStaff(Integer id, String name, String surname) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.surname = surname;
-		this.labReports = labReports;
+		this.labReports = new ArrayList<LabReport>();
 	}
 
 	public Integer getId() {

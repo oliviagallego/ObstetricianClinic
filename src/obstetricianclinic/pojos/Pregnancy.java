@@ -20,20 +20,19 @@ public class Pregnancy implements Serializable{
 	
 	private Woman woman;
 
-	public Pregnancy(Integer id, Date dateTest, Date dateConception, String birthReport, List<Newborn> newborns,
-			Woman woman) {
+	public Pregnancy(Integer id, Date dateTest, Date dateConception, String birthReport, Woman woman) {
 		super();
 		this.id = id;
 		this.dateTest = dateTest;
 		this.dateConception = dateConception;
 		this.birthReport = birthReport;
-		this.newborns = newborns;
+		this.newborns = new ArrayList<Newborn>();
 		this.woman = woman;
 	}
 
-	public Pregnancy(List<Newborn> newborns) {
+	public Pregnancy() {
 		super();
-		this.newborns = newborns;
+		this.newborns = new ArrayList<Newborn>();
 	}
 
 	public Integer getId() {

@@ -54,9 +54,11 @@ public class Disease implements Serializable{
 	public String getDrug() {
 		return drug;
 	}
+	
+	
 	@Override
 	public int hashCode() {
-		return Objects.hash(diseaseType, id, women);
+		return Objects.hash(diseaseType, drug, id, women);
 	}
 
 	@Override
@@ -68,14 +70,15 @@ public class Disease implements Serializable{
 		if (getClass() != obj.getClass())
 			return false;
 		Disease other = (Disease) obj;
-		return Objects.equals(diseaseType, other.diseaseType)&& Objects.equals(id, other.id) 
-				&& Objects.equals(women, other.women);
+		return Objects.equals(diseaseType, other.diseaseType) && Objects.equals(drug, other.drug)
+				&& Objects.equals(id, other.id) && Objects.equals(women, other.women);
 	}
 
 	@Override
 	public String toString() {
-		return "Disease [id=" + id + ", diseaseType=" + diseaseType + ", women=" + women + "]";
+		return "Disease [id=" + id + ", diseaseType=" + diseaseType + ", drug=" + drug + ", women=" + women + "]";
 	}
+
 	private String assignDrugBasedOnDiseaseType(String diseaseType) {
         if (diseaseType == null) {
             return "";
@@ -91,5 +94,4 @@ public class Disease implements Serializable{
                 return "No drug assigned";
         }
     }
-    
 }

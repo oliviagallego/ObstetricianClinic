@@ -3,39 +3,35 @@ import java.util.*;
 import java.io.Serializable;
 
 public class LabReport implements Serializable{
-	private static final long serialVersionUID = -7562122036761305186L;
-	private LabStaff labStaff;
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1322009778992795425L;
+	private Integer id;
 	private Date dateTest;
 	private boolean pregnant;
-	private Disease disease;
+	private Woman woman;
+	private LaboratoryStaff laboratoryStaff;
 	
-	public LabReport(LabStaff labStaff, Date dateTest, boolean pregnant, Disease disease) {
-		super();
-		this.labStaff = labStaff;
-		this.dateTest = dateTest;
-		this.pregnant = pregnant;
-		this.disease = disease;
-	}
-	
-
-	public LabReport(LabStaff labStaff, Date dateTest, boolean pregnant) {
-		super();
-		this.labStaff = labStaff;
-		this.dateTest = dateTest;
-		this.pregnant = pregnant;
-	}
-
-
 	public LabReport() {
 		super();
 	}
 
-	public LabStaff getLabStaff() {
-		return labStaff;
+	public LabReport(Integer id, Date dateTest, boolean pregnant, Woman woman, LaboratoryStaff laboratoryStaff) {
+		super();
+		this.id = id;
+		this.dateTest = dateTest;
+		this.pregnant = pregnant;
+		this.woman = woman;
+		this.laboratoryStaff = laboratoryStaff;
 	}
 
-	public void setLabStaff(LabStaff labStaff) {
-		this.labStaff = labStaff;
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
 	public Date getDateTest() {
@@ -54,17 +50,25 @@ public class LabReport implements Serializable{
 		this.pregnant = pregnant;
 	}
 
-	public Disease getDisease() {
-		return disease;
+	public Woman getWoman() {
+		return woman;
 	}
 
-	public void setDisease(Disease disease) {
-		this.disease = disease;
+	public void setWoman(Woman woman) {
+		this.woman = woman;
+	}
+
+	public LaboratoryStaff getLaboratoryStaff() {
+		return laboratoryStaff;
+	}
+
+	public void setLaboratoryStaff(LaboratoryStaff laboratoryStaff) {
+		this.laboratoryStaff = laboratoryStaff;
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(dateTest, disease, labStaff, pregnant);
+		return Objects.hash(dateTest, id, laboratoryStaff, pregnant, woman);
 	}
 
 	@Override
@@ -76,16 +80,16 @@ public class LabReport implements Serializable{
 		if (getClass() != obj.getClass())
 			return false;
 		LabReport other = (LabReport) obj;
-		return Objects.equals(dateTest, other.dateTest) && Objects.equals(disease, other.disease)
-				&& Objects.equals(labStaff, other.labStaff) && pregnant == other.pregnant;
+		return Objects.equals(dateTest, other.dateTest) && Objects.equals(id, other.id)
+				&& Objects.equals(laboratoryStaff, other.laboratoryStaff) && pregnant == other.pregnant
+				&& Objects.equals(woman, other.woman);
 	}
 
 	@Override
 	public String toString() {
-		return "labReport [labStaff=" + labStaff + ", dateTest=" + dateTest + ", pregnant=" + pregnant + ", disease="
-				+ disease + "]";
+		return "LabReport [id=" + id + ", dateTest=" + dateTest + ", pregnant=" + pregnant + ", woman=" + woman
+				+ ", laboratoryStaff=" + laboratoryStaff + "]";
 	}
 	
 	
-
 }
