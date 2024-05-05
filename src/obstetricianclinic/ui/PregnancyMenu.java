@@ -7,7 +7,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import obstetricianclinic.ifaces.LabReportManager;
-import obstetricianclinic.ifaces.WomanManager;
+import obstetricianclinic.ifaces.*;
 import obstetricianclinic.jdbc.ConnectionManager;
 import obstetricianclinic.pojos.LabReport;
 import obstetricianclinic.pojos.Woman;
@@ -18,37 +18,33 @@ public class PregnancyMenu {
 	
 	private static WomanManager womanMan;
 	private static LabReportManager labReportMan;
+	private static PregnancyManager pregMan;
 	
 	public static void main(Woman woman) {
 		ConnectionManager conMan = new ConnectionManager();
 		womanMan = conMan.getWomanMan();
+		pregMan = conMan.getPregnancyMan();
+		labReportMan=conMan.getLabReportMan();
 	
 		while (true) {
 			try {
-				System.out.println("Woman's Menu of: "+woman.getName()+" "+woman.getSurname());
+				System.out.println("Pregnancys's Menu of: "+woman.getName()+" "+woman.getSurname());
 				System.out.println("\nChoose an option, please:");
-				System.out.println("\n1. View woman's data");
-				System.out.println("\n2. Update woman's data");
-				System.out.println("\n3. Delete woman's data");
+				System.out.println("\n1. Search pregnancy");
+				System.out.println("\n2. Add a pregnancy to the woman's data.");
 				System.out.println("\n0. Exit");
 
 			
         int choice = Integer.parseInt(r.readLine());
 		switch (choice) {
 						case 1: {
-							int id= woman.getId();
-							viewWoman(id,woman);
+							pregnancySearch();
 							break;
 						}
 						case 2: {
-							updateWoman(woman);
+							addPregancy(woman);
 							break;
 						}
-						case 3: {
-							deleteWoman();
-							break;
-						}
-						
 						case 0: {
 							conMan.closeConnection();
 							return;
@@ -73,7 +69,7 @@ public class PregnancyMenu {
 
                
 
-public static void viewWoman(int id, Woman woman) throws IOException {
+public static void pregnancySearch() throws IOException {
 	System.out.println("Please what do you want to see of the woman's data:");
 	System.out.println("\nChoose an option:");
 	System.out.println("\n1. View woman's information");
@@ -100,7 +96,7 @@ public static void viewWoman(int id, Woman woman) throws IOException {
 
 }
 
-public static Woman updateWoman(Woman woman) throws IOException {
+public static void addPregancy(Woman woman) throws IOException {
 	System.out.println("Please what do you want to update of the woman's data:");
 	System.out.println("\nChoose an option:");
 	System.out.println("\n1. Change name");
@@ -124,10 +120,6 @@ public static Woman updateWoman(Woman woman) throws IOException {
 		System.out.println(" ERROR: Invalid option.");
 	}
    }
-
-public static Woman deleteWoman() throws IOException {
-	
-}
 
 	
 
