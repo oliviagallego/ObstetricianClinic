@@ -10,7 +10,7 @@ public abstract class LogInMenu {
 
 	public static void main(String[] Args) {
 
-		userMan = new JPAUserManager();
+		userMan = (UserManager) new JPAUserManager();
 		System.out.print("\nWelcome to the Obstetrician Clinic!");
 
 		while (true) {
