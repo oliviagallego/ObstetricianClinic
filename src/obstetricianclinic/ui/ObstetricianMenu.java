@@ -26,6 +26,8 @@ public class ObstetricianMenu {
 	public static void main(String[] args) {
 		ConnectionManager conMan = new ConnectionManager();
 		obstetricianMan = new JDBCObstetricianManager(conMan.getConnection());
+		womanMan = new JDBCWomanManager(conMan.getConnection());
+    	
 		
 		while (true) {
 			try {
@@ -44,13 +46,14 @@ public class ObstetricianMenu {
 							break;
 						}
 						case 2: {
-							searchWomanByNameAndSurname();
+							searchWomanByNameAndSurname(choice);
 							break;
 						}
 						case 3: {
-							changepassword();
+							changePassword();
 							break;
 						}
+						
 						case 0: {
 							conMan.closeConnection();
 							return;
@@ -80,12 +83,11 @@ public static void registerwoman() throws IOException {
 	String surname = r.readLine();
 	System.out.println("weight:");
 	Float weight = Float.parseFloat(r.readLine());
-	System.out.println("Date of birth (yyyy-MM-dd):");
+	System.out.println("Date of birth (dd-MM-yyyy):");
 	String dob = r.readLine();
 	LocalDate dobLocalDate = LocalDate.parse(dob, formatter); 
 	Date dobDate = Date.valueOf(dobLocalDate); 
-	Woman o = new Woman(name, surname, dob, weight);
-	//hay un error en el constructor con el set date, y no me lo acepta//
+	Woman o = new Woman(name, surname, dobDate, weight, obstetrician);
 	womanMan.registerWoman(o);
 
 }
@@ -96,14 +98,23 @@ public static void searchWomanByNameAndSurname(int id) throws IOException {
 	System.out.println("Surname::");
 	String surname = r.readLine();
 	List<Woman> listwoman = womanMan.searchWomanByNameAndSurname(name, surname);
-	//el constructor devuelve un woman en vez de una lista the woman//
 	System.out.println(listwoman);
+   }
+	
+	public static void changePassword() {
+		System.out.println("\nChange password:");
+		String password = Utilities.readString(" -Type new password: ");
+		User user= changePassword(user, password);
+		System.out.println(" -Password changed correctly to " + user.getPassword());
+		break;
+}
+
+
+
+
+
 	
 	
-	//falta constructor para cambiar la contraseña del obstetrician//
-	public static void changepassword() {
-		
-	}
 	
 	
 	
@@ -112,4 +123,4 @@ public static void searchWomanByNameAndSurname(int id) throws IOException {
 	
 }
 
-}
+

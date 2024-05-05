@@ -12,7 +12,7 @@ public interface UserManager {
 	public Role getRole(String name);
 	public List<Role> getRoles();
 	
-	public User logIn(String name, String password);
+	public User logIn(String user, String password);
 	public void logOut();
 	public User changePassword(User user, String newPassword);
 }

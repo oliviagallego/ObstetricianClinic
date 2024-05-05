@@ -18,7 +18,7 @@ public abstract class LogInMenu {
 			String username = Utilities.readString(" -Username: ");
 			String password = Utilities.readString(" -Password: ");
 
-			User user = userMan.login(username, password);
+			User user = userMan.logIn(username, password);
 			// User user = userMan.logIn("manager", "default0", "manager@obstetricianClinic.com");
 
 			if (user != null) {
