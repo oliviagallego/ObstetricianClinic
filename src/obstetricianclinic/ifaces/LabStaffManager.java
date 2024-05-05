@@ -9,5 +9,5 @@ public  interface LabStaffManager {
 	public LabReport getLabReport(int id);
 	public void updateLabReport(LabReport report);
 	public void deleteLabReport(int id);
-	public List<LabReport> listAllLabReports(LabStaff staff);
+	public List<LabReport> listAllLabReports(LaboratoryStaff staff);
 }

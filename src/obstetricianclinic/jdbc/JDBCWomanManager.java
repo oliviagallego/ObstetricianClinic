@@ -6,6 +6,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.sql.Date;
+
 
 import obstetricianclinic.ifaces.WomanManager;
 import obstetricianclinic.pojos.Woman;
@@ -98,6 +100,12 @@ public class JDBCWomanManager implements WomanManager {
 			e.printStackTrace();
 		}
 
+	}
+
+	@Override
+	public void viewWoman(Woman woman) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

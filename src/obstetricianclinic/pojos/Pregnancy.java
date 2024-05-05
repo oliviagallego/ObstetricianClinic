@@ -1,5 +1,7 @@
 package obstetricianclinic.pojos;
-import java.util.*;
+import java.sql.Date;
+import java.util.ArrayList;
+import java.util.List;
 import java.io.Serializable;
 
 public class Pregnancy implements Serializable{

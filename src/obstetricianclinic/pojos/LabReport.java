@@ -1,5 +1,6 @@
 package obstetricianclinic.pojos;
-import java.util.*;
+import java.sql.Date;
+import java.util.Objects;
 import java.io.Serializable;
 
 public class LabReport implements Serializable{
