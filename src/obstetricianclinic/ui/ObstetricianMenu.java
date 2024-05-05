@@ -46,7 +46,7 @@ public class ObstetricianMenu {
 						}
 						case 2: {
 							Woman woman= searchWomanByNameAndSurname();
-							
+							WomanMenu.main(woman);
 							break;
 						}
 						case 3: {
@@ -60,6 +60,9 @@ public class ObstetricianMenu {
 						case 0: {
 							conMan.closeConnection();
 							return;
+						}
+						default: {
+							System.out.println(" ERROR: Invalid option.");
 						}
 						}
 
@@ -129,7 +132,7 @@ public static Woman searchWomanByNameAndSurname() throws IOException {
     }
 
    }
-	
+	 
 
 	
 
