@@ -9,5 +9,5 @@ public interface WomanManager {
 	public void deleteWoman(int id);
 	public List<Woman> searchWomanByNameAndSurname(String name, String surname);
 	public void updateWoman (Woman woman);
-	public void viewWoman(Woman woman);
+	public Woman viewWoman(int id);
 }

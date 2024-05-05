@@ -6,6 +6,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+
+import dogclinic.pojos.Dog;
+
 import java.sql.Date;
 
 
@@ -103,9 +106,27 @@ public class JDBCWomanManager implements WomanManager {
 	}
 
 	@Override
-	public void viewWoman(Woman woman) {
-		// TODO Auto-generated method stub
-		
+	public Woman viewWoman(int id) {
+		try {
+			String sql = "SELECT * FROM women WHERE id = ?";
+			PreparedStatement p;
+			p= c.prepareStatement(sql);
+			p.setInt(1, id);
+			ResultSet rs = p.executeQuery();
+			rs.next();
+			String name= rs.getString("name");
+			String surname= rs.getString("surname");
+			Date dob = rs.getDate("dob");
+			Float weight= rs.getFloat("weight");
+			Woman w= new Woman(id, name, surname, dob, weight);
+			rs.close();
+			p.close();
+			return w;
+		} catch (SQLException e) {
+			System.out.println("Database error.");
+			e.printStackTrace();
+		}
+		return null;
 	}
 
 }

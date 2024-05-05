@@ -35,7 +35,6 @@ public class Woman implements Serializable{
     	this.name= name;
     	this.surname= surname;
     }
-    
     public Woman(String name, String surname, Integer id, Date dob, Float weight, Obstetrician obstetrician){
     	super();
         this.name = name;
@@ -47,6 +46,15 @@ public class Woman implements Serializable{
         this.diseases = new ArrayList<Disease>();
         this.pregnancies = new ArrayList<Pregnancy>();
         this.labReports= new ArrayList<LabReport>();
+    }
+    
+    public Woman(Integer id, String name, String surname,  Date dob, Float weight){
+    	super();
+        this.id = id;
+        this.name = name;
+        this.surname = surname;
+        this.dob = dob;
+        this.weight = weight;
     }
 
 	public String getName() {
