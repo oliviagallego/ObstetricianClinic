@@ -4,7 +4,7 @@ import java.util.List;
 
 import obstetricianclinic.ifaces.LabStaffManager;
 import obstetricianclinic.pojos.LabReport;
-import obstetricianclinic.pojos.LaboratoryStaff;
+import obstetricianclinic.pojos.LabStaff;
 
 public class JDBCLabStaffManager implements LabStaffManager {
 
@@ -33,7 +33,7 @@ public class JDBCLabStaffManager implements LabStaffManager {
 	}
 
 	@Override
-	public List<LabReport> listAllLabReports(LaboratoryStaff staff) {
+	public List<LabReport> listAllLabReports(LabStaff staff) {
 		// TODO Auto-generated method stub
 		return null;
 	}

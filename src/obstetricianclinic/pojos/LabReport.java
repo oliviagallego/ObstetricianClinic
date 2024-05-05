@@ -4,12 +4,12 @@ import java.io.Serializable;
 
 public class LabReport implements Serializable{
 	private static final long serialVersionUID = -7562122036761305186L;
-	private LaboratoryStaff labStaff;
+	private LabStaff labStaff;
 	private Date dateTest;
 	private boolean pregnant;
 	private Disease disease;
 	
-	public LabReport(LaboratoryStaff labStaff, Date dateTest, boolean pregnant, Disease disease) {
+	public LabReport(LabStaff labStaff, Date dateTest, boolean pregnant, Disease disease) {
 		super();
 		this.labStaff = labStaff;
 		this.dateTest = dateTest;
@@ -21,11 +21,11 @@ public class LabReport implements Serializable{
 		super();
 	}
 
-	public LaboratoryStaff getLabStaff() {
+	public LabStaff getLabStaff() {
 		return labStaff;
 	}
 
-	public void setLabStaff(LaboratoryStaff labStaff) {
+	public void setLabStaff(LabStaff labStaff) {
 		this.labStaff = labStaff;
 	}
 

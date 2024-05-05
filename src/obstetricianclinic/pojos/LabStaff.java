@@ -1,21 +1,22 @@
 package obstetricianclinic.pojos;
 
+import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
 
-public class LaboratoryStaff {
-	private static final long serialVersionUID = -1079965302432167439L;
+public class LabStaff implements Serializable{
+	
     private Integer id;
-    private String userName;
-    private String password;
+    private String name;
+    private String surname;
     private List<LabReport> labReports;
     
-	public LaboratoryStaff() {
+	public LabStaff() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public LaboratoryStaff(Integer id, String userName, String password, List<LabReport> labReports) {
+	public LabStaff(Integer id, String userName, String password, List<LabReport> labReports) {
 		super();
 		this.id = id;
 		this.userName = userName;
@@ -70,7 +71,7 @@ public class LaboratoryStaff {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		LaboratoryStaff other = (LaboratoryStaff) obj;
+		LabStaff other = (LabStaff) obj;
 		return Objects.equals(id, other.id) && Objects.equals(labReports, other.labReports)
 				&& Objects.equals(password, other.password) && Objects.equals(userName, other.userName);
 	}
