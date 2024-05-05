@@ -7,8 +7,6 @@ import java.sql.Date;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
-
-
 import obstetricianclinic.ifaces.*;
 import obstetricianclinic.jdbc.*;
 import obstetricianclinic.pojos.*;
@@ -22,11 +20,13 @@ public class ObstetricianMenu {
 	
 	private static ObstetricianManager obstetricianMan;
 	private static WomanManager womanMan;
+	private static UserManager userMan;
 	
-	public static void main(String[] args) {
+	public static void main(User user, UserManager man) {
 		ConnectionManager conMan = new ConnectionManager();
 		obstetricianMan = conMan.getObstetricianMan();
 		womanMan = conMan.getWomanMan();/* solo tenemos q hacer uso del método*/
+		userMan = man;
 		
 		while (true) {
 			try {
@@ -50,7 +50,10 @@ public class ObstetricianMenu {
 							break;
 						}
 						case 3: {
-							changePassword();
+							System.out.println("\nChange password:");
+							String password = Utilities.readString(" -Type new password: ");
+							user = man.changePassword(user, password);
+							System.out.println(" -Password changed correctly to " + user.getPassword());
 							break;
 						}
 						
@@ -102,15 +105,7 @@ public static void searchWomanByNameAndSurname(int id) throws IOException {
 	System.out.println(listwoman);
    }
 	
-	public static void changePassword() { //Este metodo tenemos q verllo por que tenemos q saber como gestionar los tres posibles users del programa (obstetrician, manager, labstaff)
-		System.out.println("\nChange password:");
-		String password = r.readLine();
-		System.out.println(" -Type new password: ");
-		String newPassword = r.readLine();
-		User user=changePassword( obstetricianMan, newPassword);
-		System.out.println(" -Password changed correctly to " + user.getPassword());
-		break;
-}
+
 	
 
 
