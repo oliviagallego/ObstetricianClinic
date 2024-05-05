@@ -12,7 +12,6 @@ public class Obstetrician implements Serializable{
 	private static final long serialVersionUID = -7562122036761305186L;
 	private String name;
 	private String surname;
-	private String password;
 	private Integer id;
 	private List<Woman> women;
 	
@@ -21,11 +20,10 @@ public class Obstetrician implements Serializable{
 		this.women = new ArrayList<Woman>();
 	}
 	
-	public Obstetrician(String name, String surname, String password, int id) {
+	public Obstetrician(String name, String surname, int id) {
 		super();
 		this.name = name;
 		this.surname = surname;
-		this.password = password;
 		this.id = id;
 		this.women = new ArrayList<Woman>();
 	}
@@ -44,14 +42,6 @@ public class Obstetrician implements Serializable{
 
 	public void setSurname(String surname) {
 		this.surname = surname;
-	}
-
-	public String getPassword() {
-		return password;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
 	}
 
 	public int getId() {
@@ -73,7 +63,7 @@ public class Obstetrician implements Serializable{
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(id, name, password, surname, women);
+		return Objects.hash(id, name, surname, women);
 	}
 
 	@Override
@@ -86,14 +76,12 @@ public class Obstetrician implements Serializable{
 			return false;
 		Obstetrician other = (Obstetrician) obj;
 		return Objects.equals(id, other.id) && Objects.equals(name, other.name)
-				&& Objects.equals(password, other.password) && Objects.equals(surname, other.surname)
-				&& Objects.equals(women, other.women);
+				&& Objects.equals(surname, other.surname)&& Objects.equals(women, other.women);
 	}
 
 	@Override
 	public String toString() {
-		return "obstetrician [name=" + name + ", surname=" + surname + ", password=" + password + ", id=" + id
-				+ ", women=" + women + "]";
+		return "obstetrician [name=" + name + ", surname=" + surname + ", id=" + id+ ", women=" + women + "]";
 	}
 
 	

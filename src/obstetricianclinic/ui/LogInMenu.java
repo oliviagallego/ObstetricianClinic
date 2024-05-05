@@ -1,6 +1,7 @@
 package obstetricianclinic.ui;
-import obstetricianclinic.ifaces.UserManager;
-import obstetricianclinic.pojos.User;
+import obstetricianclinic.ifaces.*;
+import obstetricianclinic.pojos.*;
+import obstetricianclinic.jpa.*;
 
 
 public abstract class LogInMenu {
