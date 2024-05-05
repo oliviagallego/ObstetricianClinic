@@ -18,7 +18,6 @@ public class User implements Serializable {
 	@Column(unique = true)
 	private String username;
 	private String password;
-	private String email;
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "roleId")
 	private Role role;
@@ -27,11 +26,10 @@ public class User implements Serializable {
 		super();
 	}
 
-	public User(String username, String password, String email) {
+	public User(String username, String password) {
 		super();
 		this.username = username;
 		this.password = password;
-		this.email = email;
 	}
 
 	public Integer getId() {
@@ -56,14 +54,6 @@ public class User implements Serializable {
 
 	public void setPassword(String password) {
 		this.password = password;
-	}
-
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
 	}
 
 	public Role getRole() {
@@ -93,7 +83,7 @@ public class User implements Serializable {
 
 	@Override
 	public String toString() {
-		return "User [id=" + id + ", email=" + email + ", password=" + password + ", role=" + role + "]";
+		return "User [id=" + id + ", password=" + password + ", role=" + role + "]";
 	}
 }
 
