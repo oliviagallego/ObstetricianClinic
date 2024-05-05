@@ -43,7 +43,7 @@ public class ConnectionManager {
 	
 	
 
-	public Connection getC() {
+	public Connection getConnection() {
 		return c;
 	}
 
