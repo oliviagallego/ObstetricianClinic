@@ -32,22 +32,7 @@ public class JDBCDiseaseManager implements DiseaseManager {
 			}
 
 	}
-
-	@Override
-	public void removeDisease(int id) {
-		try {
-			String sql = "DELETE FROM diseases WHERE id = ?";
-			PreparedStatement p;
-			p = c.prepareStatement(sql);
-			p.setInt(1, id);
-			p.executeUpdate();
-			p.close();
-		} catch (SQLException e) {
-			System.out.println("Database error.");
-			e.printStackTrace();
-		}
-	}
-
+	
 
 	@Override
 	public void updateDisease2(Disease disease) {

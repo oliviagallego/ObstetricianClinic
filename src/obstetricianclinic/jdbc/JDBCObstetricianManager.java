@@ -34,6 +34,7 @@ public class JDBCObstetricianManager implements ObstetricianManager {
 
 	}
 
+	//Este lo borraba!!!!!! no hace falta mas
 	@Override
 	public void removeObstetrician(int id) {
 		try {

@@ -69,13 +69,24 @@ public class JDBCPregnancyManager implements PregnancyManager {
 
 	@Override
 	public void addBirthReport(String birthReport, Pregnancy pregnancy) {
-		// TODO Auto-generated method stub
+		// Esto como lo gestionamos? va aquí?
 		
 	}
 
 	@Override
 	public void updatePregnancy(Pregnancy pregnancy) {
-		// TODO Auto-generated method stub
+		try {
+			String sql = "UPDATE pregnancies SET" + " dateTest = ?, " + " birthReport = ?, " + " WHERE id = ?";
+			PreparedStatement p;
+			p = c.prepareStatement(sql);
+			p.setDate(1, pregnancy.getDateTest());
+			p.setString(2, pregnancy.getBirthReport());
+			p.executeUpdate();
+			p.close();
+		} catch (SQLException e) {
+			System.out.println("Database error.");
+			e.printStackTrace();
+		}
 		
 	}
 
