@@ -37,10 +37,10 @@ public class JDBCWomanManager implements WomanManager {
 			insert.executeUpdate();
 			insert.close();
 			
-			}catch(SQLException sqlE) {
+		}catch(SQLException sqlE) {
 				System.out.println("Database exception");
 				sqlE.printStackTrace();
-			}
+		}
 
 	}
 

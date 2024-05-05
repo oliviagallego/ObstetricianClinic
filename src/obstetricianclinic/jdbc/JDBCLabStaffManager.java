@@ -1,11 +1,12 @@
 package obstetricianclinic.jdbc;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.List;
 
 import obstetricianclinic.ifaces.LabStaffManager;
-import obstetricianclinic.pojos.LabReport;
-import obstetricianclinic.pojos.LabStaff;
+import obstetricianclinic.pojos.*;
 
 public class JDBCLabStaffManager implements LabStaffManager {
 	private ConnectionManager conMan;
@@ -17,45 +18,40 @@ public class JDBCLabStaffManager implements LabStaffManager {
 	}
 
 	@Override
-	public void addLabReport(LabReport report) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public LabReport getLabReport(int id) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public void updateLabReport(LabReport report) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void deleteLabReport(int id) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public List<LabReport> listAllLabReports(LabStaff staff) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public void addLabStaff(String name, String surname) {
-		// TODO Auto-generated method stub
+	public void addLabStaff(LaboratoryStaff laboratoryStaff) {
+		try {
+			String sql= "INSERT INTO labStaffs (name, surname) " + "VALUES(?,?);";
+			PreparedStatement insert= c.prepareStatement(sql);
+			insert.setString(1, laboratoryStaff.getName());
+			insert.setString(2, laboratoryStaff.getSurname());
+			
+			insert.executeUpdate();
+			insert.close();
+			
+			}catch(SQLException sqlE) {
+				System.out.println("Database exception");
+				sqlE.printStackTrace();
+			}
 		
 	}
 
 	@Override
-	public void updateLabStaff(String name, String surname) {
-		// TODO Auto-generated method stub
-		
+	public void updateLabStaff(LaboratoryStaff laboratoryStaff) {
+		try {
+			String sql = "UPDATE labStaffs SET" + " name = ?, " + " surname = ?"+ " WHERE id = ?";
+			PreparedStatement p;
+			p = c.prepareStatement(sql);
+			p.setString(1, laboratoryStaff.getName());
+			p.setString(2, laboratoryStaff.getSurname());
+
+			p.executeUpdate();
+			p.close();
+		} catch (SQLException e) {
+			System.out.println("Database error.");
+			e.printStackTrace();
+		}
 	}
+
+	
 
 }
