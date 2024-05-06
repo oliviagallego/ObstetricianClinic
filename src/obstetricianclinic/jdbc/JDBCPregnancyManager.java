@@ -62,14 +62,12 @@ public class JDBCPregnancyManager implements PregnancyManager {
 			
 			while(rs.next()) {
 				Integer id = rs.getInt("id");
-				Date dateTest = rs.getDate("dateTest");
 				Date dateConception= rs.getDate("dateConception");
-				String laboratoryResult= rs.getString("laboratoryResult");
 				String birthReport= rs.getString("birthReport");
-				List<Newborn> newborns= conMan.getNewbornMan();//???
-				Woman woman= conMan.getWomanMan().getWoman();//????
+				//List<Newborn> newborns= conMan.getNewbornMan().searchNewbornByPregnancy(id);//???
+				//Woman woman= conMan.getWomanMan().;//????
 				
-				Pregnancy pregnancy= new Pregnancy(id, dateTest, dateConception, laboratoryResult, birthReport, newborns, woman);
+				Pregnancy pregnancy= new Pregnancy(id, dateConception, birthReport);
 				pregnancies.add(pregnancy);
 			}
 			search.close();
@@ -90,6 +88,20 @@ public class JDBCPregnancyManager implements PregnancyManager {
 	@Override
 	public void updatePregnancy(Pregnancy pregnancy) {
 		try {
+<<<<<<< HEAD
+			String sql = "UPDATE pregnancies SET" + " dateConception = ?, " + " birthReport = ?, " + " WHERE id = ?";
+			PreparedStatement p;
+			p = c.prepareStatement(sql);
+			p.setDate(1, pregnancy.getDateConception());
+			p.setString(2, pregnancy.getBirthReport());
+			p.executeUpdate();
+			p.close();
+		} catch (SQLException e) {
+			System.out.println("Database error.");
+			e.printStackTrace();
+		}
+
+=======
 			String sql = "UPDATE pregnancies SET" + " dateTest = ?, " + " birthReport = ?, " + " WHERE id = ?";
 			PreparedStatement p;
 			p = c.prepareStatement(sql);
@@ -102,6 +114,7 @@ public class JDBCPregnancyManager implements PregnancyManager {
 			e.printStackTrace();
 		}
 		
+>>>>>>> branch 'main' of https://github.com/oliviagallego/ObstetricianClinic
 	}
 
 }

@@ -13,8 +13,6 @@ public class Pregnancy implements Serializable{
 
 	private Integer id;
 	
-	private Date dateTest;
-	
 	private Date dateConception;
 	
 	private String birthReport;
@@ -23,14 +21,19 @@ public class Pregnancy implements Serializable{
 	
 	private Woman woman;
 
-	public Pregnancy(Integer id, Date dateTest, Date dateConception, String birthReport, Woman woman) {
+	public Pregnancy(Integer id, Date dateConception, String birthReport, Woman woman) {
 		super();
 		this.id = id;
-		this.dateTest = dateTest;
 		this.dateConception = dateConception;
 		this.birthReport = birthReport;
 		this.newborns = new ArrayList<Newborn>();
 		this.woman = woman;
+	}
+	public Pregnancy(Integer id, Date dateConception, String birthReport) {
+		super();
+		this.id = id;
+		this.dateConception = dateConception;
+		this.birthReport = birthReport;
 	}
 
 	public Pregnancy() {
@@ -46,13 +49,6 @@ public class Pregnancy implements Serializable{
 		this.id = id;
 	}
 
-	public Date getDateTest() {
-		return dateTest;
-	}
-
-	public void setDateTest(Date dateTest) {
-		this.dateTest = dateTest;
-	}
 
 	public Date getDateConception() {
 		return dateConception;
@@ -88,7 +84,7 @@ public class Pregnancy implements Serializable{
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(birthReport, dateConception, dateTest, id, newborns, woman);
+		return Objects.hash(birthReport, dateConception, id, newborns, woman);
 	}
 
 	@Override
@@ -101,16 +97,16 @@ public class Pregnancy implements Serializable{
 			return false;
 		Pregnancy other = (Pregnancy) obj;
 		return Objects.equals(birthReport, other.birthReport) && Objects.equals(dateConception, other.dateConception)
-				&& Objects.equals(dateTest, other.dateTest) && Objects.equals(id, other.id)
-				&& Objects.equals(newborns, other.newborns) && Objects.equals(woman, other.woman);
+				&& Objects.equals(id, other.id) && Objects.equals(newborns, other.newborns)
+				&& Objects.equals(woman, other.woman);
 	}
 
 	@Override
 	public String toString() {
-		return "Pregnancy [id=" + id + ", dateTest=" + dateTest + ", dateConception=" + dateConception
-				+ ", birthReport=" + birthReport + ", newborns=" + newborns + ", woman=" + woman + "]";
+		return "Pregnancy [id=" + id + ", dateConception=" + dateConception + ", birthReport=" + birthReport
+				+ ", newborns=" + newborns + ", woman=" + woman + "]";
 	}
-	
+
 	
 
 }

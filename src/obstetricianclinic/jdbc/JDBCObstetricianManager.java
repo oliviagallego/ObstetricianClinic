@@ -19,19 +19,17 @@ public class JDBCObstetricianManager implements ObstetricianManager {
 	@Override
 	public void addObstetrician(Obstetrician obstetrician) {
 	try {
-		String query = "INSERT INTO obstetricians (name, surname, password, id) VALUES (?, ?, ?, ?);";
+		String query = "INSERT INTO obstetricians (name, surname) VALUES (?, ?);";
 		PreparedStatement insert = c.prepareStatement(query);
 		insert.setString(1, obstetrician.getName());
 		insert.setString(2, obstetrician.getSurname());
-		insert.setString(3, obstetrician.getPassword());
-		insert.setInt(4, obstetrician.getId());
 		insert.executeUpdate();
 		insert.close();
 	}catch(SQLException sqlE) {
 		System.out.println("Database exception");
 		sqlE.printStackTrace();
 	}
-
+	
 	}
 
 	//Este lo borraba!!!!!! no hace falta mas
@@ -59,7 +57,6 @@ public class JDBCObstetricianManager implements ObstetricianManager {
 			p = c.prepareStatement(sql);
 			p.setString(1, obs.getName());
 			p.setString(2, obs.getSurname());
-			p.setInt(3, obs.getId());
 			p.executeUpdate();
 			p.close();
 		} catch (SQLException e) {

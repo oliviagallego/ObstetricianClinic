@@ -37,6 +37,15 @@ public class Newborn implements Serializable{
 		this.gender = gender;
 		this.pregnancy = pregnancy;
 	}
+	public Newborn(Integer id,String name, String surname,  Date dob, Float weight, String gender) {
+		super();
+		this.name = name;
+		this.surname = surname;
+		this.id = id;
+		this.dob = dob;
+		this.weight = weight;
+		this.gender = gender;
+	}
 	
 	
 	public Newborn(String name, String surname, Float weight, String gender) {

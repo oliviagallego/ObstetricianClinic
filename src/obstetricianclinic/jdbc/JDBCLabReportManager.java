@@ -91,7 +91,7 @@ public class JDBCLabReportManager implements LabReportManager {
 	}
 
 	@Override
-	public List<LabReport> listAllLabReports() {
+	public List<LabReport> listAllLabReports() {//NO LO HARIA
 		// TODO Auto-generated method stub
 		return null;
 	}
