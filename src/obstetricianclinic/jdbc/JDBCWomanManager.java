@@ -24,7 +24,7 @@ public class JDBCWomanManager implements WomanManager {
 	@Override
 	public void registerWoman(Woman woman) {
 		try {
-			String sql= "INSERT INTO women (name, surname, dob, weight, obstetricianId) " + "VALUES(?,?,?,?,?);";
+			String sql= "INSERT INTO women (name, surname, dob, weight, obstetrician_id) " + "VALUES(?,?,?,?,?);";
 			PreparedStatement insert= c.prepareStatement(sql);
 			insert.setString(1, woman.getName());
 			insert.setString(2, woman.getSurname());
