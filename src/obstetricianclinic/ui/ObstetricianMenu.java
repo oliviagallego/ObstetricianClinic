@@ -21,6 +21,7 @@ public class ObstetricianMenu {
 	private static ObstetricianManager obstetricianMan;
 	private static WomanManager womanMan;
 	private static UserManager userMan;
+	private static DiseaseManager diseaseMan;
 	
 	public static void main(User user, UserManager man) {
 		ConnectionManager conMan = new ConnectionManager();
@@ -93,17 +94,19 @@ public static void registerwoman() throws IOException {
 	String dob = r.readLine();
 	LocalDate dobLocalDate = LocalDate.parse(dob, formatter);
 	Date dobDate = Date.valueOf(dobLocalDate); 
-	Woman woman = new Woman(name, surname, dobDate, weight);//quitamos el atributo oobstetrician para crear el objeto woman en este caso por que estamos en la cuenta de un obstetrician en concreto por lo tanto ose le asignará ese doctor directamente.
-	//Para que la creacion de este objeto funcione tenemos que tener en la clase woman un constructor con esos atributos justo y en ese orden.
-	womanMan.registerWoman(woman); //el error esta en la interfaz q estaba mal escrito register
-	
+	System.out.println("Disease:");
+	String d = r.readLine();
+	Disease disease= new Disease(d);
+	Woman woman = new Woman(name, surname, dobDate, weight);
+	womanMan.registerWoman(woman);
+	diseaseMan.addDisease(disease);
 
 }
 
 public static Woman searchWomanByNameAndSurname() throws IOException {
 	System.out.println("Search woman by name:");
 	String name = r.readLine();
-	System.out.println("Surname::");
+	System.out.println("Surname:");
 	String surname = r.readLine();
 	List<Woman> listWomen = womanMan.searchWomanByNameAndSurname(name, surname);
 	

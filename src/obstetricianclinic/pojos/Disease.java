@@ -24,6 +24,11 @@ public class Disease implements Serializable{
 		this.diseaseType = diseaseType;
 		this.women = new ArrayList<Woman>();
 	}
+	
+	public Disease(String diseaseType) {
+		super();
+		this.diseaseType = diseaseType;
+	}
 
 	public Integer getId() {
 		return id;

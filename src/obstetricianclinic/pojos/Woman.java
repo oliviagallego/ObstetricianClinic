@@ -64,6 +64,15 @@ public class Woman implements Serializable{
 		this.dob = dob;
 		this.weight = weight;
 	}
+	
+	public Woman(String name, String surname, Date dob, float weight, List<Disease> diseases) {
+		super();
+		this.name = name;
+		this.surname = surname;
+		this.dob = dob;
+		this.weight = weight;
+		this.diseases = diseases;
+	}
 
 	public String getName() {
 		return name;
