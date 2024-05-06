@@ -26,7 +26,7 @@ public abstract class LogInMenu {
                 if ("Obstetrician".equals(roleName)) {
                     ManagerMenu.menu(user, userMan);
                 } else if ("Lab Staff".equals(roleName)) {
-                    labStaffMenu.menu(user.getEmail());
+                    labStaffMenu.menu(user, userMan);
                 } else {
                     System.out.println("Access Denied: Your role is not recognized.");
                 }
