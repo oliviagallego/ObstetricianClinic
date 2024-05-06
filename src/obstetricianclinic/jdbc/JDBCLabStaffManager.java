@@ -22,7 +22,7 @@ public class JDBCLabStaffManager implements LabStaffManager {
 	@Override
 	public void addLabStaff(LaboratoryStaff staff) {
 		try {
-			String sql= "INSERT INTO ... (name, surname) " + "VALUES(?,?);"; //No se donde meter los staff 
+			String sql= "INSERT INTO laboratoryStaffs (name, surname) " + "VALUES(?,?);"; 
 			PreparedStatement insert= c.prepareStatement(sql);
 			insert.setString(1, staff.getName());
 			insert.setString(2, staff.getSurname());
