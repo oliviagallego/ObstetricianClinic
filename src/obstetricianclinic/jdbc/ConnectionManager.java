@@ -10,13 +10,13 @@ import obstetricianclinic.ifaces.*;
 public class ConnectionManager {
 	
 	private Connection c;
-	private static PregnancyManager pregnancyMan;
-	private static WomanManager womanMan;
-	private static NewbornManager newbornMan;
-	private static ObstetricianManager obstetricianMan;
-	private static DiseaseManager diseaseMan;
-	private static LabReportManager labReportMan;
-	private static LabStaffManager labStaffMan;
+	private PregnancyManager pregnancyMan;
+	private WomanManager womanMan;
+	private NewbornManager newbornMan;
+	private ObstetricianManager obstetricianMan;
+	private DiseaseManager diseaseMan;
+	private LabReportManager labReportMan;
+	private LabStaffManager labStaffMan;
 	
 	public ConnectionManager() {
 		try {
@@ -31,7 +31,7 @@ public class ConnectionManager {
 			this.newbornMan = new JDBCNewbornManager(this);
 			this.obstetricianMan = new JDBCObstetricianManager(this);
 			this.diseaseMan = new JDBCDiseaseManager(this);
-			this.labReportMan= new JDBCLabReportManager(this);//preguntar
+			this.labReportMan= new JDBCLabReportManager(this);
 			this.labStaffMan= new JDBCLabStaffManager(this);
 			
 		}catch (Exception e) {
@@ -102,8 +102,8 @@ public class ConnectionManager {
 	private void createTables() {
 		try {
 			Statement createTables1= c.createStatement();
-			String create1= "CREATE TABLE obstetrician ("
-					+ "id INTEGER PRIMARY KEY AUTOINCREMENT, "
+			String create1= "CREATE TABLE obstetricians ("
+					+ "obstetrician_id INTEGER PRIMARY KEY AUTOINCREMENT, "
 					+ "name TEXT NOT NULL, "
 					+ "surname TEXT NOT NULL)";
 			
@@ -112,66 +112,66 @@ public class ConnectionManager {
 			
 			
 			Statement createTables2= c.createStatement();
-			String create2= "CREATE TABLE woman ("
-					+ "id INTEGER PRIMARY KEY AUTOINCREMENT, "
+			String create2= "CREATE TABLE women ("
+					+ "woman_id INTEGER PRIMARY KEY AUTOINCREMENT, "
 					+ "name TEXT NOT NULL, "
 					+ "surname TEXT NOT NULL, "
 					+ "dob DATE NOT NULL, "
 					+ "weight REAL NOT NULL, "
-					+ "obstetrician_id INTEGER REFERENCES obstetrician(id))";
+					+ "obstetrician_id INTEGER REFERENCES obstetricians(id))";
 			createTables2.executeUpdate(create2);
 			createTables2.close();
 			
 			Statement createTables3= c.createStatement();
-			String create3= "CREATE TABLE disease ("
-					+ "id INTEGER PRIMARY KEY AUTOINCREMENT, "
+			String create3= "CREATE TABLE diseases ("
+					+ "disease_id INTEGER PRIMARY KEY AUTOINCREMENT, "
 					+ "type_Disease TEXT NOT NULL)";
 			createTables3.executeUpdate(create3);
 			createTables3.close();
 			
 			Statement createTables4= c.createStatement();
-			String create4= "CREATE TABLE laboratoryReport ("
-					+ "id INTEGER PRIMARY KEY AUTOINCREMENT, "
+			String create4= "CREATE TABLE laboratoryReports ("
+					+ "laboratoryReport_id INTEGER PRIMARY KEY AUTOINCREMENT, "
 					+ "date_test DATE NOT NULL, "
 					+ "pregnant BOOLEAN NOT NULL, "
-					+ "laboratoryStaff_id INTEGER REFERENCES laboratoryStaff(id), "
-					+ "woman_id INTEGER REFERENCES woman(id))";
+					+ "laboratoryStaff_id INTEGER REFERENCES laboratoryStaffs(id), "
+					+ "woman_id INTEGER REFERENCES women(id))";
 			createTables4.executeUpdate(create4);
 			createTables4.close();
 			
 			Statement createTables5= c.createStatement();
-			String create5= "CREATE TABLE pregnancy ("
-					+ "id INTEGER PRIMARY KEY AUTOINCREMENT, "
+			String create5= "CREATE TABLE pregnancies ("
+					+ "pregnancy_id INTEGER PRIMARY KEY AUTOINCREMENT, "
 					+ "date_conception DATE NOT NULL, "
-					+ "birth_report TEXT NOT NULL, "
-					+ "woman_id INTEGER REFERENCES woman(id))";
+					+ "birth_report TEXT , "
+					+ "woman_id INTEGER REFERENCES women(id))";
 			createTables5.executeUpdate(create5);
 			createTables5.close();
 			
 			Statement createTables6= c.createStatement();
-			String create6= "CREATE TABLE newborn ("
-					+ "id INTEGER PRIMARY KEY AUTOINCREMENT, "
+			String create6= "CREATE TABLE newborns ("
+					+ "newborn_id INTEGER PRIMARY KEY AUTOINCREMENT, "
 					+ "name TEXT NOT NULL, "
 					+ "surname TEXT NOT NULL, "
 					+ "dob DATE NOT NULL, "
 					+ "weight INTEGER NOT NULL, "
 					+ "gender TEXT NOT NULL CHECK(gender='Female' OR gender='Male'), "
-					+ "pregnancy_id INTEGER REFERENCES pregnancy(id))";
+					+ "pregnancy_id INTEGER REFERENCES pregnancies(id))";
 			createTables6.executeUpdate(create6);
 			createTables6.close();
 			
 			Statement createTables7= c.createStatement();
-			String create7= "CREATE TABLE laboratoryStaff ("
-					+ "id INTEGER PRIMARY KEY AUTOINCREMENT, "
+			String create7= "CREATE TABLE laboratoryStaffs ("
+					+ "laboratoryStaff_id INTEGER PRIMARY KEY AUTOINCREMENT, "
 					+ "name TEXT NOT NULL, "
 					+ "surname TEXT NOT NULL)";
 			createTables7.executeUpdate(create7);
 			createTables7.close();
 			
 			Statement createTables8= c.createStatement();
-			String create8= "CREATE TABLE woman_disease ("
-					+ "woman_id INTEGER REFERENCES woman(id), "
-					+ "disease_id INTEGER REFERENCES disease(id), "
+			String create8= "CREATE TABLE womans_diseases ("
+					+ "woman_id INTEGER REFERENCES women(id), "
+					+ "disease_id INTEGER REFERENCES diseases(id), "
 					+ "PRIMARY KEY(woman_id, disease_id))";
 			createTables8.executeUpdate(create8);
 			createTables8.close();
