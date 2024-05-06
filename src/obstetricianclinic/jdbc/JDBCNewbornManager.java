@@ -24,7 +24,7 @@ public class JDBCNewbornManager implements NewbornManager {
 	@Override
 	public void addNewborn(Newborn newborn) {
 		try {
-			String query = "INSERT INTO newborns (name, surname, dob, weight, gender, pregnancyId) VALUES (?, ?, ?, ?, ?, ?);";
+			String query = "INSERT INTO newborns (name, surname, dob, weight, gender, pregnancy_id) VALUES (?, ?, ?, ?, ?, ?);";
 			PreparedStatement insert = c.prepareStatement(query);
 			insert.setString(1, newborn.getName());
 			insert.setString(2, newborn.getSurname());
