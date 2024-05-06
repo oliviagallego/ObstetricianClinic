@@ -6,9 +6,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 import obstetricianclinic.ifaces.LabStaffManager;
-<<<<<<< HEAD
 import obstetricianclinic.pojos.*;
-=======
 import obstetricianclinic.pojos.LabReport;
 import obstetricianclinic.pojos.LaboratoryStaff;
 
@@ -24,7 +22,8 @@ public class JDBCLabStaffManager implements LabStaffManager {
 	@Override
 	public void addLabStaff(LaboratoryStaff laboratoryStaff) {
 		try {
-			String sql= "INSERT INTO labStaffs (name, surname) " + "VALUES(?,?);";
+
+			String sql= "INSERT INTO laboratoryStaffs (name, surname) " + "VALUES(?,?);"; 
 			PreparedStatement insert= c.prepareStatement(sql);
 			insert.setString(1, laboratoryStaff.getName());
 			insert.setString(2, laboratoryStaff.getSurname());
