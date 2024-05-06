@@ -36,6 +36,20 @@ public class JDBCPregnancyManager implements PregnancyManager {
 			sqlE.printStackTrace();
 		}
 	}
+	
+	@Override
+	public void addPregnancyByWomanAndPregnancy(Woman woman, Pregnancy pregnancy){
+	    String sql = "INSERT INTO pregnancies (woman_id, date_conception) VALUES (?, ?);";
+	    try (PreparedStatement insert = c.prepareStatement(sql)) {
+	        insert.setInt(1, woman.getId());  // Establecer el woman_id
+	        insert.setDate(2, new java.sql.Date(pregnancy.getDateConception().getTime()));  // Establecer date_conception
+
+	        insert.executeUpdate();
+	    } catch (SQLException sqlE) {
+	        System.out.println("Database exception");
+	        sqlE.printStackTrace();
+	    }
+	}
 
 	@Override
 	public List<Pregnancy> searchPregnancyByDateOfConception(Date dateOfConception) {

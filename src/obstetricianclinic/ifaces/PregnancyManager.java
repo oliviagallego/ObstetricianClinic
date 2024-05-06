@@ -11,4 +11,5 @@ public interface PregnancyManager {
 	public List<Pregnancy> searchPregnancyByDateOfConception(Date dateOfConception);
 	public void addBirthReport(String birthReport, Pregnancy pregnancy);
 	public void updatePregnancy(Pregnancy pregnancy);
+	public void addPregnancyByWomanAndPregnancy(Woman woman, Pregnancy pregnancy);
 }

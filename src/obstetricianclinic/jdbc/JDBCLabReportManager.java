@@ -1,6 +1,7 @@
 package obstetricianclinic.jdbc;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -92,6 +93,11 @@ public class JDBCLabReportManager implements LabReportManager {
 	@Override
 	public List<LabReport> listAllLabReports() {
 		// TODO Auto-generated method stub
+		return null;
+	}
+	
+	public  Date getDateTest(LabReport labReport) {
+		//TODO Auto-generated method stub
 		return null;
 	}
 
