@@ -105,8 +105,6 @@ public static Pregnancy pregnancySearch() throws IOException {
 	
 	}	
 
-}
-
 public static void addPregancy(Woman woman) throws IOException {
 	System.out.println("Register Pregnancy:");
 	//Mirar como esto de la DoT si añadir atriburto en pregnancy o q?
@@ -132,8 +130,7 @@ public static void addPregancy(Woman woman) throws IOException {
 		Newborn newborn= new Newborn(name,surname,weight,gender);
 		bornMan.addNewborn(newborn);
 		number--;
-	}
-		
+	}}
 }
 
 
