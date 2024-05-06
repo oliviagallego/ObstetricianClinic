@@ -40,8 +40,7 @@ public class ConnectionManager {
 		}
 	}
 	
-	
-	
+
 
 	public Connection getConnection() {
 		return c;
@@ -49,52 +48,50 @@ public class ConnectionManager {
 
 
 
-
-	public static PregnancyManager getPregnancyMan() {
+	public PregnancyManager getPregnancyMan() {
 		return pregnancyMan;
 	}
 
 
 
-
-	public static WomanManager getWomanMan() {
+	public WomanManager getWomanMan() {
 		return womanMan;
 	}
 
 
 
-
-	public static NewbornManager getNewbornMan() {
+	public NewbornManager getNewbornMan() {
 		return newbornMan;
 	}
 
 
 
-
-	public static ObstetricianManager getObstetricianMan() {
+	public ObstetricianManager getObstetricianMan() {
 		return obstetricianMan;
 	}
 
 
 
-
-	public static DiseaseManager getDiseaseMan() {
+	public DiseaseManager getDiseaseMan() {
 		return diseaseMan;
 	}
 
 
 
 
-	public static LabReportManager getLabReportMan() {
+	public LabReportManager getLabReportMan() {
 		return labReportMan;
 	}
 
 
 
 
-	public static LabStaffManager getLabStaffMan() {
+	public LabStaffManager getLabStaffMan() {
 		return labStaffMan;
 	}
+
+
+
 
 
 
