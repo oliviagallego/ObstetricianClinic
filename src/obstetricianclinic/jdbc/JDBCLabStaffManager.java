@@ -38,7 +38,7 @@ public class JDBCLabStaffManager implements LabStaffManager {
 	@Override
 	public void updateLabStaff(LaboratoryStaff staff) {
 		try {
-			String sql = "UPDATE ... SET" + " name = ?, " + " surname = ?, " + " WHERE id = ?"; //me pasa lo mismo no sé donde guardarlo
+			String sql = "UPDATE laboratoryStaffs SET" + " name = ?, " + " surname = ?, " + " WHERE id = ?";
 			PreparedStatement p;
 			p = c.prepareStatement(sql);
 			p.setString(1, staff.getName());

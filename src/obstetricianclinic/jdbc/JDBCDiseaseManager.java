@@ -19,7 +19,7 @@ public class JDBCDiseaseManager implements DiseaseManager {
 	@Override
 	public void addDisease(Disease disease) { //
 		try {
-			String sql= "INSERT INTO diseases (diseaseType, drug) " + "VALUES(?,?);";
+			String sql= "INSERT INTO diseases (diseaseType) " + "VALUES(?);";
 			PreparedStatement insert= c.prepareStatement(sql);
 			insert.setString(1, disease.getDiseaseType());
 			
@@ -37,11 +37,11 @@ public class JDBCDiseaseManager implements DiseaseManager {
 	@Override
 	public void updateDisease2(Disease disease) {
 		try {
-			String sql = "UPDATE diseases SET" + " DiseaseType = ?, " + " drug = ? " + " WHERE id = ?";
+			String sql = "UPDATE diseases SET" + " DiseaseType = ?, " + " WHERE id = ?";
 			PreparedStatement p;
 			p = c.prepareStatement(sql);
 			p.setString(1, disease.getDiseaseType());
-			p.setString(2, disease.getDrug());
+	
 			
 			p.executeUpdate();
 			p.close();
