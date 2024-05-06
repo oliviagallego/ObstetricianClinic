@@ -9,6 +9,7 @@ public interface LabReportManager {
 	public void updateLabReport(LabReport labreport);
 	public LabReport getLabReportById(int id);
 	public List<LabReport> getLabReportsByWoman(Woman woman);
+	public LabReport getLabReportsDOT(Date dot);
 	public List<LabReport> listAllLabReports();
 	public Date getDateTest(LabReport labReport);
 }

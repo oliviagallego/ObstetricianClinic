@@ -100,5 +100,9 @@ public class JDBCLabReportManager implements LabReportManager {
 		//TODO Auto-generated method stub
 		return null;
 	}
+	public LabReport getLabReportsDOT(Date dot) {
+		//TODO Auto-generated method stub
+		return null;
+	}
 
 }
