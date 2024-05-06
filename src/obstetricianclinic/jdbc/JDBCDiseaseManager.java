@@ -31,7 +31,11 @@ public class JDBCDiseaseManager implements DiseaseManager {
 			}
 
 	}
+<<<<<<< HEAD
 
+=======
+	
+>>>>>>> branch 'main' of https://github.com/oliviagallego/ObstetricianClinic
 
 	@Override
 	public void updateDisease(Disease disease) {

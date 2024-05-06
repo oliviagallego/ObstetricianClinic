@@ -6,7 +6,11 @@ import java.sql.SQLException;
 import java.util.List;
 
 import obstetricianclinic.ifaces.LabStaffManager;
+<<<<<<< HEAD
 import obstetricianclinic.pojos.*;
+=======
+import obstetricianclinic.pojos.LabReport;
+import obstetricianclinic.pojos.LaboratoryStaff;
 
 public class JDBCLabStaffManager implements LabStaffManager {
 	private ConnectionManager conMan;
@@ -50,7 +54,7 @@ public class JDBCLabStaffManager implements LabStaffManager {
 			System.out.println("Database error.");
 			e.printStackTrace();
 		}
-	}
+
 
 	
 

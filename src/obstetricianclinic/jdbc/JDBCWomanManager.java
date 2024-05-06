@@ -22,7 +22,7 @@ public class JDBCWomanManager implements WomanManager {
 	}
 
 	@Override
-	public void resgisterWoman(Woman woman) {
+	public void registerWoman(Woman woman) {
 		try {
 			String sql= "INSERT INTO women (name, surname, dob, weight) " + "VALUES(?,?,?,?);";
 			PreparedStatement insert= c.prepareStatement(sql);
@@ -125,5 +125,6 @@ public class JDBCWomanManager implements WomanManager {
 		}
 		return null;
 	}
+
 
 }

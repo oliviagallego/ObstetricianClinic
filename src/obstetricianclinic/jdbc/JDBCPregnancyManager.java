@@ -36,6 +36,20 @@ public class JDBCPregnancyManager implements PregnancyManager {
 			sqlE.printStackTrace();
 		}
 	}
+	
+	@Override
+	public void addPregnancyByWomanAndPregnancy(Woman woman, Pregnancy pregnancy){
+	    String sql = "INSERT INTO pregnancies (woman_id, date_conception) VALUES (?, ?);";
+	    try (PreparedStatement insert = c.prepareStatement(sql)) {
+	        insert.setInt(1, woman.getId());  // Establecer el woman_id
+	        insert.setDate(2, new java.sql.Date(pregnancy.getDateConception().getTime()));  // Establecer date_conception
+
+	        insert.executeUpdate();
+	    } catch (SQLException sqlE) {
+	        System.out.println("Database exception");
+	        sqlE.printStackTrace();
+	    }
+	}
 
 	@Override
 	public List<Pregnancy> searchPregnancyByDateOfConception(Date dateOfConception) {
@@ -67,13 +81,14 @@ public class JDBCPregnancyManager implements PregnancyManager {
 
 	@Override
 	public void addBirthReport(String birthReport, Pregnancy pregnancy) {
-		// TODO Auto-generated method stub
+		// Esto como lo gestionamos? va aquí?
 		
 	}
 
 	@Override
 	public void updatePregnancy(Pregnancy pregnancy) {
 		try {
+<<<<<<< HEAD
 			String sql = "UPDATE pregnancies SET" + " dateConception = ?, " + " birthReport = ?, " + " WHERE id = ?";
 			PreparedStatement p;
 			p = c.prepareStatement(sql);
@@ -86,6 +101,20 @@ public class JDBCPregnancyManager implements PregnancyManager {
 			e.printStackTrace();
 		}
 
+=======
+			String sql = "UPDATE pregnancies SET" + " dateTest = ?, " + " birthReport = ?, " + " WHERE id = ?";
+			PreparedStatement p;
+			p = c.prepareStatement(sql);
+			p.setDate(1, pregnancy.getDateTest());
+			p.setString(2, pregnancy.getBirthReport());
+			p.executeUpdate();
+			p.close();
+		} catch (SQLException e) {
+			System.out.println("Database error.");
+			e.printStackTrace();
+		}
+		
+>>>>>>> branch 'main' of https://github.com/oliviagallego/ObstetricianClinic
 	}
 
 }
