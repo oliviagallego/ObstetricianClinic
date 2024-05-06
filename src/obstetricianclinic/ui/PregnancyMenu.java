@@ -11,7 +11,6 @@ import java.util.List;
 import obstetricianclinic.ifaces.LabReportManager;
 import obstetricianclinic.ifaces.*;
 import obstetricianclinic.jdbc.ConnectionManager;
-import obstetricianclinic.pojos.LabReport;
 import obstetricianclinic.pojos.*;
 
 public class PregnancyMenu {
@@ -41,7 +40,8 @@ public class PregnancyMenu {
         int choice = Integer.parseInt(r.readLine());
 		switch (choice) {
 						case 1: {
-							Pregnancy pregSearche=pregnancySearch();
+							Pregnancy pregSearch=pregnancySearch();
+							
 							break;
 						}
 						case 2: {
@@ -106,31 +106,45 @@ public static Pregnancy pregnancySearch() throws IOException {
 	}	
 
 public static void addPregancy(Woman woman) throws IOException {
-	System.out.println("Register Pregnancy:");
-	//Mirar como esto de la DoT si añadir atriburto en pregnancy o q?
-	//System.out.println("Date of Test: "+labReportMan.getDateTest());
-	System.out.println("Date of conception: ");
-	String dateC = r.readLine();
-	LocalDate dateCLocalDate = LocalDate.parse(dateC, formatter);
-	Date dateConception = Date.valueOf(dateCLocalDate);
-	System.out.println("Birth report: ");
-	String textReport;
-	System.out.println("How many Newborns you need to add? ");
-	int number= Integer.parseInt(r.readLine());
-	while(number>0) {
-		System.out.println(number+" -Please type the Newborn data:");
-		System.out.println("Name:");
-		String name = r.readLine();
-		System.out.println("Surname:");
-		String surname = r.readLine();
-		System.out.println("Weight:");
-		Float weight = Float.parseFloat(r.readLine());
-		System.out.println("Gender (F/M):");
-		String gender = r.readLine();
-		Newborn newborn= new Newborn(name,surname,weight,gender);
-		bornMan.addNewborn(newborn);
-		number--;
-	}}
+	List<LabReport> reports = labReportMan.getLabReportsByWoman(woman);
+	LabReport lastReport = null; 
+	
+	if (!reports.isEmpty()) {
+	    lastReport = reports.get(reports.size() - 1);  
+	    if(lastReport.isPregnant()==true) {
+	    	System.out.println("Register Pregnancy:");
+	    	//Mirar como esto de la DoT si añadir atriburto en pregnancy o q?
+	    	//System.out.println("Date of Test: "+labReportMan.getDateTest());
+	    	System.out.println("Date of conception: ");
+	    	String dateC = r.readLine();
+	    	LocalDate dateCLocalDate = LocalDate.parse(dateC, formatter);
+	    	Date dateConception = Date.valueOf(dateCLocalDate);
+	    	System.out.println("Birth report: ");
+	    	String textReport;
+	    	System.out.println("How many Newborns you need to add? ");
+	    	int number= Integer.parseInt(r.readLine());
+	    	while(number>0) {
+	    		System.out.println(number+" -Please type the Newborn data:");
+	    		System.out.println("Name:");
+	    		String name = r.readLine();
+	    		System.out.println("Surname:");
+	    		String surname = r.readLine();
+	    		System.out.println("Weight:");
+	    		Float weight = Float.parseFloat(r.readLine());
+	    		System.out.println("Gender (F/M):");
+	    		String gender = r.readLine();
+	    		Newborn newborn= new Newborn(name,surname,weight,gender);
+	    		bornMan.addNewborn(newborn);
+	    		number--;
+	    	}}
+	    }else {
+	    	System.out.println("The woman needs to take a laboratory test.");
+	    }
+	}
+
+		
+		
+	
 }
 
 
