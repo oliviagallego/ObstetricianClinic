@@ -24,14 +24,14 @@ public class JDBCNewbornManager implements NewbornManager {
 	@Override
 	public void addNewborn(Newborn newborn) {
 		try {
-			String query = "INSERT INTO newborns (name, surname, dob, weight, gender) VALUES (?, ?, ?, ?, ?);";
+			String query = "INSERT INTO newborns (name, surname, dob, weight, gender, pregnancyId) VALUES (?, ?, ?, ?, ?, ?);";
 			PreparedStatement insert = c.prepareStatement(query);
 			insert.setString(1, newborn.getName());
 			insert.setString(2, newborn.getSurname());
 			insert.setDate(3, newborn.getDob());
 			insert.setFloat(4, newborn.getWeight());
 			insert.setString(5, newborn.getGender());
-
+			insert.setInt(6, newborn.getPregnancy().getId());
 			insert.executeUpdate();
 			insert.close();
 		}catch(SQLException sqlE) {

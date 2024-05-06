@@ -24,10 +24,12 @@ public class JDBCLabReportManager implements LabReportManager {
 	@Override
 	public void addLabReport(LabReport labReport) {
 		try {
-			String sql= "INSERT INTO labReports (dateTest, pregnant) " + "VALUES(?,?);";
+			String sql= "INSERT INTO labReports (dateTest, pregnant, womanId, laboratoryStaffId) " + "VALUES(?,?,?,?);";
 			PreparedStatement insert= c.prepareStatement(sql);
 			insert.setDate(1, labReport.getDateTest());
 			insert.setBoolean(2, labReport.isPregnant());
+			insert.setInt(3, labReport.getWoman().getId());
+			insert.setInt(4, labReport.getLaboratoryStaff().getId());
 			insert.executeUpdate();
 			insert.close();
 			

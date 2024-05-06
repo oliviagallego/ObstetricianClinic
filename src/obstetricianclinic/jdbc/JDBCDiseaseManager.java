@@ -49,4 +49,19 @@ public class JDBCDiseaseManager implements DiseaseManager {
 			e.printStackTrace();
 		}
 	}
+	
+	@Override
+	public void assignDiseaseToWoman(int diseaseId, int womanId) {
+		try {
+			String sql = "INSERT INTO woman_disease(dogId, vetId) VALUES (?,?)";
+			PreparedStatement p = c.prepareStatement(sql);
+			p.setInt(1, diseaseId);
+			p.setInt(2, womanId);
+			p.executeUpdate();
+			p.close();
+		} catch (SQLException e) {
+			System.out.println("Database error.");
+			e.printStackTrace();
+		}
+	}
 }

@@ -7,7 +7,7 @@ import obstetricianclinic.pojos.*;
 
 
 public interface PregnancyManager {
-	public void addPregnancy (Date dateOfConception);
+	public void addPregnancy (Pregnancy preganancy);
 	public List<Pregnancy> searchPregnancyByDateOfConception(Date dateOfConception);
 	public void addBirthReport(String birthReport, Pregnancy pregnancy);
 	public void updatePregnancy(Pregnancy pregnancy);

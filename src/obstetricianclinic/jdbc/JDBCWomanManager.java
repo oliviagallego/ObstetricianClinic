@@ -24,12 +24,14 @@ public class JDBCWomanManager implements WomanManager {
 	@Override
 	public void registerWoman(Woman woman) {
 		try {
-			String sql= "INSERT INTO women (name, surname, dob, weight) " + "VALUES(?,?,?,?);";
+			String sql= "INSERT INTO women (name, surname, dob, weight, obstetricianId) " + "VALUES(?,?,?,?,?);";
 			PreparedStatement insert= c.prepareStatement(sql);
 			insert.setString(1, woman.getName());
 			insert.setString(2, woman.getSurname());
 			insert.setDate(3, woman.getDob());
 			insert.setFloat(4, woman.getWeight());
+			insert.setInt(5, woman.getObstetrician().getId());
+
 			
 			insert.executeUpdate();
 			insert.close();
