@@ -7,11 +7,11 @@ import obstetricianclinic.pojos.*;
 public interface UserManager {
 
 	public void register(User user);
-	public void assignRole(User user, Role role);
-	
+	public void createRole(Role role);
 	public Role getRole(String name);
+	public void assignRole(User user, Role role);
 	public List<Role> getRoles();
-	
+	//Return null if there is no user
 	public User logIn(String user, String password);
 	public void logOut();
 	public User changePassword(User user, String newPassword);

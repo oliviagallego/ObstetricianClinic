@@ -9,8 +9,6 @@ import javax.persistence.*;
 @Table(name = "users")
 public class User implements Serializable {
 
-	private static final long serialVersionUID = 1852408272326099491L;
-
 	@Id
 	@GeneratedValue(generator = "users")
 	@TableGenerator(name = "users", table = "sqlite_sequence", pkColumnName = "name", valueColumnName = "seq", pkColumnValue = "users")
