@@ -17,7 +17,7 @@ public class JDBCDiseaseManager implements DiseaseManager {
 	}
 
 	@Override
-	public void addDisease(Disease disease) { //
+	public void addDisease(Disease disease) {
 		try {
 			String sql= "INSERT INTO diseases (diseaseType) " + "VALUES(?);";
 			PreparedStatement insert= c.prepareStatement(sql);
@@ -40,23 +40,8 @@ public class JDBCDiseaseManager implements DiseaseManager {
 			PreparedStatement p;
 			p = c.prepareStatement(sql);
 			p.setString(1, disease.getDiseaseType());
-	
+			p.setInt(2, disease.getId());
 			
-			p.executeUpdate();
-			p.close();
-		} catch (SQLException e) {
-			System.out.println("Database error.");
-			e.printStackTrace();
-		}
-	}
-	
-	@Override
-	public void assignDiseaseToWoman(int disease_id, int woman_id) {
-		try {
-			String sql = "INSERT INTO woman_diseases(disease_Id, woman_Id) VALUES (?,?)";
-			PreparedStatement p = c.prepareStatement(sql);
-			p.setInt(1, disease_id);
-			p.setInt(2, woman_id);
 			p.executeUpdate();
 			p.close();
 		} catch (SQLException e) {

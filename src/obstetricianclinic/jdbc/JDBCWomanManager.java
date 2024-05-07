@@ -46,7 +46,7 @@ public class JDBCWomanManager implements WomanManager {
 	@Override
 	public void deleteWoman(int id) {
 		try {
-			String sql = "DELETE FROM womans WHERE id = ?";
+			String sql = "DELETE FROM women WHERE id = ?";
 			PreparedStatement p;
 			p = c.prepareStatement(sql);
 			p.setInt(1, id);
@@ -59,31 +59,7 @@ public class JDBCWomanManager implements WomanManager {
 
 	}
 
-	@Override
-	public List<Woman> searchWomanByNameAndSurname(String name, String surname) {
-		List<Woman> women= new ArrayList<Woman>();
-		try {
-			String sql= "SELECT * FROM women WHERE name LIKE ? AND surname LIKE ?";
-			PreparedStatement p;
-			p= c.prepareStatement(sql);
-			p.setString(1, "%" + name + "%");
-			p.setString(2, "%" + surname + "%");
-			ResultSet rs= p.executeQuery();
-			while(rs.next()) {
-				Integer id= rs.getInt("id");
-				String womanName= rs.getString("name");
-				String womanSurname= rs.getString("surname");
-				Woman w = new Woman(id, womanName, womanSurname);
-				women.add(w);
-			}
-			rs.close();
-			p.close();
-		}catch(SQLException e) {
-			System.out.println("Error in the database");
-			e.printStackTrace();
-		}
-		return women;
-	}
+	
 
 	@Override
 	public void updateWoman(Woman woman) {
@@ -95,6 +71,7 @@ public class JDBCWomanManager implements WomanManager {
 			p.setString(2, woman.getSurname());
 			p.setDate(3, woman.getDob());
 			p.setFloat(4, woman.getWeight());
+			p.setInt(5, woman.getId());
 			p.executeUpdate();
 			p.close();
 		} catch (SQLException e) {
@@ -105,19 +82,59 @@ public class JDBCWomanManager implements WomanManager {
 	}
 
 	@Override
-	public Woman viewWoman(int id) {
+	public List<Woman> searchWomanByObstetrician(int id) {
+		List<Woman> list = new ArrayList<Woman>();
+		try {
+			String sql = "SELECT * FROM women WHERE obstetrician_id = ?";
+			PreparedStatement p = c.prepareStatement(sql);
+			p.setInt(1, id);
+			ResultSet rs = p.executeQuery();
+			while (rs.next()) {
+				// Create a new Woman
+				Integer woman_id= rs.getInt("id");
+				String name= rs.getString("name");
+				String surname= rs.getString("surname");
+				Date dob = rs.getDate("dob");
+				Float weight= rs.getFloat("weight");
+				Woman w= new Woman(woman_id, name, surname, dob, weight);
+				list.add(w);
+			}
+		} catch (SQLException e) {
+			System.out.println("Database error.");
+			e.printStackTrace();
+		}
+		return list;
+	}
+
+	@Override
+	public void assignWomanToDisease(int woman_id, int disease_id) {
+		try {
+			String sql = "INSERT INTO women_diseases (woman_id, disease_id) VALUES (?,?)";
+			PreparedStatement p = c.prepareStatement(sql);
+			p.setInt(1, woman_id);
+			p.setInt(2, disease_id);
+			p.executeUpdate();
+			p.close();
+		} catch (SQLException e) {
+			System.out.println("Database error.");
+			e.printStackTrace();
+		}
+		
+	}
+
+	@Override
+	public Woman getWoman(int id) {
 		try {
 			String sql = "SELECT * FROM women WHERE id = ?";
-			PreparedStatement p;
-			p= c.prepareStatement(sql);
+			PreparedStatement p = c.prepareStatement(sql);
 			p.setInt(1, id);
 			ResultSet rs = p.executeQuery();
 			rs.next();
-			String name= rs.getString("name");
+			String name = rs.getString("name");
 			String surname= rs.getString("surname");
 			Date dob = rs.getDate("dob");
 			Float weight= rs.getFloat("weight");
-			Woman w= new Woman(id, name, surname, dob, weight);
+			Woman w= new Woman(name, surname, dob, weight);
 			rs.close();
 			p.close();
 			return w;

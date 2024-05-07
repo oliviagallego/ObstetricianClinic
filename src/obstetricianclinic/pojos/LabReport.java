@@ -12,19 +12,26 @@ public class LabReport implements Serializable{
 	private Date dateTest;
 	private boolean pregnant;
 	private Woman woman;
-	private LaboratoryStaff laboratoryStaff;
+	private LabStaff labStaff;
 	
 	public LabReport() {
 		super();
 	}
 
-	public LabReport(Integer id, Date dateTest, boolean pregnant, Woman woman, LaboratoryStaff laboratoryStaff) {
+	public LabReport(Integer id, Date dateTest, boolean pregnant, Woman woman, LabStaff labStaff) {
 		super();
 		this.id = id;
 		this.dateTest = dateTest;
 		this.pregnant = pregnant;
 		this.woman = woman;
-		this.laboratoryStaff = laboratoryStaff;
+		this.labStaff = labStaff;
+	}
+	
+	public LabReport(Integer id, Date dateTest, boolean pregnant) {
+		super();
+		this.id = id;
+		this.dateTest = dateTest;
+		this.pregnant = pregnant;
 	}
 
 	public Integer getId() {
@@ -59,17 +66,18 @@ public class LabReport implements Serializable{
 		this.woman = woman;
 	}
 
-	public LaboratoryStaff getLaboratoryStaff() {
-		return laboratoryStaff;
+
+	public LabStaff getLabStaff() {
+		return labStaff;
 	}
 
-	public void setLaboratoryStaff(LaboratoryStaff laboratoryStaff) {
-		this.laboratoryStaff = laboratoryStaff;
+	public void setLabStaff(LabStaff labStaff) {
+		this.labStaff = labStaff;
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(dateTest, id, laboratoryStaff, pregnant, woman);
+		return Objects.hash(dateTest, id, labStaff, pregnant, woman);
 	}
 
 	@Override
@@ -82,14 +90,14 @@ public class LabReport implements Serializable{
 			return false;
 		LabReport other = (LabReport) obj;
 		return Objects.equals(dateTest, other.dateTest) && Objects.equals(id, other.id)
-				&& Objects.equals(laboratoryStaff, other.laboratoryStaff) && pregnant == other.pregnant
+				&& Objects.equals(labStaff, other.labStaff) && pregnant == other.pregnant
 				&& Objects.equals(woman, other.woman);
 	}
 
 	@Override
 	public String toString() {
 		return "LabReport [id=" + id + ", dateTest=" + dateTest + ", pregnant=" + pregnant + ", woman=" + woman
-				+ ", laboratoryStaff=" + laboratoryStaff + "]";
+				+ ", laboratoryStaff=" + labStaff + "]";
 	}
 	
 	

@@ -25,10 +25,11 @@ public class JDBCPregnancyManager implements PregnancyManager {
 	@Override
 	public void addPregnancy(Pregnancy pregnancy) {
 		try {
-		String sql= "INSERT INTO pregnancies (dateConception, woma_Id) " + "VALUES(?,?);";
+		String sql= "INSERT INTO pregnancies (dateConception, birthReport, woman_id) " + "VALUES(?,?,?);";
 		PreparedStatement insert= c.prepareStatement(sql);
 		insert.setDate(1, pregnancy.getDateConception());
-		insert.setInt(2, pregnancy.getWoman().getId());
+		insert.setString(2, pregnancy.getBirthReport());
+		insert.setInt(3, pregnancy.getWoman().getId());
 		insert.executeUpdate();
 		insert.close();
 		}catch(SQLException sqlE) {
@@ -36,21 +37,8 @@ public class JDBCPregnancyManager implements PregnancyManager {
 			sqlE.printStackTrace();
 		}
 	}
+
 	
-	@Override
-	public void addPregnancyByWomanAndPregnancy(Woman woman, Pregnancy pregnancy){
-	    String sql = "INSERT INTO pregnancies (woman_id, date_conception) VALUES (?, ?);";
-	    try (PreparedStatement insert = c.prepareStatement(sql)) {
-	        insert.setInt(1, woman.getId());  // Establecer el woman_id
-	        insert.setDate(2, new java.sql.Date(pregnancy.getDateConception().getTime()));  // Establecer date_conception
-
-	        insert.executeUpdate();
-	    } catch (SQLException sqlE) {
-	        System.out.println("Database exception");
-	        sqlE.printStackTrace();
-	    }
-	}
-
 	@Override
 	public List<Pregnancy> searchPregnancyByDateOfConception(Date dateOfConception) {
 		List<Pregnancy> pregnancies= new ArrayList<Pregnancy>();
@@ -61,13 +49,11 @@ public class JDBCPregnancyManager implements PregnancyManager {
 			ResultSet rs= search.executeQuery();
 			
 			while(rs.next()) {
-				Integer id = rs.getInt("id");
+				Integer pregnancy_id = rs.getInt("id");
 				Date dateConception= rs.getDate("dateConception");
 				String birthReport= rs.getString("birthReport");
-				//List<Newborn> newborns= conMan.getNewbornMan().searchNewbornByPregnancy(id);//???
-				//Woman woman= conMan.getWomanMan().;//????
 				
-				Pregnancy pregnancy= new Pregnancy(id, dateConception, birthReport);
+				Pregnancy pregnancy= new Pregnancy(pregnancy_id, dateConception, birthReport);
 				pregnancies.add(pregnancy);
 			}
 			search.close();
@@ -80,41 +66,43 @@ public class JDBCPregnancyManager implements PregnancyManager {
 	}
 
 	@Override
-	public void addBirthReport(String birthReport, Pregnancy pregnancy) {
-		// Esto como lo gestionamos? va aquí?
-		
-	}
-
-	@Override
 	public void updatePregnancy(Pregnancy pregnancy) {
 		try {
-<<<<<<< HEAD
 			String sql = "UPDATE pregnancies SET" + " dateConception = ?, " + " birthReport = ?, " + " WHERE id = ?";
 			PreparedStatement p;
 			p = c.prepareStatement(sql);
 			p.setDate(1, pregnancy.getDateConception());
 			p.setString(2, pregnancy.getBirthReport());
+			p.setInt(3, pregnancy.getId());
 			p.executeUpdate();
 			p.close();
 		} catch (SQLException e) {
 			System.out.println("Database error.");
 			e.printStackTrace();
 		}
+	}
 
-=======
-			String sql = "UPDATE pregnancies SET" + " dateTest = ?, " + " birthReport = ?, " + " WHERE id = ?";
-			PreparedStatement p;
-			p = c.prepareStatement(sql);
-			p.setDate(1, pregnancy.getDateTest());
-			p.setString(2, pregnancy.getBirthReport());
-			p.executeUpdate();
-			p.close();
+	@Override
+	public List<Pregnancy> searchPregnancyByWoman(int id) {
+		List<Pregnancy> list = new ArrayList<Pregnancy>();
+		try {
+			String sql = "SELECT * FROM pregnancies WHERE woman_id = ?";
+			PreparedStatement p = c.prepareStatement(sql);
+			p.setInt(1, id);
+			ResultSet rs = p.executeQuery();
+			while (rs.next()) {
+				// Create a new Pregnancy
+				Integer pregnancy_id = rs.getInt("id");
+				Date dateConception = rs.getDate("dateConception");
+				String birthReport = rs.getString("birthReport");
+				Pregnancy pg= new Pregnancy(pregnancy_id, dateConception, birthReport);
+				list.add(pg);
+			}
 		} catch (SQLException e) {
 			System.out.println("Database error.");
 			e.printStackTrace();
 		}
-		
->>>>>>> branch 'main' of https://github.com/oliviagallego/ObstetricianClinic
+		return list;
 	}
 
 }

@@ -7,8 +7,6 @@ import java.util.List;
 
 import obstetricianclinic.ifaces.LabStaffManager;
 import obstetricianclinic.pojos.*;
-import obstetricianclinic.pojos.LabReport;
-import obstetricianclinic.pojos.LaboratoryStaff;
 
 public class JDBCLabStaffManager implements LabStaffManager {
 	private ConnectionManager conMan;
@@ -20,13 +18,13 @@ public class JDBCLabStaffManager implements LabStaffManager {
 	}
 
 	@Override
-	public void addLabStaff(LaboratoryStaff laboratoryStaff) {
+	public void addLabStaff(LabStaff labStaff) {
 		try {
 
-			String sql= "INSERT INTO laboratoryStaffs (name, surname) " + "VALUES(?,?);"; 
+			String sql= "INSERT INTO labStaffs (name, surname) " + "VALUES(?,?);"; 
 			PreparedStatement insert= c.prepareStatement(sql);
-			insert.setString(1, laboratoryStaff.getName());
-			insert.setString(2, laboratoryStaff.getSurname());
+			insert.setString(1, labStaff.getName());
+			insert.setString(2, labStaff.getSurname());
 			
 			insert.executeUpdate();
 			insert.close();
@@ -39,15 +37,15 @@ public class JDBCLabStaffManager implements LabStaffManager {
 	}
 
 	@Override
-	public void updateLabStaff(LaboratoryStaff laboratoryStaff) {
+	public void updateLabStaff(LabStaff labStaff) {
 		try {
 
-			String sql = "UPDATE laboratoryStaffs SET" + " name = ?, " + " surname = ?, " + " WHERE id = ?";
+			String sql = "UPDATE labStaffs SET" + " name = ?, " + " surname = ?, " + " WHERE id = ?";
 			PreparedStatement p;
 			p = c.prepareStatement(sql);
-			p.setString(1, laboratoryStaff.getName());
-			p.setString(2, laboratoryStaff.getSurname());
-
+			p.setString(1, labStaff.getName());
+			p.setString(2, labStaff.getSurname());
+			p.setInt(3, labStaff.getId());
 			p.executeUpdate();
 			p.close();
 		} catch (SQLException e) {
@@ -55,7 +53,5 @@ public class JDBCLabStaffManager implements LabStaffManager {
 			e.printStackTrace();
 		}
 
-
-	
-
+	}
 }

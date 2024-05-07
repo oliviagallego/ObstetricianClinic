@@ -1,5 +1,4 @@
 package obstetricianclinic.jdbc;
-import java.ifaces.*;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -7,8 +6,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import obstetricianclinic.pojos.Newborn;
-import obstetricianclinic.pojos.Pregnancy;
+
+import obstetricianclinic.pojos.*;
 import obstetricianclinic.ifaces.NewbornManager;
 import java.sql.Date;
 
@@ -42,35 +41,6 @@ public class JDBCNewbornManager implements NewbornManager {
 	}
 
 	@Override
-	public List<Newborn> searchNewbornByDOB(Date dob) {
-		List<Newborn> newborns= new ArrayList<Newborn>();
-		try {
-			String sql= "SELECT * FROM newborns WHERE dob LIKE ?";
-			PreparedStatement search= c.prepareStatement(sql);
-			search.setDate(1, dob);
-			ResultSet rs= search.executeQuery();
-			
-			while(rs.next()) {
-				Integer id = rs.getInt("id");
-				String name= rs.getString("name");
-				String surname= rs.getString("surname");
-				Date dofBirth= rs.getDate("dob");
-				Float weight= rs.getFloat("weight");
-				String gender= rs.getString("gender");
-				
-				Newborn newborn= new Newborn(id, name,surname, dofBirth, weight, gender);
-				newborns.add(newborn);
-			}
-			search.close();
-			rs.close();
-		}catch(SQLException e) {
-			System.out.println("Error in the database");
-			e.printStackTrace();
-		}
-		return newborns;
-	}
-
-	@Override
 	public void updateNewborn(Newborn newborn) {
 		try {
 			String sql = "UPDATE newborns SET" + " name = ?, " + " surname = ?, " + " dob = ? " + " weight = ? "+ " gender = ? "+ " WHERE id = ?";
@@ -81,6 +51,7 @@ public class JDBCNewbornManager implements NewbornManager {
 			p.setDate(3, newborn.getDob());
 			p.setFloat(4, newborn.getWeight());
 			p.setString(5, newborn.getGender());
+			p.setInt(6, newborn.getId());
 			p.executeUpdate();
 			p.close();
 		} catch (SQLException e) {
@@ -90,9 +61,53 @@ public class JDBCNewbornManager implements NewbornManager {
 	}
 
 	@Override
-	public List<Newborn> searchNewbornByPregnancy(int pregnancyId) {
-		// TODO Auto-generated method stub
+	public List<Newborn> searchNewbornByPregnancy(int id) {
+		List<Newborn> list= new ArrayList<Newborn>();
+		try {
+			String sql = "SELECT * FROM newborns WHERE pregnancy_id = ?";
+			PreparedStatement p = c.prepareStatement(sql);
+			p.setInt(1, id);
+			ResultSet rs = p.executeQuery();
+			while (rs.next()) {
+				// Create a new Newborn
+				Integer newborn_id = rs.getInt("id");
+				String name = rs.getString("name");
+				String surname= rs.getString("surname");
+				Date dob = rs.getDate("dob");
+				Float weight= rs.getFloat("weight");
+				String gender = rs.getString("gender");
+				Newborn newborn = new Newborn(newborn_id, name, surname, dob, weight, gender);
+				list.add(newborn);
+			}
+		} catch (SQLException e) {
+			System.out.println("Database error.");
+			e.printStackTrace();
+		}
+		return list;
+	}
+
+	@Override
+	public Newborn getNewborn(int id) {
+		try {
+			String sql = "SELECT * FROM newborns WHERE id = ?";
+			PreparedStatement p = c.prepareStatement(sql);
+			p.setInt(1, id);
+			ResultSet rs = p.executeQuery();
+			rs.next();
+			String name= rs.getString("name");
+			String surname = rs.getString("surname");
+			Date dob = rs.getDate("dob");
+			Float weight= rs.getFloat("weight");
+			String gender = rs.getString("gender");
+			Newborn newborn = new Newborn(name, surname, dob, weight, gender);
+			rs.close();
+			p.close();
+			return newborn;
+		}catch (SQLException e) {
+			System.out.println("Database error.");
+			e.printStackTrace();
 		return null;
+		}
 	}
 
 }

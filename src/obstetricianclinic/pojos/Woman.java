@@ -15,7 +15,7 @@ public class Woman implements Serializable{
 	private String name;
     private String surname;
     private Date dob;
-    private float weight;
+    private Float weight;
     private List<Disease> diseases;
     private Obstetrician obstetrician;
     private List<Pregnancy> pregnancies;
@@ -29,12 +29,6 @@ public class Woman implements Serializable{
         this.labReports= new ArrayList<LabReport>();
     }
     
-    public Woman(Integer id, String name, String surname) {
-    	super();
-    	this.id=id;
-    	this.name= name;
-    	this.surname= surname;
-    }
     public Woman(String name, String surname, Integer id, Date dob, Float weight, Obstetrician obstetrician){
     	super();
         this.name = name;
@@ -57,7 +51,7 @@ public class Woman implements Serializable{
         this.weight = weight;
     }
     
-	public Woman(String name, String surname, Date dob, float weight) {
+	public Woman(String name, String surname, Date dob, Float weight) {
 		super();
 		this.name = name;
 		this.surname = surname;
@@ -65,14 +59,6 @@ public class Woman implements Serializable{
 		this.weight = weight;
 	}
 	
-	public Woman(String name, String surname, Date dob, float weight, List<Disease> diseases) {
-		super();
-		this.name = name;
-		this.surname = surname;
-		this.dob = dob;
-		this.weight = weight;
-		this.diseases = diseases;
-	}
 
 	public String getName() {
 		return name;

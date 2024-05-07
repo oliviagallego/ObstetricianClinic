@@ -24,12 +24,12 @@ public class JDBCLabReportManager implements LabReportManager {
 	@Override
 	public void addLabReport(LabReport labReport) {
 		try {
-			String sql= "INSERT INTO labReports (dateTest, pregnant, woman_id, laboratoryStaff_id) " + "VALUES(?,?,?,?);";
+			String sql= "INSERT INTO labReports (dateTest, pregnant, woman_id, labStaff_id) " + "VALUES(?,?,?,?);";
 			PreparedStatement insert= c.prepareStatement(sql);
 			insert.setDate(1, labReport.getDateTest());
 			insert.setBoolean(2, labReport.isPregnant());
 			insert.setInt(3, labReport.getWoman().getId());
-			insert.setInt(4, labReport.getLaboratoryStaff().getId());
+			insert.setInt(4, labReport.getLabStaff().getId());
 			insert.executeUpdate();
 			insert.close();
 			
@@ -47,6 +47,7 @@ public class JDBCLabReportManager implements LabReportManager {
 			p = c.prepareStatement(sql);
 			p.setDate(1, report.getDateTest());
 			p.setBoolean(2, report.isPregnant());
+			p.setInt(3, report.getId());
 			p.executeUpdate();
 			p.close();
 		} catch (SQLException e) {
@@ -57,54 +58,49 @@ public class JDBCLabReportManager implements LabReportManager {
 	}
 
 	@Override
-	public LabReport getLabReportById(int id) {
-		//no me haria falta que en vez de devolver un labReport, devuelva la lista ?? 
-		//tmb le pasaria otra cosa que no fuera el id
-		return null;
-	}
-
-	@Override
-	public List<LabReport> getLabReportsByWoman(Woman woman) {
-		List<LabReport> reports= new ArrayList<LabReport>();
+	public List<LabReport> searchLabReportByWoman(int id) {
+		List<LabReport> list = new ArrayList<LabReport>();
 		try {
-			String sql= "SELECT * FROM reports WHERE name LIKE ? AND surname LIKE ?";
-			PreparedStatement p;
-			p= c.prepareStatement(sql);
-			/* he cogido la estructura de un metodo de woman pero tengo varias dudas
-			p.setString(1, "%" + name + "%");
-			p.setString(2, "%" + surname + "%");
-			ResultSet rs= p.executeQuery();
-			while(rs.next()) {
-				Integer id= rs.getInt("id");
-				String womanName= rs.getString("name");
-				String womanSurname= rs.getString("surname");
-				Woman w = new Woman(id, womanName, womanSurname);
-				reports.add(w);
+			String sql = "SELECT * FROM labReports WHERE woman_id = ?";
+			PreparedStatement p = c.prepareStatement(sql);
+			p.setInt(1, id);
+			ResultSet rs = p.executeQuery();
+			while (rs.next()) {
+				// Create a new LabReport
+				Integer labReport_id = rs.getInt("id");
+				Date dateTest = rs.getDate("dateTest");
+				Boolean pregnant = rs.getBoolean("pregnant");
+				LabReport labReport = new LabReport(labReport_id, dateTest, pregnant);
+				list.add(labReport);
 			}
-			rs.close();
-			p.close();
-		}catch(SQLException e) {
-			System.out.println("Error in the database");
+		} catch (SQLException e) {
+			System.out.println("Database error.");
 			e.printStackTrace();
 		}
-		*/
-		return reports;
-		return null;
+		return list;
 	}
 
 	@Override
-	public List<LabReport> listAllLabReports() {//NO LO HARIA
-		// TODO Auto-generated method stub
-		return null;
-	}
-	
-	public  Date getDateTest(LabReport labReport) {
-		//TODO Auto-generated method stub
-		return null;
-	}
-	public LabReport getLabReportsDOT(Date dot) {
-		//TODO Auto-generated method stub
-		return null;
+	public List<LabReport> searchLabReportByLabStaff(int id) {
+		List<LabReport> list = new ArrayList<LabReport>();
+		try {
+			String sql = "SELECT * FROM labReports WHERE labStaff_id = ?";
+			PreparedStatement p = c.prepareStatement(sql);
+			p.setInt(1, id);
+			ResultSet rs = p.executeQuery();
+			while (rs.next()) {
+				// Create a new LabReport
+				Integer labReport_id = rs.getInt("id");
+				Date dateTest = rs.getDate("dateTest");
+				Boolean pregnant = rs.getBoolean("pregnant");
+				LabReport labReport = new LabReport(labReport_id, dateTest, pregnant);
+				list.add(labReport);
+			}
+		} catch (SQLException e) {
+			System.out.println("Database error.");
+			e.printStackTrace();
+		}
+		return list;
 	}
 
 }

@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-public class LaboratoryStaff implements Serializable{
+public class LabStaff implements Serializable{
     /**
 	 * 
 	 */
@@ -16,12 +16,12 @@ public class LaboratoryStaff implements Serializable{
     private List<LabReport> labReports;
     
     
-	public LaboratoryStaff() {
+	public LabStaff() {
 		super();
 		this.labReports = new ArrayList<LabReport>();
 	}
 
-	public LaboratoryStaff(Integer id, String name, String surname) {
+	public LabStaff(Integer id, String name, String surname) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -74,14 +74,14 @@ public class LaboratoryStaff implements Serializable{
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		LaboratoryStaff other = (LaboratoryStaff) obj;
+		LabStaff other = (LabStaff) obj;
 		return Objects.equals(id, other.id) && Objects.equals(labReports, other.labReports)
 				&& Objects.equals(name, other.name) && Objects.equals(surname, other.surname);
 	}
 
 	@Override
 	public String toString() {
-		return "LaboratoryStaff [id=" + id + ", name=" + name + ", surname=" + surname + ", labReports=" + labReports
+		return "LabStaff [id=" + id + ", name=" + name + ", surname=" + surname + ", labReports=" + labReports
 				+ "]";
 	}
 

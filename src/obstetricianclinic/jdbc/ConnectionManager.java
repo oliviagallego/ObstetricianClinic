@@ -127,11 +127,11 @@ public class ConnectionManager {
 			createTables3.close();
 			
 			Statement createTables4= c.createStatement();
-			String create4= "CREATE TABLE laboratoryReports ("
+			String create4= "CREATE TABLE labReports ("
 					+ "laboratoryReport_id INTEGER PRIMARY KEY AUTOINCREMENT, "
 					+ "date_test DATE NOT NULL, "
 					+ "pregnant BOOLEAN NOT NULL, "
-					+ "laboratoryStaff_id INTEGER REFERENCES laboratoryStaffs(id), "
+					+ "labStaff_id INTEGER REFERENCES labStaffs(id), "
 					+ "woman_id INTEGER REFERENCES women(id))";
 			createTables4.executeUpdate(create4);
 			createTables4.close();
@@ -158,15 +158,15 @@ public class ConnectionManager {
 			createTables6.close();
 			
 			Statement createTables7= c.createStatement();
-			String create7= "CREATE TABLE laboratoryStaffs ("
-					+ "laboratoryStaff_id INTEGER PRIMARY KEY AUTOINCREMENT, "
+			String create7= "CREATE TABLE labStaffs ("
+					+ "labStaff_id INTEGER PRIMARY KEY AUTOINCREMENT, "
 					+ "name TEXT NOT NULL, "
 					+ "surname TEXT NOT NULL)";
 			createTables7.executeUpdate(create7);
 			createTables7.close();
 			
 			Statement createTables8= c.createStatement();
-			String create8= "CREATE TABLE womans_diseases ("
+			String create8= "CREATE TABLE women_diseases ("
 					+ "woman_id INTEGER REFERENCES women(id), "
 					+ "disease_id INTEGER REFERENCES diseases(id), "
 					+ "PRIMARY KEY(woman_id, disease_id))";
