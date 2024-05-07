@@ -15,4 +15,5 @@ public interface UserManager {
 	public User logIn(String username, String password);
 	public void logOut();
 	public User changePassword(User username, String newPassword);
+	public Obstetrician getObstetricianFromUser(User user);
 }

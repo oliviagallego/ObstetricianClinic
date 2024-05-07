@@ -6,7 +6,7 @@ import java.io.InputStreamReader;
 import java.sql.Date;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.List;
+import java.util.*;
 import obstetricianclinic.ifaces.*;
 import obstetricianclinic.jdbc.*;
 import obstetricianclinic.pojos.*;
@@ -27,7 +27,7 @@ public class ObstetricianMenu {
 		obstetricianMan = conMan.getObstetricianMan();
 		womanMan = conMan.getWomanMan();/* solo tenemos q hacer uso del método*/
 		userMan = man;
-		//Obstetrician obstetrician= obstetricianMan.equals(user);
+		Obstetrician obstetrician = userMan.getObstetricianFromUser(user);
 		while (true) {
 			try {
 				System.out.println("Welcome to the obstetrician clinic!!");
@@ -45,7 +45,8 @@ public class ObstetricianMenu {
 							break;
 						}
 						case 2: {
-							Woman woman= searchWomanByNameAndSurname();
+							int id_obs=obstetrician.getId();
+							Woman woman= searchWomanByNameAndSurname(id);
 							WomanMenu.menu(woman);
 							break;
 						}
@@ -98,13 +99,21 @@ public static void registerwoman() throws IOException {
 
 }
 
-public static Woman searchWomanByNameAndSurname() throws IOException {
+public static Woman searchWomanByNameAndSurname(int id) throws IOException {
+	List<Woman>listWomenOfObstetrician= womanMan.searchWomanByObstetrician(id);
+	
 	System.out.println("Search woman by name:");
 	String name = r.readLine();
 	System.out.println("Surname:");
 	String surname = r.readLine();
-	List<Woman>listWomenOfObstetrician= searchWomanByObstetrician();
-	List<Woman> listWomen = womanMan.searchWomanByNameAndSurname(name, surname);
+	
+	List<Woman> listWomen=new ArrayList<>();
+	for(int i=0; i<listWomenOfObstetrician.size(); i++) {
+		Woman o=listWomenOfObstetrician.get(i);
+		if(o.getName().equals(name)&&o.getSurname().equals(surname)) {
+			listWomen.add(o);
+		}
+	}
 	
 	if (listWomen.isEmpty()) {
         System.out.println("No women found with the name and surname provided.");
