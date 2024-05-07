@@ -40,27 +40,32 @@ public class JPAUserManager implements UserManager {
 		Role role= (Role) q.getSingleResult();
 		return role;
 	}
+	
+	@Override
+	public List<Role> getAllRoles() {
+		Query q= em.createNativeQuery("SELECT * FROM roles", Role.class);
+		List<Role> roles= (List<Role>) q.getResultList();
+		return roles;
+	}
 
 	@Override
 	public void assignRole(User user, Role role) {
 		em.getTransaction().begin();
 		user.setRole(role);//assign role to user
 		//add User to List of Users in Role
-		
+		role.addUser(user);
 		em.getTransaction().commit();
 
 	}
 
 	@Override
-	public List<Role> getRoles() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public User logIn(String user, String password) {
-		// TODO Auto-generated method stub
-		return null;
+	public User logIn(String username, String password) {
+		Query q = em.createNativeQuery("SELECT FROM users WHERE username = ? AND password = ?",User.class);
+		q.setParameter(1, username);
+		q.setParameter(2, password);
+		//TODO remember to provide bad password to see what happens
+		User user= (User) q.getSingleResult();
+		return user;
 	}
 
 	@Override

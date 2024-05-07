@@ -10,9 +10,9 @@ public interface UserManager {
 	public void createRole(Role role);
 	public Role getRole(String name);
 	public void assignRole(User user, Role role);
-	public List<Role> getRoles();
+	public List<Role> getAllRoles();
 	//Return null if there is no user
-	public User logIn(String user, String password);
+	public User logIn(String username, String password);
 	public void logOut();
-	public User changePassword(User user, String newPassword);
+	public User changePassword(User username, String newPassword);
 }
