@@ -106,7 +106,7 @@ public static Pregnancy pregnancySearch() throws IOException {
 	}	
 
 public static void addPregancy(Woman woman) throws IOException {
-	List<LabReport> reports = labReportMan.getLabReportsByWoman(woman);
+	List<LabReport> reports = labReportMan.searchLabReportByWoman(woman.getId());
 	LabReport lastReport = null; 
 	
 	if (!reports.isEmpty()) {
@@ -132,7 +132,7 @@ public static void addPregancy(Woman woman) throws IOException {
 	    		Float weight = Float.parseFloat(r.readLine());
 	    		System.out.println("Gender (F/M):");
 	    		String gender = r.readLine();
-	    		Newborn newborn= new Newborn(name,surname,weight,gender);
+	    		Newborn newborn= new Newborn(name,surname,lastReport.getDateTest(),weight,gender);
 	    		bornMan.addNewborn(newborn);
 	    		number--;
 	    	}}
