@@ -113,8 +113,7 @@ public static void addPregancy(Woman woman) throws IOException {
 	    lastReport = reports.get(reports.size() - 1);  
 	    if(lastReport.isPregnant()==true) {
 	    	System.out.println("Register Pregnancy:");
-	    	//Mirar como esto de la DoT si añadir atriburto en pregnancy o q?
-	    	//System.out.println("Date of Test: "+labReportMan.getDateTest());
+	    	System.out.println("Date of Test: "+lastReport.getDateTest());
 	    	System.out.println("Date of conception: ");
 	    	String dateC = r.readLine();
 	    	LocalDate dateCLocalDate = LocalDate.parse(dateC, formatter);
