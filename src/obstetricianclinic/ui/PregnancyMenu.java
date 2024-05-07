@@ -22,7 +22,7 @@ public class PregnancyMenu {
 	private static PregnancyManager pregMan;
 	private static NewbornManager bornMan;
 	
-	public static void main(Woman woman) {
+	public static void menu(Woman woman) {
 		ConnectionManager conMan = new ConnectionManager();
 		womanMan = conMan.getWomanMan();
 		pregMan = conMan.getPregnancyMan();
@@ -180,40 +180,27 @@ public static void subPregnancyMenu(Pregnancy pregnancy) {
 public static void updatePregancy(Pregnancy pregnancy) throws IOException {
 	System.out.println("Please what do you want to update of the pregnancy's data:");
 	System.out.println("\nChoose an option:");
-	System.out.println("\n1. Change name");
-	System.out.println("\n2. Change surname");
-	System.out.println("\n3. Change dob");
-	System.out.println("\n4. Change weight");
+	System.out.println("\n1. Change Date of conception");
+	System.out.println("\n2. Change Birth report");
 	int option= Integer.parseInt(r.readLine());
 	switch(option) {
 	case 1:
-		System.out.println("Give me the new name: ");
-		System.out.println("Name:");
-		String name = r.readLine();
-		woman.setName(name);
-		womanMan.updateWoman(woman);
+		System.out.println("The actual Date of conception is: "+pregnancy.getDateConception());
+		System.out.println("\n Give me the new Date of test: ");
+		String dateC = r.readLine();
+    	LocalDate dateCLocalDate = LocalDate.parse(dateC, formatter);
+    	Date dateConception = Date.valueOf(dateCLocalDate);
+    	pregnancy.setDateConception(dateConception);
+		pregMan.updatePregnancy(pregnancy);
 		break;
 	case 2:
-		System.out.println("Give me the new surname: ");
-		System.out.println("Surname:");
-		String surname = r.readLine();
-		woman.setSurname(surname);
-		womanMan.updateWoman(woman);
+		System.out.println("The actual Birth report is: "+pregnancy.getBirthReport());
+		System.out.println("\n Give me the new Birth report: ");
+		String report = r.readLine();
+		pregnancy.setBirthReport(report);
+		pregMan.updatePregnancy(pregnancy);
 		break;
-	case 3:
-		System.out.println("Give me the new Date of birth (dd-MM-yyyy): ");
-		String dob = r.readLine();
-		LocalDate dobLocalDate = LocalDate.parse(dob, formatter);
-		Date dobDate = Date.valueOf(dobLocalDate); System.out.println(l);
-		woman.setDob(dobDate);
-		womanMan.updateWoman(woman);
-		break;
-	case 4:
-		System.out.println("Give me the new weight: ");
-		Float weight = Float.parseFloat(r.readLine());
-		woman.setWeight(weight);
-		womanMan.updateWoman(woman);
-		break;
+		
 	default: {
 		System.out.println(" ERROR: Invalid option.");
 	}

@@ -32,7 +32,11 @@ public class JDBCWomanManager implements WomanManager {
 			insert.setFloat(4, woman.getWeight());
 			insert.setInt(5, woman.getObstetrician().getId());
 
-			
+			oman_id= rs.getInt("id");
+				String name= rs.getString("name");
+				String surname= rs.getString("surname");
+				Date dob = rs.getDate("dob");
+	
 			insert.executeUpdate();
 			insert.close();
 			
@@ -91,11 +95,7 @@ public class JDBCWomanManager implements WomanManager {
 			ResultSet rs = p.executeQuery();
 			while (rs.next()) {
 				// Create a new Woman
-				Integer woman_id= rs.getInt("id");
-				String name= rs.getString("name");
-				String surname= rs.getString("surname");
-				Date dob = rs.getDate("dob");
-				Float weight= rs.getFloat("weight");
+				Integer w			Float weight= rs.getFloat("weight");
 				Woman w= new Woman(woman_id, name, surname, dob, weight);
 				list.add(w);
 			}

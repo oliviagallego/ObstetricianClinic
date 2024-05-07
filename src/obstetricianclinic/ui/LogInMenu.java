@@ -22,12 +22,14 @@ public abstract class LogInMenu {
 			// User user = userMan.logIn("manager", "default0", "manager@obstetricianClinic.com");
 
 			if (user != null) {
-				String roleName = user.getRole().getName();
-                if ("Obstetrician".equals(roleName)) {
+                if (user.getRole().getName().equals("manager")) {
                     ManagerMenu.menu(user, userMan);
-                } else if ("Lab Staff".equals(roleName)) {
-                    labStaffMenu.menu(user, userMan);
-                } else {
+                } else if (user.getRole().getName().equals("obstetrician")) {
+                    ObstetricianMenu.menu(user, userMan);
+                } else if(user.getRole().getName().equals("lab staff")){
+                	 labStaffMenu.menu(user, userMan);
+                }
+                else {
                     System.out.println("Access Denied: Your role is not recognized.");
                 }
             } else {

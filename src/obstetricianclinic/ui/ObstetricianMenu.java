@@ -21,14 +21,13 @@ public class ObstetricianMenu {
 	private static ObstetricianManager obstetricianMan;
 	private static WomanManager womanMan;
 	private static UserManager userMan;
-	private static DiseaseManager diseaseMan;
 	
-	public static void main(User user, UserManager man) {
+	public static void menu(User user, UserManager man) {
 		ConnectionManager conMan = new ConnectionManager();
 		obstetricianMan = conMan.getObstetricianMan();
 		womanMan = conMan.getWomanMan();/* solo tenemos q hacer uso del método*/
 		userMan = man;
-	
+		//Obstetrician obstetrician= obstetricianMan.equals(user);
 		while (true) {
 			try {
 				System.out.println("Welcome to the obstetrician clinic!!");
@@ -47,7 +46,7 @@ public class ObstetricianMenu {
 						}
 						case 2: {
 							Woman woman= searchWomanByNameAndSurname();
-							WomanMenu.main(woman);
+							WomanMenu.menu(woman);
 							break;
 						}
 						case 3: {
@@ -88,18 +87,14 @@ public static void registerwoman() throws IOException {
 	String name = r.readLine();
 	System.out.println("Surname:");
 	String surname = r.readLine();
-	System.out.println("weight:");
+	System.out.println("Weight:");
 	Float weight = Float.parseFloat(r.readLine());
 	System.out.println("Date of birth (dd-MM-yyyy):");
 	String dob = r.readLine();
 	LocalDate dobLocalDate = LocalDate.parse(dob, formatter);
 	Date dobDate = Date.valueOf(dobLocalDate); 
-	System.out.println("Disease:");
-	String d = r.readLine();
-	Disease disease= new Disease(d);
 	Woman woman = new Woman(name, surname, dobDate, weight);
 	womanMan.registerWoman(woman);
-	diseaseMan.addDisease(disease);
 
 }
 
@@ -108,6 +103,7 @@ public static Woman searchWomanByNameAndSurname() throws IOException {
 	String name = r.readLine();
 	System.out.println("Surname:");
 	String surname = r.readLine();
+	List<Woman>listWomenOfObstetrician= searchWomanByObstetrician();
 	List<Woman> listWomen = womanMan.searchWomanByNameAndSurname(name, surname);
 	
 	if (listWomen.isEmpty()) {

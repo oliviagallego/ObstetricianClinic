@@ -10,6 +10,7 @@ import java.util.List;
 
 import obstetricianclinic.ifaces.*;
 import obstetricianclinic.jdbc.ConnectionManager;
+import obstetricianclinic.pojos.Disease;
 import obstetricianclinic.pojos.LabReport;
 import obstetricianclinic.pojos.User;
 import obstetricianclinic.pojos.Woman;
@@ -20,8 +21,9 @@ public class WomanMenu {
 	
 	private static WomanManager womanMan;
 	private static LabReportManager labReportMan;
+	private static DiseaseManager diseaseMan;
 	
-	public static void main(Woman woman) {
+	public static void menu(Woman woman) {
 		ConnectionManager conMan = new ConnectionManager();
 		womanMan = conMan.getWomanMan();
 	
@@ -32,6 +34,7 @@ public class WomanMenu {
 				System.out.println("\n1. View woman's data");
 				System.out.println("\n2. Update woman's data");
 				System.out.println("\n3. Delete woman's data");
+				System.out.println("\n4. Assign disease");
 				System.out.println("\n0. Exit");
 
 			
@@ -49,6 +52,11 @@ public class WomanMenu {
 						case 3: {
 							int id= woman.getId();
 							womanMan.deleteWoman(id);
+							break;
+						}
+						case 4:{
+							int id= woman.getId();
+							assignDisease(id);
 							break;
 						}
 						
@@ -93,7 +101,7 @@ public static void viewWoman(int id, Woman woman) throws IOException {
 		System.out.println(l);
 		break;
 	case 3:
-		PregnancyMenu.main(woman);
+		PregnancyMenu.menu(woman);
 		break;
 	default: {
 		System.out.println(" ERROR: Invalid option.");
@@ -145,15 +153,14 @@ public static void updateWoman(Woman woman) throws IOException {
 	}
 		
    }
-	
 }
-
-	
-
-
-
-
-	
+public static void assignDisease(int woman_id) throws IOException {
+	System.out.println("Give me de disease: ");
+	String d = r.readLine();
+	Disease disease= diseaseMan.searchDiseaseByName(d);
+	Integer disease_id=disease.getId();
+	womanMan.assignWomanToDisease(woman_id,disease_id);
+}
 	
 	
 	
