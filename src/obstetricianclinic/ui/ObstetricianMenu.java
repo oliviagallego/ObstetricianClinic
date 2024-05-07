@@ -1,4 +1,7 @@
 package obstetricianclinic.ui;
+import obstetricianclinic.ifaces.*;
+import obstetricianclinic.jdbc.*;
+import obstetricianclinic.pojos.*;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -7,9 +10,7 @@ import java.sql.Date;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
-import obstetricianclinic.ifaces.*;
-import obstetricianclinic.jdbc.*;
-import obstetricianclinic.pojos.*;
+
 //import obstetricianclinic.jpa.JPAUserManager;esta por programar
 
 
