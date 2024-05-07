@@ -41,7 +41,7 @@ public class PregnancyMenu {
 		switch (choice) {
 						case 1: {
 							Pregnancy pregSearch=pregnancySearch();
-							
+							subPregnancyMenu(pregSearch);
 							break;
 						}
 						case 2: {
@@ -68,10 +68,6 @@ public class PregnancyMenu {
 
 			}
 				
-				
-
-               
-
 public static Pregnancy pregnancySearch() throws IOException {
 	System.out.println("Please insert the date of conception:");
 	String dateC = r.readLine();
@@ -141,9 +137,93 @@ public static void addPregancy(Woman woman) throws IOException {
 	    }
 	}
 
+public static void subPregnancyMenu(Pregnancy pregnancy) {
+	while (true) {
+		try {
+			System.out.println("Pregnancys's Menu of:"+pregnancy.getDateConception());
+			System.out.println("\nChoose an option, please:");
+			System.out.println("\n1. View pregnancy's Data");
+			System.out.println("\n2. Update pregnancy's Data");
+			System.out.println("\n3. View Newborns's Data");
+			System.out.println("\n0. Exit");
+
 		
+    int choice = Integer.parseInt(r.readLine());
+	switch (choice) {
+					case 1: {
+						System.out.println(pregnancy);
+						break;
+					}
+					case 2: {
+						updatePregancy(pregnancy);
+						break;
+					}
+					case 0: {
+						conMan.closeConnection();
+						return;
+					}
+					default: {
+						System.out.println(" ERROR: Invalid option.");
+					}
+					}
+
+				} catch (NumberFormatException e) {
+					System.out.println("Please write a number");
+					e.printStackTrace();
+				} catch (IOException e) {
+					System.out.println("I/O Exception.");
+					e.printStackTrace();
+				}
+			}
+
+}
+public static void updatePregancy(Pregnancy pregnancy) throws IOException {
+	System.out.println("Please what do you want to update of the pregnancy's data:");
+	System.out.println("\nChoose an option:");
+	System.out.println("\n1. Change name");
+	System.out.println("\n2. Change surname");
+	System.out.println("\n3. Change dob");
+	System.out.println("\n4. Change weight");
+	int option= Integer.parseInt(r.readLine());
+	switch(option) {
+	case 1:
+		System.out.println("Give me the new name: ");
+		System.out.println("Name:");
+		String name = r.readLine();
+		woman.setName(name);
+		womanMan.updateWoman(woman);
+		break;
+	case 2:
+		System.out.println("Give me the new surname: ");
+		System.out.println("Surname:");
+		String surname = r.readLine();
+		woman.setSurname(surname);
+		womanMan.updateWoman(woman);
+		break;
+	case 3:
+		System.out.println("Give me the new Date of birth (dd-MM-yyyy): ");
+		String dob = r.readLine();
+		LocalDate dobLocalDate = LocalDate.parse(dob, formatter);
+		Date dobDate = Date.valueOf(dobLocalDate); System.out.println(l);
+		woman.setDob(dobDate);
+		womanMan.updateWoman(woman);
+		break;
+	case 4:
+		System.out.println("Give me the new weight: ");
+		Float weight = Float.parseFloat(r.readLine());
+		woman.setWeight(weight);
+		womanMan.updateWoman(woman);
+		break;
+	default: {
+		System.out.println(" ERROR: Invalid option.");
+	}
 		
-	
+   }
+	}
+
+
+
+
 }
 
 
