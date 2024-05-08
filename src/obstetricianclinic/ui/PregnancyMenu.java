@@ -158,8 +158,11 @@ public static void subPregnancyMenu(Pregnancy pregnancy) {
 						updatePregancy(pregnancy);
 						break;
 					}
+					case 3: {
+						NewbornMenu.menu(pregnancy);
+						break;
+					}
 					case 0: {
-						conMan.closeConnection();
 						return;
 					}
 					default: {

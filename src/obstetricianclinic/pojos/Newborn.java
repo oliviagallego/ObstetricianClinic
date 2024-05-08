@@ -56,6 +56,15 @@ public class Newborn implements Serializable{
 	}
 	
 	
+	public Newborn(String name, String surname, Date dob, Float weight, String gender, Pregnancy pregnancy) {
+		super();
+		this.name = name;
+		this.surname = surname;
+		this.dob = dob;
+		this.weight = weight;
+		this.gender = gender;
+		this.pregnancy = pregnancy;
+	}
 	public String getName() {
 		return name;
 	}
