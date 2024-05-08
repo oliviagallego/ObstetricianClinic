@@ -22,7 +22,7 @@ public class labStaffMenu {
 	private static LabReportManager labReportMan;
 	private static LabStaffManager labStaffMan;
 	
-	public static void main(User user, UserManager man) {
+	public static void menu(User user, UserManager man) {
 		ConnectionManager conMan = new ConnectionManager();
 		obstetricianMan = conMan.getObstetricianMan();
 		womanMan = conMan.getWomanMan();

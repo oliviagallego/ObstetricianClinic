@@ -139,7 +139,7 @@ public static void updateWoman(Woman woman) throws IOException {
 		System.out.println("Give me the new Date of birth (dd-MM-yyyy): ");
 		String dob = r.readLine();
 		LocalDate dobLocalDate = LocalDate.parse(dob, formatter);
-		Date dobDate = Date.valueOf(dobLocalDate); System.out.println(l);
+		Date dobDate = Date.valueOf(dobLocalDate);
 		woman.setDob(dobDate);
 		womanMan.updateWoman(woman);
 		break;

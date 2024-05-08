@@ -47,7 +47,7 @@ public class ObstetricianMenu {
 						}
 						case 2: {
 							int id_obs=obstetrician.getId();
-							Woman woman= searchWomanByNameAndSurname(id);
+							Woman woman= searchWomanByNAndS(id_obs);
 							WomanMenu.menu(woman);
 							break;
 						}
@@ -100,7 +100,7 @@ public static void registerwoman() throws IOException {
 
 }
 
-public static Woman searchWomanByNameAndSurname(int id) throws IOException {
+public static Woman searchWomanByNAndS(int id) throws IOException {
 	List<Woman>listWomenOfObstetrician= womanMan.searchWomanByObstetrician(id);
 	
 	System.out.println("Search woman by name:");
