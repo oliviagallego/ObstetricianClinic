@@ -17,6 +17,14 @@ public class JPAUserManager implements UserManager {
 		em.getTransaction().begin();
 		em.createNativeQuery("PRAGMA foreign_keys=ON").executeUpdate();
 		em.getTransaction().commit();
+		//Create default roles
+		//if they don't exist already
+		try {
+			this.getRole("obstetrician");
+		}catch(NoResultException e) {
+			this.createRole(new Role("obstetrician"));
+			this.createRole(new Role("laboratory staff"));
+		}
 	}
 
 	@Override
@@ -60,12 +68,17 @@ public class JPAUserManager implements UserManager {
 
 	@Override
 	public User logIn(String username, String password) {
+		User u =null;
 		Query q = em.createNativeQuery("SELECT FROM users WHERE username = ? AND password = ?",User.class);
 		q.setParameter(1, username);
 		q.setParameter(2, password);
-		//TODO remember to provide bad password to see what happens
-		User user= (User) q.getSingleResult();
-		return user;
+		try {
+			u= (User) q.getSingleResult();
+		}catch(NoResultException e) {
+			return null;
+		}
+		
+		return u;
 	}
 
 	@Override
