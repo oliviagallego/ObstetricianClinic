@@ -88,16 +88,16 @@ public static void viewWoman(int id, Woman woman) throws IOException {
 	System.out.println("Please what do you want to see of the woman's data:");
 	System.out.println("\nChoose an option:");
 	System.out.println("\n1. View woman's information");
-	System.out.println("\n2. View woman's laboratory report");
+	System.out.println("\n2. View woman's laboratory reports");
 	System.out.println("\n3. View woman's pregnancy record");
 	int option= Integer.parseInt(r.readLine());
 	switch(option) {
 	case 1:
-		Woman o=womanMan.viewWoman(id);
+		Woman o=womanMan.getWoman(id);
 		System.out.println(o);
 		break;
 	case 2:
-		List<LabReport> l= labReportMan.getLabReportsByWoman(woman);
+		List<LabReport> l= labReportMan.searchLabReportByWoman(woman.getId());
 		System.out.println(l);
 		break;
 	case 3:
