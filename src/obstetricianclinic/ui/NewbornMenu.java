@@ -60,6 +60,7 @@ public class NewbornMenu {
 						case 2: {
 							Newborn nw=chooseNw(pregnancy);
 							updateNewborn(nw);
+							System.out.println(nw);
 							break;
 						}
 						case 3: {

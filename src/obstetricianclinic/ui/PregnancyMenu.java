@@ -156,6 +156,7 @@ public static void subPregnancyMenu(Pregnancy pregnancy) {
 					}
 					case 2: {
 						updatePregancy(pregnancy);
+						System.out.println(pregnancy);
 						break;
 					}
 					case 3: {

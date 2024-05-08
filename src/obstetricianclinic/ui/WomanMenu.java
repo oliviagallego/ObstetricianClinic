@@ -47,6 +47,7 @@ public class WomanMenu {
 						}
 						case 2: {
 							updateWoman(woman);
+							System.out.println(woman);
 							break;
 						}
 						case 3: {
