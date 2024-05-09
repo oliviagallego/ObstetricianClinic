@@ -33,6 +33,13 @@ public class LabReport implements Serializable{
 		this.dateTest = dateTest;
 		this.pregnant = pregnant;
 	}
+	
+
+	public LabReport(Date dateTest, boolean pregnant) {
+		super();
+		this.dateTest = dateTest;
+		this.pregnant = pregnant;
+	}
 
 	public Integer getId() {
 		return id;

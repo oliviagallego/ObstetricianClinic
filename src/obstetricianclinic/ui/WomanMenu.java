@@ -47,6 +47,7 @@ public class WomanMenu {
 						}
 						case 2: {
 							updateWoman(woman);
+							System.out.println(woman);
 							break;
 						}
 						case 3: {
@@ -88,16 +89,16 @@ public static void viewWoman(int id, Woman woman) throws IOException {
 	System.out.println("Please what do you want to see of the woman's data:");
 	System.out.println("\nChoose an option:");
 	System.out.println("\n1. View woman's information");
-	System.out.println("\n2. View woman's laboratory report");
+	System.out.println("\n2. View woman's laboratory reports");
 	System.out.println("\n3. View woman's pregnancy record");
 	int option= Integer.parseInt(r.readLine());
 	switch(option) {
 	case 1:
-		Woman o=womanMan.viewWoman(id);
+		Woman o=womanMan.getWoman(id);
 		System.out.println(o);
 		break;
 	case 2:
-		List<LabReport> l= labReportMan.getLabReportsByWoman(woman);
+		List<LabReport> l= labReportMan.searchLabReportByWoman(woman.getId());
 		System.out.println(l);
 		break;
 	case 3:
@@ -138,7 +139,7 @@ public static void updateWoman(Woman woman) throws IOException {
 		System.out.println("Give me the new Date of birth (dd-MM-yyyy): ");
 		String dob = r.readLine();
 		LocalDate dobLocalDate = LocalDate.parse(dob, formatter);
-		Date dobDate = Date.valueOf(dobLocalDate); System.out.println(l);
+		Date dobDate = Date.valueOf(dobLocalDate);
 		woman.setDob(dobDate);
 		womanMan.updateWoman(woman);
 		break;

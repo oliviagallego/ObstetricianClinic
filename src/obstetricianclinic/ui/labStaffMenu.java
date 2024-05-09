@@ -13,11 +13,6 @@ import obstetricianclinic.pojos.*;
 
 public class labStaffMenu {
 
-	public static void menu(User user, UserManager userMan) {
-		// TODO Auto-generated method stub
-		
-	}
-	
 	private static BufferedReader r = new BufferedReader(new InputStreamReader(System.in));
 	private static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
 	
@@ -27,7 +22,7 @@ public class labStaffMenu {
 	private static LabReportManager labReportMan;
 	private static LabStaffManager labStaffMan;
 	
-	public static void main(User user, UserManager man) {
+	public static void menu(User user, UserManager man) {
 		ConnectionManager conMan = new ConnectionManager();
 		obstetricianMan = conMan.getObstetricianMan();
 		womanMan = conMan.getWomanMan();
@@ -45,7 +40,6 @@ public class labStaffMenu {
     int choice = Integer.parseInt(r.readLine());
 	switch (choice) {
 				
-					
 					case 1: {
 						 addLabReport();
 						break;
@@ -67,34 +61,17 @@ public class labStaffMenu {
 					System.out.println("I/O Exception.");
 					e.printStackTrace();
 				}
-			}
-	
-	
-	
-	
-	
-	public static void addLabReport() throws IOException{
-			System.out.println("Date of test (dd-MM-yyyy):");
-			String dateTest = r.readLine();
-			LocalDate dobLocalDate = LocalDate.parse(dateTest, formatter);
-			Date dateTestDate = Date.valueOf(dobLocalDate); 
-		    //No me acuerdo como pedir un boolean
-			LabReport labreport = new LabReport();
-			labReportMan.addLabReport(labreport);
-			}
-
-	
-	
-		
-	
-
-	//Para ver lab report en el obstetrician
-	//public static void searchLabReport() throws IOException{
-	//	System.out.println("Date of test (dd-MM-yyyy) of the report you are searching: ");
-	//	String dateTest = r.readLine();
-	//	LocalDate dobLocalDate = LocalDate.parse(dateTest, formatter);
-	//	Date dateTestDate = Date.valueOf(dobLocalDate); 
-	//	LabReport report= labReportMan.getLabReportsDOT(dateTestDate);
-	//	System.out.println(report);
-	
 	}
+	}
+	public static void addLabReport() throws IOException{
+		System.out.println("\n Laboratory report: ");
+		System.out.println("\n Date of test (dd-MM-yyyy):");
+		String dateTest = r.readLine();
+		LocalDate dobLocalDate = LocalDate.parse(dateTest, formatter);
+		Date dateTestDate = Date.valueOf(dobLocalDate); 
+		System.out.println("Is the pregnancy test positive(true) or negative (false)? ");
+		boolean testResult= Boolean.parseBoolean(r.readLine());
+		LabReport labreport = new LabReport(dateTestDate,testResult);
+		labReportMan.addLabReport(labreport);
+		}	
+}

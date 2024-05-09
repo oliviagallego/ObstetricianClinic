@@ -5,6 +5,7 @@ import java.util.List;
 import javax.persistence.*;
 
 import obstetricianclinic.ifaces.UserManager;
+import obstetricianclinic.pojos.Obstetrician;
 import obstetricianclinic.pojos.Role;
 import obstetricianclinic.pojos.User;
 
@@ -43,7 +44,7 @@ public class JPAUserManager implements UserManager {
 
 	@Override
 	public Role getRole(String name) {
-		Query q = em.createNativeQuery("SELECT FROM roles WHERE name LIKE ?", Role.class);
+		Query q = em.createNativeQuery("SELECT  FROM Roles WHERE name LIKE ?", Role.class);
 		q.setParameter(1, name);
 		Role role= (Role) q.getSingleResult();
 		return role;
@@ -51,7 +52,7 @@ public class JPAUserManager implements UserManager {
 	
 	@Override
 	public List<Role> getAllRoles() {
-		Query q= em.createNativeQuery("SELECT * FROM roles", Role.class);
+		Query q= em.createNativeQuery("SELECT * FROM Roles", Role.class);
 		List<Role> roles= (List<Role>) q.getResultList();
 		return roles;
 	}
@@ -82,15 +83,41 @@ public class JPAUserManager implements UserManager {
 	}
 
 	@Override
-	public void logOut() {
-		// TODO Auto-generated method stub
+	public User changePassword(User user, String newPassword) {
+		
+		try {
+			//Query sql = em.createNativeQuery("SELECT * FROM users WHERE username = ? AND password = ?", User.class);
+			//sql.setParameter(1, user.getUsername());
+			//sql.setParameter(2, user.getPassword());
+			//user = (User) sql.getSingleResult();
+			
+			em.getTransaction().begin();
+			user.setPassword(newPassword);
+			em.getTransaction().commit();
+			return user;
+			
+		}catch(NoResultException e) {
+			return null;
+		}
+	}
 
+	public void logOut() {
+		em.close();
 	}
 
 	@Override
-	public User changePassword(User user, String newPassword) {
-		// TODO Auto-generated method stub
-		return null;
+	public Obstetrician getObstetricianFromUser(User user) {
+		try {
+			Query query = em.createNativeQuery("SELECT * FROM obstetricians WHERE username = ?", Obstetrician.class);
+            query.setParameter(1, user.getUsername());
+            return (Obstetrician) query.getSingleResult();
+        } catch (NoResultException e) {
+            System.out.println("No obstetrician found for the given username.");
+            return null;
+        } catch (Exception e) {
+            System.out.println("Error retrieving obstetrician: " + e.getMessage());
+            return null;
+        }
 	}
 
 }

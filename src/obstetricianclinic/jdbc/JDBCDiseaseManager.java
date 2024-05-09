@@ -8,6 +8,7 @@ import obstetricianclinic.ifaces.DiseaseManager;
 import obstetricianclinic.pojos.Disease;
 
 public class JDBCDiseaseManager implements DiseaseManager {
+
 	private ConnectionManager conMan;
 	Connection c;
 	
@@ -49,4 +50,11 @@ public class JDBCDiseaseManager implements DiseaseManager {
 			e.printStackTrace();
 		}
 	}
+
+	@Override
+	public Disease searchDiseaseByName(String diseaseType) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }
