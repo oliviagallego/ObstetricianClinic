@@ -1,11 +1,16 @@
 package obstetricianclinic.jdbc;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import obstetricianclinic.ifaces.DiseaseManager;
 import obstetricianclinic.pojos.Disease;
+import obstetricianclinic.pojos.Woman;
 
 public class JDBCDiseaseManager implements DiseaseManager {
 
@@ -53,7 +58,20 @@ public class JDBCDiseaseManager implements DiseaseManager {
 
 	@Override
 	public Disease searchDiseaseByName(String diseaseType) {
-		// TODO Auto-generated method stub
+		try {
+			String sql = "SELECT * FROM diseases WHERE diseaseType = ?";
+			PreparedStatement p = c.prepareStatement(sql);
+			p.setString(1, "%"+diseaseType+"%");
+			ResultSet rs = p.executeQuery();
+			
+			Integer disease_id= rs.getInt("id");
+			String Type= rs.getString("diseaseType");
+			Disease d= new Disease(disease_id, Type);
+			return d;
+		} catch (SQLException e) {
+			System.out.println("Database error.");
+			e.printStackTrace();
+		}
 		return null;
 	}
 
