@@ -12,8 +12,9 @@ import obstetricianclinic.pojos.User;
 public class ManagerMenu {
 	
 	private static BufferedReader r = new BufferedReader(new InputStreamReader(System.in));
-
-	public static void menu(UserManager userMan) throws NumberFormatException, IOException{
+	private static UserManager userMan;
+	
+	public static void menu( UserManager userMan) throws NumberFormatException, IOException{
 		System.out.print("Choose a username: ");
 		String username= r.readLine();
 		System.out.print("Password:");
