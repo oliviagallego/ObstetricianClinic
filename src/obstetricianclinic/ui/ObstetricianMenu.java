@@ -42,7 +42,7 @@ public class ObstetricianMenu {
         int choice = Integer.parseInt(r.readLine());
 		switch (choice) {
 						case 1: {
-							registerwoman();
+							registerwoman(obstetrician);
 							break;
 						}
 						case 2: {
@@ -83,7 +83,7 @@ public class ObstetricianMenu {
 
                
 
-public static void registerwoman() throws IOException {
+public static void registerwoman(Obstetrician obst) throws IOException {
 	System.out.println("Please type the womans data:");
 	System.out.println("Name:");
 	String name = r.readLine();
@@ -95,7 +95,7 @@ public static void registerwoman() throws IOException {
 	String dob = r.readLine();
 	LocalDate dobLocalDate = LocalDate.parse(dob, formatter);
 	Date dobDate = Date.valueOf(dobLocalDate); 
-	Woman woman = new Woman(name, surname, dobDate, weight);
+	Woman woman = new Woman(name, surname, dobDate, weight, obst);
 	womanMan.registerWoman(woman);
 
 }

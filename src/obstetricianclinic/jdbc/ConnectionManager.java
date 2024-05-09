@@ -34,6 +34,7 @@ public class ConnectionManager {
 			this.labReportMan= new JDBCLabReportManager(this);
 			this.labStaffMan= new JDBCLabStaffManager(this);
 			
+			
 		}catch (Exception e) {
 			System.out.println("Database access error");
 			e.printStackTrace();

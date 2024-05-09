@@ -9,7 +9,6 @@
         <!-- Entity Classes -->
         <class>obstetricianclinic.pojos.User</class>
         <class>obstetricianclinic.pojos.Role</class>
-        <class>obstetricianclinic.pojos.Obstetrician</class>
 
         <properties>
             <!-- Connection properties -->
