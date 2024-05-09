@@ -42,9 +42,7 @@ public class ManagerMenu {
 					+ "\n 3. Change Password" 
 					+ "\n 0. Log out");
 			int option = Utilities.readInteger("Choose an option: ");
-	
-	private static BufferedReader r = new BufferedReader(new InputStreamReader(System.in));
-	private static UserManager userMan;
+
 		switch(option) {
 			case 1:{
 				System.out.println("\nRegistration of an obstetrician: ");
