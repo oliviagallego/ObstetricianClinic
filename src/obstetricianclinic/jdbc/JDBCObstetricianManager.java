@@ -1,10 +1,14 @@
 package obstetricianclinic.jdbc;
 
 import java.sql.Connection;
+import java.sql.Date;
+
 import obstetricianclinic.pojos.*;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import dogclinic.pojos.Dog;
 import obstetricianclinic.ifaces.ObstetricianManager;
 
 public class JDBCObstetricianManager implements ObstetricianManager {
@@ -48,5 +52,32 @@ public class JDBCObstetricianManager implements ObstetricianManager {
 			e.printStackTrace();
 		}
 	}
+	
+	//He añadido este método que nos faltaba 
+	@Override
+	public Obstetrician getObstetrician(int id) {
+		try {
+			String sql = "SELECT * FROM obstetricians WHERE id = ?";
+			PreparedStatement p = c.prepareStatement(sql);
+			p.setInt(1, id);
+			ResultSet rs = p.executeQuery();
+			rs.next();
+			String name = rs.getString("name");
+			String surname = rs.getString("surname");
+			Obstetrician obs = new Obstetrician(name, surname, id);
+			rs.close();
+			p.close();
+			return obs;
+		} catch (SQLException e) {
+			System.out.println("Database error.");
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	//Meteria un metodo para buscar Obstetrician
+
+	
+	
 
 }

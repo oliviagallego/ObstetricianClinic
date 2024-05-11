@@ -3,8 +3,10 @@ package obstetricianclinic.ui;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
 import java.util.List;
 
+import dogclinic.pojos.Dog;
 import obstetricianclinic.ifaces.UserManager;
 
 import java.io.BufferedReader;
@@ -51,7 +53,8 @@ public class ManagerMenu {
 				}
 			case 2:{
 				System.out.println("\nSelect obstetrician: ");
-				updateObstetrician();
+				updateObstetrician();//Esta seria una opcion
+				searchObstetricianByNAndS(); //Esta seria la segunda opcion
 				break;
 				}
 			case 3:{
@@ -89,5 +92,64 @@ public class ManagerMenu {
 		Obstetrician obstetrician = new Obstetrician(name, surname, password);
 		obstetricianMan.addObstetrician(obstetrician);
 	}
+	
+	//Este es el método de update pero no se si tiene muhco sentido que este aquí
+	public static void updateObstetrician(int id) throws IOException {
+		Obstetrician obstetrician = obstetricianMan.getObstetrician(id);
+		System.out.println("Type the new data, or press enter to keep actual data:");
+		System.out.println("Name (" + obstetrician.getName() + "):");
+		String name = r.readLine();
+		if (!name.equals("")) {
+			obstetrician.setName(name);
+		}
+		System.out.println("Surname (" + obstetrician.getSurname() + "):");
+		String surname = r.readLine();
+		if (!surname.equals("")) {
+			obstetrician.setSurname(surname);
+		}
+		obstetricianMan.updateObstetrician(obstetrician);
+	}
+	
+	
+	//este seria el método de buscar el osbtetrician
+	public static Obstetrician searchObstetricianByNAndS(int id) throws IOException {
+		List<Obstetrician>listObstetricianOfManager= obstetricianMan.searchObstetrician(id);//Aqui iria la funcion para buscar el obstetrician que puesto en el interface de obstetrician
+		System.out.println("Search Obstetrician by name:");
+		String name = r.readLine();
+		System.out.println("Surname:");
+		String surname = r.readLine();
+		
+		List<Obstetrician> listObstetrician = new ArrayList<>();
+		for(int i=0; i<listObstetricianOfManager.size(); i++) {
+			Obstetrician obstetrician=listObstetricianOfManager.get(i);
+			if(obstetrician.getName().equals(name)&&obstetrician.getSurname().equals(surname)) {
+				listObstetrician.add(obstetrician);
+			}
+		}
+		
+		if (listObstetrician.isEmpty()) {
+	        System.out.println("No Obstetrician found with the name and surname provided.");
+	        return null;  
+	    }
+
+	    if (listObstetrician.size() == 1) {
+	        System.out.println("One Obstetrician found: " + listObstetrician.get(0));
+	        return listObstetrician.get(0);  
+	    }
+
+	    System.out.println("Multiple matches found, please choose one:");
+	    for (int i = 0; i < listObstetrician.size(); i++) {
+	        System.out.println((i + 1) + ". " + listObstetrician.get(i));
+	    }
+	    System.out.println("Enter the number of the woman you choose:");
+	    int choice = Integer.parseInt(r.readLine()) - 1; 
+	    if (choice >= 0 && choice < listObstetrician.size()) {
+	        return listObstetrician.get(choice);
+	    } else {
+	        System.out.println("Invalid choice, please enter a valid number.");
+	        return null; 
+
+	   }
+	
 }
 
