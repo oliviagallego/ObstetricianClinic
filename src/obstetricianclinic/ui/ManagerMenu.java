@@ -53,7 +53,7 @@ public class ManagerMenu {
 				}
 			case 2:{
 				System.out.println("\nSelect obstetrician: ");
-				updateObstetrician();//Esta seria una opcion
+				updateObstetrician();//Esta seria una opcion (Yo JAIME, la borraba)
 				searchObstetricianByNAndS(); //Esta seria la segunda opcion
 				break;
 				}
@@ -113,7 +113,7 @@ public class ManagerMenu {
 	
 	//este seria el método de buscar el osbtetrician
 	public static Obstetrician searchObstetricianByNAndS(int id) throws IOException {
-		List<Obstetrician>listObstetricianOfManager= obstetricianMan.searchObstetrician(id);//Aqui iria la funcion para buscar el obstetrician que puesto en el interface de obstetrician
+		List<Obstetrician>listObstetricianOfManager= obstetricianMan.searchObstetrician();//Aqui iria la funcion para buscar el obstetrician que puesto en el interface de obstetrician
 		System.out.println("Search Obstetrician by name:");
 		String name = r.readLine();
 		System.out.println("Surname:");
@@ -151,5 +151,6 @@ public class ManagerMenu {
 
 	   }
 	
+}
 }
 
