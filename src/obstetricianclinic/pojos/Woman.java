@@ -6,19 +6,42 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
+import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+
+import obstetricianclinic.xml.SQLDateAdapter;
+
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlRootElement(name = "Woman")
+@XmlType(propOrder = { "name", "surname", "dob", "weight", "obstetrician"})
 public class Woman implements Serializable{
     /**
 	 * 
 	 */
 	private static final long serialVersionUID = 3355504574744043511L;
+	@XmlTransient
     private Integer id;
+	@XmlElement
 	private String name;
+	@XmlElement
     private String surname;
+	@XmlElement
+	@XmlJavaTypeAdapter(SQLDateAdapter.class)
     private Date dob;
+	@XmlElement
     private Float weight;
+    @XmlTransient
     private List<Disease> diseases;
+    @XmlElement(name = "obstetrician")
     private Obstetrician obstetrician;
+    @XmlTransient
     private List<Pregnancy> pregnancies;
+    @XmlTransient
     private List<LabReport> labReports;
 
     // Constructor

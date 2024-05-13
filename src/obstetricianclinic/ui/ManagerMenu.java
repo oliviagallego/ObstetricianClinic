@@ -6,9 +6,6 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
-import bloodbank.ifaces.UserManager;
-import bloodbank.pojos.Role;
-import bloodbank.pojos.User;
 
 import java.io.BufferedReader;
 import java.io.IOException;

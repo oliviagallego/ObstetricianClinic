@@ -9,6 +9,9 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+
+import obstetricianclinic.xml.SQLDateAdapter;
 
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlRootElement(name = "Newborn")
@@ -25,12 +28,13 @@ public class Newborn implements Serializable{
 	@XmlTransient
 	private Integer id;
 	@XmlElement
+	@XmlJavaTypeAdapter(SQLDateAdapter.class)
 	private Date dob;
 	@XmlElement
 	private Float weight;
 	@XmlElement
 	private String gender;
-	@XmlElement
+	@XmlElement(name = "Pregnancy")
 	private Pregnancy pregnancy;
 	
 	// Constructor
