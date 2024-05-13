@@ -1,22 +1,33 @@
 package obstetricianclinic.pojos;
 import java.sql.Date;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
+import javax.xml.bind.annotation.XmlType;
+
 import java.io.Serializable;
 
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlRootElement(name = "Pregnancy")
+@XmlType(propOrder = { "dateConcepcion", "birthReport", "woman"})
 public class Pregnancy implements Serializable{
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 8679593455988548890L;
-
+	@XmlTransient
 	private Integer id;
 	
 	private Date dateConception;
 	
 	private String birthReport;
-	
+	@XmlTransient
 	private List<Newborn> newborns;
 	
 	private Woman woman;

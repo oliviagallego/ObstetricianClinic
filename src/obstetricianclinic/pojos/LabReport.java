@@ -1,17 +1,33 @@
 package obstetricianclinic.pojos;
 import java.sql.Date;
 import java.util.Objects;
+
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
+import javax.xml.bind.annotation.XmlType;
+
 import java.io.Serializable;
 
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlRootElement(name = "LabReport")
+@XmlType(propOrder = { "dateTest", "pregnant", "woman", "labStaff"}) 
 public class LabReport implements Serializable{
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1322009778992795425L;
+	@XmlTransient
 	private Integer id;
+	@XmlElement
 	private Date dateTest;
+	@XmlElement
 	private boolean pregnant;
+	@XmlElement
 	private Woman woman;
+	@XmlElement
 	private LabStaff labStaff;
 	
 	public LabReport() {

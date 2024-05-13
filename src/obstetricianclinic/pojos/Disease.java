@@ -4,13 +4,26 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
+import javax.xml.bind.annotation.XmlType;
+
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlRootElement(name = "Disease")
+@XmlType(propOrder = { "diseaseType", "date"})
 public class Disease implements Serializable{
     /**
 	 * 
 	 */
 	private static final long serialVersionUID = -1079965302432167439L;
+	@XmlTransient
 	private Integer id;
+	@XmlElement
     private String diseaseType;
+	@XmlTransient
     private List<Woman> women;
     
     public Disease() {

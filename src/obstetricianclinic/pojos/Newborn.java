@@ -3,24 +3,34 @@ import java.io.Serializable;
 import java.sql.Date;
 import java.util.Objects;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
+import javax.xml.bind.annotation.XmlType;
+
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlRootElement(name = "Newborn")
+@XmlType(propOrder = { "name", "surname", "dob", "weight", "gender", "pregnancy"})
 public class Newborn implements Serializable{
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 7404209682399165641L;
-
+	@XmlElement
 	private String name;
-	
+	@XmlElement
 	private String surname;
-	
+	@XmlTransient
 	private Integer id;
-	
+	@XmlElement
 	private Date dob;
-	
+	@XmlElement
 	private Float weight;
-	
+	@XmlElement
 	private String gender;
-	
+	@XmlElement
 	private Pregnancy pregnancy;
 	
 	// Constructor
