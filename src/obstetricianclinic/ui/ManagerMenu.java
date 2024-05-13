@@ -47,7 +47,7 @@ public class ManagerMenu {
 				break;
 				}
 			case 2:{
-				Obstetrician obs= searchObstetricianByNAndS(user.getId());
+				Obstetrician obs = searchObstetricianByNameAndSurname(user.getId());
 				break;
 				}
 			case 3:{
@@ -89,7 +89,7 @@ public class ManagerMenu {
 	
 
 	
-	public static Obstetrician searchObstetricianByNameAndSurnmae(int id) throws IOException {
+	public static Obstetrician searchObstetricianByNameAndSurname(int id) throws IOException {
 		System.out.println("\nSelect obstetrician: ");
 		System.out.println("Search Obstetrician by name and surname:");
 		System.out.println("Name: ");
