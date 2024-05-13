@@ -6,8 +6,6 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
-import dogclinic.pojos.Dog;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -20,18 +18,19 @@ import obstetricianclinic.jdbc.*;
 
 public class ManagerMenu {
 	
+	private static BufferedReader r = new BufferedReader(new InputStreamReader(System.in));
+	
 	private static LabStaffManager labStaffMan;
 	private static ObstetricianManager obstetricianMan;
 	private static UserManager userMan;
-	//creo que nos falta una interfaz XML que aun no hemos dado en clase 
-	
-	private static BufferedReader r = new BufferedReader(new InputStreamReader(System.in));
 
-	public static void menu(User user, UserManager userMan)  throws IOException {
+	public static void menu(User user, UserManager man)  throws IOException {
 		
-		ConnectionManager conMan = new ConnectionManager(); // creamos la conexion con el jdbc
-		userMan= man;
+		ConnectionManager conMan = new ConnectionManager();
 		obstetricianMan = conMan.getObstetricianMan();
+		labStaffMan= conMan.getLabStaffMan();
+		
+		userMan= man;
 		
 		while(true) {
 			try {
@@ -88,37 +87,19 @@ public class ManagerMenu {
 		obstetricianMan.addObstetrician(obstetrician);
 	}
 	
-	//Este es el método de update pero no se si tiene muhco sentido que este aquí
-	public static void updateObstetrician(int id) throws IOException {
-		Obstetrician obstetrician = obstetricianMan.getObstetrician(id);
-		System.out.println("Type the new data, or press enter to keep actual data:");
-		System.out.println("Name (" + obstetrician.getName() + "):");
-		String name = r.readLine();
-		if (!name.equals("")) {
-			obstetrician.setName(name);
-		}
-		System.out.println("Surname (" + obstetrician.getSurname() + "):");
-		String surname = r.readLine();
-		if (!surname.equals("")) {
-			obstetrician.setSurname(surname);
-		}
-		obstetricianMan.updateObstetrician(obstetrician);
-	}
+
 	
-	
-	//este seria el método de buscar el osbtetrician
-	public static Obstetrician searchObstetricianByNAndS(int id) throws IOException {
+	public static Obstetrician searchObstetricianByNameAndSurnmae(int id) throws IOException {
 		System.out.println("\nSelect obstetrician: ");
-		System.out.println("Search Obstetrician by name:");
+		System.out.println("Search Obstetrician by name and surname:");
+		System.out.println("Name: ");
 		String name = r.readLine();
 		System.out.println("Surname:");
 		String surname = r.readLine();
-		List<Obstetrician>listObstetricianOfManager= obstetricianMan.searchObstetricianByNameAndSurname();//Aqui iria la funcion para buscar el obstetrician que puesto en el interface de obstetrician
-
-		
+		List<Obstetrician>listObstetricianOfManager= obstetricianMan.searchObstetricianByNameAndSurname(name, surname);
 		List<Obstetrician> listObstetrician = new ArrayList<>();
 		for(int i=0; i<listObstetricianOfManager.size(); i++) {
-			Obstetrician obstetrician=listObstetricianOfManager.get(i);
+			Obstetrician obstetrician = listObstetricianOfManager.get(i);
 			if(obstetrician.getName().equals(name)&&obstetrician.getSurname().equals(surname)) {
 				listObstetrician.add(obstetrician);
 			}

@@ -19,13 +19,11 @@ public class ObstetricianMenu {
 	private static BufferedReader r = new BufferedReader(new InputStreamReader(System.in));
 	private static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
 	
-	private static ObstetricianManager obstetricianMan;
 	private static WomanManager womanMan;
 	private static UserManager userMan;
 	
 	public static void menu(User user, UserManager man) {
 		ConnectionManager conMan = new ConnectionManager();
-		obstetricianMan = conMan.getObstetricianMan();
 		womanMan = conMan.getWomanMan();/* solo tenemos q hacer uso del método*/
 		userMan = man;
 		Obstetrician obstetrician = userMan.getObstetricianFromUser(user);

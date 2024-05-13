@@ -12,7 +12,7 @@ public abstract class LogInMenu {
 
 	public static void main(String[] Args)  throws NumberFormatException, IOException{
 
-		userMan = (UserManager) new JPAUserManager();
+		userMan = new JPAUserManager();
 		System.out.print("\nWelcome to the Obstetrician Clinic!");
 
 		while (true) {
@@ -25,7 +25,7 @@ public abstract class LogInMenu {
 
 			if (user != null) {
                 if (user.getRole().getName().equals("manager")) {
-                    ManagerMenu.menu(userMan);
+                    ManagerMenu.menu(user);
                 } else if (user.getRole().getName().equals("obstetrician")) {
                     ObstetricianMenu.menu(user, userMan);
                 } else if(user.getRole().getName().equals("lab staff")){
