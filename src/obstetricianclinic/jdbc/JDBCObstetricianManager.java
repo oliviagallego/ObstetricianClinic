@@ -74,13 +74,12 @@ public class JDBCObstetricianManager implements ObstetricianManager {
 				Obstetrician obs = new Obstetrician(name, surname,obstetrician_id);
 				listObstetricians.add(obs);
 			}
-			return listObstetricians;
+			
 		} catch (SQLException e) {
 			System.out.println("Database error.");
 			e.printStackTrace();
 		}
-		
-		return null;
+		return listObstetricians;
 	}
 
 	
