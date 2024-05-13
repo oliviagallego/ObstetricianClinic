@@ -57,22 +57,24 @@ public class JDBCDiseaseManager implements DiseaseManager {
 	}
 
 	@Override
-	public Disease searchDiseaseByName(String diseaseType) {
+	public List<Disease> searchDiseaseByName(String diseaseType) {
+		List<Disease> listDiseases= new ArrayList<Disease>();
 		try {
 			String sql = "SELECT * FROM diseases WHERE diseaseType = ?";
 			PreparedStatement p = c.prepareStatement(sql);
 			p.setString(1, "%"+diseaseType+"%");
 			ResultSet rs = p.executeQuery();
-			
-			Integer disease_id= rs.getInt("id");
-			String Type= rs.getString("diseaseType");
-			Disease d= new Disease(disease_id, Type);
-			return d;
+			while (rs.next()) {
+				Integer disease_id= rs.getInt("id");
+				String Type= rs.getString("diseaseType");
+				Disease d= new Disease(disease_id, Type);
+				listDiseases.add(d);
+			}
 		} catch (SQLException e) {
 			System.out.println("Database error.");
 			e.printStackTrace();
 		}
-		return null;
+		return listDiseases;
 	}
 
 }
