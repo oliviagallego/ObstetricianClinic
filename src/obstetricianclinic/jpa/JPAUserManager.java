@@ -25,6 +25,7 @@ public class JPAUserManager implements UserManager {
 		}catch(NoResultException e) {
 			this.createRole(new Role("obstetrician"));
 			this.createRole(new Role("laboratory staff"));
+			this.createRole(new Role("manager"));
 		}
 	}
 
