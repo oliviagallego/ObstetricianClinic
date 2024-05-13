@@ -4,6 +4,6 @@ import obstetricianclinic.pojos.Disease;
 
 public interface DiseaseManager {
 	void addDisease(Disease disease);
-	void updateDisease(Disease disease);//para?
-	public Disease searchDiseaseByName(String diseaseType);
+	void updateDisease(Disease disease);
+	public List<Disease> searchDiseaseByName(String diseaseType);
 }
