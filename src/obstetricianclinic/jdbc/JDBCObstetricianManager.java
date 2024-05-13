@@ -79,20 +79,18 @@ public class JDBCObstetricianManager implements ObstetricianManager {
 	
 	//Meteria un metodo para buscar Obstetrician PERO NO SE QUE 
 	
-	public List<Obstetrician> searchObstetrician() {
+	public List<Obstetrician> searchObstetricianByNameAdnSurname(String name, String Surname) {
 		List<Obstetrician> listObstetricians = new ArrayList<Obstetrician>();
 		try {
-			String sql = "SELECT * FROM obstetricians WHERE obstetrician_id = ?";
+			String sql = "SELECT * FROM obstetricians WHERE name = ?";
 			PreparedStatement p = c.prepareStatement(sql);
 			p.setInt(1, id);
 			ResultSet rs = p.executeQuery();
 			while (rs.next()) {
-				// Create a new Woman
-				Integer woman_id= rs.getInt("id");
+				Integer obstetrician_id= rs.getInt("id");
 				String name= rs.getString("name");
 				String surname= rs.getString("surname");
-				Date dob= rs.getDate("dob");
-				Float weight= rs.getFloat("weight");
+			
 				Woman w= new Woman(woman_id, name, surname, dob, weight);
 				listObstetricians.add(w);
 			}

@@ -7,7 +7,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import dogclinic.pojos.Dog;
-import obstetricianclinic.ifaces.UserManager;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -20,22 +19,20 @@ import obstetricianclinic.pojos.*;
 import obstetricianclinic.jdbc.*;
 
 public class ManagerMenu {
-	private static DiseaseManager diseaseMan;
-	private static LabReportManager labReportMan;
+	
 	private static LabStaffManager labStaffMan;
-	private static NewbornManager newbornMan;
 	private static ObstetricianManager obstetricianMan;
-	private static PregnancyManager pregnancyMan;
 	private static UserManager userMan;
-	private static WomanManager womanMan;
 	//creo que nos falta una interfaz XML que aun no hemos dado en clase 
 	
 	private static BufferedReader r = new BufferedReader(new InputStreamReader(System.in));
 
-
-	public static void menu(User user, UserManager userMan) {
-		userMan = man;
+	public static void menu(User user, UserManager userMan)  throws IOException {
+		
 		ConnectionManager conMan = new ConnectionManager(); // creamos la conexion con el jdbc
+		userMan= man;
+		obstetricianMan = conMan.getObstetricianMan();
+		
 		while(true) {
 			try {
 			System.out.println("\nMANAGER MENU):" 
@@ -47,20 +44,17 @@ public class ManagerMenu {
 
 		switch(option) {
 			case 1:{
-				System.out.println("\nRegistration of an obstetrician: ");
 				registerObstetrician();
 				break;
 				}
 			case 2:{
-				System.out.println("\nSelect obstetrician: ");
-				updateObstetrician();//Esta seria una opcion (Yo JAIME, la borraba)
-				searchObstetricianByNAndS(); //Esta seria la segunda opcion
+				Obstetrician obs= searchObstetricianByNAndS(user.getId());
 				break;
 				}
 			case 3:{
 				System.out.println("\nChanging Manager Password: ");
 				String password = Utilities.readString(" -Type new password: ");
-				user = man.changePassword(user, password);
+				user = conMan.changePassword(user, password);
 				System.out.println(" -Password changed correctly to " + user.getPassword());
 				break;
 				}		case 0: {
@@ -82,6 +76,7 @@ public class ManagerMenu {
 	}
 	
 	public static void registerObstetrician() throws IOException {
+		System.out.println("\nRegistration of an obstetrician: ");
 		System.out.println("Please type the obstetrician data:");
 		System.out.println("Name:");
 		String name = r.readLine();
@@ -113,11 +108,13 @@ public class ManagerMenu {
 	
 	//este seria el método de buscar el osbtetrician
 	public static Obstetrician searchObstetricianByNAndS(int id) throws IOException {
-		List<Obstetrician>listObstetricianOfManager= obstetricianMan.searchObstetrician();//Aqui iria la funcion para buscar el obstetrician que puesto en el interface de obstetrician
+		System.out.println("\nSelect obstetrician: ");
 		System.out.println("Search Obstetrician by name:");
 		String name = r.readLine();
 		System.out.println("Surname:");
 		String surname = r.readLine();
+		List<Obstetrician>listObstetricianOfManager= obstetricianMan.searchObstetricianByNameAndSurname();//Aqui iria la funcion para buscar el obstetrician que puesto en el interface de obstetrician
+
 		
 		List<Obstetrician> listObstetrician = new ArrayList<>();
 		for(int i=0; i<listObstetricianOfManager.size(); i++) {
