@@ -21,6 +21,13 @@ public class Obstetrician implements Serializable{
 	}
 	
 
+	public Obstetrician(String name, String surname) {
+		super();
+		this.name = name;
+		this.surname = surname;
+	}
+
+
 	public Obstetrician(String name, String surname, Integer id) {
 		super();
 		this.name = name;

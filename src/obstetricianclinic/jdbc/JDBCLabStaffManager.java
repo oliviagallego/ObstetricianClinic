@@ -2,7 +2,9 @@ package obstetricianclinic.jdbc;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import obstetricianclinic.ifaces.LabStaffManager;
@@ -36,6 +38,8 @@ public class JDBCLabStaffManager implements LabStaffManager {
 		
 	}
 
+	
+	//Creo que sobra
 	@Override
 	public void updateLabStaff(LabStaff labStaff) {
 		try {
@@ -54,4 +58,30 @@ public class JDBCLabStaffManager implements LabStaffManager {
 		}
 
 	}
+	
+	@Override
+	public List<LabStaff> searchLabStaffByNameAndSurname(String name, String surname) {
+		List<LabStaff> listLabStaff = new ArrayList<LabStaff>();
+		try {
+			String sql = "SELECT * FROM labStaffs WHERE  (name, surname) VALUES (?, ?);";
+			PreparedStatement p = c.prepareStatement(sql);
+			p.setString(1, name);
+			p.setString(2, surname);
+			ResultSet rs = p.executeQuery();
+			while (rs.next()) {
+				Integer labStaff_id= rs.getInt("id");
+				name= rs.getString("name");
+				surname= rs.getString("surname");
+				LabStaff labStaff = new LabStaff(labStaff_id, name, surname);
+				listLabStaff.add(labStaff);
+			}
+			
+		} catch (SQLException e) {
+			System.out.println("Database error.");
+			e.printStackTrace();
+		}
+		return listLabStaff;
+	}
+
+	
 }
