@@ -62,24 +62,24 @@ public class JDBCObstetricianManager implements ObstetricianManager {
 	public List<Obstetrician> searchObstetricianByNameAndSurname(String name, String surname) {
 		List<Obstetrician> listObstetricians = new ArrayList<Obstetrician>();
 		try {
-			String sql = "SELECT * FROM obstetricians WHERE name = ?";
+			String sql = "SELECT * FROM obstetricians WHERE  (name, surname) VALUES (?, ?);";
 			PreparedStatement p = c.prepareStatement(sql);
-			p.setInt(1, id);
-			p.setString(2, name);
-			p.setString(3, surname);
+			p.setString(1, name);
+			p.setString(2, surname);
 			ResultSet rs = p.executeQuery();
 			while (rs.next()) {
 				Integer obstetrician_id= rs.getInt("id");
-				String name= rs.getString("name");
-				String surname= rs.getString("surname");
-				Obstetrician obs = new Obstetrician(obstetrician_id, name, surname);
+				name= rs.getString("name");
+				surname= rs.getString("surname");
+				Obstetrician obs = new Obstetrician(name, surname,obstetrician_id);
 				listObstetricians.add(obs);
 			}
+			return listObstetricians;
 		} catch (SQLException e) {
 			System.out.println("Database error.");
 			e.printStackTrace();
 		}
-		return listObstetricians;
+		
 		return null;
 	}
 
