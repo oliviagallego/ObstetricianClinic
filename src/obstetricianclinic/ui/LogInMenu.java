@@ -2,6 +2,7 @@ package obstetricianclinic.ui;
 import java.io.IOException;
 
 import obstetricianclinic.ifaces.*;
+import obstetricianclinic.jdbc.ConnectionManager;
 import obstetricianclinic.pojos.*;
 import obstetricianclinic.jpa.*;
 
@@ -11,7 +12,9 @@ public abstract class LogInMenu {
 	private static UserManager userMan;
 
 	public static void main(String[] Args)  throws NumberFormatException, IOException{
-
+		
+		ConnectionManager conMan = new ConnectionManager();
+		
 		userMan = (UserManager) new JPAUserManager();
 		System.out.print("\nWelcome to the Obstetrician Clinic!");
 
@@ -25,11 +28,11 @@ public abstract class LogInMenu {
 
 			if (user != null) {
                 if (user.getRole().getName().equals("manager")) {
-                    ManagerMenu.menu(userMan);
+                    ManagerMenu.menu(user, userMan, conMan);
                 } else if (user.getRole().getName().equals("obstetrician")) {
-                    ObstetricianMenu.menu(user, userMan);
+                    ObstetricianMenu.menu(user, userMan, conMan);
                 } else if(user.getRole().getName().equals("lab staff")){
-                	 labStaffMenu.menu(user, userMan);
+                	 labStaffMenu.menu(user, userMan, conMan);
                 }
                 else {
                     System.out.println("Access Denied: Your role is not recognized.");

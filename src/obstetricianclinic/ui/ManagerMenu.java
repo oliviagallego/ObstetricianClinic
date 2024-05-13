@@ -22,15 +22,11 @@ public class ManagerMenu {
 	
 	private static LabStaffManager labStaffMan;
 	private static ObstetricianManager obstetricianMan;
-	private static UserManager userMan;
-	//creo que nos falta una interfaz XML que aun no hemos dado en clase 
 	
 	private static BufferedReader r = new BufferedReader(new InputStreamReader(System.in));
 
-	public static void menu(User user, UserManager userMan)  throws IOException {
+	public static void menu(User user, UserManager userMan, ConnectionManager conMan)  throws IOException {
 		
-		ConnectionManager conMan = new ConnectionManager(); // creamos la conexion con el jdbc
-		userMan= man;
 		obstetricianMan = conMan.getObstetricianMan();
 		
 		while(true) {
@@ -54,7 +50,7 @@ public class ManagerMenu {
 			case 3:{
 				System.out.println("\nChanging Manager Password: ");
 				String password = Utilities.readString(" -Type new password: ");
-				user = conMan.changePassword(user, password);
+				user = userMan.changePassword(user, password);
 				System.out.println(" -Password changed correctly to " + user.getPassword());
 				break;
 				}		case 0: {

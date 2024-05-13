@@ -21,13 +21,12 @@ public class ObstetricianMenu {
 	
 	private static ObstetricianManager obstetricianMan;
 	private static WomanManager womanMan;
-	private static UserManager userMan;
 	
-	public static void menu(User user, UserManager man) {
-		ConnectionManager conMan = new ConnectionManager();
+	public static void menu(User user, UserManager userMan, ConnectionManager conMan) {
+		
 		obstetricianMan = conMan.getObstetricianMan();
 		womanMan = conMan.getWomanMan();/* solo tenemos q hacer uso del método*/
-		userMan = man;
+		
 		Obstetrician obstetrician = userMan.getObstetricianFromUser(user);
 		while (true) {
 			try {
@@ -48,13 +47,13 @@ public class ObstetricianMenu {
 						case 2: {
 							int id_obs=obstetrician.getId();
 							Woman woman= searchWomanByNAndS(id_obs);
-							WomanMenu.menu(woman);
+							WomanMenu.menu(woman, conMan);
 							break;
 						}
 						case 3: {
 							System.out.println("\nChange password:");
 							String password = Utilities.readString(" -Type new password: ");
-							user = man.changePassword(user, password);
+							user = userMan.changePassword(user, password);
 							System.out.println(" -Password changed correctly to " + user.getPassword());
 							break;
 						}

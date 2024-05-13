@@ -8,6 +8,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
+import dogclinic.pojos.Vet;
 import obstetricianclinic.ifaces.*;
 import obstetricianclinic.jdbc.ConnectionManager;
 import obstetricianclinic.pojos.Disease;
@@ -23,8 +24,8 @@ public class WomanMenu {
 	private static LabReportManager labReportMan;
 	private static DiseaseManager diseaseMan;
 	
-	public static void menu(Woman woman) {
-		ConnectionManager conMan = new ConnectionManager();
+	public static void menu(Woman woman, ConnectionManager conMan) {
+
 		womanMan = conMan.getWomanMan();
 	
 		while (true) {
@@ -156,10 +157,13 @@ public static void updateWoman(Woman woman) throws IOException {
    }
 }
 public static void assignDisease(int woman_id) throws IOException {
-	System.out.println("Give me de disease: ");
-	String d = r.readLine();
-	Disease disease= diseaseMan.searchDiseaseByName(d);
-	Integer disease_id=disease.getId();
+	System.out.println("Please, give me the name of the disease: ");
+	String diseaseType = r.readLine();
+	List<Disease> listDisease= diseaseMan.searchDiseaseByName(diseaseType);
+	System.out.println(listDisease);
+	System.out.println("Please choose a disease, type its Id:");
+	Integer disease_id=Integer.parseInt(r.readLine());
+	
 	womanMan.assignWomanToDisease(woman_id,disease_id);
 }
 	

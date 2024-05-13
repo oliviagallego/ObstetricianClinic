@@ -18,15 +18,13 @@ public class labStaffMenu {
 	
 	private static ObstetricianManager obstetricianMan;
 	private static WomanManager womanMan;
-	private static UserManager userMan;
 	private static LabReportManager labReportMan;
 	private static LabStaffManager labStaffMan;
 	
-	public static void menu(User user, UserManager man) {
-		ConnectionManager conMan = new ConnectionManager();
+	public static void menu(User user, UserManager man, ConnectionManager conMan) {
 		obstetricianMan = conMan.getObstetricianMan();
 		womanMan = conMan.getWomanMan();
-		userMan = man;
+		
 		
 	
 	while (true) {
