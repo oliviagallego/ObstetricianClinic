@@ -8,7 +8,7 @@ public interface ObstetricianManager {
     public void updateObstetrician(Obstetrician obstetrician);//yo lo borraba 
     public Obstetrician getObstetrician(int id);//he añadido este que nos faltaba
 	//Habria que añadir una cuarta funcion para poder buscar al obstetrician:
-    public List<Obstetrician> searchObstetrician();
+    public List<Obstetrician> searchObstetricianByNameAndSurname(String name, String surname);
 
 
     
