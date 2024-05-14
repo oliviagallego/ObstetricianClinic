@@ -16,7 +16,7 @@ import javax.xml.bind.annotation.XmlType;
 
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlRootElement(name = "LabStaff")
-@XmlType(propOrder = { "name", "surname"})
+@XmlType(propOrder = { "name", "surname", "reports"})
 public class LabStaff implements Serializable{
     /**
 	 * 
