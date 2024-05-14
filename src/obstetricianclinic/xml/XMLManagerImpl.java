@@ -39,11 +39,8 @@ public class XMLManagerImpl implements XMLManager {
 		try {
 			// Create the JAXBContext
 			JAXBContext jaxbContext = JAXBContext.newInstance(Obstetrician.class);
-
 			// Get the unmarshaler
 			Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
-
-			// Use the Unmarshaler to unmarshal the XML document from a file
 			Obstetrician obs = (Obstetrician) unmarshaller.unmarshal(xml);
 			return obs;
 
@@ -91,8 +88,6 @@ public class XMLManagerImpl implements XMLManager {
 
 			// Get the unmarshaler
 			Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
-
-			// Use the Unmarshaler to unmarshal the XML document from a file
 			LabStaff labstaff = (LabStaff) unmarshaller.unmarshal(xml);
 			return labstaff;
 
