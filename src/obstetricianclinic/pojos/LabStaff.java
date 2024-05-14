@@ -9,6 +9,7 @@ import java.util.Objects;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.XmlType;
@@ -27,7 +28,8 @@ public class LabStaff implements Serializable{
 	private String name;
 	@XmlElement
 	private String surname;
-	@XmlTransient
+	@XmlElementWrapper(name = "Reports")
+	@XmlElement(name = "Report")
     private List<LabReport> labReports;
     
     
