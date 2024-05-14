@@ -71,7 +71,7 @@ public class JPAUserManager implements UserManager {
 	@Override
 	public User logIn(String username, String password) {
 		User u =null;
-		Query q = em.createNativeQuery("SELECT FROM users WHERE username = ? AND password = ?",User.class);
+		Query q = em.createNativeQuery("SELECT * FROM users WHERE username = ? AND password = ?",User.class);
 		q.setParameter(1, username);
 		q.setParameter(2, password);
 		try {
