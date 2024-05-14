@@ -119,8 +119,7 @@ public class ManagerMenu {
 		String userName = r.readLine();
 		System.out.println("Password:");
 		String password = r.readLine();
-	
-		//Alguien si me puede ayudar a revisar si esto se hace así
+
 		User user = new User(userName, password);
 		userMan.register(user);
 		Role role = userMan.getRole("labStaff");
