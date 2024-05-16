@@ -1,4 +1,23 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+
+<!DOCTYPE Pregnancies [
+    <!ELEMENT Pregnancies (Pregnancy+)>
+    <!ELEMENT Pregnancy (dateConception, birthReport, NewBorns)>
+        <!ELEMENT dateConception (#PCDATA)>
+        <!ELEMENT birthReport (#PCDATA)>
+        <!ELEMENT NewBorns (NewBorn+)>
+            <!ELEMENT NewBorn (name, surname, dob, weight, gender)>
+                <!ATTLIST NewBorn id CDATA #REQUIRED>
+                <!ATTLIST NewBorn name CDATA #IMPLIED>
+                <!ELEMENT name (#PCDATA)>
+                <!ELEMENT surname (#PCDATA)>
+                <!ELEMENT dob (#PCDATA)>
+                <!ELEMENT weight (#PCDATA)>
+                    <!ATTLIST weight unit CDATA #REQUIRED>
+                <!ELEMENT gender (#PCDATA)>
+]>
+
+
 	<Pregnancies>
 	    <Pregnancy>
 	        <dateConception>2004-01-23</dateConception>
