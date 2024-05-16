@@ -29,6 +29,7 @@ public class ManagerMenu {
 	public static void menu(User user, UserManager userMan, ConnectionManager conMan)  throws IOException {
 
 		obstetricianMan = conMan.getObstetricianMan();
+	    userMan = conMan.getUser();
 		labStaffMan= conMan.getLabStaffMan();
 		
 		while(true) {
