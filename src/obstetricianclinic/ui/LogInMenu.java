@@ -19,6 +19,14 @@ public abstract class LogInMenu {
 		userMan = new JPAUserManager();
 
 		System.out.print("\nWelcome to the Obstetrician Clinic!");
+		/*
+		 Hemos creado el manager
+		String passwordManager = "Manager123";
+		Role roleManager = userMan.getRole("manager");
+		User manager = new User(usernameManager, passwordManager);
+		userMan.register(manager);
+		userMan.assignRole(manager, roleManager);
+		*/
 
 		while (true) {
 			System.out.println("\nLog-In menu:");
