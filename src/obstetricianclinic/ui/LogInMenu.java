@@ -29,7 +29,7 @@ public abstract class LogInMenu {
 		*/
 
 		while (true) {
-			System.out.println("\nLog-In menu:");
+			System.out.println("\nLog-In menu");
 			//String username = Utilities.readString(" -Username: ");
 			System.out.println("Username:");
 			String username = r.readLine();
