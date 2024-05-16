@@ -81,8 +81,6 @@ public class JDBCObstetricianManager implements ObstetricianManager {
 		}
 		return listObstetricians;
 	}
-
-	
 	
 
 }
