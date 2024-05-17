@@ -106,19 +106,6 @@ public class JPAUserManager implements UserManager {
 		em.close();
 	}
 
-	@Override
-	public Obstetrician getObstetricianFromUser(User user) {
-		try {
-			Query query = em.createNativeQuery("SELECT * FROM obstetricians WHERE username = ?", Obstetrician.class);
-            query.setParameter(1, user.getUsername());
-            return (Obstetrician) query.getSingleResult();
-        } catch (NoResultException e) {
-            System.out.println("No obstetrician found for the given username.");
-            return null;
-        } catch (Exception e) {
-            System.out.println("Error retrieving obstetrician: " + e.getMessage());
-            return null;
-        }
-	}
+	
 
 }

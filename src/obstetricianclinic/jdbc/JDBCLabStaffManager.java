@@ -7,6 +7,9 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.NoResultException;
+import javax.persistence.Query;
+
 import obstetricianclinic.ifaces.LabStaffManager;
 import obstetricianclinic.pojos.*;
 
@@ -23,10 +26,11 @@ public class JDBCLabStaffManager implements LabStaffManager {
 	public void addLabStaff(LabStaff labStaff) {
 		try {
 
-			String sql= "INSERT INTO labStaffs (name, surname) " + "VALUES(?,?);"; 
+			String sql= "INSERT INTO labStaffs (name, username, surname) " + "VALUES(?, ?, ?);"; 
 			PreparedStatement insert= c.prepareStatement(sql);
 			insert.setString(1, labStaff.getName());
-			insert.setString(2, labStaff.getSurname());
+			insert.setString(2, labStaff.getUsername());
+			insert.setString(3, labStaff.getSurname());
 			
 			insert.executeUpdate();
 			insert.close();
@@ -39,17 +43,18 @@ public class JDBCLabStaffManager implements LabStaffManager {
 	}
 
 	
-	//Creo que sobra
+	
 	@Override
 	public void updateLabStaff(LabStaff labStaff) {
 		try {
 
-			String sql = "UPDATE labStaffs SET" + " name = ?, " + " surname = ?, " + " WHERE id = ?";
+			String sql = "UPDATE labStaffs SET" + " name = ?, " + "username = ?" + " surname = ?, " + " WHERE id = ?";
 			PreparedStatement p;
 			p = c.prepareStatement(sql);
 			p.setString(1, labStaff.getName());
-			p.setString(2, labStaff.getSurname());
-			p.setInt(3, labStaff.getId());
+			p.setString(2, labStaff.getUsername());
+			p.setString(3, labStaff.getSurname());
+			p.setInt(4, labStaff.getId());
 			p.executeUpdate();
 			p.close();
 		} catch (SQLException e) {
@@ -60,19 +65,21 @@ public class JDBCLabStaffManager implements LabStaffManager {
 	}
 	
 	@Override
-	public List<LabStaff> searchLabStaffByNameAndSurname(String name, String surname) {
+	public List<LabStaff> searchLabStaffByNameAndSurname(String name, String username, String surname) {
 		List<LabStaff> listLabStaff = new ArrayList<LabStaff>();
 		try {
-			String sql = "SELECT * FROM labStaffs WHERE  (name, surname) VALUES (?, ?);";
+			String sql = "SELECT * FROM labStaffs WHERE  (name, username, surname) VALUES (?, ?, ?);";
 			PreparedStatement p = c.prepareStatement(sql);
 			p.setString(1, name);
-			p.setString(2, surname);
+			p.setString(2, username);
+			p.setString(3, surname);
 			ResultSet rs = p.executeQuery();
 			while (rs.next()) {
 				Integer labStaff_id= rs.getInt("id");
 				name= rs.getString("name");
+				username= rs.getString("username");
 				surname= rs.getString("surname");
-				LabStaff labStaff = new LabStaff(labStaff_id, name, surname);
+				LabStaff labStaff = new LabStaff(labStaff_id, name, username, surname);
 				listLabStaff.add(labStaff);
 			}
 			
@@ -83,5 +90,19 @@ public class JDBCLabStaffManager implements LabStaffManager {
 		return listLabStaff;
 	}
 
-	
+	@Override
+	public LabStaff getLabStaffFromUser(String username) {
+		try {
+			String sql = "SELECT * FROM labStaffs WHERE username = ?";
+			PreparedStatement p= c.prepareStatement(sql);
+            p.setString(1, username);
+            ResultSet rs= p.executeQuery();
+            LabStaff labStaffs= new LabStaff(username);
+    		return labStaffs;
+        } catch (SQLException e) {
+			System.out.println("Database error.");
+			e.printStackTrace();
+		}
+		return null;
+	}
 }

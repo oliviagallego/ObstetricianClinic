@@ -40,12 +40,17 @@ public class LabStaff implements Serializable{
 		this.labReports = new ArrayList<LabReport>();
 	}
 	
-	
+	public LabStaff(String username) {
+		super();
+		this.username=username;
+		this.labReports = new ArrayList<LabReport>();
+	}
 
 	public LabStaff(String name, String surname) {
 		super();
 		this.name = name;
 		this.surname = surname;
+		this.labReports = new ArrayList<LabReport>();
 	}
 
 

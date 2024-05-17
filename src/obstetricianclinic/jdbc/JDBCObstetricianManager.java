@@ -9,6 +9,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.persistence.NoResultException;
+import javax.persistence.Query;
+
 import obstetricianclinic.ifaces.ObstetricianManager;
 
 public class JDBCObstetricianManager implements ObstetricianManager {
@@ -23,9 +27,10 @@ public class JDBCObstetricianManager implements ObstetricianManager {
 	@Override
 	public void addObstetrician(Obstetrician obstetrician) {
 	try {
-		String query = "INSERT INTO obstetricians (name, surname) VALUES (?, ?);";
+		String query = "INSERT INTO obstetricians (name, username, surname) VALUES (?, ?, ?);";
 		PreparedStatement insert = c.prepareStatement(query);
 		insert.setString(1, obstetrician.getName());
+		insert.setString(2, obstetrician.getUsername());
 		insert.setString(2, obstetrician.getSurname());
 		insert.executeUpdate();
 		insert.close();
@@ -33,7 +38,6 @@ public class JDBCObstetricianManager implements ObstetricianManager {
 		System.out.println("Database exception");
 		sqlE.printStackTrace();
 	}
-	
 	}
 
 	@Override
@@ -45,8 +49,9 @@ public class JDBCObstetricianManager implements ObstetricianManager {
 			ResultSet rs = p.executeQuery();
 			rs.next();
 			String name = rs.getString("name");
+			String username= rs.getString("username");
 			String surname = rs.getString("surname");
-			Obstetrician obs = new Obstetrician(name, surname, id);
+			Obstetrician obs = new Obstetrician(name, username, surname, id);
 			rs.close();
 			p.close();
 			return obs;
@@ -59,19 +64,21 @@ public class JDBCObstetricianManager implements ObstetricianManager {
 	
 
 	@Override
-	public List<Obstetrician> searchObstetricianByNameAndSurname(String name, String surname) {
+	public List<Obstetrician> searchObstetricianByNameAndSurname(String name, String username, String surname) {
 		List<Obstetrician> listObstetricians = new ArrayList<Obstetrician>();
 		try {
-			String sql = "SELECT * FROM obstetricians WHERE  (name, surname) VALUES (?, ?);";
+			String sql = "SELECT * FROM obstetricians WHERE  (name, username, surname) VALUES (?, ?, ?);";
 			PreparedStatement p = c.prepareStatement(sql);
 			p.setString(1, name);
-			p.setString(2, surname);
+			p.setString(2, username);
+			p.setString(3, surname);
 			ResultSet rs = p.executeQuery();
 			while (rs.next()) {
 				Integer obstetrician_id= rs.getInt("id");
 				name= rs.getString("name");
+				username= rs.getString("username");
 				surname= rs.getString("surname");
-				Obstetrician obs = new Obstetrician(name, surname,obstetrician_id);
+				Obstetrician obs = new Obstetrician(name, username, surname,obstetrician_id);
 				listObstetricians.add(obs);
 			}
 			
@@ -82,5 +89,20 @@ public class JDBCObstetricianManager implements ObstetricianManager {
 		return listObstetricians;
 	}
 	
+	@Override
+	public Obstetrician getObstetricianFromUser(String username) {
+		try {
+			String sql = "SELECT * FROM obstetricians WHERE username = ?";
+			PreparedStatement p= c.prepareStatement(sql);
+            p.setString(1, username);
+            ResultSet rs= p.executeQuery();
+            Obstetrician obs= new Obstetrician(username);
+    		return obs;
+        } catch (SQLException e) {
+			System.out.println("Database error.");
+			e.printStackTrace();
+		}
+		return null;
+	}
 
 }
