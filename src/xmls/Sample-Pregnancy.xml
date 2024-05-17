@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+
+<!DOCTYPE Pregnancies [
+    <!ELEMENT Pregnancies (Pregnancy+)>
+    <!ELEMENT Pregnancy (dateConception, birthReport, NewBorns)>
+        <!ELEMENT dateConception (#PCDATA)>
+        <!ELEMENT birthReport (#PCDATA)>
+        <!ELEMENT NewBorns (NewBorn+)>
+            <!ELEMENT NewBorn (name, surname, dob, weight, gender)>
+                <!ATTLIST NewBorn id CDATA #REQUIRED>
+                <!ATTLIST NewBorn name CDATA #IMPLIED>
+                <!ELEMENT name (#PCDATA)>
+                <!ELEMENT surname (#PCDATA)>
+                <!ELEMENT dob (#PCDATA)>
+                <!ELEMENT weight (#PCDATA)>
+                    <!ATTLIST weight unit CDATA #REQUIRED>
+                <!ELEMENT gender (#PCDATA)>
+]>
+
+
+	<Pregnancies>
+	    <Pregnancy>
+	        <dateConception>2004-01-23</dateConception>
+	        <birthReport>Everything went Fine</birthReport>
+	        <NewBorns>
+	            <NewBorn id="1" name="NewBorn-1">
+	                <name>Nicolas</name>
+	                <surname>Martin</surname>
+	                <dob>2004-10-25</dob>
+	                <weight unit="kilograms">4.5</weight>
+	                <gender>Male</gender>
+	            </NewBorn>
+	            <NewBorn id="2" name="NewBorn-2">
+	                <name>Alejandro</name>
+	                <surname>Martin</surname>
+	                <dob>2004-10-25</dob>
+	                <weight unit="kilograms">3.9</weight>
+	                <gender>Male</gender>
+	            </NewBorn>
+	        </NewBorns>
+	    </Pregnancy>
+	    <Pregnancy>
+	        <dateConception>2007-05-28</dateConception>
+	        <birthReport>Baby upside down, Caesarean section</birthReport>
+	        <NewBorns>
+	            <NewBorn id="1" name="NewBorn-1">
+	                <name>Juan</name>
+	                <surname>Martin</surname>
+	                <dob>2008-02-21</dob>
+	                <weight unit="kilograms">4.5</weight>
+	                <gender>Male</gender>
+	            </NewBorn>
+	        </NewBorns>
+	    </Pregnancy>
+	</Pregnancies>
