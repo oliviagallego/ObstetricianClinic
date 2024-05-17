@@ -21,12 +21,15 @@ public abstract class LogInMenu {
 		System.out.print("\nWelcome to the Obstetrician Clinic!");
 		/*
 		 Hemos creado el manager
+		*/
+		String usernameManager = "Manager";
 		String passwordManager = "Manager123";
 		Role roleManager = userMan.getRole("manager");
 		User manager = new User(usernameManager, passwordManager);
 		userMan.register(manager);
 		userMan.assignRole(manager, roleManager);
-		*/
+		
+		
 
 		while (true) {
 			System.out.println("\nLog-In menu");
