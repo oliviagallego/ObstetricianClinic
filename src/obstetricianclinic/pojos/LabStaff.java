@@ -27,6 +27,8 @@ public class LabStaff implements Serializable{
 	@XmlElement
 	private String name;
 	@XmlElement
+	private String username;
+	@XmlElement
 	private String surname;
 	@XmlElementWrapper(name = "Reports")
 	@XmlElement(name = "Report")
@@ -48,13 +50,25 @@ public class LabStaff implements Serializable{
 
 
 
-	public LabStaff(Integer id, String name, String surname) {
+	public LabStaff(Integer id, String name, String username, String surname) {
 		super();
 		this.id = id;
 		this.name = name;
+		this.username= username;
 		this.surname = surname;
 		this.labReports = new ArrayList<LabReport>();
 	}
+
+	public String getUsername() {
+		return username;
+	}
+
+
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
 
 	public Integer getId() {
 		return id;
@@ -88,10 +102,14 @@ public class LabStaff implements Serializable{
 		this.labReports = labReports;
 	}
 
+
+
 	@Override
 	public int hashCode() {
-		return Objects.hash(id, labReports, name, surname);
+		return Objects.hash(id, labReports, name, surname, username);
 	}
+
+
 
 	@Override
 	public boolean equals(Object obj) {
@@ -103,13 +121,18 @@ public class LabStaff implements Serializable{
 			return false;
 		LabStaff other = (LabStaff) obj;
 		return Objects.equals(id, other.id) && Objects.equals(labReports, other.labReports)
-				&& Objects.equals(name, other.name) && Objects.equals(surname, other.surname);
+				&& Objects.equals(name, other.name) && Objects.equals(surname, other.surname)
+				&& Objects.equals(username, other.username);
 	}
+
+
 
 	@Override
 	public String toString() {
-		return "LabStaff [id=" + id + ", name=" + name + ", surname=" + surname + ", labReports=" + labReports
-				+ "]";
+		return "LabStaff [id=" + id + ", name=" + name + ", username=" + username + ", surname=" + surname
+				+ ", labReports=" + labReports + "]";
 	}
+
+	
 
 }

@@ -25,6 +25,8 @@ public class Obstetrician implements Serializable{
 	@XmlElement
 	private String name;
 	@XmlElement
+	private String username;
+	@XmlElement
 	private String surname;
 	@XmlTransient
 	private Integer id;
@@ -45,12 +47,22 @@ public class Obstetrician implements Serializable{
 	}
 
 
-	public Obstetrician(String name, String surname, Integer id) {
+	public Obstetrician(String name, String username, String surname, Integer id) {
 		super();
 		this.name = name;
+		this.username= username;
 		this.surname = surname;
 		this.id = id;
 		this.women = new ArrayList<Woman>();
+	}
+	public String getUsername() {
+		return username;
+	}
+
+
+
+	public void setUsername(String username) {
+		this.username = username;
 	}
 
 	public String getName() {
@@ -88,8 +100,9 @@ public class Obstetrician implements Serializable{
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(id, name, surname, women);
+		return Objects.hash(id, name, surname, username, women);
 	}
+
 
 	@Override
 	public boolean equals(Object obj) {
@@ -101,13 +114,19 @@ public class Obstetrician implements Serializable{
 			return false;
 		Obstetrician other = (Obstetrician) obj;
 		return Objects.equals(id, other.id) && Objects.equals(name, other.name)
-				&& Objects.equals(surname, other.surname)&& Objects.equals(women, other.women);
+				&& Objects.equals(surname, other.surname) && Objects.equals(username, other.username)
+				&& Objects.equals(women, other.women);
 	}
+
 
 	@Override
 	public String toString() {
-		return "obstetrician [name=" + name + ", surname=" + surname + ", id=" + id+ ", women=" + women + "]";
+		return "Obstetrician [name=" + name + ", username=" + username + ", surname=" + surname + ", id=" + id
+				+ ", women=" + women + "]";
 	}
+
+
+	
 
 	
 }
