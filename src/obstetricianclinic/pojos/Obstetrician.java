@@ -50,9 +50,17 @@ public class Obstetrician implements Serializable{
 		this.name = name;
 		this.surname = surname;
 	}
+	
 
+	public Obstetrician(String name, String surname,String username) {
+		super();
+		this.name = name;
+		this.username = username;
+		this.surname = surname;
+		this.women = new ArrayList<Woman>();
+	}
 
-	public Obstetrician(String name, String username, String surname, Integer id) {
+	public Obstetrician(String name,  String surname, String username,Integer id) {
 		super();
 		this.name = name;
 		this.username= username;

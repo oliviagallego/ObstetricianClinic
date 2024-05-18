@@ -84,17 +84,19 @@ public class ManagerMenu {
 		String name = r.readLine();
 		System.out.println("Surname:");
 		String surname = r.readLine();
-		Obstetrician obstetrician = new Obstetrician(name, surname);
-		obstetricianMan.addObstetrician(obstetrician);
+		
+		
 		
 		//Me he dado cuenta de que faltaba esto
 		System.out.println("Introduce the Log in information:");
 		System.out.println("UserName:");
-		String userName = r.readLine();
+		String username = r.readLine();
 		System.out.println("Password:");
 		String password = r.readLine();
+		Obstetrician obstetrician = new Obstetrician(name, surname,username);
+		obstetricianMan.addObstetrician(obstetrician);
 		
-		User user = new User(userName, password);
+		User user = new User(username, password);
 		userMan.register(user);
 		Role role = userMan.getRole("obstetrician");
 		userMan.assignRole(user, role);
@@ -107,15 +109,16 @@ public class ManagerMenu {
 		String name = r.readLine();
 		System.out.println("Surname:");
 		String surname = r.readLine();
-		LabStaff labStaff = new LabStaff(name, surname);
-		labStaffMan.addLabStaff(labStaff);
 		
 		System.out.println("Introduce the Log in information:");
 		System.out.println("UserName:");
-		String userName = r.readLine();
+		String username = r.readLine();
 		System.out.println("Password:");
 		String password = r.readLine();
-		User user = new User(userName, password);
+		
+		LabStaff labStaff = new LabStaff(name, surname, username);
+		labStaffMan.addLabStaff(labStaff);
+		User user = new User(username, password);
 		userMan.register(user);
 		Role role = userMan.getRole("labStaff");
 		userMan.assignRole(user, role);

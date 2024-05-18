@@ -26,11 +26,11 @@ public class JDBCLabStaffManager implements LabStaffManager {
 	public void addLabStaff(LabStaff labStaff) {
 		try {
 
-			String sql= "INSERT INTO labStaffs (name, username, surname) " + "VALUES(?, ?, ?);"; 
+			String sql= "INSERT INTO labStaffs (name, surname,username) " + "VALUES(?, ?, ?);"; 
 			PreparedStatement insert= c.prepareStatement(sql);
 			insert.setString(1, labStaff.getName());
-			insert.setString(2, labStaff.getUsername());
-			insert.setString(3, labStaff.getSurname());
+			insert.setString(2, labStaff.getSurname());
+			insert.setString(3, labStaff.getUsername());
 			
 			insert.executeUpdate();
 			insert.close();
@@ -48,12 +48,12 @@ public class JDBCLabStaffManager implements LabStaffManager {
 	public void updateLabStaff(LabStaff labStaff) {
 		try {
 
-			String sql = "UPDATE labStaffs SET" + " name = ?, " + "username = ?" + " surname = ?, " + " WHERE id = ?";
+			String sql = "UPDATE labStaffs SET" + " name = ?, " +  " surname = ?, " + "username = ?" +" WHERE id = ?";
 			PreparedStatement p;
 			p = c.prepareStatement(sql);
 			p.setString(1, labStaff.getName());
-			p.setString(2, labStaff.getUsername());
-			p.setString(3, labStaff.getSurname());
+			p.setString(2, labStaff.getSurname());
+			p.setString(3, labStaff.getUsername());
 			p.setInt(4, labStaff.getId());
 			p.executeUpdate();
 			p.close();

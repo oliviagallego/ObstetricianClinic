@@ -52,8 +52,15 @@ public class LabStaff implements Serializable{
 		this.surname = surname;
 		this.labReports = new ArrayList<LabReport>();
 	}
+	
 
-
+	public LabStaff(String name,  String surname,String username) {
+		super();
+		this.name = name;
+		this.username = username;
+		this.surname = surname;
+		this.labReports = new ArrayList<LabReport>();
+	}
 
 	public LabStaff(Integer id, String name, String surname, String username) {
 		super();

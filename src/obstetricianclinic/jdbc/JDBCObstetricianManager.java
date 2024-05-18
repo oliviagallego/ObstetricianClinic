@@ -27,11 +27,11 @@ public class JDBCObstetricianManager implements ObstetricianManager {
 	@Override
 	public void addObstetrician(Obstetrician obstetrician) {
 	try {
-		String query = "INSERT INTO obstetricians (name, username, surname) VALUES (?, ?, ?);";
+		String query = "INSERT INTO obstetricians (name, surname,username) VALUES (?, ?, ?);";
 		PreparedStatement insert = c.prepareStatement(query);
 		insert.setString(1, obstetrician.getName());
-		insert.setString(2, obstetrician.getUsername());
 		insert.setString(2, obstetrician.getSurname());
+		insert.setString(2, obstetrician.getUsername());
 		insert.executeUpdate();
 		insert.close();
 	}catch(SQLException sqlE) {
@@ -49,9 +49,9 @@ public class JDBCObstetricianManager implements ObstetricianManager {
 			ResultSet rs = p.executeQuery();
 			rs.next();
 			String name = rs.getString("name");
-			String username= rs.getString("username");
 			String surname = rs.getString("surname");
-			Obstetrician obs = new Obstetrician(name, username, surname, id);
+			String username= rs.getString("username");
+			Obstetrician obs = new Obstetrician(name, surname,username, id);
 			rs.close();
 			p.close();
 			return obs;
@@ -64,21 +64,21 @@ public class JDBCObstetricianManager implements ObstetricianManager {
 	
 
 	@Override
-	public List<Obstetrician> searchObstetricianByNameAndSurname(String name, String username, String surname) {
+	public List<Obstetrician> searchObstetricianByNameAndSurname(String name, String surname,String username) {
 		List<Obstetrician> listObstetricians = new ArrayList<Obstetrician>();
 		try {
 			String sql = "SELECT * FROM obstetricians WHERE  (name, username, surname) VALUES (?, ?, ?);";
 			PreparedStatement p = c.prepareStatement(sql);
 			p.setString(1, name);
-			p.setString(2, username);
-			p.setString(3, surname);
+			p.setString(2, surname);
+			p.setString(3, username);
 			ResultSet rs = p.executeQuery();
 			while (rs.next()) {
 				Integer obstetrician_id= rs.getInt("id");
 				name= rs.getString("name");
-				username= rs.getString("username");
 				surname= rs.getString("surname");
-				Obstetrician obs = new Obstetrician(name, username, surname,obstetrician_id);
+				username= rs.getString("username");
+				Obstetrician obs = new Obstetrician(name, surname,username,obstetrician_id);
 				listObstetricians.add(obs);
 			}
 			
