@@ -14,6 +14,12 @@ import obstetricianclinic.ifaces.WomanManager;
 import obstetricianclinic.jdbc.ConnectionManager;
 import obstetricianclinic.pojos.*;
 
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.*;
+import java.util.List;
 
 public class NewbornMenu {
 	private static BufferedReader r = new BufferedReader(new InputStreamReader(System.in));

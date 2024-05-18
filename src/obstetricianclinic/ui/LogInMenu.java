@@ -8,7 +8,6 @@ import obstetricianclinic.jdbc.ConnectionManager;
 import obstetricianclinic.pojos.*;
 import obstetricianclinic.jpa.*;
 
-
 public abstract class LogInMenu{
 	
 	private static UserManager userMan;
@@ -34,7 +33,6 @@ public abstract class LogInMenu{
 				userMan.assignRole(manager, roleManager);
 				*/
 				
-
 				while (true) {
 					System.out.println("\nLog-In menu");
 					System.out.println("\nUsername:");
@@ -52,7 +50,7 @@ public abstract class LogInMenu{
 		                } else if (user.getRole().getName().equals("obstetrician")) {
 		                    ObstetricianMenu.menu(user, userMan, conMan);
 		                } else if(user.getRole().getName().equals("lab staff")){
-		                	 labStaffMenu.menu(user, userMan, conMan);
+		                	 LabStaffMenu.menu(user, userMan, conMan);
 		                }
 		                else {
 		                    System.out.println("Access Denied: Your role is not recognized.");

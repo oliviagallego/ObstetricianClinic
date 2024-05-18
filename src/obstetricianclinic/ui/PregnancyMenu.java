@@ -13,6 +13,7 @@ import obstetricianclinic.ifaces.*;
 import obstetricianclinic.jdbc.ConnectionManager;
 import obstetricianclinic.pojos.*;
 
+
 public class PregnancyMenu {
 	private static BufferedReader r = new BufferedReader(new InputStreamReader(System.in));
 	private static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
@@ -211,8 +212,6 @@ public static void updatePregancy(Pregnancy pregnancy) throws IOException {
 		
    }
 	}
-
-
 
 
 }

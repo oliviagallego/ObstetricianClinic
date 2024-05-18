@@ -10,10 +10,7 @@ import java.util.List;
 
 import obstetricianclinic.ifaces.*;
 import obstetricianclinic.jdbc.ConnectionManager;
-import obstetricianclinic.pojos.Disease;
-import obstetricianclinic.pojos.LabReport;
-import obstetricianclinic.pojos.User;
-import obstetricianclinic.pojos.Woman;
+import obstetricianclinic.pojos.*;
 
 public class WomanMenu {
 	private static BufferedReader r = new BufferedReader(new InputStreamReader(System.in));
@@ -165,12 +162,6 @@ public static void assignDisease(int woman_id) throws IOException {
 	
 	womanMan.assignWomanToDisease(woman_id,disease_id);
 }
-	
-	
-	
-	
-	
-	
 	
 
 }
