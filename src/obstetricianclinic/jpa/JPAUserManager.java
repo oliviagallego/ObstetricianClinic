@@ -1,7 +1,6 @@
 package obstetricianclinic.jpa;
 
 import java.util.List;
-
 import javax.persistence.*;
 
 import obstetricianclinic.ifaces.UserManager;
@@ -28,14 +27,14 @@ public class JPAUserManager implements UserManager {
 			this.createRole(new Role("manager"));
 		}
 	}
-
+	
+	
 	@Override
-	public void register(User user) {
+	public void register(User user){
 		em.getTransaction().begin();
 		em.persist(user);
 		em.getTransaction().commit();
 	}
-
 	@Override
 	public void createRole(Role role) {
 		em.getTransaction().begin();
@@ -105,7 +104,19 @@ public class JPAUserManager implements UserManager {
 	public void logOut() {
 		em.close();
 	}
-
+	
+	@Override
+    public User getUser(String username) {
+		User u =null;
+		Query q = em.createQuery("SELECT u FROM User u WHERE u.username = :username", User.class);
+        q.setParameter("username", username);
+        try {
+        	u= (User) q.getSingleResult();
+			return u;
+		}catch(NoResultException e) {
+			return null;
+		}
+    }
 	
 
 }

@@ -26,7 +26,7 @@ public class ManagerMenu {
 	private static UserManager userMan; // no entiendo porque me obliga a importarlo a la fuerza cuando se lo pasamos como parametro al menu
 
 
-	public static void menu(User user, UserManager userMan, ConnectionManager conMan)  throws IOException {
+	public static void menu(User user, UserManager userMan, ConnectionManager conMan)  throws IOException, Exception {
 
 		obstetricianMan = conMan.getObstetricianMan();
 	    //userMan = conMan.getUser();
@@ -78,11 +78,14 @@ public class ManagerMenu {
 			}catch (IOException e) {
 				System.out.println("I/O Exception.");
 				e.printStackTrace();
-			}
+			} catch (Exception e) {
+		        System.out.println("Registration failed: " + e.getMessage());
+		        
+		    }
 		}
 	}
 	
-	public static void registerObstetrician() throws IOException {
+	public static void registerObstetrician() throws IOException, Exception {
 		System.out.println("\nRegistration of an obstetrician: ");
 		System.out.println("Please type the obstetrician data:");
 		System.out.println("Name:");
@@ -105,7 +108,7 @@ public class ManagerMenu {
 		userMan.assignRole(user, role);
 	}
 	
-	public static void registerLabStaff() throws IOException {
+	public static void registerLabStaff() throws IOException,Exception {
 		System.out.println("\nRegistration of an laboratory staff: ");
 		System.out.println("Please type the laboratory staff data:");
 		System.out.println("Name:");
