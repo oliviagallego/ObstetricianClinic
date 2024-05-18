@@ -55,7 +55,7 @@ public class LabStaff implements Serializable{
 
 
 
-	public LabStaff(Integer id, String name, String username, String surname) {
+	public LabStaff(Integer id, String name, String surname, String username) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -134,7 +134,7 @@ public class LabStaff implements Serializable{
 
 	@Override
 	public String toString() {
-		return "LabStaff [id=" + id + ", name=" + name + ", username=" + username + ", surname=" + surname
+		return "LabStaff [id=" + id + ", name=" + name +", surname=" + surname +", username=" + username 
 				+ ", labReports=" + labReports + "]";
 	}
 

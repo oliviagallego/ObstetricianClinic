@@ -20,12 +20,13 @@ public class ObstetricianMenu {
 	private static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
 	
 	private static WomanManager womanMan;
-	
+	private static ObstetricianManager obstetricianMan;
 
 	public static void menu(User user, UserManager userMan, ConnectionManager conMan) {
 		womanMan = conMan.getWomanMan();/* solo tenemos q hacer uso del método*/
+		obstetricianMan = conMan.getObstetricianMan();
 		
-		Obstetrician obstetrician = userMan.getObstetricianFromUser(user);
+		Obstetrician obstetrician = obstetricianMan.getObstetricianFromUser(user.getUsername());
 		while (true) {
 			try {
 				System.out.println("Welcome to the obstetrician clinic!!");

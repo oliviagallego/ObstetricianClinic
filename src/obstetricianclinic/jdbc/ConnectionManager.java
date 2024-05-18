@@ -96,7 +96,6 @@ public class ConnectionManager {
 
 
 
-
 	private void createTables() {
 		try {
 			Statement createTables1= c.createStatement();

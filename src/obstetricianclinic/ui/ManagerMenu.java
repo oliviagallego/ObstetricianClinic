@@ -136,7 +136,9 @@ public class ManagerMenu {
 		String name = r.readLine();
 		System.out.println("Surname:");
 		String surname = r.readLine();
-		List<Obstetrician>listObstetricianOfManager= obstetricianMan.searchObstetricianByNameAndSurname(name, surname);
+		System.out.println("Username:");
+		String username = r.readLine();
+		List<Obstetrician>listObstetricianOfManager= obstetricianMan.searchObstetricianByNameAndSurname(name, surname,username);
 		List<Obstetrician> listObstetrician = new ArrayList<>();
 		for(int i=0; i<listObstetricianOfManager.size(); i++) {
 			Obstetrician obstetrician = listObstetricianOfManager.get(i);
@@ -178,7 +180,9 @@ public class ManagerMenu {
 		String name = r.readLine();
 		System.out.println("Surname:");
 		String surname = r.readLine();
-		List<LabStaff>listLabStaffOfManager= labStaffMan.searchLabStaffByNameAndSurname(name, surname);
+		System.out.println("Username:");
+		String username = r.readLine();
+		List<LabStaff>listLabStaffOfManager= labStaffMan.searchLabStaffByNameAndSurname(name, surname,username);
 		List<LabStaff> listLabStaff = new ArrayList<>();
 		for(int i=0; i<listLabStaffOfManager.size(); i++) {
 			LabStaff labStaff = listLabStaffOfManager.get(i);

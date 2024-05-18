@@ -65,21 +65,21 @@ public class JDBCLabStaffManager implements LabStaffManager {
 	}
 	
 	@Override
-	public List<LabStaff> searchLabStaffByNameAndSurname(String name, String username, String surname) {
+	public List<LabStaff> searchLabStaffByNameAndSurname(String name, String surname, String username) {
 		List<LabStaff> listLabStaff = new ArrayList<LabStaff>();
 		try {
-			String sql = "SELECT * FROM labStaffs WHERE  (name, username, surname) VALUES (?, ?, ?);";
+			String sql = "SELECT * FROM labStaffs WHERE  (name, surname,username) VALUES (?, ?, ?);";
 			PreparedStatement p = c.prepareStatement(sql);
 			p.setString(1, name);
-			p.setString(2, username);
-			p.setString(3, surname);
+			p.setString(2, surname);
+			p.setString(3, username);
 			ResultSet rs = p.executeQuery();
 			while (rs.next()) {
 				Integer labStaff_id= rs.getInt("id");
 				name= rs.getString("name");
-				username= rs.getString("username");
 				surname= rs.getString("surname");
-				LabStaff labStaff = new LabStaff(labStaff_id, name, username, surname);
+				username= rs.getString("username");
+				LabStaff labStaff = new LabStaff(labStaff_id, name, surname,username);
 				listLabStaff.add(labStaff);
 			}
 			
