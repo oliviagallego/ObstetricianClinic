@@ -2,6 +2,7 @@ package obstetricianclinic.ui;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.sql.SQLException;
 
 import obstetricianclinic.ifaces.*;
 import obstetricianclinic.jdbc.ConnectionManager;
@@ -13,7 +14,7 @@ public abstract class LogInMenu{
 	private static UserManager userMan;
 	private static BufferedReader r = new BufferedReader(new InputStreamReader(System.in));
 	
-	public static void main(String[] Args) { // throws NumberFormatException, IOException, Exception{
+	public static void main(String[] Args) throws SQLException { // throws NumberFormatException, IOException, Exception{
 			
 			try {
 				ConnectionManager conMan = new ConnectionManager();

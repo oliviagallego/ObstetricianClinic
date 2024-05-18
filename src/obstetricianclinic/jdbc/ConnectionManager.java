@@ -103,7 +103,7 @@ public class ConnectionManager {
 					+ "obstetrician_id INTEGER PRIMARY KEY AUTOINCREMENT, "
 					+ "name TEXT NOT NULL, "
 					+ "surname TEXT NOT NULL, "
-					+ "username TEXT NOT NULL)";
+					+ "username TEXT NOT NULL UNIQUE)";//añadimos que no se puede repetir
 			
 			createTables1.executeUpdate(create1);
 			createTables1.close();
@@ -116,7 +116,9 @@ public class ConnectionManager {
 					+ "surname TEXT NOT NULL, "
 					+ "dob DATE NOT NULL, "
 					+ "weight REAL NOT NULL, "
-					+ "obstetrician_id INTEGER REFERENCES obstetricians(id))";
+					+ "obstetrician_id INTEGER, "
+					+ "FOREIGN KEY (obstetrician_id) REFERENCES obstetricians(obstetrician_id))";
+
 			createTables2.executeUpdate(create2);
 			createTables2.close();
 			

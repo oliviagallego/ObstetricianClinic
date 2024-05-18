@@ -31,7 +31,7 @@ public class ObstetricianMenu {
 				System.out.println("1. Register a Woman");
 				System.out.println("2. Select a woman");
 				System.out.println("3. Change password");
-				System.out.println("0. Exit");
+				System.out.println("0. Exit\n");
 
 			
         int choice = Integer.parseInt(r.readLine());

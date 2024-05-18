@@ -3,6 +3,7 @@ package obstetricianclinic.ui;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import obstetricianclinic.ifaces.*;
@@ -18,10 +19,10 @@ public class ManagerMenu {
 	private static UserManager userMan; // no entiendo porque me obliga a importarlo a la fuerza cuando se lo pasamos como parametro al menu
 
 
-	public static void menu(User user, UserManager userMan, ConnectionManager conMan)  throws IOException, Exception {
+	public static void menu(User user, UserManager userMan, ConnectionManager conMan)  throws IOException, Exception, SQLException  {
 
 		obstetricianMan = conMan.getObstetricianMan();
-	    //userMan = conMan.getUser();
+		ManagerMenu.userMan = userMan; 
 		labStaffMan= conMan.getLabStaffMan();
 		
 		while(true) {
@@ -50,13 +51,18 @@ public class ManagerMenu {
 				}
 			case 4:
 				LabStaff labstaff = searchLabStaffByNameAndSurname(user.getId());
+				if (labstaff != null) {
+                    System.out.println("Lab Staff selected: " + labstaff.toString());
+                }
+				break;
 			case 5:{
 				System.out.println("\nChanging Manager Password: ");
 				String password = Utilities.readString(" -Type new password: ");
 				user = userMan.changePassword(user, password);
 				System.out.println(" -Password changed correctly to " + user.getPassword());
 				break;
-				}		case 0: {
+				}		
+			case 0: {
 				conMan.closeConnection();
 				return;
 				}
@@ -100,9 +106,14 @@ public class ManagerMenu {
 		userMan.register(user);
 		Role role = userMan.getRole("obstetrician");
 		userMan.assignRole(user, role);
+		System.out.println("\nThe obstetrician "+obstetrician.getName()+" "+obstetrician.getSurname()+" is inserted to the Database");
 	}
 	
 	public static void registerLabStaff() throws IOException,Exception {
+		if (userMan == null) {
+	        System.out.println("UserManager has not been initialized");
+	        throw new IllegalStateException("UserManager is required but was not initialized.");
+	    }
 		System.out.println("\nRegistration of an laboratory staff: ");
 		System.out.println("Please type the laboratory staff data:");
 		System.out.println("Name:");

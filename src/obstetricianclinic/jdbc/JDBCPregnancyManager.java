@@ -24,18 +24,39 @@ public class JDBCPregnancyManager implements PregnancyManager {
 	
 	@Override
 	public void addPregnancy(Pregnancy pregnancy) {
-		try {
-		String sql= "INSERT INTO pregnancies (dateConception, birthReport, woman_id) " + "VALUES(?,?,?);";
-		PreparedStatement insert= c.prepareStatement(sql);
-		insert.setDate(1, pregnancy.getDateConception());
-		insert.setString(2, pregnancy.getBirthReport());
-		insert.setInt(3, pregnancy.getWoman().getId());
-		insert.executeUpdate();
-		insert.close();
-		}catch(SQLException sqlE) {
-			System.out.println("Database exception");
-			sqlE.printStackTrace();
-		}
+	    try {
+	        if (pregnancyExists(pregnancy.getDateConception(), pregnancy.getWoman().getId())) {
+	            System.out.println("A pregnancy record for this woman on the specified date of conception already exists. Please verify the information.");
+	            return;
+	        }
+
+	        String sql = "INSERT INTO pregnancies (dateConception, birthReport, woman_id) VALUES (?, ?, ?);";
+	        try (PreparedStatement insert = c.prepareStatement(sql)) {
+	            insert.setDate(1, pregnancy.getDateConception());
+	            insert.setString(2, pregnancy.getBirthReport());
+	            insert.setInt(3, pregnancy.getWoman().getId());
+	            insert.executeUpdate();
+	            System.out.println("Pregnancy successfully added to the database.");
+	        }
+	    } catch (SQLException sqlE) {
+	        System.out.println("Database exception");
+	        sqlE.printStackTrace();
+	    }
+	}
+
+
+	private boolean pregnancyExists(Date dateConception, int womanId) throws SQLException {
+	    String query = "SELECT COUNT(*) FROM pregnancies WHERE (dateConception, woman_id) "+"VALUES (?, ?, ?); ";
+	    try (PreparedStatement stmt = c.prepareStatement(query)) {
+	        stmt.setDate(1, dateConception);
+	        stmt.setInt(2, womanId);
+	        try (ResultSet rs = stmt.executeQuery()) {
+	            if (rs.next()) {
+	                return rs.getInt(1) > 0;
+	            }
+	        }
+	    }
+	    return false;
 	}
 
 	
