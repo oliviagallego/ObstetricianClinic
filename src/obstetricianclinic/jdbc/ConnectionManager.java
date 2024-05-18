@@ -103,6 +103,7 @@ public class ConnectionManager {
 			String create1= "CREATE TABLE obstetricians ("
 					+ "obstetrician_id INTEGER PRIMARY KEY AUTOINCREMENT, "
 					+ "name TEXT NOT NULL, "
+					+ "username TEXT NOT NULL, "
 					+ "surname TEXT NOT NULL)";
 			
 			createTables1.executeUpdate(create1);
@@ -162,6 +163,7 @@ public class ConnectionManager {
 			String create7= "CREATE TABLE labStaffs ("
 					+ "labStaff_id INTEGER PRIMARY KEY AUTOINCREMENT, "
 					+ "name TEXT NOT NULL, "
+					+ "username TEXT NOT NULL, "
 					+ "surname TEXT NOT NULL)";
 			createTables7.executeUpdate(create7);
 			createTables7.close();
