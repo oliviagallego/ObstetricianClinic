@@ -11,7 +11,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
 
-//import obstetricianclinic.jpa.JPAUserManager;esta por programar
+//import obstetricianclinic.jpa.JPAUserManager; esta por programar
 public class ObstetricianMenu {
 	
 	private static BufferedReader r = new BufferedReader(new InputStreamReader(System.in));

@@ -48,9 +48,9 @@ public abstract class LogInMenu{
 		                if (user.getRole().getName().equals("manager")) {
 		                    ManagerMenu.menu(user, userMan, conMan);
 
-		                } else if (user.getRole().equals("obstetrician")) {
+		                } else if (user.getRole().getName().equals("obstetrician")) {
 		                    ObstetricianMenu.menu(user, userMan, conMan);
-		                } else if(user.getRole().equals("lab staff")){
+		                } else if(user.getRole().getName().equals("lab staff")){
 		                	 LabStaffMenu.menu(user, userMan, conMan);
 		                }
 		                else {
