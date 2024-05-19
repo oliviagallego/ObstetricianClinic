@@ -1,6 +1,7 @@
 package obstetricianclinic.jpa;
 
 import java.util.List;
+
 import javax.persistence.*;
 
 import obstetricianclinic.ifaces.UserManager;
