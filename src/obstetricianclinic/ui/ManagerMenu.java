@@ -16,7 +16,7 @@ public class ManagerMenu {
 	
 	private static LabStaffManager labStaffMan;
 	private static ObstetricianManager obstetricianMan;
-	private static UserManager userMan; // no entiendo porque me obliga a importarlo a la fuerza cuando se lo pasamos como parametro al menu
+	private static UserManager userMan; 
 
 
 	public static void menu(User user, UserManager userMan, ConnectionManager conMan)  throws IOException, Exception, SQLException  {
