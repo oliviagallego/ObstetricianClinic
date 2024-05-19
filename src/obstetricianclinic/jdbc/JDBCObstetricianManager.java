@@ -25,7 +25,7 @@ public class JDBCObstetricianManager implements ObstetricianManager {
 	}
 
 	@Override
-	public void addObstetrician(Obstetrician obstetrician) throws SQLException {
+	/*public void addObstetrician(Obstetrician obstetrician) throws SQLException {
 	    try {
 	        if (obstetrician.getUsername() == null || obstetrician.getUsername().trim().isEmpty()) {
 	            throw new IllegalArgumentException("Username must not be null or empty");
@@ -47,20 +47,49 @@ public class JDBCObstetricianManager implements ObstetricianManager {
 	        System.out.println("Database exception");
 	        sqlE.printStackTrace();
 	    }
+	}*/
+	public void addObstetrician(Obstetrician obstetrician) {
+		if (checkUsernameExists(obstetrician.getUsername())) {
+	        System.out.println("Username already exists. Please choose a different username.");
+	        return;
+	    }
+	    String sql = "INSERT INTO obstetricians (name, surname, username) VALUES (?, ?, ?)";
+	    try (Connection conn = this.conMan.getConnection();
+	         PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+	        pstmt.setString(1, obstetrician.getName());
+	        pstmt.setString(2, obstetrician.getSurname());
+	        pstmt.setString(3, obstetrician.getUsername());
+	        int affectedRows = pstmt.executeUpdate();
+	        if (affectedRows > 0) {
+	            System.out.println("Obstetrician successfully added to the database.");
+	        } else {
+	            System.out.println("Failed to add the obstetrician to the database.");
+	        }
+	    } catch (SQLException e) {
+	        System.out.println("Database error during obstetrician registration.");
+	        e.printStackTrace();
+	    }
 	}
 
-	private boolean obstetricianExists(String username) throws SQLException {
-	    String query = "SELECT COUNT(*) FROM obstetricians WHERE username = ?";
-	    try (PreparedStatement stmt = c.prepareStatement(query)) {
-	        stmt.setString(1, username);
-	        try (ResultSet rs = stmt.executeQuery()) {
-	            if (rs.next()) {
-	                return rs.getInt(1) > 0;
-	            }
+
+	public boolean checkUsernameExists(String username) {
+	    String sql = "SELECT COUNT(*) FROM users WHERE username = ?";
+	    try (Connection conn = this.conMan.getConnection();
+	         PreparedStatement pstmt = conn.prepareStatement(sql)) {
+	        pstmt.setString(1, username);
+	        ResultSet rs = pstmt.executeQuery();
+	        if (rs.next()) {
+	            return rs.getInt(1) > 0;
 	        }
+	    } catch (SQLException e) {
+	        System.out.println("Database error during username check.");
+	        e.printStackTrace();
+	        throw new RuntimeException("Failed to check if username exists", e);
 	    }
 	    return false;
 	}
+
 
 
 	@Override
@@ -88,7 +117,7 @@ public class JDBCObstetricianManager implements ObstetricianManager {
 	
 
 	@Override //Lo he corregido por que salia el error: SQL error or missing database (near ",": syntax error)
-		public List<Obstetrician> searchObstetricianByNameAndSurname(String name, String surname, String username) {
+	public List<Obstetrician> searchObstetricianByNameAndSurname(String name, String surname, String username) {
 	    List<Obstetrician> listObstetricians = new ArrayList<Obstetrician>();
 	    try {
 	        String sql = "SELECT * FROM obstetricians WHERE name = ? AND surname = ? AND username = ?";

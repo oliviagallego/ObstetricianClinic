@@ -14,6 +14,7 @@ public class JPAUserManager implements UserManager {
 
 	public JPAUserManager() {
 		em= Persistence.createEntityManagerFactory("obstetricianclinic-provider").createEntityManager();
+		initializeRoles();
 		em.getTransaction().begin();
 		em.createNativeQuery("PRAGMA foreign_keys=ON").executeUpdate();
 		em.getTransaction().commit();
@@ -26,21 +27,50 @@ public class JPAUserManager implements UserManager {
 			this.createRole(new Role("laboratory staff"));
 			this.createRole(new Role("manager"));
 		}
+		
 	}
 	
+	private void initializeRoles() {
+        em.getTransaction().begin();
+        try {
+            String[] roleNames = {"obstetrician", "laboratory staff", "manager"};
+            for (String roleName : roleNames) {
+                try {
+                    getRole(roleName);
+                } catch (NoResultException e) {
+                    createRole(new Role(roleName));
+                }
+            }
+            em.getTransaction().commit();
+        } catch (Exception e) {
+            em.getTransaction().rollback();
+            throw e;
+        }
+    }
 	
 	@Override
-	public void register(User user){
-		em.getTransaction().begin();
-		em.persist(user);
-		em.getTransaction().commit();
-	}
-	@Override
-	public void createRole(Role role) {
-		em.getTransaction().begin();
-		em.persist(role);
-		em.getTransaction().commit();
-	}
+    public void register(User user) {
+        em.getTransaction().begin();
+        try {
+            em.persist(user);
+            em.getTransaction().commit();
+        } catch (Exception e) {
+            em.getTransaction().rollback();
+            throw e;
+        }
+    }
+
+    @Override
+    public void createRole(Role role) {
+        em.getTransaction().begin();
+        try {
+            em.persist(role);
+            em.getTransaction().commit();
+        } catch (Exception e) {
+            em.getTransaction().rollback();
+            throw e;
+        }
+    }
 
 	@Override
 	public Role getRole(String name) {
@@ -59,13 +89,16 @@ public class JPAUserManager implements UserManager {
 
 	@Override
 	public void assignRole(User user, Role role) {
-		em.getTransaction().begin();
-		user.setRole(role);//assign role to user
-		//add User to List of Users in Role
-		role.addUser(user);
-		em.getTransaction().commit();
-
-	}
+        em.getTransaction().begin();
+        try {
+            user.setRole(role);
+            role.addUser(user);
+            em.getTransaction().commit();
+        } catch (Exception e) {
+            em.getTransaction().rollback();
+            throw e;
+        }
+    }
 
 	@Override
 	public User logIn(String username, String password) {
@@ -84,25 +117,21 @@ public class JPAUserManager implements UserManager {
 
 	@Override
 	public User changePassword(User user, String newPassword) {
-		
-		try {
-			//Query sql = em.createNativeQuery("SELECT * FROM users WHERE username = ? AND password = ?", User.class);
-			//sql.setParameter(1, user.getUsername());
-			//sql.setParameter(2, user.getPassword());
-			//user = (User) sql.getSingleResult();
-			
-			em.getTransaction().begin();
-			user.setPassword(newPassword);
-			em.getTransaction().commit();
-			return user;
-			
-		}catch(NoResultException e) {
-			return null;
-		}
+		em.getTransaction().begin();
+        try {
+            user.setPassword(newPassword);
+            em.getTransaction().commit();
+            return user;
+        } catch (Exception e) {
+            em.getTransaction().rollback();
+            throw e;
+        }
 	}
 
 	public void logOut() {
-		em.close();
+		if (em.isOpen()) {
+            em.close();
+        }
 	}
 	
 	@Override
