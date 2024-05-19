@@ -48,9 +48,9 @@ public abstract class LogInMenu{
 		                if (user.getRole().getName().equals("manager")) {
 		                    ManagerMenu.menu(user, userMan, conMan);
 
-		                } else if (user.getRole().getName().equals("obstetrician")) {
+		                } else if (user.getRole().equals("obstetrician")) {
 		                    ObstetricianMenu.menu(user, userMan, conMan);
-		                } else if(user.getRole().getName().equals("lab staff")){
+		                } else if(user.getRole().equals("lab staff")){
 		                	 LabStaffMenu.menu(user, userMan, conMan);
 		                }
 		                else {
@@ -71,7 +71,7 @@ public abstract class LogInMenu{
 	    String password = "Manager123";
 	    if (userMan.getUser(username) == null) { 
 	        User manager = new User(username, password);
-	        userMan.register(manager);
+	        userMan.register(manager, "manager");
 	        userMan.assignRole(manager, userMan.getRole("manager"));
 	    } else {
 	        System.out.println("Manager user already exists.");

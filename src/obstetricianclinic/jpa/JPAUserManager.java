@@ -1,7 +1,6 @@
 package obstetricianclinic.jpa;
 
 import java.util.List;
-
 import javax.persistence.*;
 
 import obstetricianclinic.ifaces.UserManager;
@@ -50,7 +49,23 @@ public class JPAUserManager implements UserManager {
     }
 	
 	@Override
-    public void register(User user) {
+    /*public void register(User user) {
+        em.getTransaction().begin();
+        try {
+            em.persist(user);
+            em.getTransaction().commit();
+        } catch (Exception e) {
+            em.getTransaction().rollback();
+            throw e;
+        }
+    }*/
+	public void register(User user, String roleName) {
+        Role role = getRole(roleName);
+        if (role == null) {
+            role = new Role(roleName);
+            createRole(role);
+        }
+        user.setRole(role);
         em.getTransaction().begin();
         try {
             em.persist(user);
@@ -77,6 +92,7 @@ public class JPAUserManager implements UserManager {
 	public Role getRole(String name) {
 		Query q = em.createNativeQuery("SELECT * FROM roles WHERE name LIKE ?", Role.class);
 		q.setParameter(1, name);
+		q.getSingleResult();
 		Role role= (Role) q.getSingleResult();
 		return role;
 	}
@@ -104,11 +120,13 @@ public class JPAUserManager implements UserManager {
 	@Override
 	public User logIn(String username, String password) {
 		User u =null;
-		Query q = em.createNativeQuery("SELECT * FROM users WHERE username = ? AND password = ?",User.class);
+		Query q = em.createNativeQuery("SELECT * FROM users WHERE username = ? AND password = ? ",User.class);
 		q.setParameter(1, username);
 		q.setParameter(2, password);
+		q.getSingleResult();
 		try {
 			u= (User) q.getSingleResult();
+			
 		}catch(NoResultException e) {
 			return null;
 		}
@@ -140,6 +158,7 @@ public class JPAUserManager implements UserManager {
 		User u =null;
 		Query q = em.createQuery("SELECT u FROM User u WHERE u.username = :username", User.class);
         q.setParameter("username", username);
+        q.getSingleResult();
         try {
         	u= (User) q.getSingleResult();
 			return u;

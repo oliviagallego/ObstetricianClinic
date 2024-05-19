@@ -103,7 +103,7 @@ public class ManagerMenu {
 		obstetricianMan.addObstetrician(obstetrician);
 		
 		User user = new User(username, password);
-		userMan.register(user);
+		userMan.register(user, "obstetrician");
 		Role role = userMan.getRole("obstetrician");
 		userMan.assignRole(user, role);
 		System.out.println("\nThe obstetrician "+obstetrician.getName()+" "+obstetrician.getSurname()+" is inserted to the Database");
@@ -130,7 +130,7 @@ public class ManagerMenu {
 		LabStaff labStaff = new LabStaff(name, surname, username);
 		labStaffMan.addLabStaff(labStaff);
 		User user = new User(username, password);
-		userMan.register(user);
+		userMan.register(user, "labstaff");
 		Role role = userMan.getRole("labStaff");
 		userMan.assignRole(user, role);
 	}
