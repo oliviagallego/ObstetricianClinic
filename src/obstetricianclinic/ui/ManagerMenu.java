@@ -130,7 +130,7 @@ public class ManagerMenu {
 		LabStaff labStaff = new LabStaff(name, surname, username);
 		labStaffMan.addLabStaff(labStaff);
 		User user = new User(username, password);
-		userMan.register(user, "labstaff");
+		userMan.register(user, "labStaff");
 		Role role = userMan.getRole("labStaff");
 		userMan.assignRole(user, role);
 	}
