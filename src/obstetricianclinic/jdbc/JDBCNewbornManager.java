@@ -22,23 +22,45 @@ public class JDBCNewbornManager implements NewbornManager {
 
 	@Override
 	public void addNewborn(Newborn newborn) {
-		try {
-			String query = "INSERT INTO newborns (name, surname, dob, weight, gender, pregnancy_id) VALUES (?, ?, ?, ?, ?, ?);";
-			PreparedStatement insert = c.prepareStatement(query);
-			insert.setString(1, newborn.getName());
-			insert.setString(2, newborn.getSurname());
-			insert.setDate(3, newborn.getDob());
-			insert.setFloat(4, newborn.getWeight());
-			insert.setString(5, newborn.getGender());
-			insert.setInt(6, newborn.getPregnancy().getId());
-			insert.executeUpdate();
-			insert.close();
-		}catch(SQLException sqlE) {
-			System.out.println("Database exception");
-			sqlE.printStackTrace();
-		}
+	    try {
+	        if (newbornExists(newborn.getName(), newborn.getSurname(), newborn.getDob(), newborn.getPregnancy().getId())) {
+	            System.out.println("A newborn with the same name, surname, date of birth, and linked to the same pregnancy already exists. Please verify the information.");
+	            return;
+	        }
 
+	        String query = "INSERT INTO newborns (name, surname, dob, weight, gender, pregnancy_id) VALUES (?, ?, ?, ?, ?, ?);";
+	        try (PreparedStatement insert = c.prepareStatement(query)) {
+	            insert.setString(1, newborn.getName());
+	            insert.setString(2, newborn.getSurname());
+	            insert.setDate(3, newborn.getDob());
+	            insert.setFloat(4, newborn.getWeight());
+	            insert.setString(5, newborn.getGender());
+	            insert.setInt(6, newborn.getPregnancy().getId());
+	            insert.executeUpdate();
+	            System.out.println("Newborn successfully added to the database.");
+	        }
+	    } catch (SQLException sqlE) {
+	        System.out.println("Database exception");
+	        sqlE.printStackTrace();
+	    }
 	}
+
+	private boolean newbornExists(String name, String surname, Date dob, int pregnancyId) throws SQLException {
+	    String query = "SELECT COUNT(*) FROM newborns WHERE name = ? AND surname = ? AND dob = ? AND pregnancy_id = ?";
+	    try (PreparedStatement stmt = c.prepareStatement(query)) {
+	        stmt.setString(1, name);
+	        stmt.setString(2, surname);
+	        stmt.setDate(3, dob);
+	        stmt.setInt(4, pregnancyId);
+	        try (ResultSet rs = stmt.executeQuery()) {
+	            if (rs.next()) {
+	                return rs.getInt(1) > 0;
+	            }
+	        }
+	    }
+	    return false;
+	}
+
 
 	@Override
 	public void updateNewborn(Newborn newborn) {

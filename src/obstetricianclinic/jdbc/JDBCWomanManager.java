@@ -21,26 +21,40 @@ public class JDBCWomanManager implements WomanManager {
 		this.c = conMan.getConnection();
 	}
 
-	@Override
 	public void registerWoman(Woman woman) {
-		try {
-			String sql= "INSERT INTO women (name, surname, dob, weight, obstetrician_id) " + "VALUES(?,?,?,?,?);";
-			PreparedStatement insert= c.prepareStatement(sql);
-			insert.setString(1, woman.getName());
-			insert.setString(2, woman.getSurname());
-			insert.setDate(3, woman.getDob());
-			insert.setFloat(4, woman.getWeight());
-			insert.setInt(5, woman.getObstetrician().getId());
-	
-			insert.executeUpdate();
-			insert.close();
-			
-		}catch(SQLException sqlE) {
-				System.out.println("Database exception");
-				sqlE.printStackTrace();
-		}
+	    String sql = "INSERT INTO women (name, surname, dob, weight, obstetrician_id) VALUES (?, ?, ?, ?, ?)";
+	    try (Connection conn = this.conMan.getConnection();
+	         PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
+	        pstmt.setString(1, woman.getName());
+	        pstmt.setString(2, woman.getSurname());
+	        pstmt.setDate(3, woman.getDob());
+	        pstmt.setFloat(4, woman.getWeight());
+	        pstmt.setInt(5, woman.getObstetrician().getId());
+
+	        pstmt.executeUpdate();
+	        System.out.println("Woman successfully registered.");
+	    } catch (SQLException e) {
+	        System.out.println("Database error.");
+	        e.printStackTrace();
+	    }
 	}
+
+
+	private boolean womanExists(String name, String surname, Date dob) throws SQLException {
+	    String query = "SELECT COUNT(*) FROM women WHERE name = ? AND surname = ? AND dob = ?";
+	    try (PreparedStatement stmt = c.prepareStatement(query)) {
+	        stmt.setString(1, name);
+	        stmt.setString(2, surname);
+	        stmt.setDate(3, dob);
+	        ResultSet rs = stmt.executeQuery();
+	        if (rs.next()) {
+	            return rs.getInt(1) > 0;
+	        }
+	    }
+	    return false;
+	}
+
 
 	@Override
 	public void deleteWoman(int id) {

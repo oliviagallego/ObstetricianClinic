@@ -13,17 +13,23 @@ import java.util.*;
 
 //import obstetricianclinic.jpa.JPAUserManager;esta por programar
 public class ObstetricianMenu {
+	
 	private static BufferedReader r = new BufferedReader(new InputStreamReader(System.in));
 	private static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
 	
 	private static WomanManager womanMan;
 	private static ObstetricianManager obstetricianMan;
-
+	
 	public static void menu(User user, UserManager userMan, ConnectionManager conMan) {
 		womanMan = conMan.getWomanMan();/* solo tenemos q hacer uso del método*/
 		obstetricianMan = conMan.getObstetricianMan();
 		
 		Obstetrician obstetrician = obstetricianMan.getObstetricianFromUser(user.getUsername());
+	    if (obstetrician == null) {
+	        System.out.println("Obstetrician not found, please check the credentials.");
+	        return;
+	    }
+	   
 		while (true) {
 			try {
 				System.out.println("Welcome to the obstetrician clinic!!");
@@ -31,7 +37,7 @@ public class ObstetricianMenu {
 				System.out.println("1. Register a Woman");
 				System.out.println("2. Select a woman");
 				System.out.println("3. Change password");
-				System.out.println("0. Exit");
+				System.out.println("0. Exit\n");
 
 			
         int choice = Integer.parseInt(r.readLine());
