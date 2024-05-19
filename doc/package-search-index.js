@@ -1,0 +1,1 @@
+packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"obstetricianclinic.ifaces"},{"l":"obstetricianclinic.jdbc"},{"l":"obstetricianclinic.jpa"},{"l":"obstetricianclinic.pojos"},{"l":"obstetricianclinic.ui"},{"l":"obstetricianclinic.xml"},{"l":"sample.db.graphics"}];updateSearchResults();
