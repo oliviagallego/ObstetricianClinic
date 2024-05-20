@@ -22,7 +22,7 @@ public abstract class LogInMenu{
 				userMan = new JPAUserManager();
 
 				System.out.print("\nWelcome to the Obstetrician Clinic!");
-				
+			/*
 				
 				String usernameManager = "Manager";
 				String passwordManager = "Manager123";
@@ -32,7 +32,7 @@ public abstract class LogInMenu{
 		
 				userMan.assignRole(manager, roleManager);
 				
-				
+				*/
 				
 				while (true) {
 					System.out.println("\nLog-In menu");

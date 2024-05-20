@@ -60,39 +60,42 @@ public class JDBCLabStaffManager implements LabStaffManager {
 	}*/
 	
 	public void addLabStaff(LabStaff labStaff) {
-		if (checkUsernameExists(labStaff.getUsername())) {
+	    if (!checkUsernameExists(labStaff.getUsername())) {
 	        System.out.println("Username already exists. Please choose a different username.");
 	        return;
 	    }
-		try {
-			String sql = "INSERT INTO labStaffs (name, surname, username) VALUES (?, ?, ?)";
-			PreparedStatement pstmt = c.prepareStatement(sql);
-			pstmt.setString(1, labStaff.getName());
-			pstmt.setString(2, labStaff.getSurname());
-			pstmt.setString(3, labStaff.getUsername());
-			pstmt.executeUpdate();
-			pstmt.close();
+	    try {
+	        String sql = "INSERT INTO labStaffs (name, surname, username) VALUES (?, ?, ?)";
+	        PreparedStatement pstmt = c.prepareStatement(sql);
+	        pstmt.setString(1, labStaff.getName());
+	        pstmt.setString(2, labStaff.getSurname());
+	        pstmt.setString(3, labStaff.getUsername());
+	        pstmt.executeUpdate();
+	        System.out.println("Lab staff successfully added.");
+	        pstmt.close();
 	    } catch (SQLException e) {
 	        System.out.println("Database error during labStaff registration.");
 	        e.printStackTrace();
 	    }
 	}
 
-
 	public boolean checkUsernameExists(String username) {
-	    
+	    boolean exists = false;  // Supone que el usuario no existe
 	    try {
-	    	String sql = "SELECT * FROM users WHERE username = ?";
-	    	PreparedStatement pstmt = c.prepareStatement(sql);
-		    pstmt.setString(1, username);
-		    ResultSet rs = pstmt.executeQuery();
-		    return !rs.next(); //si hay usuarios con ese nombre
-	    }catch (SQLException e) {
+	        String sql = "SELECT * FROM users WHERE username = ?";  
+	        PreparedStatement pstmt = c.prepareStatement(sql);
+	        pstmt.setString(1, username);
+	        ResultSet rs = pstmt.executeQuery();
+	        exists = rs.next();  // Si rs.next() es true, significa que el usuario existe
+	        rs.close();
+	        pstmt.close();
+	    } catch (SQLException e) {
 	        System.out.println("Database error during username check.");
 	        e.printStackTrace();
 	    }
-	    return true;//no hay usurios con el nombre
+	    return !exists;  // Devuelve true si el usuario no existe, false si existe
 	}
+
 
 	
 	@Override
