@@ -126,8 +126,7 @@ public class ConnectionManager {
 					+ "surname TEXT NOT NULL, "
 					+ "dob DATE NOT NULL, "
 					+ "weight REAL NOT NULL, "
-					+ "obstetrician_id INTEGER, "
-					+ "FOREIGN KEY (obstetrician_id) REFERENCES obstetricians(obstetrician_id))";
+					+ "obstetrician_id INTEGER REFERENCES obstetricians(obstetrician_id)) ";
 
 			createTables2.executeUpdate(create2);
 			createTables2.close();
@@ -144,8 +143,7 @@ public class ConnectionManager {
 					+ "laboratoryReport_id INTEGER PRIMARY KEY AUTOINCREMENT, "
 					+ "date_test DATE NOT NULL, "
 					+ "pregnant BOOLEAN NOT NULL, "
-					+ "labStaff_id INTEGER REFERENCES labStaffs(id), "
-					+ "woman_id INTEGER REFERENCES women(id))";
+					+ "labStaff_id INTEGER REFERENCES labStaffs(id))";
 			createTables4.executeUpdate(create4);
 			createTables4.close();
 			
