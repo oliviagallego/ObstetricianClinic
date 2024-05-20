@@ -157,6 +157,8 @@ public class JDBCObstetricianManager implements ObstetricianManager {
 	        String name = rs.getString("name");
             String surname = rs.getString("surname");
             Obstetrician obs= new Obstetrician(name, surname, username, obstetrician_id);
+            rs.close();
+            p.close();
     		return obs;
         } catch (SQLException e) {
 			System.out.println("Database error.");
