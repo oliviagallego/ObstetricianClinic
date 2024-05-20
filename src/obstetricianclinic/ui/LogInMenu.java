@@ -22,10 +22,8 @@ public abstract class LogInMenu{
 				userMan = new JPAUserManager();
 
 				System.out.print("\nWelcome to the Obstetrician Clinic!");
-				initialSetup();
-				/*
-				 Hemos creado el manager
 				
+				/*
 				String usernameManager = "Manager";
 				String passwordManager = "Manager123";
 				Role roleManager = userMan.getRole("manager");
@@ -34,6 +32,7 @@ public abstract class LogInMenu{
 		
 				userMan.assignRole(manager, roleManager);
 				*/
+				
 				
 				while (true) {
 					System.out.println("\nLog-In menu");
@@ -68,17 +67,4 @@ public abstract class LogInMenu{
 	            e.printStackTrace();
 	        }
 		}
-	public static void initialSetup() {
-	    String username = "Manager";
-	    String password = "Manager123";
-	    if (userMan.getUser(username) == null) { 
-	        User manager = new User(username, password);
-	        userMan.register(manager, "manager");
-	        userMan.assignRole(manager, userMan.getRole("manager"));
-	    } else {
-	        System.out.println("Manager user already exists.");
-	    }
-	}
-
-	
 }

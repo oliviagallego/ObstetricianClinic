@@ -99,6 +99,7 @@ public class JDBCObstetricianManager implements ObstetricianManager {
 	        p.setInt(1, id);
 	        try (ResultSet rs = p.executeQuery()) {
 	            if (rs.next()) {
+	            	
 	                String name = rs.getString("name");
 	                String surname = rs.getString("surname");
 	                String username = rs.getString("username");
@@ -152,7 +153,10 @@ public class JDBCObstetricianManager implements ObstetricianManager {
 			PreparedStatement p= c.prepareStatement(sql);
             p.setString(1, username);
             ResultSet rs= p.executeQuery();
-            Obstetrician obs= new Obstetrician(username);
+	        Integer obstetrician_id = rs.getInt("obstetrician_id");
+	        String name = rs.getString("name");
+            String surname = rs.getString("surname");
+            Obstetrician obs= new Obstetrician(name, surname, username, obstetrician_id);
     		return obs;
         } catch (SQLException e) {
 			System.out.println("Database error.");
