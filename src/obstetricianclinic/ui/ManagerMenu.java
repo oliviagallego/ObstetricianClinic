@@ -133,6 +133,7 @@ public class ManagerMenu {
 		userMan.register(user, "labStaff");
 		Role role = userMan.getRole("labStaff");
 		userMan.assignRole(user, role);
+		System.out.println("\nThe obstetrician "+labStaff.getName()+" "+labStaff.getSurname()+" is inserted to the Database");
 	}
 	
 	
