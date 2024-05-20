@@ -64,19 +64,14 @@ public class JDBCLabStaffManager implements LabStaffManager {
 	        System.out.println("Username already exists. Please choose a different username.");
 	        return;
 	    }
-	    String sql = "INSERT INTO labStaffs (name, surname, username) VALUES (?, ?, ?)";
-	    try (Connection conn = this.conMan.getConnection();
-	         PreparedStatement pstmt = conn.prepareStatement(sql)) {
-
-	        pstmt.setString(1, labStaff.getName());
-	        pstmt.setString(2, labStaff.getSurname());
-	        pstmt.setString(3, labStaff.getUsername());
-	        int affectedRows = pstmt.executeUpdate();
-	        if (affectedRows > 0) {
-	            System.out.println("LabStaff successfully added to the database.");
-	        } else {
-	            System.out.println("Failed to add the LabStaff to the database.");
-	        }
+		try {
+			String sql = "INSERT INTO labStaffs (name, surname, username) VALUES (?, ?, ?)";
+			PreparedStatement pstmt = c.prepareStatement(sql);
+			pstmt.setString(1, labStaff.getName());
+			pstmt.setString(2, labStaff.getSurname());
+			pstmt.setString(3, labStaff.getUsername());
+			pstmt.executeUpdate();
+			pstmt.close();
 	    } catch (SQLException e) {
 	        System.out.println("Database error during labStaff registration.");
 	        e.printStackTrace();
@@ -85,20 +80,18 @@ public class JDBCLabStaffManager implements LabStaffManager {
 
 
 	public boolean checkUsernameExists(String username) {
-	    String sql = "SELECT COUNT(*) FROM users WHERE username = ?";
-	    try (Connection conn = this.conMan.getConnection();
-	         PreparedStatement pstmt = conn.prepareStatement(sql)) {
-	        pstmt.setString(1, username);
-	        ResultSet rs = pstmt.executeQuery();
-	        if (rs.next()) {
-	            return rs.getInt(1) > 0;
-	        }
-	    } catch (SQLException e) {
+	    
+	    try {
+	    	String sql = "SELECT * FROM users WHERE username = ?";
+	    	PreparedStatement pstmt = c.prepareStatement(sql);
+		    pstmt.setString(1, username);
+		    ResultSet rs = pstmt.executeQuery();
+		    return !rs.next(); //si hay usuarios con ese nombre
+	    }catch (SQLException e) {
 	        System.out.println("Database error during username check.");
 	        e.printStackTrace();
-	        throw new RuntimeException("Failed to check if username exists", e);
 	    }
-	    return false;
+	    return true;//no hay usurios con el nombre
 	}
 
 	
