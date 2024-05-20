@@ -18,6 +18,7 @@ public abstract class LogInMenu{
 			
 			try {
 				ConnectionManager conMan = new ConnectionManager();
+				
 				userMan = new JPAUserManager();
 
 				System.out.print("\nWelcome to the Obstetrician Clinic!");
@@ -64,6 +65,7 @@ public abstract class LogInMenu{
 	            System.out.println("\nAn error occurred: " + e.getMessage());
 	        } catch (Exception e) {
 	            System.out.println("\nUnexpected error: " + e.getMessage());
+	            e.printStackTrace();
 	        }
 		}
 	public static void initialSetup() {

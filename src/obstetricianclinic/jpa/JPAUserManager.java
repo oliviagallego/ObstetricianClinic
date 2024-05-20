@@ -14,19 +14,12 @@ public class JPAUserManager implements UserManager {
 
 	public JPAUserManager() {
 		em= Persistence.createEntityManagerFactory("obstetricianclinic-provider").createEntityManager();
-		initializeRoles();
+		
 		em.getTransaction().begin();
 		em.createNativeQuery("PRAGMA foreign_keys=ON").executeUpdate();
 		em.getTransaction().commit();
-		//Create default roles
-		//if they don't exist already
-		try {
-			this.getRole("obstetrician");
-		}catch(NoResultException e) {
-			this.createRole(new Role("obstetrician"));
-			this.createRole(new Role("labStaff"));
-			this.createRole(new Role("manager"));
-		}
+		
+		initializeRoles();
 		
 	}
 	
@@ -35,10 +28,8 @@ public class JPAUserManager implements UserManager {
         try {
             String[] roleNames = {"obstetrician", "labStaff", "manager"};
             for (String roleName : roleNames) {
-                try {
-                    getRole(roleName);
-                } catch (NoResultException e) {
-                    createRole(new Role(roleName));
+                if(getRole(roleName).equals(null)) {
+                	createRole(new Role(roleName));
                 }
             }
             em.getTransaction().commit();
@@ -61,18 +52,13 @@ public class JPAUserManager implements UserManager {
     }*/
 	public void register(User user, String roleName) {
         Role role = getRole(roleName);
-        if (role == null) {
-            role = new Role(roleName);
-            createRole(role);
-        }
         user.setRole(role);
         em.getTransaction().begin();
         try {
             em.persist(user);
             em.getTransaction().commit();
         } catch (Exception e) {
-            em.getTransaction().rollback();
-            throw e;
+            em.getTransaction();
         }
     }
 
@@ -99,11 +85,15 @@ public class JPAUserManager implements UserManager {
 	
 
 	public Role getRole(String name) {
-		TypedQuery<Role> q = em.createQuery("SELECT r FROM Role r WHERE r.name LIKE :name", Role.class);
-		q.setParameter("name", name);
-		q.getSingleResult();
-		Role role= (Role) q.getSingleResult();
-		return role;
+		try {
+			Query q = em.createNativeQuery("SELECT * FROM roles WHERE name=?", Role.class);
+			q.setParameter(1,name);
+			Role role= (Role) q.getSingleResult();
+			return role;
+		}catch(NoResultException e){
+			return null;
+		}
+		
 	}
 	
 	@Override
