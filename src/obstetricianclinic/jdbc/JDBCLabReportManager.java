@@ -24,7 +24,7 @@ public class JDBCLabReportManager implements LabReportManager {
 	@Override
 	public void addLabReport(LabReport labReport) {
 		try {
-			String sql= "INSERT INTO labReports (dateTest, pregnant, woman_id, labStaff_id) " + "VALUES(?,?,?,?);";
+			String sql= "INSERT INTO labReports (date_test, pregnant, woman_id, labStaff_id) " + "VALUES(?,?,?,?);";
 			PreparedStatement insert= c.prepareStatement(sql);
 			insert.setDate(1, labReport.getDateTest());
 			insert.setBoolean(2, labReport.isPregnant());
@@ -67,10 +67,10 @@ public class JDBCLabReportManager implements LabReportManager {
 			ResultSet rs = p.executeQuery();
 			while (rs.next()) {
 				// Create a new LabReport
-				Integer labReport_id = rs.getInt("id");
+				Integer laboratoryReport_id = rs.getInt("laboratoryReport_id");
 				Date dateTest = rs.getDate("dateTest");
 				Boolean pregnant = rs.getBoolean("pregnant");
-				LabReport labReport = new LabReport(labReport_id, dateTest, pregnant);
+				LabReport labReport = new LabReport(laboratoryReport_id, dateTest, pregnant);
 				list.add(labReport);
 			}
 		} catch (SQLException e) {

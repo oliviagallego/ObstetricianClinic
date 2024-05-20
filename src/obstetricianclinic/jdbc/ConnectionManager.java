@@ -144,6 +144,7 @@ public class ConnectionManager {
 					+ "laboratoryReport_id INTEGER PRIMARY KEY AUTOINCREMENT, "
 					+ "date_test DATE NOT NULL, "
 					+ "pregnant BOOLEAN NOT NULL, "
+					+ "woman_id INTEGER REFERENCES women(id) " //he añadido esto para solucionar el error de: SQL error or missing database (table labReports has no column named woman_id) 
 					+ "labStaff_id INTEGER REFERENCES labStaffs(id))";
 			createTables4.executeUpdate(create4);
 			createTables4.close();
