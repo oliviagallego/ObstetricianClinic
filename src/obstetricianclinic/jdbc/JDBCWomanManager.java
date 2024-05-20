@@ -104,7 +104,7 @@ public class JDBCWomanManager implements WomanManager {
 			ResultSet rs = p.executeQuery();
 			while (rs.next()) {
 				// Create a new Woman
-				Integer woman_id= rs.getInt("id");
+				Integer woman_id= rs.getInt("obstetrician_id");
 				String name= rs.getString("name");
 				String surname= rs.getString("surname");
 				Date dob= rs.getDate("dob");
