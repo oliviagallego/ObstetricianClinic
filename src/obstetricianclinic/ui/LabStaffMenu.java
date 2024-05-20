@@ -24,7 +24,7 @@ public class LabStaffMenu {
 	
 	public static void menu(User user, UserManager man, ConnectionManager conMan) {
 		
-		if (user.getRole() == null || !user.getRole().getName().equals("lab staff")) {
+		if (user.getRole() == null || !user.getRole().getName().equals("labStaff")) {
             System.out.println("Access Denied: You do not have the necessary permissions to access this menu.");
             return;
         }
