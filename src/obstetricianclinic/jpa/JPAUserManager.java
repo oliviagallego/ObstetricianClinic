@@ -24,7 +24,7 @@ public class JPAUserManager implements UserManager {
 			this.getRole("obstetrician");
 		}catch(NoResultException e) {
 			this.createRole(new Role("obstetrician"));
-			this.createRole(new Role("laboratory staff"));
+			this.createRole(new Role("labStaff"));
 			this.createRole(new Role("manager"));
 		}
 		
@@ -33,7 +33,7 @@ public class JPAUserManager implements UserManager {
 	private void initializeRoles() {
         em.getTransaction().begin();
         try {
-            String[] roleNames = {"obstetrician", "laboratory staff", "manager"};
+            String[] roleNames = {"obstetrician", "labStaff", "manager"};
             for (String roleName : roleNames) {
                 try {
                     getRole(roleName);
