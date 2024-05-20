@@ -23,6 +23,7 @@ public class WomanMenu {
 	public static void menu(Woman woman, ConnectionManager conMan) {
 
 		womanMan = conMan.getWomanMan();
+		labReportMan=conMan.getLabReportMan();
 	
 		while (true) {
 			try {
@@ -96,7 +97,11 @@ public static void viewWoman(int id, Woman woman) throws IOException {
 		break;
 	case 2:
 		List<LabReport> l= labReportMan.searchLabReportByWoman(woman.getId());
-		System.out.println(l);
+		if(l.isEmpty()) {
+			System.out.println("\nWe are sorry "+woman.getName()+" "+woman.getSurname()+" doesn't have laboratory reports recorded.");
+		}else {
+			System.out.println(l);
+		}
 		break;
 	case 3:
 		PregnancyMenu.menu(woman);

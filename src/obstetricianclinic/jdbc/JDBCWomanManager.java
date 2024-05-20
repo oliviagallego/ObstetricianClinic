@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import java.sql.Date;
@@ -138,18 +139,21 @@ public class JDBCWomanManager implements WomanManager {
 	@Override
 	public Woman getWoman(int id) {
 		try {
-			String sql = "SELECT * FROM women WHERE id = ?";
+			/*String sql = "SELECT * FROM women WHERE woman_id = ?";
 			PreparedStatement p = c.prepareStatement(sql);
-			p.setInt(1, id);
-			ResultSet rs = p.executeQuery();
+			p.setInt(1, id);*/
+			String sql = "SELECT * FROM women WHERE woman_id ="+id;
+			Statement st;
+			st=c.createStatement();
+			ResultSet rs = st.executeQuery(sql);
 			rs.next();
-			String name = rs.getString("name");
+			/*String name = rs.getString("name");
 			String surname= rs.getString("surname");
 			Date dob = rs.getDate("dob");
-			Float weight= rs.getFloat("weight");
-			Woman w= new Woman(name, surname, dob, weight);
+			Float weight= rs.getFloat("weight");*/
+			Woman w= new Woman(rs.getInt("woman_id"), rs.getString("name"), rs.getString("surname"), rs.getDate("dob"), rs.getFloat("weight"));
 			rs.close();
-			p.close();
+			st.close();
 			return w;
 		} catch (SQLException e) {
 			System.out.println("Database error.");

@@ -68,7 +68,7 @@ public class JDBCLabReportManager implements LabReportManager {
 			while (rs.next()) {
 				// Create a new LabReport
 				Integer laboratoryReport_id = rs.getInt("laboratoryReport_id");
-				Date dateTest = rs.getDate("dateTest");
+				Date dateTest = rs.getDate("date_test");
 				Boolean pregnant = rs.getBoolean("pregnant");
 				LabReport labReport = new LabReport(laboratoryReport_id, dateTest, pregnant);
 				list.add(labReport);
