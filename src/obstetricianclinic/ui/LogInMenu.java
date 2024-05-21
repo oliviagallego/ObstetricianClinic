@@ -23,7 +23,7 @@ public abstract class LogInMenu{
 
 				System.out.print("\nWelcome to the Obstetrician Clinic!");
 			
-				
+				/*
 				String usernameManager = "Manager";
 				String passwordManager = "Manager123";
 				Role roleManager = userMan.getRole("manager");
@@ -31,6 +31,8 @@ public abstract class LogInMenu{
 				userMan.register(manager);
 		
 				userMan.assignRole(manager, roleManager);
+				*/
+				
 				while (true) {
 					System.out.println("\nLog-In menu");
 					System.out.println("\nUsername:");
