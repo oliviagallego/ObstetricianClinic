@@ -14,7 +14,7 @@ import obstetricianclinic.pojos.Woman;
 
 public class JDBCLabReportManager implements LabReportManager {
 	private ConnectionManager conMan;
-	Connection c;
+	private Connection c;
 	
 	public JDBCLabReportManager(ConnectionManager conMan) {
 		this.conMan = conMan;

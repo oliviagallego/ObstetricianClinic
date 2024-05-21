@@ -15,7 +15,7 @@ import obstetricianclinic.pojos.Woman;
 public class JDBCDiseaseManager implements DiseaseManager {
 
 	private ConnectionManager conMan;
-	Connection c;
+	private Connection c;
 	
 	public JDBCDiseaseManager(ConnectionManager conMan) {
 		this.conMan = conMan;
@@ -70,6 +70,7 @@ public class JDBCDiseaseManager implements DiseaseManager {
 				Disease d= new Disease(disease_id, Type);
 				listDiseases.add(d);
 			}
+			p.close();//he añadido esto
 		} catch (SQLException e) {
 			System.out.println("Database error.");
 			e.printStackTrace();
