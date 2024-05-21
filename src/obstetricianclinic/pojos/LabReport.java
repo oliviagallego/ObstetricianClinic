@@ -26,7 +26,7 @@ public class LabReport implements Serializable{
 	private Integer id;
 	@XmlElement
 	@XmlJavaTypeAdapter(SQLDateAdapter.class)
-	private Date dateTest;
+	private Date date_Test;
 	@XmlElement
 	private boolean pregnant;
 	@XmlElement(name = "woman")
@@ -38,26 +38,26 @@ public class LabReport implements Serializable{
 		super();
 	}
 
-	public LabReport(Integer id, Date dateTest, boolean pregnant, Woman woman, LabStaff labStaff) {
+	public LabReport(Integer id, Date date_Test, boolean pregnant, Woman woman, LabStaff labStaff) {
 		super();
 		this.id = id;
-		this.dateTest = dateTest;
+		this.date_Test = date_Test;
 		this.pregnant = pregnant;
 		this.woman = woman;
 		this.labStaff = labStaff;
 	}
 	
-	public LabReport(Integer id, Date dateTest, boolean pregnant) {
+	public LabReport(Integer id, Date date_Test, boolean pregnant) {
 		super();
 		this.id = id;
-		this.dateTest = dateTest;
+		this.date_Test = date_Test;
 		this.pregnant = pregnant;
 	}
 	
 
-	public LabReport(Date dateTest, boolean pregnant) {
+	public LabReport(Date date_Test, boolean pregnant) {
 		super();
-		this.dateTest = dateTest;
+		this.date_Test = date_Test;
 		this.pregnant = pregnant;
 	}
 
@@ -69,12 +69,12 @@ public class LabReport implements Serializable{
 		this.id = id;
 	}
 
-	public Date getDateTest() {
-		return dateTest;
+	public Date getDate_Test() {
+		return date_Test;
 	}
 
-	public void setDateTest(Date dateTest) {
-		this.dateTest = dateTest;
+	public void setDate_Test(Date date_Test) {
+		this.date_Test = date_Test;
 	}
 
 	public boolean isPregnant() {
@@ -104,7 +104,7 @@ public class LabReport implements Serializable{
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(dateTest, id, labStaff, pregnant, woman);
+		return Objects.hash(date_Test, id, labStaff, pregnant, woman);
 	}
 
 	@Override
@@ -116,14 +116,14 @@ public class LabReport implements Serializable{
 		if (getClass() != obj.getClass())
 			return false;
 		LabReport other = (LabReport) obj;
-		return Objects.equals(dateTest, other.dateTest) && Objects.equals(id, other.id)
+		return Objects.equals(date_Test, other.date_Test) && Objects.equals(id, other.id)
 				&& Objects.equals(labStaff, other.labStaff) && pregnant == other.pregnant
 				&& Objects.equals(woman, other.woman);
 	}
 
 	@Override
 	public String toString() {
-		return "LabReport [id=" + id + ", dateTest=" + dateTest + ", pregnant=" + pregnant + ", woman=" + woman
+		return "LabReport [id=" + id + ", date_Test=" + date_Test + ", pregnant=" + pregnant + ", woman=" + woman
 				+ ", laboratoryStaff=" + labStaff + "]";
 	}
 	

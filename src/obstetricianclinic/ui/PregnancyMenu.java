@@ -110,7 +110,7 @@ public static void addPregancy(Woman woman) throws IOException {
 	    lastReport = reports.get(reports.size() - 1);  
 	    if(lastReport.isPregnant()==true) {
 	    	System.out.println("Register Pregnancy:");
-	    	System.out.println("Date of Test: "+lastReport.getDateTest());
+	    	System.out.println("Date of Test: "+lastReport.getDate_Test());
 	    	System.out.println("Date of conception: ");
 	    	String dateC = r.readLine();
 	    	LocalDate dateCLocalDate = LocalDate.parse(dateC, formatter);
@@ -129,7 +129,7 @@ public static void addPregancy(Woman woman) throws IOException {
 	    		Float weight = Float.parseFloat(r.readLine());
 	    		System.out.println("Gender (F/M):");
 	    		String gender = r.readLine();
-	    		Newborn newborn= new Newborn(name,surname,lastReport.getDateTest(),weight,gender);
+	    		Newborn newborn= new Newborn(name,surname,lastReport.getDate_Test(),weight,gender);
 	    		bornMan.addNewborn(newborn);
 	    		number--;
 	    	}}

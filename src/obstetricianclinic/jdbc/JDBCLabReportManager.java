@@ -26,7 +26,7 @@ public class JDBCLabReportManager implements LabReportManager {
 		try {
 			String sql= "INSERT INTO labReports (date_test, pregnant, woman_id, labStaff_id) " + "VALUES(?,?,?,?);";
 			PreparedStatement insert= c.prepareStatement(sql);
-			insert.setDate(1, labReport.getDateTest());
+			insert.setDate(1, labReport.getDate_Test());
 			insert.setBoolean(2, labReport.isPregnant());
 			insert.setInt(3, labReport.getWoman().getId());
 			insert.setInt(4, labReport.getLabStaff().getId());
@@ -42,10 +42,10 @@ public class JDBCLabReportManager implements LabReportManager {
 	@Override
 	public void updateLabReport(LabReport report) {
 		try {
-			String sql = "UPDATE labReports SET" + " dateTest = ?, " + " pregnant = ?, " + " WHERE id = ?";
+			String sql = "UPDATE labReports SET" + " date_Test = ?, " + " pregnant = ?, " + " WHERE id = ?";
 			PreparedStatement p;
 			p = c.prepareStatement(sql);
-			p.setDate(1, report.getDateTest());
+			p.setDate(1, report.getDate_Test());
 			p.setBoolean(2, report.isPregnant());
 			p.setInt(3, report.getId());
 			p.executeUpdate();
@@ -68,9 +68,9 @@ public class JDBCLabReportManager implements LabReportManager {
 			while (rs.next()) {
 				// Create a new LabReport
 				Integer laboratoryReport_id = rs.getInt("laboratoryReport_id");
-				Date dateTest = rs.getDate("date_test");
+				Date date_Test = rs.getDate("date_test");
 				Boolean pregnant = rs.getBoolean("pregnant");
-				LabReport labReport = new LabReport(laboratoryReport_id, dateTest, pregnant);
+				LabReport labReport = new LabReport(laboratoryReport_id, date_Test, pregnant);
 				list.add(labReport);
 			}
 		} catch (SQLException e) {
@@ -91,9 +91,9 @@ public class JDBCLabReportManager implements LabReportManager {
 			while (rs.next()) {
 				// Create a new LabReport
 				Integer labReport_id = rs.getInt("id");
-				Date dateTest = rs.getDate("dateTest");
+				Date date_Test = rs.getDate("dateTest");
 				Boolean pregnant = rs.getBoolean("pregnant");
-				LabReport labReport = new LabReport(labReport_id, dateTest, pregnant);
+				LabReport labReport = new LabReport(labReport_id, date_Test, pregnant);
 				list.add(labReport);
 			}
 		} catch (SQLException e) {

@@ -60,40 +60,45 @@ public class JDBCLabStaffManager implements LabStaffManager {
 	}*/
 	
 	public void addLabStaff(LabStaff labStaff) {
-	    if (!checkUsernameExists(labStaff.getUsername())) {
+	    if (checkUsernameExists(labStaff.getUsername())) {
 	        System.out.println("Username already exists. Please choose a different username.");
 	        return;
 	    }
-	    try {
-	        String sql = "INSERT INTO labStaffs (name, surname, username) VALUES (?, ?, ?)";
-	        PreparedStatement pstmt = c.prepareStatement(sql);
+	    String sql = "INSERT INTO labStaffs (name, surname, username) VALUES (?, ?, ?)";
+	    try (Connection conn = this.conMan.getConnection();
+		    PreparedStatement pstmt = conn.prepareStatement(sql)){
+	        
 	        pstmt.setString(1, labStaff.getName());
 	        pstmt.setString(2, labStaff.getSurname());
 	        pstmt.setString(3, labStaff.getUsername());
-	        pstmt.executeUpdate();
-	        System.out.println("Lab staff successfully added.");
-	        pstmt.close();
+	        int affectedRows = pstmt.executeUpdate();
+	        if (affectedRows > 0) {
+	            System.out.println("LabStaff successfully added to the database.");
+	        } else {
+	            System.out.println("Failed to add the labStaff to the database.");
+	        }
 	    } catch (SQLException e) {
 	        System.out.println("Database error during labStaff registration.");
 	        e.printStackTrace();
 	    }
+	    
 	}
 
 	public boolean checkUsernameExists(String username) {
-	    boolean exists = false;  // Supone que el usuario no existe
-	    try {
-	        String sql = "SELECT * FROM users WHERE username = ?";  
-	        PreparedStatement pstmt = c.prepareStatement(sql);
-	        pstmt.setString(1, username);
-	        ResultSet rs = pstmt.executeQuery();
-	        exists = rs.next();  // Si rs.next() es true, significa que el usuario existe
-	        rs.close();
-	        pstmt.close();
-	    } catch (SQLException e) {
-	        System.out.println("Database error during username check.");
-	        e.printStackTrace();
-	    }
-	    return !exists;  // Devuelve true si el usuario no existe, false si existe
+		String sql = "SELECT COUNT(*) FROM users WHERE username = ?"; 
+		try (Connection conn = this.conMan.getConnection();
+			PreparedStatement pstmt = conn.prepareStatement(sql)) {
+		    pstmt.setString(1, username);
+		    ResultSet rs = pstmt.executeQuery();
+		    if (rs.next()) {
+		    	return rs.getInt(1) > 0;
+		    }
+		} catch (SQLException e) {
+		    System.out.println("Database error during username check.");
+		    e.printStackTrace();
+		    throw new RuntimeException("Failed to check if username exists", e);
+		}
+		return false;
 	}
 
 
@@ -118,7 +123,7 @@ public class JDBCLabStaffManager implements LabStaffManager {
 	 @Override
 	
 	 public List<LabStaff> searchLabStaffByNameAndSurname(String name, String surname, String username) {
-		    List<LabStaff> listLabStaff = new ArrayList<LabStaff>();
+		    List<LabStaff> listLabStaffs = new ArrayList<LabStaff>();
 		    try {
 		        String sql = "SELECT * FROM labStaffs WHERE name = ? AND surname = ? AND username = ?";
 		        PreparedStatement p = c.prepareStatement(sql);
@@ -128,12 +133,12 @@ public class JDBCLabStaffManager implements LabStaffManager {
 		        ResultSet rs = p.executeQuery();
 
 		        while (rs.next()) {
-		            Integer id = rs.getInt("labStaff_id"); 
+		            Integer labStaff_id = rs.getInt("labStaff_id"); 
 		            name = rs.getString("name");
 		            surname = rs.getString("surname");
 		            username = rs.getString("username");
-		            LabStaff lab = new LabStaff(id, name, surname, username);
-		            listLabStaff.add(lab);
+		            LabStaff lab = new LabStaff(labStaff_id, name, surname, username);
+		            listLabStaffs.add(lab);
 		        }
 		        rs.close();
 		        p.close();
@@ -141,22 +146,23 @@ public class JDBCLabStaffManager implements LabStaffManager {
 		        System.out.println("Database error.");
 		        e.printStackTrace();
 		    }
-		    return listLabStaff;
+		    return listLabStaffs;
 		}
 
 	 @Override
 	    public LabStaff getLabStaffFromUser(String username) {
 	        try {
 	            String sql = "SELECT * FROM labStaffs WHERE username = ?";
-	            try (PreparedStatement p = c.prepareStatement(sql);
-	                 ResultSet rs = p.executeQuery()) {
-	                if (rs.next()) {
-	                    int id = rs.getInt("id");
-	                    String name = rs.getString("name");
-	                    String surname = rs.getString("surname");
-	                    return new LabStaff(id, name, surname, username);
-	                }
-	            }
+	            PreparedStatement p = c.prepareStatement(sql);
+	            p.setString(1, username);
+	            ResultSet rs = p.executeQuery();
+	            Integer labStaff_id = rs.getInt("labStaff_id");
+	            String name = rs.getString("name");
+	            String surname = rs.getString("surname");
+	            LabStaff labs= new LabStaff(labStaff_id, name, surname, username);
+	            rs.close();
+	            p.close();
+	            return labs;
 	        } catch (SQLException e) {
 	            System.out.println("Database error.");
 	            e.printStackTrace();

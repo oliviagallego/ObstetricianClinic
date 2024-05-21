@@ -23,19 +23,24 @@ public class LabStaffMenu {
 	private static LabStaffManager labStaffMan;
 	
 	public static void menu(User user, UserManager man, ConnectionManager conMan) {
-		
-		if (user.getRole() == null || !user.getRole().getName().equals("labStaff")) {
+		/*if (user.getRole() == null || !user.getRole().getName().equals("labStaff")) {
             System.out.println("Access Denied: You do not have the necessary permissions to access this menu.");
-            return;
-        }
-		
+            return;  MEJOR  LO DE DEBAJO IGUAL Q OBSTETRICIANMENU
+        }*/
 		obstetricianMan = conMan.getObstetricianMan();
 		womanMan = conMan.getWomanMan();
+		labStaffMan = conMan.getLabStaffMan();
 		labReportMan = conMan.getLabReportMan();
+		
+		LabStaff labStaff = labStaffMan.getLabStaffFromUser(user.getUsername());
+	    if (labStaff == null) {
+	        System.out.println("LabStaff not found, please check the credentials.");
+	        return;
+	    }
         
         while (true) {
         	try {
-        		System.out.println("Welcome to the obstetrician clinic!!");
+        		System.out.println("Welcome to the LabStaff clinic!!");
         		System.out.println("Choose an option, please:");
         		System.out.println("1. Add Laboratory Reports");
         		System.out.println("0. Exit");

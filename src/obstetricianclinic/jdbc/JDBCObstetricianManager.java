@@ -55,7 +55,7 @@ public class JDBCObstetricianManager implements ObstetricianManager {
 	    }
 	    String sql = "INSERT INTO obstetricians (name, surname, username) VALUES (?, ?, ?)";
 	    try (Connection conn = this.conMan.getConnection();
-	         PreparedStatement pstmt = conn.prepareStatement(sql)) {
+	        PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
 	        pstmt.setString(1, obstetrician.getName());
 	        pstmt.setString(2, obstetrician.getSurname());

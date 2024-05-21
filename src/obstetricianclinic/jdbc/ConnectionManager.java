@@ -45,10 +45,10 @@ public class ConnectionManager {
 	
 
 
-	/*public Connection getConnection() {
+	public Connection getConnection() {
 		return c;
-	}*/
-	
+	}
+	/*
 	//vamos a intentar solucionar el problema de database connection closed con esto
 	public Connection getConnection() {
 	    try {
@@ -56,7 +56,7 @@ public class ConnectionManager {
 	    } catch (SQLException e) {
 	        throw new RuntimeException("Error connecting to the database", e);
 	    }
-	}
+	}*/
 
 
 
@@ -114,7 +114,7 @@ public class ConnectionManager {
 					+ "obstetrician_id INTEGER PRIMARY KEY AUTOINCREMENT, "
 					+ "name TEXT NOT NULL, "
 					+ "surname TEXT NOT NULL, "
-					+ "username TEXT NOT NULL UNIQUE)";//añadimos que no se puede repetir
+					+ "username TEXT NOT NULL UNIQUE)";
 			
 			createTables1.executeUpdate(create1);
 			createTables1.close();
@@ -127,7 +127,7 @@ public class ConnectionManager {
 					+ "surname TEXT NOT NULL, "
 					+ "dob DATE NOT NULL, "
 					+ "weight REAL NOT NULL, "
-					+ "obstetrician_id INTEGER REFERENCES obstetricians(obstetrician_id)) ";
+					+ "obstetrician_id INTEGER REFERENCES obstetricians(obstetrician_id))";
 
 			createTables2.executeUpdate(create2);
 			createTables2.close();
@@ -144,8 +144,8 @@ public class ConnectionManager {
 					+ "laboratoryReport_id INTEGER PRIMARY KEY AUTOINCREMENT, "
 					+ "date_test DATE NOT NULL, "
 					+ "pregnant BOOLEAN NOT NULL, "
-					+ "woman_id INTEGER REFERENCES women(id) " //he añadido esto para solucionar el error de: SQL error or missing database (table labReports has no column named woman_id) 
-					+ "labStaff_id INTEGER REFERENCES labStaffs(id))";
+					+ "woman_id INTEGER REFERENCES women(woman_id), " 
+					+ "labStaff_id INTEGER REFERENCES labStaffs(labStaff_id))";
 			createTables4.executeUpdate(create4);
 			createTables4.close();
 			
@@ -153,8 +153,8 @@ public class ConnectionManager {
 			String create5= "CREATE TABLE pregnancies ("
 					+ "pregnancy_id INTEGER PRIMARY KEY AUTOINCREMENT, "
 					+ "date_conception DATE NOT NULL, "
-					+ "birth_report TEXT , "
-					+ "woman_id INTEGER REFERENCES women(id))";
+					+ "birth_report TEXT, "
+					+ "woman_id INTEGER REFERENCES women(woman_id))";
 			createTables5.executeUpdate(create5);
 			createTables5.close();
 			
@@ -166,7 +166,7 @@ public class ConnectionManager {
 					+ "dob DATE NOT NULL, "
 					+ "weight INTEGER NOT NULL, "
 					+ "gender TEXT NOT NULL CHECK(gender='Female' OR gender='Male'), "
-					+ "pregnancy_id INTEGER REFERENCES pregnancies(id))";
+					+ "pregnancy_id INTEGER REFERENCES pregnancies(pregnancy_id))";
 			createTables6.executeUpdate(create6);
 			createTables6.close();
 			
@@ -179,10 +179,11 @@ public class ConnectionManager {
 			createTables7.executeUpdate(create7);
 			createTables7.close();
 			
+			
 			Statement createTables8= c.createStatement();
 			String create8= "CREATE TABLE women_diseases ("
-					+ "woman_id INTEGER REFERENCES women(id), "
-					+ "disease_id INTEGER REFERENCES diseases(id), "
+					+ "woman_id INTEGER REFERENCES women(woman_id), "
+					+ "disease_id INTEGER REFERENCES diseases(disease_id), "
 					+ "PRIMARY KEY(woman_id, disease_id))";
 			createTables8.executeUpdate(create8);
 			createTables8.close();

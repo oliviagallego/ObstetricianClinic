@@ -22,8 +22,8 @@ public class ManagerMenu {
 	public static void menu(User user, UserManager userMan, ConnectionManager conMan)  throws IOException, Exception, SQLException  {
 
 		obstetricianMan = conMan.getObstetricianMan();
-		ManagerMenu.userMan = userMan; 
 		labStaffMan= conMan.getLabStaffMan();
+		ManagerMenu.userMan = userMan; 
 		
 		while(true) {
 			try {
@@ -92,8 +92,6 @@ public class ManagerMenu {
 		String surname = r.readLine();
 		
 		
-		
-		//Me he dado cuenta de que faltaba esto
 		System.out.println("Introduce the Log in information:");
 		System.out.println("UserName:");
 		String username = r.readLine();
@@ -109,12 +107,12 @@ public class ManagerMenu {
 		System.out.println("\nThe obstetrician "+obstetrician.getName()+" "+obstetrician.getSurname()+" is inserted to the Database");
 	}
 	
-	public static void registerLabStaff() throws IOException,Exception {
-		if (userMan == null) {
+	public static void registerLabStaff() throws IOException, Exception {
+		/*if (userMan == null) {
 	        System.out.println("UserManager has not been initialized");
 	        throw new IllegalStateException("UserManager is required but was not initialized.");
-	    }
-		System.out.println("\nRegistration of an laboratory staff: ");
+	    }*/
+		System.out.println("\nRegistration of a laboratory staff: ");
 		System.out.println("Please type the laboratory staff data:");
 		System.out.println("Name:");
 		String name = r.readLine();
@@ -133,7 +131,7 @@ public class ManagerMenu {
 		userMan.register(user);
 		Role role = userMan.getRole("labStaff");
 		userMan.assignRole(user, role);
-		System.out.println("\nThe obstetrician "+labStaff.getName()+" "+labStaff.getSurname()+" is inserted to the Database");
+		System.out.println("\nThe labStaff "+labStaff.getName()+" "+labStaff.getSurname()+" is inserted to the Database");
 	}
 	
 	
