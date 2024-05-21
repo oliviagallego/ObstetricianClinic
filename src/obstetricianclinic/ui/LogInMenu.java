@@ -31,9 +31,6 @@ public abstract class LogInMenu{
 				userMan.register(manager);
 		
 				userMan.assignRole(manager, roleManager);
-			
-				
-				
 				while (true) {
 					System.out.println("\nLog-In menu");
 					System.out.println("\nUsername:");
