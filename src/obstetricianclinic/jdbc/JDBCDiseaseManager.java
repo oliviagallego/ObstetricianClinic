@@ -75,6 +75,7 @@ public class JDBCDiseaseManager implements DiseaseManager {
 			e.printStackTrace();
 		}
 		return listDiseases;
+	
 	}
 
 }
