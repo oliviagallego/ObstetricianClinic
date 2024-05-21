@@ -7,6 +7,7 @@ import obstetricianclinic.pojos.*;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -60,7 +61,7 @@ public class JDBCObstetricianManager implements ObstetricianManager {
 	        pstmt.setString(1, obstetrician.getName());
 	        pstmt.setString(2, obstetrician.getSurname());
 	        pstmt.setString(3, obstetrician.getUsername());
-	        int affectedRows = pstmt.executeUpdate();
+        	int affectedRows = pstmt.executeUpdate();
 	        if (affectedRows > 0) {
 	            System.out.println("Obstetrician successfully added to the database.");
 	        } else {
@@ -89,9 +90,28 @@ public class JDBCObstetricianManager implements ObstetricianManager {
 	    }
 	    return false;
 	}
-
-
-
+	
+	/*public void addObstetrician(Obstetrician obstetrician) {
+	    
+	    try {
+	    		String sql = "INSERT INTO obstetricians (name, surname, username) VALUES (?, ?, ?)";
+	    		PreparedStatement pstmt = c.prepareStatement(sql);
+	    		pstmt.setString(1, obstetrician.getName());
+	    		pstmt.setString(2, obstetrician.getSurname());
+	    		pstmt.setString(3, obstetrician.getUsername());
+	    		int affectedRows = pstmt.executeUpdate();
+		        if (affectedRows > 0) {
+		            System.out.println("Obstetrician successfully added to the database.");
+		        } else {
+		            System.out.println("Failed to add the obstetrician to the database.");
+		        }
+	    		pstmt.close();
+	    } catch (SQLException e) {
+	        System.out.println("Database error during obstetrician registration.");
+	        e.printStackTrace();
+	    }
+	}*/
+	
 	@Override
 	public Obstetrician getObstetrician(int id) {
 		String sql = "SELECT * FROM obstetricians WHERE id = ?";
@@ -115,7 +135,23 @@ public class JDBCObstetricianManager implements ObstetricianManager {
 	        return null;
 	    }
 	}
-	
+	/*public Obstetrician getObstetrician(int id) {
+		
+	    try {
+	    	String sql = "SELECT * FROM obstetricians WHERE id = ?";
+	    	Statement st = c.createStatement();
+	    	ResultSet rs = st.executeQuery(sql);
+	    	rs.next();	    	
+	        String name = rs.getString("name");
+            String surname = rs.getString("surname");
+            String username = rs.getString("username");
+            return new Obstetrician(name, surname, username, id);
+	    } catch (SQLException e) {
+	        System.out.println("Database error: " + e.getMessage());
+	        e.printStackTrace();
+	        return null;
+	    }
+	}*/
 
 	@Override //Lo he corregido por que salia el error: SQL error or missing database (near ",": syntax error)
 	public List<Obstetrician> searchObstetricianByNameAndSurname(String name, String surname, String username) {

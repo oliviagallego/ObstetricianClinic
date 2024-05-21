@@ -57,8 +57,8 @@ public class JDBCLabStaffManager implements LabStaffManager {
 	        }
 	    }
 	    return false;
-	}*/
-	
+	}
+	*/
 	public void addLabStaff(LabStaff labStaff) {
 	    if (checkUsernameExists(labStaff.getUsername())) {
 	        System.out.println("Username already exists. Please choose a different username.");
@@ -100,8 +100,24 @@ public class JDBCLabStaffManager implements LabStaffManager {
 		}
 		return false;
 	}
-
-
+	
+	
+	/*public void addLabStaff(LabStaff labStaff) {
+	   
+	    try {
+	    	String sql = "INSERT INTO labStaffs (name, surname, username) VALUES (?, ?, ?)";
+	    	PreparedStatement pstmt = c.prepareStatement(sql);
+	        pstmt.setString(1, labStaff.getName());
+	        pstmt.setString(2, labStaff.getSurname());
+	        pstmt.setString(3, labStaff.getUsername());
+	        pstmt.executeUpdate();
+	        pstmt.close();
+	    } catch (SQLException e) {
+	        System.out.println("Database error during labStaff registration.");
+	        e.printStackTrace();
+	    }
+	    
+	}*/
 	
 	@Override
 	public void updateLabStaff(LabStaff labStaff) {
@@ -118,10 +134,25 @@ public class JDBCLabStaffManager implements LabStaffManager {
 	        e.printStackTrace();
 	    }
 	}
-
+	/*@Override
+	public void updateLabStaff(LabStaff labStaff) {
+	    
+	    try {
+	    	String sql = "UPDATE labStaffs SET name = ?, surname = ?, username = ? WHERE id = ?";
+	    	PreparedStatement pstmt = c.prepareStatement(sql);
+	        pstmt.setString(1, labStaff.getName());
+	        pstmt.setString(2, labStaff.getSurname());
+	        pstmt.setString(3, labStaff.getUsername());
+	        pstmt.setInt(4, labStaff.getId());
+	        pstmt.executeUpdate();
+	        pstmt.close();
+	    } catch (SQLException e) {
+	        System.out.println("Database error: " + e.getMessage());
+	        e.printStackTrace();
+	    }
+	}*/
 	
 	 @Override
-	
 	 public List<LabStaff> searchLabStaffByNameAndSurname(String name, String surname, String username) {
 		    List<LabStaff> listLabStaffs = new ArrayList<LabStaff>();
 		    try {
@@ -169,4 +200,5 @@ public class JDBCLabStaffManager implements LabStaffManager {
 	        }
 	        return null;
 	    }
+	
 }
