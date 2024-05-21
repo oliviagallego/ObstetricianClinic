@@ -32,7 +32,7 @@ public abstract class LogInMenu{
 		
 				userMan.assignRole(manager, roleManager);
 				
-				
+			
 				
 				while (true) {
 					System.out.println("\nLog-In menu");
