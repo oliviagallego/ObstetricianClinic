@@ -18,7 +18,7 @@ import obstetricianclinic.ifaces.ObstetricianManager;
 
 public class JDBCObstetricianManager implements ObstetricianManager {
 	private ConnectionManager conMan;
-	private Connection c;
+	Connection c;
 	
 	public JDBCObstetricianManager(ConnectionManager conMan) {
 		this.conMan = conMan;
