@@ -31,7 +31,7 @@ public abstract class LogInMenu{
 				userMan.register(manager);
 		
 				userMan.assignRole(manager, roleManager);
-				
+			
 				
 				
 				while (true) {
