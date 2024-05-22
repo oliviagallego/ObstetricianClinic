@@ -41,7 +41,7 @@ public class JDBCWomanManager implements WomanManager {
 	    }
 	}
 
-
+	/*
 	private boolean womanExists(String name, String surname, Date dob) throws SQLException {
 	    String query = "SELECT COUNT(*) FROM women WHERE name = ? AND surname = ? AND dob = ?";
 	    try (PreparedStatement stmt = c.prepareStatement(query)) {
@@ -55,6 +55,8 @@ public class JDBCWomanManager implements WomanManager {
 	    }
 	    return false;
 	}
+	
+	*/
 
 
 	@Override

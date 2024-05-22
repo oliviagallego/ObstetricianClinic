@@ -69,7 +69,7 @@ public class JDBCLabStaffManager implements LabStaffManager {
 			}	
 	}
 
-	//Esto no lo tiene
+	/*
 	public boolean checkUsernameExists(String username) {
 		String sql = "SELECT COUNT(*) FROM users WHERE username = ?"; 
 		try (Connection conn = this.conMan.getConnection();
@@ -86,6 +86,8 @@ public class JDBCLabStaffManager implements LabStaffManager {
 		}
 		return false;
 	}
+	
+	*/
 	
 	/*
 	@Override

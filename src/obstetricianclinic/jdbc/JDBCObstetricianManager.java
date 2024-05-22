@@ -99,7 +99,7 @@ public class JDBCObstetricianManager implements ObstetricianManager {
 	    }
 	}*/
 	
-	//Lo mismo que antes
+	/*
 	public boolean checkUsernameExists(String username) {
 	    String sql = "SELECT COUNT(*) FROM users WHERE username = ?";
 	    try (Connection conn = this.conMan.getConnection();
@@ -116,6 +116,8 @@ public class JDBCObstetricianManager implements ObstetricianManager {
 	    }
 	    return false;
 	}
+	
+	*/
 	
 	/*
 	@Override
