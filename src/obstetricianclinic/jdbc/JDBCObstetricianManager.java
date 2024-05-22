@@ -146,22 +146,26 @@ public class JDBCObstetricianManager implements ObstetricianManager {
 	*/
 	
 	//Como Rodrigo
+	@Override
 	public Obstetrician getObstetrician(int id) {
-		
-	    try {
-	    	String sql = "SELECT * FROM obstetricians WHERE obstetrician_id = ?";
-	    	Statement st = c.createStatement();
-	    	ResultSet rs = st.executeQuery(sql);
-	    	rs.next();	    	
-	        String name = rs.getString("name");
-            String surname = rs.getString("surname");
-            String username = rs.getString("username");
-            return new Obstetrician(name, surname, username, id);
-	    } catch (SQLException e) {
-	        System.out.println("Database error: " + e.getMessage());
-	        e.printStackTrace();
-	        return null;
-	    }
+		try {
+			String sql = "SELECT * FROM obstetricians WHERE id = ?";
+			PreparedStatement p = c.prepareStatement(sql);
+			p.setInt(1, id);
+			ResultSet rs = p.executeQuery();
+			rs.next();
+			String name = rs.getString("name");
+			String username= rs.getString("username");
+			String surname = rs.getString("surname");
+			Obstetrician obs = new Obstetrician(name, username, surname, id);
+			rs.close();
+			p.close();
+			return obs;
+		} catch (SQLException e) {
+			System.out.println("Database error.");
+			e.printStackTrace();
+		}
+		return null;
 	}
 
 	@Override //Lo he corregido por que salia el error: SQL error or missing database (near ",": syntax error)
