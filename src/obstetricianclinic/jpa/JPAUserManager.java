@@ -78,6 +78,11 @@ public class JPAUserManager implements UserManager {
 		public User changePassword(User user, String newPassword) {
 			
 			try {
+				Query q = em.createNativeQuery("SELECT * FROM users WHERE username = ? AND password = ?",User.class);
+				q.setParameter(1, user.getUsername());
+				q.setParameter(2, user.getPassword());
+				user= (User) q.getSingleResult();
+
 				em.getTransaction().begin();
 				user.setPassword(newPassword);
 				em.getTransaction().commit();
@@ -87,13 +92,10 @@ public class JPAUserManager implements UserManager {
 				return null;
 			}
 		}
-		
+	
 		
 		public void logOut() {
-			if(em.isOpen()) {
-				em.close();
-			}
-			
+			em.close();
 		}
 	
 }

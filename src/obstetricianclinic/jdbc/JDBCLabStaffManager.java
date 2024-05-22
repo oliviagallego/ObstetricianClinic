@@ -22,43 +22,7 @@ public class JDBCLabStaffManager implements LabStaffManager {
 		this.c = conMan.getConnection();
 	}
 
-	/*@Override
-	public void addLabStaff(LabStaff labStaff) {
-	    try {
-	        if (labStaff.getUsername() == null || labStaff.getUsername().trim().isEmpty()) {
-	            throw new IllegalArgumentException("Username must not be null or empty");
-	        }
-	        if (labStaffExists(labStaff.getUsername())) {
-	            System.out.println("A LabStaff with this username already exists. Please use a different username.");
-	            return;
-	        }
-
-	        String sql = "INSERT INTO labStaffs (name, surname, username) VALUES (?, ?, ?);"; 
-	        try (PreparedStatement insert = c.prepareStatement(sql)) {
-	            insert.setString(1, labStaff.getName());
-	            insert.setString(2, labStaff.getSurname());
-	            insert.setString(3, labStaff.getUsername());
-	            insert.executeUpdate();
-	            System.out.println("LabStaff successfully added to the database.");
-	        }
-	    } catch (SQLException sqlE) {
-	        System.out.println("Database exception");
-	        sqlE.printStackTrace();
-	    }
-	}
-	private boolean labStaffExists(String username) throws SQLException {
-	    String query = "SELECT COUNT(*) FROM labStaffs WHERE username = ?";
-	    try (PreparedStatement stmt = c.prepareStatement(query)) {
-	        stmt.setString(1, username);
-	        try (ResultSet rs = stmt.executeQuery()) {
-	            if (rs.next()) {
-	                return rs.getInt(1) > 0;
-	            }
-	        }
-	    }
-	    return false;
-	}
-	*/
+	
 	
 	/* 
 	public void addLabStaff(LabStaff labStaff) {
