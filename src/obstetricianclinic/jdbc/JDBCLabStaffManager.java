@@ -59,29 +59,23 @@ public class JDBCLabStaffManager implements LabStaffManager {
 	    return false;
 	}
 	*/
+	
+	@Override
 	public void addLabStaff(LabStaff labStaff) {
-	    if (checkUsernameExists(labStaff.getUsername())) {
-	        System.out.println("Username already exists. Please choose a different username.");
-	        return;
-	    }
-	    String sql = "INSERT INTO labStaffs (name, surname, username) VALUES (?, ?, ?)";
-	    try (Connection conn = this.conMan.getConnection();
-		    PreparedStatement pstmt = conn.prepareStatement(sql)){
-	        
-	        pstmt.setString(1, labStaff.getName());
-	        pstmt.setString(2, labStaff.getSurname());
-	        pstmt.setString(3, labStaff.getUsername());
-	        int affectedRows = pstmt.executeUpdate();
-	        if (affectedRows > 0) {
-	            System.out.println("LabStaff successfully added to the database.");
-	        } else {
-	            System.out.println("Failed to add the labStaff to the database.");
-	        }
-	    } catch (SQLException e) {
-	        System.out.println("Database error during labStaff registration.");
-	        e.printStackTrace();
-	    }
-	    
+		try {
+			String sql= "INSERT INTO labStaffs (name, username, surname) " + "VALUES(?, ?, ?);"; 
+			PreparedStatement insert= c.prepareStatement(sql);
+			insert.setString(1, labStaff.getName());
+			insert.setString(2, labStaff.getSurname());
+			insert.setString(3, labStaff.getUsername());
+			insert.setString(4, labStaff.getSurname());
+
+			insert.executeUpdate();
+			insert.close();
+		}catch(SQLException sqlE) {
+			System.out.println("Database exception");
+			sqlE.printStackTrace();
+		}
 	}
 
 	public boolean checkUsernameExists(String username) {
@@ -102,22 +96,6 @@ public class JDBCLabStaffManager implements LabStaffManager {
 	}
 	
 	
-	/*public void addLabStaff(LabStaff labStaff) {
-	   
-	    try {
-	    	String sql = "INSERT INTO labStaffs (name, surname, username) VALUES (?, ?, ?)";
-	    	PreparedStatement pstmt = c.prepareStatement(sql);
-	        pstmt.setString(1, labStaff.getName());
-	        pstmt.setString(2, labStaff.getSurname());
-	        pstmt.setString(3, labStaff.getUsername());
-	        pstmt.executeUpdate();
-	        pstmt.close();
-	    } catch (SQLException e) {
-	        System.out.println("Database error during labStaff registration.");
-	        e.printStackTrace();
-	    }
-	    
-	}*/
 	
 	@Override
 	public void updateLabStaff(LabStaff labStaff) {

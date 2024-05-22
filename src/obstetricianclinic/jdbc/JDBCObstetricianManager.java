@@ -25,31 +25,24 @@ public class JDBCObstetricianManager implements ObstetricianManager {
 		this.c = conMan.getConnection();
 	}
 
+	
 	@Override
-	/*public void addObstetrician(Obstetrician obstetrician) throws SQLException {
-	    try {
-	        if (obstetrician.getUsername() == null || obstetrician.getUsername().trim().isEmpty()) {
-	            throw new IllegalArgumentException("Username must not be null or empty");
-	        }
-	        if (obstetricianExists(obstetrician.getUsername())) {
-	            System.out.println("An obstetrician with this username already exists. Please use a different username.");
-	            return;
-	        }
-	        
-	        String query = "INSERT INTO obstetricians (name, surname, username) VALUES (?, ?, ?);";
-	        try (PreparedStatement insert = c.prepareStatement(query)) {
-	            insert.setString(1, obstetrician.getName());
-	            insert.setString(2, obstetrician.getSurname());
-	            insert.setString(3, obstetrician.getUsername());
-	            insert.executeUpdate();
-	            System.out.println("Obstetrician successfully added to the database.");
-	        }
-	    } catch (SQLException sqlE) {
-	        System.out.println("Database exception");
-	        sqlE.printStackTrace();
-	    }
-	}*/
 	public void addObstetrician(Obstetrician obstetrician) {
+	try {
+		String query = "INSERT INTO obstetricians (name, username, surname) VALUES (?, ?, ?);";
+		PreparedStatement insert = c.prepareStatement(query);
+		insert.setString(1, obstetrician.getName());
+		insert.setString(2, obstetrician.getUsername());
+		insert.setString(3, obstetrician.getSurname());
+		insert.executeUpdate();
+		insert.close();
+	}catch(SQLException sqlE) {
+		System.out.println("Database exception");
+		sqlE.printStackTrace();
+	}
+	}
+	
+	/*public void addObstetrician(Obstetrician obstetrician) {
 		if (checkUsernameExists(obstetrician.getUsername())) {
 	        System.out.println("Username already exists. Please choose a different username.");
 	        return;
@@ -71,7 +64,7 @@ public class JDBCObstetricianManager implements ObstetricianManager {
 	        System.out.println("Database error during obstetrician registration.");
 	        e.printStackTrace();
 	    }
-	}
+	}*/
 
 
 	public boolean checkUsernameExists(String username) {
@@ -91,26 +84,6 @@ public class JDBCObstetricianManager implements ObstetricianManager {
 	    return false;
 	}
 	
-	/*public void addObstetrician(Obstetrician obstetrician) {
-	    
-	    try {
-	    		String sql = "INSERT INTO obstetricians (name, surname, username) VALUES (?, ?, ?)";
-	    		PreparedStatement pstmt = c.prepareStatement(sql);
-	    		pstmt.setString(1, obstetrician.getName());
-	    		pstmt.setString(2, obstetrician.getSurname());
-	    		pstmt.setString(3, obstetrician.getUsername());
-	    		int affectedRows = pstmt.executeUpdate();
-		        if (affectedRows > 0) {
-		            System.out.println("Obstetrician successfully added to the database.");
-		        } else {
-		            System.out.println("Failed to add the obstetrician to the database.");
-		        }
-	    		pstmt.close();
-	    } catch (SQLException e) {
-	        System.out.println("Database error during obstetrician registration.");
-	        e.printStackTrace();
-	    }
-	}*/
 	
 	@Override
 	public Obstetrician getObstetrician(int id) {
