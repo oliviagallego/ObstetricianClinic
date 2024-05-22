@@ -78,7 +78,7 @@ public class JDBCWomanManager implements WomanManager {
 	@Override
 	public void updateWoman(Woman woman) {
 		try {
-			String sql = "UPDATE women SET" + " name = ?, " + " surname = ?, " + " dob = ? " + " weight = ? "+ " WHERE id = ?";
+			String sql = "UPDATE women SET" + " name = ?, " + " surname = ?, " + " dob = ? " + " weight = ? " + " WHERE id = ?";
 			PreparedStatement p;
 			p = c.prepareStatement(sql);
 			p.setString(1, woman.getName());
