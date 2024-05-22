@@ -25,24 +25,12 @@ public class JDBCObstetricianManager implements ObstetricianManager {
 		this.c = conMan.getConnection();
 	}
 
-	//COMENTARIO JAIME
-	@Override
+	//A ver si funciona
+	//Coments
+	/*
+	 * 
+	 * OLIVIA
 	public void addObstetrician(Obstetrician obstetrician) {
-	try {
-		String query = "INSERT INTO obstetricians (name, username, surname) VALUES (?, ?, ?);";
-		PreparedStatement insert = c.prepareStatement(query);
-		insert.setString(1, obstetrician.getName());
-		insert.setString(2, obstetrician.getUsername());
-		insert.setString(3, obstetrician.getSurname());
-		insert.executeUpdate();
-		insert.close();
-	}catch(SQLException sqlE) {
-		System.out.println("Database exception");
-		sqlE.printStackTrace();
-	}
-	}
-	
-	/*public void addObstetrician(Obstetrician obstetrician) {
 		if (checkUsernameExists(obstetrician.getUsername())) {
 	        System.out.println("Username already exists. Please choose a different username.");
 	        return;
@@ -64,9 +52,54 @@ public class JDBCObstetricianManager implements ObstetricianManager {
 	        System.out.println("Database error during obstetrician registration.");
 	        e.printStackTrace();
 	    }
+	}
+	
+	*/
+	
+	//Tal cual como Rodrigo
+	public void addObstetrician(Obstetrician obstetrician) {
+		try {
+			String query = "INSERT INTO obstetricians (name, username, surname) VALUES (?, ?, ?);";
+			PreparedStatement insert = c.prepareStatement(query);
+			insert.setString(1, obstetrician.getName());
+			insert.setString(2, obstetrician.getUsername());
+			insert.setString(2, obstetrician.getSurname());
+			//COMENTARIO
+			
+			insert.executeUpdate();
+			insert.close();
+		}catch(SQLException sqlE) {
+			System.out.println("Database exception");
+			sqlE.printStackTrace();
+		}
+
+		}
+
+	/*
+	 * otro más
+	 * 
+	 * public void addObstetrician(Obstetrician obstetrician) {
+	    
+	    try {
+	    		String sql = "INSERT INTO obstetricians (name, surname, username) VALUES (?, ?, ?)";
+	    		PreparedStatement pstmt = c.prepareStatement(sql);
+	    		pstmt.setString(1, obstetrician.getName());
+	    		pstmt.setString(2, obstetrician.getSurname());
+	    		pstmt.setString(3, obstetrician.getUsername());
+	    		int affectedRows = pstmt.executeUpdate();
+		        if (affectedRows > 0) {
+		            System.out.println("Obstetrician successfully added to the database.");
+		        } else {
+		            System.out.println("Failed to add the obstetrician to the database.");
+		        }
+	    		pstmt.close();
+	    } catch (SQLException e) {
+	        System.out.println("Database error during obstetrician registration.");
+	        e.printStackTrace();
+	    }
 	}*/
-
-
+	
+	//Lo mismo que antes
 	public boolean checkUsernameExists(String username) {
 	    String sql = "SELECT COUNT(*) FROM users WHERE username = ?";
 	    try (Connection conn = this.conMan.getConnection();
@@ -84,10 +117,10 @@ public class JDBCObstetricianManager implements ObstetricianManager {
 	    return false;
 	}
 	
-	
+	/*
 	@Override
 	public Obstetrician getObstetrician(int id) {
-		String sql = "SELECT * FROM obstetricians WHERE id = ?";
+		String sql = "SELECT * FROM obstetricians WHERE obstetrician_id = ?";//cambio id por obstetrician_id
 	    try (PreparedStatement p = c.prepareStatement(sql)) {
 	        p.setInt(1, id);
 	        try (ResultSet rs = p.executeQuery()) {
@@ -108,10 +141,13 @@ public class JDBCObstetricianManager implements ObstetricianManager {
 	        return null;
 	    }
 	}
-	/*public Obstetrician getObstetrician(int id) {
+	*/
+	
+	//Como Rodrigo
+	public Obstetrician getObstetrician(int id) {
 		
 	    try {
-	    	String sql = "SELECT * FROM obstetricians WHERE id = ?";
+	    	String sql = "SELECT * FROM obstetricians WHERE obstetrician_id = ?";
 	    	Statement st = c.createStatement();
 	    	ResultSet rs = st.executeQuery(sql);
 	    	rs.next();	    	
@@ -124,7 +160,7 @@ public class JDBCObstetricianManager implements ObstetricianManager {
 	        e.printStackTrace();
 	        return null;
 	    }
-	}*/
+	}
 
 	@Override //Lo he corregido por que salia el error: SQL error or missing database (near ",": syntax error)
 	public List<Obstetrician> searchObstetricianByNameAndSurname(String name, String surname, String username) {
@@ -153,8 +189,25 @@ public class JDBCObstetricianManager implements ObstetricianManager {
 	    }
 	    return listObstetricians;
 	}
-
 	
+	//Asi estaba en el commit 
+	@Override
+	public Obstetrician getObstetricianFromUser(String username) {
+		try {
+			String sql = "SELECT * FROM obstetricians WHERE username = ?";
+			PreparedStatement p= c.prepareStatement(sql);
+            p.setString(1, username);
+            ResultSet rs= p.executeQuery();
+            Obstetrician obs= new Obstetrician(username);
+    		return obs;
+        } catch (SQLException e) {
+			System.out.println("Database error.");
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	/*
 	@Override
 	public Obstetrician getObstetricianFromUser(String username) {
 		try {
@@ -173,7 +226,13 @@ public class JDBCObstetricianManager implements ObstetricianManager {
 			System.out.println("Database error.");
 			e.printStackTrace();
 		}
+
+
+
+
 		return null;
 	}
+	
+	*/
 
 }

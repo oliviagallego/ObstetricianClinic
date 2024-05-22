@@ -60,24 +60,52 @@ public class JDBCLabStaffManager implements LabStaffManager {
 	}
 	*/
 	
-	@Override
+	/* 
 	public void addLabStaff(LabStaff labStaff) {
-		try {
-			String sql= "INSERT INTO labStaffs (name, username, surname) " + "VALUES(?, ?, ?);"; 
-			PreparedStatement insert= c.prepareStatement(sql);
-			insert.setString(1, labStaff.getName());
-			insert.setString(2, labStaff.getSurname());
-			insert.setString(3, labStaff.getUsername());
-			insert.setString(4, labStaff.getSurname());
-
-			insert.executeUpdate();
+	    if (checkUsernameExists(labStaff.getUsername())) {
+	        System.out.println("Username already exists. Please choose a different username.");
+	        return;
+	    }
+	    String sql = "INSERT INTO labStaffs (name, surname, username) VALUES (?, ?, ?)";
+	    try (Connection conn = this.conMan.getConnection();
+		    PreparedStatement pstmt = conn.prepareStatement(sql)){
+	        
+	        pstmt.setString(1, labStaff.getName());
+	        pstmt.setString(2, labStaff.getSurname());
+	        pstmt.setString(3, labStaff.getUsername());
+	        int affectedRows = pstmt.executeUpdate();
+	        if (affectedRows > 0) {
+	            System.out.println("LabStaff successfully added to the database.");
+	        } else {
+	            System.out.println("Failed to add the labStaff to the database.");
+	        }
+	    } catch (SQLException e) {
+	        System.out.println("Database error during labStaff registration.");
+	        e.printStackTrace();
+	    }
+	    
+	}
+	
+	*/
+	
+	//Tal cual como Rodrigo
+	public void addLabStaff(LabStaff labStaff) {
+	   
+	    try{
+		    String sql = "INSERT INTO labStaffs (name, surname, username) VALUES (?, ?, ?)";
+		    PreparedStatement insert= c.prepareStatement(sql);
+	        insert.setString(1, labStaff.getName());
+	        insert.setString(2, labStaff.getSurname());
+	        insert.setString(3, labStaff.getUsername());
+	        insert.executeUpdate();
 			insert.close();
-		}catch(SQLException sqlE) {
-			System.out.println("Database exception");
-			sqlE.printStackTrace();
-		}
+	    	} catch (SQLException e) {
+				System.out.println("Database exception.");
+				e.printStackTrace();
+			}	
 	}
 
+	//Esto no lo tiene
 	public boolean checkUsernameExists(String username) {
 		String sql = "SELECT COUNT(*) FROM users WHERE username = ?"; 
 		try (Connection conn = this.conMan.getConnection();
@@ -95,11 +123,10 @@ public class JDBCLabStaffManager implements LabStaffManager {
 		return false;
 	}
 	
-	
-	
+	/*
 	@Override
 	public void updateLabStaff(LabStaff labStaff) {
-	    String sql = "UPDATE labStaffs SET name = ?, surname = ?, username = ? WHERE id = ?";
+	    String sql = "UPDATE labStaffs SET name = ?, surname = ?, username = ? WHERE labStaff_id = ?";// he cabiado id por labStaff_id
 	    try (Connection conn = this.conMan.getConnection();
 	         PreparedStatement pstmt = conn.prepareStatement(sql)) {
 	        pstmt.setString(1, labStaff.getName());
@@ -112,7 +139,11 @@ public class JDBCLabStaffManager implements LabStaffManager {
 	        e.printStackTrace();
 	    }
 	}
-	/*@Override
+	
+	*/ 
+	
+	//Tal cual como Rodrigo
+	@Override
 	public void updateLabStaff(LabStaff labStaff) {
 	    
 	    try {
@@ -128,7 +159,7 @@ public class JDBCLabStaffManager implements LabStaffManager {
 	        System.out.println("Database error: " + e.getMessage());
 	        e.printStackTrace();
 	    }
-	}*/
+	}
 	
 	 @Override
 	 public List<LabStaff> searchLabStaffByNameAndSurname(String name, String surname, String username) {
@@ -157,7 +188,7 @@ public class JDBCLabStaffManager implements LabStaffManager {
 		    }
 		    return listLabStaffs;
 		}
-
+	 /*
 	 @Override
 	    public LabStaff getLabStaffFromUser(String username) {
 	        try {
@@ -178,5 +209,24 @@ public class JDBCLabStaffManager implements LabStaffManager {
 	        }
 	        return null;
 	    }
+	    */
+	 
+	 
+	 //Como el commit del viernes
+	 @Override
+		public LabStaff getLabStaffFromUser(String username) {
+			try {
+				String sql = "SELECT * FROM labStaffs WHERE username = ?";
+				PreparedStatement p= c.prepareStatement(sql);
+	            p.setString(1, username);
+	            ResultSet rs= p.executeQuery();
+	            LabStaff labStaffs= new LabStaff(username);
+	    		return labStaffs;
+	        } catch (SQLException e) {
+				System.out.println("Database error.");
+				e.printStackTrace();
+			}
+			return null;
+		}
 	
 }
