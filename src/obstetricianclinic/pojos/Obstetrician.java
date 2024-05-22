@@ -34,6 +34,9 @@ public class Obstetrician implements Serializable{
 	@XmlElement(name = "Woman")
 	private List<Woman> women;
 	
+	
+	
+	//Mil constructores otra vez
 	public Obstetrician() {
 		super();
 		this.women = new ArrayList<Woman>();
