@@ -42,7 +42,7 @@ public class JDBCLabReportManager implements LabReportManager {
 	@Override
 	public void updateLabReport(LabReport report) {
 		try {
-			String sql = "UPDATE labReports SET" + " date_Test = ?, " + " pregnant = ?, " + " WHERE id = ?";
+			String sql = "UPDATE labReports SET" + " date_Test = ?, " + " pregnant = ?, " + " WHERE laboratoryReport_id = ?";//he cambiado id por laboratoryReport_id
 			PreparedStatement p;
 			p = c.prepareStatement(sql);
 			p.setDate(1, report.getDate_Test());
@@ -90,8 +90,8 @@ public class JDBCLabReportManager implements LabReportManager {
 			ResultSet rs = p.executeQuery();
 			while (rs.next()) {
 				// Create a new LabReport
-				Integer labReport_id = rs.getInt("id");
-				Date date_Test = rs.getDate("dateTest");
+				Integer labReport_id = rs.getInt("laboratoryReport_id");//he cambiado id por laboratoryReport_id
+				Date date_Test = rs.getDate("date_test");// he cambiado dateTest por date_test
 				Boolean pregnant = rs.getBoolean("pregnant");
 				LabReport labReport = new LabReport(labReport_id, date_Test, pregnant);
 				list.add(labReport);

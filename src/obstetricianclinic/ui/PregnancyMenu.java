@@ -6,6 +6,7 @@ import java.io.InputStreamReader;
 import java.sql.Date;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
 
 import obstetricianclinic.ifaces.LabReportManager;
@@ -110,15 +111,17 @@ public static void addPregancy(Woman woman) throws IOException {
 	    lastReport = reports.get(reports.size() - 1);  
 	    if(lastReport.isPregnant()==true) {
 	    	System.out.println("Register Pregnancy:");
-	    	System.out.println("Date of Test: "+lastReport.getDate_Test());
+	    	Date dateTest=lastReport.getDate_Test();
+	    	System.out.println("Date of Test: "+dateTest);
 	    	System.out.println("Date of conception: ");
 	    	String dateC = r.readLine();
 	    	LocalDate dateCLocalDate = LocalDate.parse(dateC, formatter);
 	    	Date dateConception = Date.valueOf(dateCLocalDate);
 	    	System.out.println("Birth report: ");
-	    	String textReport;
+	    	String textReport= r.readLine();
 	    	System.out.println("How many Newborns you need to add? ");
-	    	int number= Integer.parseInt(r.readLine());
+	    	int number= Integer.parseInt(r.readLine()); 
+	    	List<Newborn> newborns=new ArrayList<Newborn>();
 	    	while(number>0) {
 	    		System.out.println(number+" -Please type the Newborn data:");
 	    		System.out.println("Name:");
@@ -130,9 +133,14 @@ public static void addPregancy(Woman woman) throws IOException {
 	    		System.out.println("Gender (F/M):");
 	    		String gender = r.readLine();
 	    		Newborn newborn= new Newborn(name,surname,lastReport.getDate_Test(),weight,gender);
+	    		newborns.add(newborn);
 	    		bornMan.addNewborn(newborn);
 	    		number--;
-	    	}}
+	    	}
+	    	Pregnancy pregnancy= new Pregnancy(dateConception,textReport,newborns,woman);
+	    	pregMan.addPregnancy(pregnancy);
+	    	System.out.println("Pregnancy added successfully.");
+	    }
 	    }else {
 	    	System.out.println("The woman needs to take a laboratory test.");
 	    }

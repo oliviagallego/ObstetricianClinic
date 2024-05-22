@@ -114,7 +114,7 @@ public class JDBCObstetricianManager implements ObstetricianManager {
 	
 	@Override
 	public Obstetrician getObstetrician(int id) {
-		String sql = "SELECT * FROM obstetricians WHERE id = ?";
+		String sql = "SELECT * FROM obstetricians WHERE obstetrician_id = ?";//cambio id por obstetrician_id
 	    try (PreparedStatement p = c.prepareStatement(sql)) {
 	        p.setInt(1, id);
 	        try (ResultSet rs = p.executeQuery()) {

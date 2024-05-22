@@ -65,7 +65,7 @@ public class JDBCNewbornManager implements NewbornManager {
 	@Override
 	public void updateNewborn(Newborn newborn) {
 		try {
-			String sql = "UPDATE newborns SET" + " name = ?, " + " surname = ?, " + " dob = ? " + " weight = ? "+ " gender = ? "+ " WHERE id = ?";
+			String sql = "UPDATE newborns SET" + " name = ?, " + " surname = ?, " + " dob = ? " + " weight = ? "+ " gender = ? "+ " WHERE newborn_id = ?";// he cambiado id por newborn_id 
 			PreparedStatement p;
 			p = c.prepareStatement(sql);
 			p.setString(1, newborn.getName());
@@ -92,7 +92,7 @@ public class JDBCNewbornManager implements NewbornManager {
 			ResultSet rs = p.executeQuery();
 			while (rs.next()) {
 				// Create a new Newborn
-				Integer newborn_id = rs.getInt("id");
+				Integer newborn_id = rs.getInt("newborn_id");// he cambiado id por newborn_id
 				String name = rs.getString("name");
 				String surname= rs.getString("surname");
 				Date dob = rs.getDate("dob");
