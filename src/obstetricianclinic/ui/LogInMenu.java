@@ -23,13 +23,9 @@ public abstract class LogInMenu{
 
 				System.out.print("\nWelcome to the Obstetrician Clinic!");
 			
-<<<<<<< HEAD
-				
-				/*String usernameManager = "Manager";
-=======
+
 				/*
 				String usernameManager = "Manager";
->>>>>>> branch 'main' of https://github.com/oliviagallego/ObstetricianClinic
 				String passwordManager = "Manager123";
 				Role roleManager = userMan.getRole("manager");
 				User manager = new User(usernameManager, passwordManager);
