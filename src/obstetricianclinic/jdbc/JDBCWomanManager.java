@@ -11,6 +11,7 @@ import java.sql.Date;
 
 
 import obstetricianclinic.ifaces.WomanManager;
+import obstetricianclinic.pojos.Obstetrician;
 import obstetricianclinic.pojos.Woman;
 
 public class JDBCWomanManager implements WomanManager {
@@ -23,23 +24,23 @@ public class JDBCWomanManager implements WomanManager {
 	}
 
 	public void registerWoman(Woman woman) {
-	    String sql = "INSERT INTO women (name, surname, dob, weight, obstetrician_id) VALUES (?, ?, ?, ?, ?)";
-	    try (Connection conn = this.conMan.getConnection();
-	         PreparedStatement pstmt = conn.prepareStatement(sql)) {
-
+	    try {
+		    String sql = "INSERT INTO women (name, surname, dob, weight, obstetrician_id) VALUES (?, ?, ?, ?, ?)";
+	    	PreparedStatement pstmt = c.prepareStatement(sql);
 	        pstmt.setString(1, woman.getName());
 	        pstmt.setString(2, woman.getSurname());
 	        pstmt.setDate(3, woman.getDob());
 	        pstmt.setFloat(4, woman.getWeight());
 	        pstmt.setInt(5, woman.getObstetrician().getId());
-
 	        pstmt.executeUpdate();
+	        pstmt.close();
 	        System.out.println("Woman successfully registered.");
 	    } catch (SQLException e) {
 	        System.out.println("Database error.");
 	        e.printStackTrace();
 	    }
 	}
+		
 
 	/*
 	private boolean womanExists(String name, String surname, Date dob) throws SQLException {
@@ -142,22 +143,18 @@ public class JDBCWomanManager implements WomanManager {
 	@Override
 	public Woman getWoman(int id) {
 		try {
-			/*String sql = "SELECT * FROM women WHERE woman_id = ?";
+			String sql = "SELECT * FROM women WHERE woman_id = ?";
 			PreparedStatement p = c.prepareStatement(sql);
-			p.setInt(1, id);*/
-			String sql = "SELECT * FROM women WHERE woman_id ="+id;
-			Statement st;
-			st=c.createStatement();
-			ResultSet rs = st.executeQuery(sql);
+			p.setInt(1, id);
+			ResultSet rs = p.executeQuery();
 			rs.next();
-			/*String name = rs.getString("name");
+			String name = rs.getString("name");
 			String surname= rs.getString("surname");
 			Date dob = rs.getDate("dob");
-			Float weight= rs.getFloat("weight");*/
-			Woman w= new Woman(rs.getInt("woman_id"), rs.getString("name"), rs.getString("surname"), rs.getDate("dob"), rs.getFloat("weight"));
+			Float weight = rs.getFloat("weight");
 			rs.close();
-			st.close();
-			return w;
+			p.close();
+			return new Woman(id, name, surname, dob, weight);
 		} catch (SQLException e) {
 			System.out.println("Database error.");
 			e.printStackTrace();

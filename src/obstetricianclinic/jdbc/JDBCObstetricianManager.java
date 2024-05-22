@@ -196,24 +196,6 @@ public class JDBCObstetricianManager implements ObstetricianManager {
 	    return listObstetricians;
 	}
 	
-	//Asi estaba en el commit 
-	@Override
-	public Obstetrician getObstetricianFromUser(String username) {
-		try {
-			String sql = "SELECT * FROM obstetricians WHERE username = ?";
-			PreparedStatement p= c.prepareStatement(sql);
-            p.setString(1, username);
-            ResultSet rs= p.executeQuery();
-            Obstetrician obs= new Obstetrician(username);
-    		return obs;
-        } catch (SQLException e) {
-			System.out.println("Database error.");
-			e.printStackTrace();
-		}
-		return null;
-	}
-
-	/*
 	@Override
 	public Obstetrician getObstetricianFromUser(String username) {
 		try {
@@ -233,12 +215,8 @@ public class JDBCObstetricianManager implements ObstetricianManager {
 			e.printStackTrace();
 		}
 
-
-
-
 		return null;
 	}
 	
-	*/
 
 }

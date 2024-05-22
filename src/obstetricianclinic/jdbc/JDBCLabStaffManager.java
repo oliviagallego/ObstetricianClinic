@@ -154,7 +154,7 @@ public class JDBCLabStaffManager implements LabStaffManager {
 		    }
 		    return listLabStaffs;
 		}
-	 /*
+	 
 	 @Override
 	    public LabStaff getLabStaffFromUser(String username) {
 	        try {
@@ -175,24 +175,5 @@ public class JDBCLabStaffManager implements LabStaffManager {
 	        }
 	        return null;
 	    }
-	    */
-	 
-	 
-	 //Como el commit del viernes
-	 @Override
-		public LabStaff getLabStaffFromUser(String username) {
-			try {
-				String sql = "SELECT * FROM labStaffs WHERE username = ?";
-				PreparedStatement p= c.prepareStatement(sql);
-	            p.setString(1, username);
-	            ResultSet rs= p.executeQuery();
-	            LabStaff labStaffs= new LabStaff(username);
-	    		return labStaffs;
-	        } catch (SQLException e) {
-				System.out.println("Database error.");
-				e.printStackTrace();
-			}
-			return null;
-		}
 	
 }
