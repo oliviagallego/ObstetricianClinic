@@ -72,7 +72,7 @@ public class JDBCPregnancyManager implements PregnancyManager {
 			while(rs.next()) {
 				Integer pregnancy_id = rs.getInt("pregnancy_id");
 				Date dateConception= rs.getDate("date_conception");
-				String birthReport= rs.getString("birth_report");//he cambiado esto por que estaba puesto como birthReport
+				String birthReport= rs.getString("birthReport");
 				
 				Pregnancy pregnancy= new Pregnancy(pregnancy_id, dateConception, birthReport);
 				pregnancies.add(pregnancy);
@@ -89,7 +89,7 @@ public class JDBCPregnancyManager implements PregnancyManager {
 	@Override
 	public void updatePregnancy(Pregnancy pregnancy) {
 		try {
-			String sql = "UPDATE pregnancies SET" + " date_conception = ?, " + " birth_report = ?, " + " WHERE pregnancy_id = ?";//he cambiado birth_report por que estaba como birthReport
+			String sql = "UPDATE pregnancies SET" + " date_conception = ?, " + " birthReport = ?, " + " WHERE pregnancy_id = ?";
 			PreparedStatement p;
 			p = c.prepareStatement(sql);
 			p.setDate(1, pregnancy.getDateConception());
@@ -115,7 +115,7 @@ public class JDBCPregnancyManager implements PregnancyManager {
 				// Create a new Pregnancy
 				Integer pregnancy_id = rs.getInt("pregnancy_id");
 				Date dateConception = rs.getDate("date_conception");
-				String birthReport = rs.getString("birth_report");//he cambiado birth_report por que estaba como birthReport
+				String birthReport = rs.getString("birthReport");
 				Pregnancy pg= new Pregnancy(pregnancy_id, dateConception, birthReport);
 				list.add(pg);
 			}

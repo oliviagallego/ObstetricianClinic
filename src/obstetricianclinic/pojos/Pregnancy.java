@@ -51,14 +51,7 @@ public class Pregnancy implements Serializable{
 		this.dateConception = dateConception;
 		this.birthReport = birthReport;
 	}
-	
-	public Pregnancy(Date dateConception, String birthReport, List<Newborn> newborns, Woman woman) {
-		super();
-		this.dateConception = dateConception;
-		this.birthReport = birthReport;
-		this.newborns = newborns;
-		this.woman = woman;
-	}
+
 	public Pregnancy() {
 		super();
 		this.newborns = new ArrayList<Newborn>();

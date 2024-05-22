@@ -121,7 +121,7 @@ public class JDBCLabStaffManager implements LabStaffManager {
 	
 	@Override
 	public void updateLabStaff(LabStaff labStaff) {
-	    String sql = "UPDATE labStaffs SET name = ?, surname = ?, username = ? WHERE labStaff_id = ?";// he cabiado id por labStaff_id
+	    String sql = "UPDATE labStaffs SET name = ?, surname = ?, username = ? WHERE id = ?";
 	    try (Connection conn = this.conMan.getConnection();
 	         PreparedStatement pstmt = conn.prepareStatement(sql)) {
 	        pstmt.setString(1, labStaff.getName());
