@@ -25,7 +25,7 @@ public class JDBCObstetricianManager implements ObstetricianManager {
 		this.c = conMan.getConnection();
 	}
 
-	
+	//COMENTARIO JAIME
 	@Override
 	public void addObstetrician(Obstetrician obstetrician) {
 	try {
