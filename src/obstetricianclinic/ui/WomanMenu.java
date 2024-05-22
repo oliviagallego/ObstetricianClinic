@@ -24,6 +24,7 @@ public class WomanMenu {
 
 		womanMan = conMan.getWomanMan();
 		labReportMan=conMan.getLabReportMan();
+		diseaseMan = conMan.getDiseaseMan();
 	
 		while (true) {
 			try {
@@ -51,6 +52,7 @@ public class WomanMenu {
 						case 3: {
 							int id= woman.getId();
 							womanMan.deleteWoman(id);
+							conMan.closeConnection();
 							break;
 						}
 						case 4:{
@@ -160,12 +162,12 @@ public static void updateWoman(Woman woman) throws IOException {
 public static void assignDisease(int woman_id) throws IOException {
 	System.out.println("Please, give me the name of the disease: ");
 	String diseaseType = r.readLine();
-	List<Disease> listDisease= diseaseMan.searchDiseaseByName(diseaseType);
-	System.out.println(listDisease);
-	System.out.println("Please choose a disease, type its Id:");
-	Integer disease_id=Integer.parseInt(r.readLine());
+	//List<Disease> listDisease= diseaseMan.searchDiseaseByName(diseaseType);
+	Disease d= new Disease(diseaseType);
+	diseaseMan.addDisease(d);
+	//System.out.println(listDisease);
 	
-	womanMan.assignWomanToDisease(woman_id,disease_id);
+	womanMan.assignWomanToDisease(woman_id,d.getId());
 }
 	
 
