@@ -52,6 +52,7 @@ public class WomanMenu {
 						case 3: {
 							int id= woman.getId();
 							womanMan.deleteWoman(id);
+							conMan.closeConnection();
 							break;
 						}
 						case 4:{
