@@ -162,12 +162,11 @@ public static void updateWoman(Woman woman) throws IOException {
 public static void assignDisease(int woman_id) throws IOException {
 	System.out.println("Please, give me the name of the disease: ");
 	String diseaseType = r.readLine();
-	//List<Disease> listDisease= diseaseMan.searchDiseaseByName(diseaseType);
-	Disease d= new Disease(diseaseType);
-	diseaseMan.addDisease(d);
-	//System.out.println(listDisease);
-	
-	womanMan.assignWomanToDisease(woman_id,d.getId());
+	List<Disease> listDisease= diseaseMan.searchDiseaseByName(diseaseType);
+	System.out.println(listDisease);
+	System.out.println("Please choose a disease, type its Id:");
+	Integer diseaseId = Integer.parseInt(r.readLine());
+	womanMan.assignWomanToDisease(woman_id,diseaseId);
 }
 	
 
