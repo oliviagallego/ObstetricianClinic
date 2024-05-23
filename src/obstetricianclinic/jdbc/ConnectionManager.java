@@ -163,8 +163,8 @@ public class ConnectionManager {
 					+ "newborn_id INTEGER PRIMARY KEY AUTOINCREMENT, "
 					+ "name TEXT NOT NULL, "
 					+ "surname TEXT NOT NULL, "
-					+ "dob DATE NOT NULL, "
-					+ "weight INTEGER NOT NULL, "
+					+ "dob DATE, "
+					+ "weight INTEGER, "
 					+ "gender TEXT NOT NULL CHECK(gender='Female' OR gender='Male'), "
 					+ "pregnancy_id INTEGER REFERENCES pregnancies(pregnancy_id))";
 			createTables6.executeUpdate(create6);

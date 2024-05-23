@@ -25,19 +25,18 @@ public class JDBCPregnancyManager implements PregnancyManager {
 	@Override
 	public void addPregnancy(Pregnancy pregnancy) {
 	    try {
-	        if (pregnancyExists(pregnancy.getDateConception(), pregnancy.getWoman().getId())) {
+	        /*if (pregnancyExists(pregnancy.getDateConception(), pregnancy.getWoman().getId())) {
 	            System.out.println("A pregnancy record for this woman on the specified date of conception already exists. Please verify the information.");
 	            return;
-	        }
-
-	        String sql = "INSERT INTO pregnancies (date_conception, birthReport, woman_id) VALUES (?, ?, ?);";
-	        try (PreparedStatement insert = c.prepareStatement(sql)) {
-	            insert.setDate(1, pregnancy.getDateConception());
-	            insert.setString(2, pregnancy.getBirthReport());
-	            insert.setInt(3, pregnancy.getWoman().getId());
-	            insert.executeUpdate();
-	            System.out.println("Pregnancy successfully added to the database.");
-	        }
+	        }*/
+	    	String sql = "INSERT INTO pregnancies (date_conception, birth_report, woman_id) VALUES (?, ?, ?);";
+	        PreparedStatement insert = c.prepareStatement(sql);
+	        insert.setDate(1, pregnancy.getDateConception());
+	        insert.setString(2, pregnancy.getBirthReport());
+	        insert.setInt(3, pregnancy.getWoman().getId());
+	        insert.executeUpdate();
+	        System.out.println("Pregnancy successfully added to the database.");
+	        
 	    } catch (SQLException sqlE) {
 	        System.out.println("Database exception");
 	        sqlE.printStackTrace();
@@ -45,7 +44,7 @@ public class JDBCPregnancyManager implements PregnancyManager {
 	}
 
 
-	private boolean pregnancyExists(Date dateConception, int womanId) throws SQLException {
+	/*private boolean pregnancyExists(Date dateConception, int womanId) throws SQLException {
 	    String query = "SELECT COUNT(*) FROM pregnancies WHERE (date_conception, woman_id) "+"VALUES (?, ?, ?); ";
 	    try (PreparedStatement stmt = c.prepareStatement(query)) {
 	        stmt.setDate(1, dateConception);
@@ -59,7 +58,7 @@ public class JDBCPregnancyManager implements PregnancyManager {
 	    return false;
 	}
 
-	
+	*/
 	@Override
 	public List<Pregnancy> searchPregnancyByDateOfConception(Date dateOfConception) {
 		List<Pregnancy> pregnancies= new ArrayList<Pregnancy>();
@@ -72,7 +71,7 @@ public class JDBCPregnancyManager implements PregnancyManager {
 			while(rs.next()) {
 				Integer pregnancy_id = rs.getInt("pregnancy_id");
 				Date dateConception= rs.getDate("date_conception");
-				String birthReport= rs.getString("birthReport");
+				String birthReport= rs.getString("birth_report");
 				
 				Pregnancy pregnancy= new Pregnancy(pregnancy_id, dateConception, birthReport);
 				pregnancies.add(pregnancy);
@@ -89,7 +88,7 @@ public class JDBCPregnancyManager implements PregnancyManager {
 	@Override
 	public void updatePregnancy(Pregnancy pregnancy) {
 		try {
-			String sql = "UPDATE pregnancies SET" + " date_conception = ?, " + " birthReport = ?, " + " WHERE pregnancy_id = ?";
+			String sql = "UPDATE pregnancies SET" + " date_conception = ?, " + " birth_report = ?" + " WHERE pregnancy_id = ?";
 			PreparedStatement p;
 			p = c.prepareStatement(sql);
 			p.setDate(1, pregnancy.getDateConception());
@@ -115,7 +114,7 @@ public class JDBCPregnancyManager implements PregnancyManager {
 				// Create a new Pregnancy
 				Integer pregnancy_id = rs.getInt("pregnancy_id");
 				Date dateConception = rs.getDate("date_conception");
-				String birthReport = rs.getString("birthReport");
+				String birthReport = rs.getString("birth_report");
 				Pregnancy pg= new Pregnancy(pregnancy_id, dateConception, birthReport);
 				list.add(pg);
 			}

@@ -41,7 +41,7 @@ public class PregnancyMenu {
         int choice = Integer.parseInt(r.readLine());
 		switch (choice) {
 						case 1: {
-							Pregnancy pregSearch=pregnancySearch();
+							Pregnancy pregSearch=pregnancySearch(woman);
 							subPregnancyMenu(pregSearch);
 							break;
 						}
@@ -69,8 +69,9 @@ public class PregnancyMenu {
 
 			}
 				
-public static Pregnancy pregnancySearch() throws IOException {
-	System.out.println("Please insert the date of conception:");
+public static Pregnancy pregnancySearch(Woman woman) throws IOException {
+
+	System.out.println("Please insert the date of conception of the pregnancy you want:");
 	String dateC = r.readLine();
 	LocalDate dateCLocalDate = LocalDate.parse(dateC, formatter);
 	Date dateConception = Date.valueOf(dateCLocalDate);
@@ -116,8 +117,8 @@ public static void addPregancy(Woman woman) throws IOException {
 	    	LocalDate dateCLocalDate = LocalDate.parse(dateC, formatter);
 	    	Date dateConception = Date.valueOf(dateCLocalDate);
 	    	System.out.println("Birth report: ");
-	    	String textReport;
-	    	System.out.println("How many Newborns you need to add? ");
+	    	String textReport= r.readLine();
+	    	/*System.out.println("How many Newborns you need to add? ");
 	    	int number= Integer.parseInt(r.readLine());
 	    	while(number>0) {
 	    		System.out.println(number+" -Please type the Newborn data:");
@@ -129,12 +130,17 @@ public static void addPregancy(Woman woman) throws IOException {
 	    		Float weight = Float.parseFloat(r.readLine());
 	    		System.out.println("Gender (F/M):");
 	    		String gender = r.readLine();
-	    		Newborn newborn= new Newborn(name,surname,lastReport.getDate_Test(),weight,gender);
+	    		//Quitamos el lastReport.getDate_Test() por que no corresponde al dob
+	    		Newborn newborn= new Newborn(name,surname,weight,gender, );
 	    		bornMan.addNewborn(newborn);
 	    		number--;
-	    	}}
+	    	}*/
+	    	Pregnancy p = new Pregnancy(dateConception,textReport, woman);
+	    	pregMan.addPregnancy(p);
+	    }
 	    }else {
 	    	System.out.println("The woman needs to take a laboratory test.");
+	    	
 	    }
 	}
 
@@ -191,7 +197,7 @@ public static void updatePregancy(Pregnancy pregnancy) throws IOException {
 	switch(option) {
 	case 1:
 		System.out.println("The actual Date of conception is: "+pregnancy.getDateConception());
-		System.out.println("\n Give me the new Date of test: ");
+		System.out.println("\n Give me the new Date of conception: ");
 		String dateC = r.readLine();
     	LocalDate dateCLocalDate = LocalDate.parse(dateC, formatter);
     	Date dateConception = Date.valueOf(dateCLocalDate);

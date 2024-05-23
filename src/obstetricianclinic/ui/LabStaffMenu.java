@@ -78,8 +78,12 @@ public class LabStaffMenu {
             System.out.println("Is the pregnancy test positive(true) or negative (false)? ");
             boolean testResult = Boolean.parseBoolean(r.readLine());
             System.out.println("\nThe women of our database are: ");
-            System.out.println(womanMan.listWomen());
-            System.out.println("\nSelect a woman by id: ");
+            List <Woman> ws=womanMan.listWomen();
+            for(int i= 0; i<ws.size(); i++) {
+            	Woman o= ws.get(i);
+            	System.out.println((i+1)+"- "+o);
+            }
+            System.out.println("\nSelect a woman: ");
             int id=Integer.parseInt(r.readLine());
             Woman w=womanMan.getWoman(id);
             LabReport labreport = new LabReport(dateTestDate, testResult, w,labStaff );

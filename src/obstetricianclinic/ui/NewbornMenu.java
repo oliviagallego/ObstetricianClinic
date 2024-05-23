@@ -39,7 +39,7 @@ public class NewbornMenu {
 		
 		while (true) {
 			try {
-				//List of Newborns
+				/*//List of Newborns
 				if(pregnancy.getNewborns().size()==1) {
 					System.out.println("\n The newborn of these pregnancy is: "+pregnancy.getNewborns());
 				}else {
@@ -48,7 +48,7 @@ public class NewbornMenu {
 						System.out.println("\n"+i+" - "+pregnancy.getNewborns().get(i));
 					}
 				}
-				
+				*/
 				System.out.println("Menu of Newborns: ");
 				System.out.println("\nChoose an option, please:");
 				System.out.println("\n1. Register a newborns");
@@ -93,23 +93,6 @@ public class NewbornMenu {
 				}
 
 			}
-	public static  Newborn chooseNw(Pregnancy pregnancy) throws IOException {
-		System.out.println("Pregnancys's Menu of: "+pregnancy.getDateConception()+" (date of conception)");
-		if(pregnancy.getNewborns().size()==1) {
-			System.out.println("\n The newborn of these pregnancy is: "+pregnancy.getNewborns());
-			Newborn nw= pregnancy.getNewborns().get(0);
-			return nw;
-		}else {
-			System.out.println("\n The newborns of these pregnancy are: ");
-			for(int i=0; i<pregnancy.getNewborns().size(); i++) {
-				System.out.println("\n"+i+" - "+pregnancy.getNewborns().get(i));
-			}
-			System.out.println("\n Which newborn are you interest in? (give me his number of the list)  ");
-			int option = Integer.parseInt(r.readLine());
-	        Newborn nw= pregnancy.getNewborns().get(option);
-	        return nw;
-		}
-	}
 	public static void registerNewborn(Pregnancy pregnancy) throws IOException {
 		System.out.println("Please type the newborns data:");
 		System.out.println("Name:");
@@ -122,11 +105,35 @@ public class NewbornMenu {
 		String dob = r.readLine();
 		LocalDate dobLocalDate = LocalDate.parse(dob, formatter);
 		Date dobDate = Date.valueOf(dobLocalDate); 
-		System.out.println("Gender (F/M): ");
+		System.out.println("Gender (Female/Male): ");
 		String gender = r.readLine();
 		Newborn nw= new Newborn(name,surname,dobDate,weight,gender,pregnancy); 
 		bornMan.addNewborn(nw);
 	}
+	
+	public static  Newborn chooseNw(Pregnancy pregnancy) throws IOException {
+		List<Newborn> nwList= bornMan.searchNewbornByPregnancy(pregnancy.getId());
+		System.out.println("Pregnancys's Menu of: "+pregnancy.getDateConception()+" (date of conception)");
+		if (nwList.isEmpty()) {
+	        System.out.println("No women found with the name and surname provided.");
+	        return null;
+	        }
+		if(nwList.size()==1) {
+			System.out.println("\n The newborn of these pregnancy is: "+pregnancy.getNewborns());
+			Newborn nw= nwList.get(0);
+			return nw;
+		}else {
+			System.out.println("\n The newborns of these pregnancy are: "+pregnancy.getNewborns());
+			for(int i=0; i<nwList.size(); i++) {
+				System.out.println("\n"+i+" - "+nwList.get(i));
+			}
+			System.out.println("\n Which newborn are you interest in? (give me his number of the list)  ");
+			int option = Integer.parseInt(r.readLine());
+	        Newborn nw= nwList.get(option);
+	        return nw;
+		}
+	}
+	
 	
 	public static void updateNewborn(Newborn nw) throws IOException {
 		System.out.println("Please what do you want to update of the newborn's data:");
