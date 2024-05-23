@@ -34,7 +34,7 @@ public class WomanMenu {
 				System.out.println("\n2. Update woman's data");
 				System.out.println("\n3. Delete woman's data");
 				System.out.println("\n4. Assign disease");
-				System.out.println("\n5. Acces to disease´s menu");
+				System.out.println("\n5. Access to disease´s menu");
 				System.out.println("\n0. Exit");
 
 			

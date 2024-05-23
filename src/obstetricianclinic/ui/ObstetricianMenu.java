@@ -85,7 +85,7 @@ public class ObstetricianMenu {
                
 
 public static void registerwoman(Obstetrician obst) throws IOException {
-	System.out.println("Please type the womans data:");
+	System.out.println("Please type woman's data:");
 	System.out.println("Name:");
 	String name = r.readLine();
 	System.out.println("Surname:");
