@@ -42,7 +42,7 @@ public class JDBCDiseaseManager implements DiseaseManager {
 	@Override
 	public void updateDisease(Disease disease) {
 		try {
-			String sql = "UPDATE diseases SET" + " type_Disease = ?, " + " WHERE disease_id = ?";
+			String sql = "UPDATE diseases SET" + " type_Disease = ? " + " WHERE disease_id = ?";
 			PreparedStatement p;
 			p = c.prepareStatement(sql);
 			p.setString(1, disease.getDiseaseType());
@@ -60,7 +60,7 @@ public class JDBCDiseaseManager implements DiseaseManager {
 	public List<Disease> searchDiseaseByName(String diseaseType) {
 		List<Disease> listDiseases= new ArrayList<Disease>();
 		try {
-			String sql = "SELECT * FROM diseases WHERE type_Disease = ?";
+			String sql = "SELECT * FROM diseases WHERE type_Disease LIKE ?";
 			PreparedStatement p = c.prepareStatement(sql);
 			p.setString(1, "%"+diseaseType+"%");
 			ResultSet rs = p.executeQuery();
@@ -70,6 +70,8 @@ public class JDBCDiseaseManager implements DiseaseManager {
 				Disease d= new Disease(disease_id, Type);
 				listDiseases.add(d);
 			}
+			rs.close();
+			p.close();
 		} catch (SQLException e) {
 			System.out.println("Database error.");
 			e.printStackTrace();

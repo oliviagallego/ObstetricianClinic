@@ -144,7 +144,7 @@ public class ConnectionManager {
 					+ "laboratoryReport_id INTEGER PRIMARY KEY AUTOINCREMENT, "
 					+ "date_test DATE NOT NULL, "
 					+ "pregnant BOOLEAN NOT NULL, "
-					+ "woman_id INTEGER REFERENCES women(woman_id), " 
+					+ "woman_id INTEGER REFERENCES women(woman_id) ON DELETE CASCADE, " 
 					+ "labStaff_id INTEGER REFERENCES labStaffs(labStaff_id))";
 			createTables4.executeUpdate(create4);
 			createTables4.close();
@@ -154,7 +154,7 @@ public class ConnectionManager {
 					+ "pregnancy_id INTEGER PRIMARY KEY AUTOINCREMENT, "
 					+ "date_conception DATE NOT NULL, "
 					+ "birth_report TEXT, "
-					+ "woman_id INTEGER REFERENCES women(woman_id))";
+					+ "woman_id INTEGER REFERENCES women(woman_id) ON DELETE CASCADE)";
 			createTables5.executeUpdate(create5);
 			createTables5.close();
 			
@@ -182,7 +182,7 @@ public class ConnectionManager {
 			
 			Statement createTables8= c.createStatement();
 			String create8= "CREATE TABLE women_diseases ("
-					+ "woman_id INTEGER REFERENCES women(woman_id), "
+					+ "woman_id INTEGER REFERENCES women(woman_id) ON DELETE CASCADE, "
 					+ "disease_id INTEGER REFERENCES diseases(disease_id), "
 					+ "PRIMARY KEY(woman_id, disease_id))";
 			createTables8.executeUpdate(create8);

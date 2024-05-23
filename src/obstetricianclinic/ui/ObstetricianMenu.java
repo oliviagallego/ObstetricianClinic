@@ -37,6 +37,7 @@ public class ObstetricianMenu {
 				System.out.println("1. Register a Woman");
 				System.out.println("2. Select a woman");
 				System.out.println("3. Change password");
+				System.out.println("4. Access to disease´s menu");
 				System.out.println("0. Exit\n");
 
 			
@@ -57,6 +58,10 @@ public class ObstetricianMenu {
 							String password = Utilities.readString(" -Type new password: ");
 							user = userMan.changePassword(user, password);
 							System.out.println(" -Password changed correctly to " + user.getPassword());
+							break;
+						}
+						case 4:{
+							DiseaseMenu.menu(conMan);
 							break;
 						}
 						

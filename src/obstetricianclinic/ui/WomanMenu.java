@@ -33,8 +33,7 @@ public class WomanMenu {
 				System.out.println("\n1. View woman's data");
 				System.out.println("\n2. Update woman's data");
 				System.out.println("\n3. Delete woman's data");
-				System.out.println("\n4. Assign disease");
-				System.out.println("\n5. Access to disease´s menu");
+				System.out.println("\n4. Assign woman to disease");
 				System.out.println("\n0. Exit");
 
 			
@@ -53,22 +52,15 @@ public class WomanMenu {
 						case 3: {
 							int id = woman.getId();
 							womanMan.deleteWoman(id);
-							conMan.closeConnection();
-							break;
+							return;
 						}
 						case 4:{
 							int id = woman.getId();
 							assignDisease(id);
 							break;
 						}
-						case 5:{
-							Disease disease = new Disease();
-							DiseaseMenu.menu(disease, conMan);
-							break;
-						}
 						
 						case 0: {
-							conMan.closeConnection();
 							return;
 						}
 						default: {
