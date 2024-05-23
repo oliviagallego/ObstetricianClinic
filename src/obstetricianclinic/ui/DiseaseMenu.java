@@ -14,53 +14,41 @@ import obstetricianclinic.pojos.*;
 
 public class DiseaseMenu {
 	private static BufferedReader r = new BufferedReader(new InputStreamReader(System.in));
-	private static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
 	
 	private static WomanManager womanMan;
-	private static LabReportManager labReportMan;
 	private static DiseaseManager diseaseMan;
 	
-	public static void menu(Woman woman, ConnectionManager conMan) {
+	public static void menu(Disease disease, ConnectionManager conMan) {
 
 		womanMan = conMan.getWomanMan();
-		labReportMan=conMan.getLabReportMan();
 		diseaseMan = conMan.getDiseaseMan();
-	
+
 		while (true) {
 			try {
-				System.out.println("Woman's Menu of: "+woman.getName()+" "+woman.getSurname());
+				System.out.println("Disease menu:");
 				System.out.println("\nChoose an option, please:");
-				System.out.println("\n1. View woman's data");
-				System.out.println("\n2. Update woman's data");
-				System.out.println("\n3. Delete woman's data");
-				System.out.println("\n4. Assign disease");
+				System.out.println("\n1. Add disease");
+				System.out.println("\n2. Update disease");	
+				System.out.println("\n3. Assign disease to woman");
 				System.out.println("\n0. Exit");
 
 			
         int choice = Integer.parseInt(r.readLine());
 		switch (choice) {
 						case 1: {
-							int id= woman.getId();
-							viewWoman(id,woman);
+							resgisterDisease();
 							break;
 						}
 						case 2: {
-							updateWoman(woman);
-							System.out.println(woman);
+							updateDisease(disease);
+							System.out.println(disease);
 							break;
 						}
 						case 3: {
-							int id= woman.getId();
-							womanMan.deleteWoman(id);
-							conMan.closeConnection();
-							break;
-						}
-						case 4:{
-							int id= woman.getId();
+							int id = woman.getId();
 							assignDisease(id);
 							break;
 						}
-						
 						case 0: {
 							conMan.closeConnection();
 							return;
@@ -80,3 +68,34 @@ public class DiseaseMenu {
 				}
 
 			}
+
+	private static void resgisterDisease() throws IOException {
+		System.out.println("Please type disease´s name: ");
+		String diseaseType = r.readLine();
+		Disease disease = new Disease(diseaseType);
+		diseaseMan.addDisease(disease);
+	}
+	
+	
+	private static void updateDisease(Disease disease) throws IOException {
+		System.out.println("Please write the new disese name");
+		String diseaseType = r.readLine();
+		disease.setDiseaseType(diseaseType);
+		diseaseMan.updateDisease(disease);
+		System.out.println("The disease has been updated correctly");
+
+	}
+	
+	public static void assignDisease(int woman_id) throws IOException {
+		System.out.println("Please, give me the name of the disease: ");
+		String diseaseType = r.readLine();
+		List<Disease> listDisease= diseaseMan.searchDiseaseByName(diseaseType);
+		System.out.println(listDisease);
+		System.out.println("Please choose a disease, type its Id:");
+		Integer diseaseId = Integer.parseInt(r.readLine());
+		womanMan.assignWomanToDisease(woman_id,diseaseId);
+	}
+		
+
+	
+	}

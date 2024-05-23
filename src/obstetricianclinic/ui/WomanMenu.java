@@ -50,14 +50,14 @@ public class WomanMenu {
 							break;
 						}
 						case 3: {
-							int id= woman.getId();
+							int id = woman.getId();
 							womanMan.deleteWoman(id);
 							conMan.closeConnection();
 							break;
 						}
 						case 4:{
-							int id= woman.getId();
-							assignDisease(id);
+							Disease disease = new Disease();
+							DiseaseMenu.menu(disease, conMan);
 							break;
 						}
 						
@@ -159,15 +159,5 @@ public static void updateWoman(Woman woman) throws IOException {
 		
    }
 }
-public static void assignDisease(int woman_id) throws IOException {
-	System.out.println("Please, give me the name of the disease: ");
-	String diseaseType = r.readLine();
-	List<Disease> listDisease= diseaseMan.searchDiseaseByName(diseaseType);
-	System.out.println(listDisease);
-	System.out.println("Please choose a disease, type its Id:");
-	Integer diseaseId = Integer.parseInt(r.readLine());
-	womanMan.assignWomanToDisease(woman_id,diseaseId);
-}
-	
 
 }
