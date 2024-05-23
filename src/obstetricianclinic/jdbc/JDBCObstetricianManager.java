@@ -59,11 +59,11 @@ public class JDBCObstetricianManager implements ObstetricianManager {
 	//Tal cual como Rodrigo
 	public void addObstetrician(Obstetrician obstetrician) {
 		try {
-			String query = "INSERT INTO obstetricians (name, username, surname) VALUES (?, ?, ?);";
+			String query = "INSERT INTO obstetricians (name, surname, username) VALUES (?, ?, ?);";
 			PreparedStatement insert = c.prepareStatement(query);
 			insert.setString(1, obstetrician.getName());
-			insert.setString(2, obstetrician.getUsername());
 			insert.setString(2, obstetrician.getSurname());
+			insert.setString(3, obstetrician.getUsername());
 			//COMENTARIO
 			
 			insert.executeUpdate();
