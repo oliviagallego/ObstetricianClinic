@@ -28,8 +28,7 @@ public class DiseaseMenu {
 				System.out.println("Disease menu:");
 				System.out.println("\nChoose an option, please:");
 				System.out.println("\n1. Add disease");
-				System.out.println("\n2. Update disease");	
-				System.out.println("\n3. Assign disease to woman");
+				System.out.println("\n2. Update disease");
 				System.out.println("\n0. Exit");
 
 			
@@ -42,11 +41,6 @@ public class DiseaseMenu {
 						case 2: {
 							updateDisease(disease);
 							System.out.println(disease);
-							break;
-						}
-						case 3: {
-							int id = woman.getId();
-							assignDisease(id);
 							break;
 						}
 						case 0: {
@@ -86,16 +80,7 @@ public class DiseaseMenu {
 
 	}
 	
-	public static void assignDisease(int woman_id) throws IOException {
-		System.out.println("Please, give me the name of the disease: ");
-		String diseaseType = r.readLine();
-		List<Disease> listDisease= diseaseMan.searchDiseaseByName(diseaseType);
-		System.out.println(listDisease);
-		System.out.println("Please choose a disease, type its Id:");
-		Integer diseaseId = Integer.parseInt(r.readLine());
-		womanMan.assignWomanToDisease(woman_id,diseaseId);
-	}
-		
+	
 
 	
 	}

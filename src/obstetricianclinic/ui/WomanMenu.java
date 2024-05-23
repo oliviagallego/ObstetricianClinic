@@ -34,6 +34,7 @@ public class WomanMenu {
 				System.out.println("\n2. Update woman's data");
 				System.out.println("\n3. Delete woman's data");
 				System.out.println("\n4. Assign disease");
+				System.out.println("\n5. Acces to disease´s menu");
 				System.out.println("\n0. Exit");
 
 			
@@ -56,6 +57,11 @@ public class WomanMenu {
 							break;
 						}
 						case 4:{
+							int id = woman.getId();
+							assignDisease(id);
+							break;
+						}
+						case 5:{
 							Disease disease = new Disease();
 							DiseaseMenu.menu(disease, conMan);
 							break;
@@ -156,8 +162,18 @@ public static void updateWoman(Woman woman) throws IOException {
 	default: {
 		System.out.println(" ERROR: Invalid option.");
 	}
-		
    }
 }
+
+public static void assignDisease(int woman_id) throws IOException {
+	System.out.println("Please, give me the name of the disease: ");
+	String diseaseType = r.readLine();
+	List<Disease> listDisease= diseaseMan.searchDiseaseByName(diseaseType);
+	System.out.println(listDisease);
+	System.out.println("Please choose a disease, type its Id:");
+	Integer diseaseId = Integer.parseInt(r.readLine());
+	womanMan.assignWomanToDisease(woman_id,diseaseId);
+}
+	
 
 }
