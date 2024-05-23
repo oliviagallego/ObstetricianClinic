@@ -35,18 +35,33 @@ public class PregnancyMenu {
 				System.out.println("\nChoose an option, please:");
 				System.out.println("\n1. Search pregnancy");
 				System.out.println("\n2. Add a pregnancy to the woman's data.");
+				System.out.println("\n3. Update pregnancy's Data");
+				System.out.println("\n4. View Newborns's Menu");
 				System.out.println("\n0. Exit");
 
 			
         int choice = Integer.parseInt(r.readLine());
 		switch (choice) {
 						case 1: {
-							Pregnancy pregSearch=pregnancySearch(woman);
-							subPregnancyMenu(pregSearch);
+							Pregnancy pregnancy=pregnancySearch(woman);
+							//subPregnancyMenu(pregSearch);
+							System.out.println(pregnancy);
 							break;
 						}
 						case 2: {
-							addPregancy(woman);
+							Pregnancy p= addPregancy(woman);
+							NewbornMenu.menu(p);
+							break;
+						}
+						case 3: {
+							Pregnancy pregnancy=pregnancySearch(woman);
+							updatePregancy(pregnancy);
+							System.out.println(pregnancy);
+							break;
+						}
+						case 4: {
+							Pregnancy pregnancy=pregnancySearch(woman);
+							NewbornMenu.menu(pregnancy);
 							break;
 						}
 						case 0: {
@@ -103,7 +118,7 @@ public static Pregnancy pregnancySearch(Woman woman) throws IOException {
 	
 	}	
 
-public static void addPregancy(Woman woman) throws IOException {
+public static Pregnancy addPregancy(Woman woman) throws IOException {
 	List<LabReport> reports = labReportMan.searchLabReportByWoman(woman.getId());
 	LabReport lastReport = null; 
 	
@@ -137,13 +152,15 @@ public static void addPregancy(Woman woman) throws IOException {
 	    	}*/
 	    	Pregnancy p = new Pregnancy(dateConception,textReport, woman);
 	    	pregMan.addPregnancy(p);
+	    	return p;
 	    }
+	    return null;
 	    }else {
 	    	System.out.println("The woman needs to take a laboratory test.");
-	    	
+	    	return null;
 	    }
 	}
-
+/*
 public static void subPregnancyMenu(Pregnancy pregnancy) {
 	while (true) {
 		try {
@@ -187,7 +204,7 @@ public static void subPregnancyMenu(Pregnancy pregnancy) {
 				}
 			}
 
-}
+}*/
 public static void updatePregancy(Pregnancy pregnancy) throws IOException {
 	System.out.println("Please what do you want to update of the pregnancy's data:");
 	System.out.println("\nChoose an option:");

@@ -33,15 +33,16 @@ public class WomanMenu {
 				System.out.println("\n1. View woman's data");
 				System.out.println("\n2. Update woman's data");
 				System.out.println("\n3. Delete woman's data");
-				System.out.println("\n4. Assign woman to disease");
+				System.out.println("\n4. Pregancies menu");
+				System.out.println("\n5. View laboratory reports");
+				System.out.println("\n6. Assign woman to disease");
 				System.out.println("\n0. Exit");
 
 			
         int choice = Integer.parseInt(r.readLine());
 		switch (choice) {
 						case 1: {
-							int id= woman.getId();
-							viewWoman(id,woman);
+							System.out.println(woman);
 							break;
 						}
 						case 2: {
@@ -55,6 +56,23 @@ public class WomanMenu {
 							return;
 						}
 						case 4:{
+							PregnancyMenu.menu(woman);
+							break;
+						}
+						case 5:{
+							List<LabReport> l= labReportMan.searchLabReportByWoman(woman.getId());
+							if(l.isEmpty()) {
+								System.out.println("\nWe are sorry "+woman.getName()+" "+woman.getSurname()+" doesn't have laboratory reports recorded.");
+							}else {
+								System.out.println("\nThe labreports of "+woman.getName()+" "+woman.getSurname()+" are: ");
+								for(int i= 0; i<l.size(); i++) {
+									LabReport o= l.get(i);
+					            	System.out.println((i+1)+"- "+o);
+					            }
+							}
+							break;
+						}						
+						case 6:{
 							int id = woman.getId();
 							assignDisease(id);
 							break;
@@ -82,7 +100,7 @@ public class WomanMenu {
 				
 
                
-
+/*
 public static void viewWoman(int id, Woman woman) throws IOException {
 	System.out.println("Please what do you want to see of the woman's data:");
 	System.out.println("\nChoose an option:");
@@ -112,7 +130,7 @@ public static void viewWoman(int id, Woman woman) throws IOException {
 		
 	}	
 
-}
+}*/
 
 public static void updateWoman(Woman woman) throws IOException {
 	System.out.println("Please what do you want to update of the woman's data:");
