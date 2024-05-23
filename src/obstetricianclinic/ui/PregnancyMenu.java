@@ -50,7 +50,7 @@ public class PregnancyMenu {
 							break;
 						}
 						case 0: {
-							conMan.closeConnection();
+							//conMan.closeConnection();
 							return;
 						}
 						default: {

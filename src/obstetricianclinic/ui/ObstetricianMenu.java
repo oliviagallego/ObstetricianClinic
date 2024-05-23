@@ -66,7 +66,7 @@ public class ObstetricianMenu {
 						}
 						
 						case 0: {
-							conMan.closeConnection();
+							//conMan.closeConnection();
 							return;
 						}
 						default: {

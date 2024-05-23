@@ -75,7 +75,7 @@ public class NewbornMenu {
 							break;
 						}
 						case 0: {
-							conMan.closeConnection();
+							//conMan.closeConnection();
 							return;
 						}
 						default: {
