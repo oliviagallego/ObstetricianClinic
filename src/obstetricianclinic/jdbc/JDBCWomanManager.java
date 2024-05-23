@@ -123,6 +123,28 @@ public class JDBCWomanManager implements WomanManager {
 		}
 		return list;
 	}
+	public List<Woman> listWomen() {
+		List<Woman> list = new ArrayList<Woman>();
+		try {
+			String sql = "SELECT * FROM women";
+			PreparedStatement p = c.prepareStatement(sql);
+			ResultSet rs = p.executeQuery();
+			while (rs.next()) {
+				// Create a new Woman
+				Integer woman_id= rs.getInt("obstetrician_id");
+				String name= rs.getString("name");
+				String surname= rs.getString("surname");
+				Date dob= rs.getDate("dob");
+				Float weight= rs.getFloat("weight");
+				Woman w= new Woman(woman_id, name, surname, dob, weight);
+				list.add(w);
+			}
+		} catch (SQLException e) {
+			System.out.println("Database error.");
+			e.printStackTrace();
+		}
+		return list;
+	}
 
 	@Override
 	public void assignWomanToDisease(int woman_id, int disease_id) {

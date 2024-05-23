@@ -11,5 +11,5 @@ public interface WomanManager {
 	public void deleteWoman(int id);
 	public void assignWomanToDisease(int woman_id, int disease_id);
 	public Woman getWoman(int id);
-
+	public List<Woman> listWomen();
 }

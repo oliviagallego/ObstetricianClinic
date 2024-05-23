@@ -63,7 +63,6 @@ public class ManagerMenu {
 				break;
 				}		
 			case 0: {
-				conMan.closeConnection();
 				return;
 				}
 			default: {

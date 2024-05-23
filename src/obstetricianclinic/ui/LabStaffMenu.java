@@ -48,12 +48,11 @@ public class LabStaffMenu {
         		switch (choice) {
         		
         		case 1: {
-					 addLabReport();
+					 addLabReport(labStaff);
 					break;
 				}
 				
 				case 0: {
-					conMan.closeConnection();
 					return;
 				}
 				default: {
@@ -69,7 +68,7 @@ public class LabStaffMenu {
 			}
         }
     }
-	public static void addLabReport() throws IOException {
+	public static void addLabReport(LabStaff labStaff) throws IOException {
         try {
             System.out.println("\nLaboratory report:");
             System.out.println("\nDate of test (dd-MM-yyyy):");
@@ -78,8 +77,12 @@ public class LabStaffMenu {
             Date dateTestDate = Date.valueOf(dobLocalDate);
             System.out.println("Is the pregnancy test positive(true) or negative (false)? ");
             boolean testResult = Boolean.parseBoolean(r.readLine());
-
-            LabReport labreport = new LabReport(dateTestDate, testResult);
+            System.out.println("\nThe women of our database are: ");
+            System.out.println(womanMan.listWomen());
+            System.out.println("\nSelect a woman by id: ");
+            int id=Integer.parseInt(r.readLine());
+            Woman w=womanMan.getWoman(id);
+            LabReport labreport = new LabReport(dateTestDate, testResult, w,labStaff );
             labReportMan.addLabReport(labreport);
             System.out.println("Laboratory report added successfully.");
         } catch (DateTimeParseException e) {

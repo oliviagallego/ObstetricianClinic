@@ -55,6 +55,14 @@ public class LabReport implements Serializable{
 	}
 	
 
+	public LabReport(Date date_Test, boolean pregnant, Woman woman, LabStaff labStaff) {
+		super();
+		this.date_Test = date_Test;
+		this.pregnant = pregnant;
+		this.woman = woman;
+		this.labStaff = labStaff;
+	}
+
 	public LabReport(Date date_Test, boolean pregnant) {
 		super();
 		this.date_Test = date_Test;
