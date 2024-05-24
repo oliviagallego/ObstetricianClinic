@@ -54,7 +54,7 @@ public class NewbornMenu {
 				System.out.println("\n1. Register a newborns");
 				System.out.println("\n2. Update newborn ");
 				System.out.println("\n3. View newborn ");
-				System.out.println("\n0. Exit");
+				System.out.println("\n0. Back");
 
 			
         int choice = Integer.parseInt(r.readLine());

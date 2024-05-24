@@ -37,7 +37,7 @@ public class PregnancyMenu {
 				System.out.println("\n2. Add a pregnancy to the woman's data.");
 				System.out.println("\n3. Update pregnancy's Data");
 				System.out.println("\n4. View Newborns's Menu");
-				System.out.println("\n0. Exit");
+				System.out.println("\n0. Back");
 
 			
         int choice = Integer.parseInt(r.readLine());

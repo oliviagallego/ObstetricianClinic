@@ -36,7 +36,7 @@ public class WomanMenu {
 				System.out.println("\n4. Pregancies menu");
 				System.out.println("\n5. View laboratory reports");
 				System.out.println("\n6. Assign woman to disease");
-				System.out.println("\n0. Exit");
+				System.out.println("\n0. Back");
 
 			
         int choice = Integer.parseInt(r.readLine());

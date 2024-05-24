@@ -30,7 +30,7 @@ public class DiseaseMenu {
 				System.out.println("\nChoose an option, please:");
 				System.out.println("\n1. Add disease");
 				System.out.println("\n2. Select disease to update");
-				System.out.println("\n0. Exit");
+				System.out.println("\n0. Back");
 
 			
         int choice = Integer.parseInt(r.readLine());
