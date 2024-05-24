@@ -54,10 +54,10 @@ public class ObstetricianMenu {
 							break;
 						}
 						case 3: {
-							System.out.println("\nChange password:");
-							String password = Utilities.readString(" -Type new password: ");
+							System.out.println("\nChanging Manager Password: ");
+							String password = Utilities.readString("\nType new password: ");
 							user = userMan.changePassword(user, password);
-							System.out.println(" -Password changed correctly to " + user.getPassword());
+							System.out.println("\nPassword changed correctly to " + user.getPassword());
 							break;
 						}
 						case 4:{

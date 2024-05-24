@@ -43,6 +43,7 @@ public class LabStaffMenu {
         		System.out.println("Welcome to the LabStaff clinic!!");
         		System.out.println("Choose an option, please:");
         		System.out.println("1. Add Laboratory Reports");
+        		System.out.println("2. Change password");
         		System.out.println("0. Log out");
         		int choice = Integer.parseInt(r.readLine());
         		switch (choice) {
@@ -51,7 +52,13 @@ public class LabStaffMenu {
 					 addLabReport(labStaff);
 					break;
 				}
-				
+        		case 2: {
+        			System.out.println("\nChanging Manager Password: ");
+    				String password = Utilities.readString("\nType new password: ");
+    				user = man.changePassword(user, password);
+    				System.out.println("\nPassword changed correctly to " + user.getPassword());
+    				break;
+				}
 				case 0: {
 					return;
 				}
