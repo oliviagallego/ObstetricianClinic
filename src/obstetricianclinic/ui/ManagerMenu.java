@@ -6,11 +6,10 @@ import java.io.InputStreamReader;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-
+import obstetricianclinic.xml.*;
 import obstetricianclinic.ifaces.*;
 import obstetricianclinic.pojos.*;
 import obstetricianclinic.jdbc.*;
-
 public class ManagerMenu {
 	
 	private static BufferedReader r = new BufferedReader(new InputStreamReader(System.in));
@@ -19,14 +18,22 @@ public class ManagerMenu {
 	private static ObstetricianManager obstetricianMan;
 	private static UserManager userMan; 
 	private static XMLManager xmlMan;
+	
+	public ManagerMenu(User user, UserManager userMan, ConnectionManager conMan, XMLManager xmlMan) {
+		this.labStaffMan=conMan.getLabStaffMan();
+		this.obstetricianMan=conMan.getObstetricianMan();
+		this.userMan= userMan; 
+		this.xmlMan=xmlMan;
+	}
 
-
-	public static void menu(User user, UserManager userMan, ConnectionManager conMan, XMLManager xmlMan)  throws IOException, Exception, SQLException  {
+	public static void menu(User user, UserManager userMan, ConnectionManager conMan)  throws IOException, Exception, SQLException  {
 
 		obstetricianMan = conMan.getObstetricianMan();
 		labStaffMan= conMan.getLabStaffMan();
 		ManagerMenu.userMan = userMan; 
+		 
 		
+		    
 		
 		while(true) {
 			try {
@@ -70,14 +77,14 @@ public class ManagerMenu {
 			case 6:{
 				System.out.println("\nSave obstetrician information to a file:");
 				Obstetrician g= searchObstetricianByNameAndSurname(user.getId());
-				saveObstetricianToFile(g.getId());
+				saveObstetricianToFile(g);
 				
 				break;
 				}
 			case 7:{
 				System.out.println("\nSave labstaff information to a file:");
 				LabStaff l= searchLabStaffByNameAndSurname(user.getId());
-				saveLabstaffToFile(l.getId());
+				saveLabstaffToFile(l);
 				
 				break;
 				}
@@ -245,24 +252,17 @@ public class ManagerMenu {
 	   }
 	
 }
-	private static void saveObstetricianToXml(Integer obstetrician_id) {
-		
-		if(obstetrician_id != null){
-			Obstetrician obstetrician = obstetricianMan.getObstetrician(obstetrician_id);
-			System.out.println(obstetrician.toString());
-			xmlMan.obstetrician2Xml(obstetrician);
+	private static void saveObstetricianToXml(Obstetrician obstetrician) {
+		System.out.println(obstetrician.toString());
+		xmlMan.obstetrician2Xml(obstetrician);
 		}
-	}
-private static void saveObstetricianToHtml(Integer obstetrician_id) {
-		
-		
-		if(obstetrician_id != null){
-			Obstetrician obstetrician = obstetricianMan.getObstetrician(obstetrician_id);
-			System.out.println(obstetrician.toString());
-			xmlMan.obstetrician2Html(obstetrician);
+	
+private static void saveObstetricianToHtml(Obstetrician obstetrician) {
+	    System.out.println(obstetrician.toString());
+		xmlMan.obstetrician2Html(obstetrician);
 		}
-	}
-private static void saveObstetricianToFile(Integer obstetrician_id) {
+	
+private static void saveObstetricianToFile(Obstetrician obstetrician ) {
 	
 	System.out.println(" -Choose file type: "
 			+ "\n   1. XML file"
@@ -272,34 +272,29 @@ private static void saveObstetricianToFile(Integer obstetrician_id) {
 	switch(file) {
 		case 1:
 			System.out.println("Save to XML file:");
-			saveObstetricianToXml(obstetrician_id);
+			saveObstetricianToXml(obstetrician);
 			break;
 		case 2:
 			System.out.println("Save to HTML file:");
-			saveObstetricianToHtml(obstetrician_id);
+			saveObstetricianToHtml(obstetrician);
 			break;
 		default:
 			System.out.println(" ERROR: invalid option.");
 	}
 }
-private static void saveLabStaffToXml(Integer labStaff_id) {
+private static void saveLabStaffToXml(LabStaff labStaff ) {
 	
-	if(labStaff_id != null){
-		LabStaff labstaff = labStaffMan.getLabStaff(labStaff_id);
-		System.out.println(labstaff.toString());
-		xmlMan.labstaff2Xml(labstaff);
+	    System.out.println(labStaff.toString());
+		xmlMan.labstaff2Xml(labStaff);
 	}
-}
-private static void saveLabStaffToHtml(Integer labStaff_id) {
+
+private static void saveLabStaffToHtml(LabStaff labStaff) {
 	
-	
-	if(labStaff_id != null){
-		LabStaff labstaff = labStaffMan.getLabStaff(labStaff_id);
-		System.out.println(labstaff.toString());
-		xmlMan.labstaff2Html(labstaff);
+	    System.out.println(labStaff.toString());
+		xmlMan.labstaff2Html(labStaff);
 	}
-}
-private static void saveLabstaffToFile(Integer labStaff_id) {
+
+private static void saveLabstaffToFile(LabStaff labStaff) {
 	
 	System.out.println(" -Choose file type: "
 			+ "\n   1. XML file"
@@ -309,11 +304,11 @@ private static void saveLabstaffToFile(Integer labStaff_id) {
 	switch(file) {
 		case 1:
 			System.out.println("Save to XML file:");
-			saveLabStaffToXml(labStaff_id);
+			saveLabStaffToXml(labStaff);
 			break;
 		case 2:
 			System.out.println("Save to HTML file:");
-			saveLabStaffToHtml(labStaff_id);
+			saveLabStaffToHtml(labStaff);
 			break;
 		default:
 			System.out.println(" ERROR: invalid option.");

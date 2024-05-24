@@ -15,8 +15,8 @@ import obstetricianclinic.xml.SQLDateAdapter;
 import java.io.Serializable;
 
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlRootElement(name = "LabReport")
-@XmlType(propOrder = { "dateTest", "pregnant", "woman", "labStaff"}) 
+@XmlRootElement(name = "labReports")
+@XmlType(propOrder = { "date_Test", "pregnant", "woman"}) 
 public class LabReport implements Serializable{
 	/**
 	 * 
@@ -29,9 +29,9 @@ public class LabReport implements Serializable{
 	private Date date_Test;
 	@XmlElement
 	private boolean pregnant;
-	@XmlElement(name = "woman")
+	@XmlElement(name = "women")
 	private Woman woman;
-	@XmlElement(name = "labStaff")
+	@XmlTransient
 	private LabStaff labStaff;
 	
 	public LabReport() {
