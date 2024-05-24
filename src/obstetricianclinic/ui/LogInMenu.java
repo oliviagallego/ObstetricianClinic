@@ -24,11 +24,12 @@ public abstract class LogInMenu{
 				System.out.print("\nWelcome to the Obstetrician Clinic!");
 			
 
-				
-				/*String usernameManager = "Manager";
+				/*
+				String usernameManager = "Manager";
 				String passwordManager = "Manager123";
+				String hashedpassword3= userMan.encryptPassword(passwordManager);
 				Role roleManager = userMan.getRole("manager");
-				User manager = new User(usernameManager, passwordManager);
+				User manager = new User(usernameManager, hashedpassword3);
 				userMan.register(manager);
 		
 				userMan.assignRole(manager, roleManager);
@@ -39,8 +40,9 @@ public abstract class LogInMenu{
 					String username = r.readLine();
 					System.out.println("\nPasword:");
 					String password = r.readLine();
+					String hashedpassword= userMan.encryptPassword(password);
 					
-					User user = userMan.logIn(username, password);
+					User user = userMan.logIn(username, hashedpassword);
 					// User user = userMan.logIn("manager", "default0", "manager@obstetricianClinic.com");
 
 					if (user != null) {

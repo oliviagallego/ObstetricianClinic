@@ -3,6 +3,8 @@ package obstetricianclinic.ui;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -122,10 +124,11 @@ public class ManagerMenu {
 		String username = r.readLine();
 		System.out.println("Password:");
 		String password = r.readLine();
+		String hashedpassword2= userMan.encryptPassword(password);
 		Obstetrician obstetrician = new Obstetrician(name, surname,username);
 		obstetricianMan.addObstetrician(obstetrician);
 		
-		User user = new User(username, password);
+		User user = new User(username, hashedpassword2);
 		userMan.register(user);
 		Role role = userMan.getRole("obstetrician");
 		userMan.assignRole(user, role);
@@ -149,10 +152,10 @@ public class ManagerMenu {
 		String username = r.readLine();
 		System.out.println("Password:");
 		String password = r.readLine();
-		
+		String hashedpassword= userMan.encryptPassword(password);
 		LabStaff labStaff = new LabStaff(name, surname, username);
 		labStaffMan.addLabStaff(labStaff);
-		User user = new User(username, password);
+		User user = new User(username, hashedpassword);
 		userMan.register(user);
 		Role role = userMan.getRole("labStaff");
 		userMan.assignRole(user, role);
@@ -313,6 +316,8 @@ private static void saveLabstaffToFile(LabStaff labStaff) {
 		default:
 			System.out.println(" ERROR: invalid option.");
 	
-}
 	}
+	}
+
+
 }
