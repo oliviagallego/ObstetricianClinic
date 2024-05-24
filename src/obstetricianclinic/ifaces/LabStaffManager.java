@@ -8,4 +8,5 @@ public  interface LabStaffManager {
 	public void updateLabStaff(LabStaff labStaff);
 	List<LabStaff> searchLabStaffByNameAndSurname(String name, String surname, String username);
 	public LabStaff getLabStaffFromUser(String username);
+	public LabStaff getLabStaff(Integer id_labstaff);
 }

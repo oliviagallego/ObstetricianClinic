@@ -13,14 +13,14 @@ public abstract class LogInMenu{
 	
 	private static UserManager userMan;
 	private static BufferedReader r = new BufferedReader(new InputStreamReader(System.in));
-	
+	private static XMLManager xmlMan;
 	public static void main(String[] Args) throws SQLException { // throws NumberFormatException, IOException, Exception{
 			
 			try {
 				ConnectionManager conMan = new ConnectionManager();
 				
 				userMan = new JPAUserManager();
-
+				xmlMan = conMan.getXmlMan();
 				System.out.print("\nWelcome to the Obstetrician Clinic!");
 			
 
@@ -45,7 +45,7 @@ public abstract class LogInMenu{
 
 					if (user != null) {
 		                if (user.getRole().getName().equals("manager")) {
-		                    ManagerMenu.menu(user, userMan, conMan);
+		                    ManagerMenu.menu(user, userMan, conMan, xmlMan);
 
 		                } else if (user.getRole().getName().equals("obstetrician")) {
 		                    ObstetricianMenu.menu(user, userMan, conMan);

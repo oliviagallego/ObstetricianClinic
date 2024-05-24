@@ -175,5 +175,29 @@ public class JDBCLabStaffManager implements LabStaffManager {
 	        }
 	        return null;
 	    }
+
+
+
+	@Override
+	public LabStaff getLabStaff(Integer labStaff_id) {
+		try {
+			String sql = "SELECT * FROM obstetricians WHERE labStaff_id = ?";
+			PreparedStatement p = c.prepareStatement(sql);
+			p.setInt(1, labStaff_id);
+			ResultSet rs = p.executeQuery();
+			rs.next();
+			String name = rs.getString("name");
+			String username= rs.getString("username");
+			String surname = rs.getString("surname");
+			LabStaff obs = new LabStaff(labStaff_id, name, surname, username);
+			rs.close();
+			p.close();
+			return obs;
+		} catch (SQLException e) {
+			System.out.println("Database error.");
+			e.printStackTrace();
+		}
+		return null;
+	}
 	
 }

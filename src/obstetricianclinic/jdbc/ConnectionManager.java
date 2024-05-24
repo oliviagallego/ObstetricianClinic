@@ -6,6 +6,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import obstetricianclinic.xml.XMLManagerImpl;
 import obstetricianclinic.ifaces.*;
 
 public class ConnectionManager {
@@ -18,6 +19,7 @@ public class ConnectionManager {
 	private DiseaseManager diseaseMan;
 	private LabReportManager labReportMan;
 	private LabStaffManager labStaffMan;
+	private static XMLManager xmlMan;
 	
 	public ConnectionManager() {
 		try {
@@ -35,6 +37,7 @@ public class ConnectionManager {
 			this.diseaseMan = new JDBCDiseaseManager(this);
 			this.labReportMan= new JDBCLabReportManager(this);
 			this.labStaffMan= new JDBCLabStaffManager(this);
+			this.xmlMan = new XMLManagerImpl();
 			
 			
 		}catch (Exception e) {
@@ -101,7 +104,9 @@ public class ConnectionManager {
 	public LabStaffManager getLabStaffMan() {
 		return labStaffMan;
 	}
-
+	public XMLManager getXmlMan() {
+		return xmlMan;
+	}
 
 
 
