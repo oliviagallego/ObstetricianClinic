@@ -43,7 +43,7 @@ public class LabStaffMenu {
         		System.out.println("Welcome to the LabStaff clinic!!");
         		System.out.println("Choose an option, please:");
         		System.out.println("1. Add Laboratory Reports");
-        		System.out.println("0. Exit");
+        		System.out.println("0. Log out");
         		int choice = Integer.parseInt(r.readLine());
         		switch (choice) {
         		
