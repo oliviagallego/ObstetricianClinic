@@ -1,13 +1,16 @@
 package obstetricianclinic.ui;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
+
 import obstetricianclinic.xml.*;
 import obstetricianclinic.ifaces.*;
 import obstetricianclinic.pojos.*;
@@ -47,6 +50,7 @@ public class ManagerMenu {
 					+ "\n 5. Change Password" 
 					+ "\n 6. XML Obstetrician"
 					+ "\n 7. XML LabStaff"
+					+ "\n 8. Add Worker From XML file"
 					+ "\n 0. Log out");
 			int option = Utilities.readInteger("Choose an option: ");
 
@@ -88,6 +92,11 @@ public class ManagerMenu {
 				LabStaff l= searchLabStaffByNameAndSurname(user.getId());
 				saveLabstaffToFile(l);
 				
+				break;
+				}
+			case 8: {
+				List<String> file = getXMLFilenamesInFolder();
+				loadFromXml(file);
 				break;
 				}
 			case 0: {
@@ -318,6 +327,58 @@ private static void saveLabstaffToFile(LabStaff labStaff) {
 	
 	}
 	}
+private static List<String> getXMLFilenamesInFolder() {
+	
+	List<String> xmlFileNames = new ArrayList<>();
+	File folder = new File("./xmls");
+
+	if (folder.isDirectory()) {
+		File[] files = folder.listFiles();
+
+		if (files != null) {
+			for (File file : files) {
+				if (file.isFile() && file.getName().toLowerCase().endsWith(".xml")) {
+					xmlFileNames.add(file.getName());
+				}
+			}
+		}
+	}
+	return xmlFileNames;
+}
+private static void loadFromXml(List<String> fileNames) {
+	
+	int cont = 1;
+	System.out.println(" -Witch file do you want to load: ");
+	Iterator<String> it = fileNames.iterator();
+	while(it.hasNext()) {
+		System.out.println("   " + cont + ". " + it.next());
+		cont++;
+	}
+	
+	int option = 0;
+	do {
+		option = Utilities.readInteger(" -Choose file: ") - 1;
+		if(option < 0 || option >= fileNames.size()) {
+			System.out.println(" ERROR: Invalid option.");
+		}
+	} while(option < 0 || option >= fileNames.size());
+	
+	File fileName = new File("./xmls/" + fileNames.get(option));
+	
+	if(fileNames.get(option).endsWith("-Labstaff.xml")){
+		LabStaff b = xmlMan.xml2LabStaff(fileName);
+		labStaffMan.addLabStaff(b);
+	}
+	if(fileNames.get(option).endsWith("-Obstetrician.xml")) {
+		Obstetrician n = xmlMan.xml2Obstetrician(fileName);
+		try {
+			obstetricianMan.addObstetrician(n);
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		}		
+	} 
+}
 
 
 }

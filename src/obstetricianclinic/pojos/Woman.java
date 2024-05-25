@@ -26,9 +26,9 @@ public class Woman implements Serializable{
 	private static final long serialVersionUID = 3355504574744043511L;
 	@XmlTransient
     private Integer id;
-	@XmlElement
+	@XmlElement(name = "names")
 	private String name;
-	@XmlElement
+	@XmlElement(name = "surnames")
     private String surname;
 	@XmlElement
 	@XmlJavaTypeAdapter(SQLDateAdapter.class)
