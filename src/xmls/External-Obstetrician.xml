@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE Obstetrician[
+
+	<!ELEMENT Obstetrician (name, surname, username, women)>
+	<!ELEMENT name (#PCDATA)>
+	<!ELEMENT surname (#PCDATA)>
+	<!ELEMENT username (#PCDATA)>
+	<!ELEMENT women (Woman*)>
+
+        <!ELEMENT Woman (name, surname, dob, weight)>
+		<!ELEMENT names (#PCDATA)>
+		<!ELEMENT surnames (#PCDATA)>
+		<!ELEMENT dob (#PCDATA)>
+		<!ELEMENT weight (#PCDATA)>
+		<!ELEMENT obstetrician (name, surname, username)>
+		]>
+		
+
+<Obstetrician>
+    <name>John</name>
+    <surname>Doe</surname>
+    <username>PedroViseras</username>
+    <women>
+        <Woman>
+            <name>Jane</name>
+            <surname>Smith</surname>
+            <dob>1990-01-01</dob>
+            <weight>60.5</weight> 
+        </Woman>
+        <Woman>
+            <name>Maria</name>
+            <surname>Johnson</surname>
+            <dob>1995-05-15</dob>
+            <weight>55.0</weight>
+        </Woman>
+    </women>
+</Obstetrician>
+

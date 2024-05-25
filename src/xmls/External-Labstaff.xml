@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE LabStaff[
+<!ELEMENT LabStaff (name, surname, username, labReports)>
+<!ELEMENT name (#PCDATA)>
+<!ELEMENT surname (#PCDATA)>
+<!ELEMENT username (#PCDATA)>
+<!ELEMENT labReports (LabReport*)>
+
+<!ELEMENT LabReport (date_Test, pregnant)>
+<!ELEMENT date_Test (#PCDATA)>
+<!ELEMENT pregnant (#PCDATA)>
+]> 
+
+<LabStaff>
+    <name>Emily</name>
+    <surname>Clark</surname>
+    <username>eclark</username>
+    <labReports>
+        <LabReport>
+            <date_Test>2023-05-20</date_Test>
+            <pregnant>true</pregnant>
+        </LabReport>
+        <LabReport>
+            <date_Test>2023-06-15</date_Test>
+            <pregnant>false</pregnant>
+        </LabReport>
+    </labReports>
+</LabStaff>
+
