@@ -11,6 +11,7 @@ import java.time.format.DateTimeParseException;
 import java.util.List;
 import obstetricianclinic.ifaces.*;
 import obstetricianclinic.jdbc.*;
+import obstetricianclinic.jpa.JPAUserManager;
 import obstetricianclinic.pojos.*;
 
 public class LabStaffMenu {
@@ -21,7 +22,7 @@ public class LabStaffMenu {
 	private static WomanManager womanMan;
 	private static LabReportManager labReportMan;
 	private static LabStaffManager labStaffMan;
-	
+	private static UserManager userMan;
 	public static void menu(User user, UserManager man, ConnectionManager conMan) {
 		/*if (user.getRole() == null || !user.getRole().getName().equals("labStaff")) {
             System.out.println("Access Denied: You do not have the necessary permissions to access this menu.");
@@ -31,6 +32,7 @@ public class LabStaffMenu {
 		womanMan = conMan.getWomanMan();
 		labStaffMan = conMan.getLabStaffMan();
 		labReportMan = conMan.getLabReportMan();
+		userMan = new JPAUserManager();
 		
 		LabStaff labStaff = labStaffMan.getLabStaffFromUser(user.getUsername());
 	    if (labStaff == null) {
@@ -55,7 +57,8 @@ public class LabStaffMenu {
         		case 2: {
         			System.out.println("\nChanging Manager Password: ");
     				String password = Utilities.readString("\nType new password: ");
-    				user = man.changePassword(user, password);
+    				String hashedpassword= userMan.encryptPassword(password);
+    				user = man.changePassword(user, hashedpassword);
     				System.out.println("\nPassword changed correctly to " + user.getPassword());
     				break;
 				}

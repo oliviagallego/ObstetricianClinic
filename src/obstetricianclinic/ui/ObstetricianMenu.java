@@ -56,7 +56,8 @@ public class ObstetricianMenu {
 						case 3: {
 							System.out.println("\nChanging Manager Password: ");
 							String password = Utilities.readString("\nType new password: ");
-							user = userMan.changePassword(user, password);
+							String hashedpassword= userMan.encryptPassword(password);
+							user = userMan.changePassword(user, hashedpassword);
 							System.out.println("\nPassword changed correctly to " + user.getPassword());
 							break;
 						}
