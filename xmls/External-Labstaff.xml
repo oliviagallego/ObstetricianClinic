@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <LabStaff>
-    <name>Nico</name>
-    <surname>Sicilia</surname>
-    <username>nsicilia</username>
-    <labReports/>
+    <name>Juan</name>
+    <surname>Juan</surname>
+    <username>jj</username>
 </LabStaff>
