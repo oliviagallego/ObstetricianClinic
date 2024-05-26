@@ -199,5 +199,21 @@ public class JDBCLabStaffManager implements LabStaffManager {
 		}
 		return null;
 	}
+
+
+
+	@Override
+	public String getUsername(LabStaff labstaff) throws SQLException {
+		String sql = "SELECT * FROM labStaffs WHERE username = ?";
+		PreparedStatement p = c.prepareStatement(sql);
+		p.setString(1, labstaff.getUsername());
+		ResultSet rs = p.executeQuery();
+		String name = rs.getString("username");
+		rs.close();
+		p.close();
+		return name;
+		
+
+	}
 	
 }

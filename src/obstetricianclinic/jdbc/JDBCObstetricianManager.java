@@ -217,6 +217,18 @@ public class JDBCObstetricianManager implements ObstetricianManager {
 
 		return null;
 	}
+
+	@Override
+	public String getUsername(Obstetrician obstetrician) throws SQLException {
+		String sql = "SELECT * FROM obstetricians WHERE username = ?";
+		PreparedStatement p = c.prepareStatement(sql);
+		p.setString(1, obstetrician.getUsername());
+		ResultSet rs = p.executeQuery();
+		String name = rs.getString("username");
+		rs.close();
+		p.close();
+		return name;
+	}
 	
 
 }

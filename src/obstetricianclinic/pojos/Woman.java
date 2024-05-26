@@ -8,6 +8,7 @@ import java.util.Objects;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
@@ -17,14 +18,13 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import obstetricianclinic.xml.SQLDateAdapter;
 
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlRootElement(name = "women")
-@XmlType(propOrder = { "name", "surname", "dob", "weight", "obstetrician"})
+@XmlType(propOrder = { "name", "surname", "dob", "weight", "obstetrician" })
 public class Woman implements Serializable{
     /**
 	 * 
 	 */
 	private static final long serialVersionUID = 3355504574744043511L;
-	@XmlTransient
+	@XmlAttribute 
     private Integer id;
 	@XmlElement(name = "names")
 	private String name;

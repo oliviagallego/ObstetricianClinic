@@ -97,6 +97,7 @@ public class ManagerMenu {
 			case 8: {
 				List<String> file = getXMLFilenamesInFolder();
 				loadFromXml(file);
+				System.out.println("Worker Added succesfully");
 				break;
 				}
 			case 0: {
@@ -345,11 +346,11 @@ private static List<String> getXMLFilenamesInFolder() {
 	}
 	return xmlFileNames;
 }
-private static void loadFromXml(List<String> fileNames) {
+private static void loadFromXml(List<String> xmlFileNames) throws IOException, SQLException {
 	
 	int cont = 1;
 	System.out.println(" -Witch file do you want to load: ");
-	Iterator<String> it = fileNames.iterator();
+	Iterator<String> it = xmlFileNames.iterator();
 	while(it.hasNext()) {
 		System.out.println("   " + cont + ". " + it.next());
 		cont++;
@@ -358,21 +359,37 @@ private static void loadFromXml(List<String> fileNames) {
 	int option = 0;
 	do {
 		option = Utilities.readInteger(" -Choose file: ") - 1;
-		if(option < 0 || option >= fileNames.size()) {
+		if(option < 0 || option >= xmlFileNames.size()) {
 			System.out.println(" ERROR: Invalid option.");
 		}
-	} while(option < 0 || option >= fileNames.size());
+	} while(option < 0 || option >= xmlFileNames.size());
 	
-	File fileName = new File("./xmls/" + fileNames.get(option));
+	File fileName = new File("./xmls/" + xmlFileNames.get(option));
 	
-	if(fileNames.get(option).endsWith("-Labstaff.xml")){
+	if(xmlFileNames.get(option).endsWith("-Labstaff.xml")){
 		LabStaff b = xmlMan.xml2LabStaff(fileName);
 		labStaffMan.addLabStaff(b);
+		System.out.println("Give this workers password");
+		String password = r.readLine();
+		String hashedpassword2= userMan.encryptPassword(password);
+		String username= labStaffMan.getUsername(b);
+		User user = new User(username, hashedpassword2);
+		userMan.register(user);
+		Role role = userMan.getRole("labStaff");
+		userMan.assignRole(user, role);
 	}
-	if(fileNames.get(option).endsWith("-Obstetrician.xml")) {
+	if(xmlFileNames.get(option).endsWith("-Obstetrician.xml")) {
 		Obstetrician n = xmlMan.xml2Obstetrician(fileName);
 		try {
 			obstetricianMan.addObstetrician(n);
+			System.out.println("Give this workers password");
+			String password = r.readLine();
+			String hashedpassword2= userMan.encryptPassword(password);
+			String username= obstetricianMan.getUsername(n);
+			User user = new User(username, hashedpassword2);
+			userMan.register(user);
+			Role role = userMan.getRole("obstetrician");
+			userMan.assignRole(user, role);
 		} catch (SQLException e) {
 			
 			e.printStackTrace();

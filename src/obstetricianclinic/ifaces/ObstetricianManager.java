@@ -9,5 +9,5 @@ public interface ObstetricianManager {
     public Obstetrician getObstetrician(int id);
     public List<Obstetrician> searchObstetricianByNameAndSurname(String name, String username, String surname);
     public Obstetrician getObstetricianFromUser(String username);
-    
+    public String getUsername(Obstetrician obstetrician) throws SQLException;
 }

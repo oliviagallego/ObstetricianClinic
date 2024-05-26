@@ -7,6 +7,7 @@ import java.util.Objects;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -28,9 +29,10 @@ public class Obstetrician implements Serializable{
 	private String username;
 	@XmlElement
 	private String surname;
-	@XmlTransient
+	@XmlAttribute
 	private Integer id;
 	@XmlElementWrapper(name = "women")
+    @XmlElement(name = "woman")
 	private List<Woman> women;
 	
 	
