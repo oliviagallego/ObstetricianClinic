@@ -38,7 +38,7 @@ public abstract class LogInMenu{
 					System.out.println("\nLog-In menu");
 					System.out.println("\nUsername:");
 					String username = r.readLine();
-					System.out.println("\nPasword:");
+					System.out.println("\nPassword:");
 					String password = r.readLine();
 					String hashedpassword= userMan.encryptPassword(password);
 					

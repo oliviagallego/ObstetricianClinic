@@ -20,9 +20,8 @@ public class XMLManagerImpl implements XMLManager {
 	public File obstetrician2Xml (Obstetrician obstetrician) {
 		
 		try {
-			// Create the JAXBContext
+			
 			JAXBContext jaxbContext = JAXBContext.newInstance(Obstetrician.class);
-			// Get the marshaler
 			Marshaller marshaller = jaxbContext.createMarshaller();
 			marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
 			File file = new File("./xmls/External-Obstetrician.xml");
@@ -66,7 +65,7 @@ public class XMLManagerImpl implements XMLManager {
 	}
 	public File labstaff2Xml(LabStaff labstaff) {
 		try {
-			// Create the JAXBContext
+
 			JAXBContext jaxbContext = JAXBContext.newInstance(LabStaff.class);
 			// Get the marshaler
 			Marshaller marshaller = jaxbContext.createMarshaller();
@@ -83,10 +82,9 @@ public class XMLManagerImpl implements XMLManager {
 	public LabStaff xml2LabStaff(File xml){
 		
 		try {
-			// Create the JAXBContext
+			
 			JAXBContext jaxbContext = JAXBContext.newInstance(LabStaff.class);
 
-			// Get the unmarshaler
 			Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
 			LabStaff labstaff = (LabStaff) unmarshaller.unmarshal(xml);
 			return labstaff;
