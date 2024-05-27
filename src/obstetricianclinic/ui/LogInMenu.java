@@ -25,7 +25,7 @@ public abstract class LogInMenu{
 			
 
 				/*
-				String usernameManager = "Manager";
+				String usernameManager = "Manager2";
 				String passwordManager = "Manager123";
 				String hashedpassword3= userMan.encryptPassword(passwordManager);
 				Role roleManager = userMan.getRole("manager");
