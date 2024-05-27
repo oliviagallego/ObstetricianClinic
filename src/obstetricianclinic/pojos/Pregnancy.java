@@ -7,6 +7,7 @@ import java.util.Objects;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
@@ -25,7 +26,7 @@ public class Pregnancy implements Serializable{
 	 * 
 	 */
 	private static final long serialVersionUID = 8679593455988548890L;
-	@XmlTransient
+	@XmlAttribute
 	private Integer id;
 	@XmlElement
 	@XmlJavaTypeAdapter(SQLDateAdapter.class)

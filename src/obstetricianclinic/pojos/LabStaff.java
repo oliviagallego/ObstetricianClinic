@@ -8,6 +8,7 @@ import java.util.Objects;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -22,7 +23,7 @@ public class LabStaff implements Serializable{
 	 * 
 	 */
 	private static final long serialVersionUID = -7699206787024615940L;
-	@XmlTransient
+	@XmlAttribute
 	private Integer id;
 	@XmlElement
 	private String name;

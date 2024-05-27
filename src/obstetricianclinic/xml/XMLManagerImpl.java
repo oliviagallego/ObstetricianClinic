@@ -66,7 +66,7 @@ public class XMLManagerImpl implements XMLManager {
 	public File labstaff2Xml(LabStaff labstaff) {
 		try {
 
-			JAXBContext jaxbContext = JAXBContext.newInstance(LabStaff.class);
+			JAXBContext jaxbContext = JAXBContext.newInstance(LabStaff.class); 
 			// Get the marshaler
 			Marshaller marshaller = jaxbContext.createMarshaller();
 			marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
