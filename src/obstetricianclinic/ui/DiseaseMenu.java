@@ -72,16 +72,16 @@ public class DiseaseMenu {
 		
 		if (listDiseases.isEmpty()) {
 	        System.out.println("No disease found with the name provided.");
-	        return null;  // Return null if no matches are found
+	        return null; 
 	    }
 		if (listDiseases.size() == 1) {
 			d=listDiseases.get(0);
 	        System.out.println("Only one Disease found: " + d);
 	        
-	        return d;  // Return the single found woman
+	        return d;  
 	    }
 
-	    // Multiple women found, let user choose
+	    
 	    System.out.println("Multiple matches found, please choose one:");
 	    for (int i = 0; i < listDiseases.size(); i++) {
 	        System.out.println((i + 1) + ". " + listDiseases.get(i));

@@ -52,14 +52,6 @@ public class ConnectionManager {
 		return c;
 	}
 	
-	/*//vamos a intentar solucionar el problema de database connection closed con esto
-	public Connection getConnection() {
-	    try {
-	        return DriverManager.getConnection("jdbc:sqlite:./db/obstetricianclinic.db");
-	    } catch (SQLException e) {
-	        throw new RuntimeException("Error connecting to the database", e);
-	    }
-	}*/
 
 
 

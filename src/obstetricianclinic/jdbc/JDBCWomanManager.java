@@ -42,22 +42,7 @@ public class JDBCWomanManager implements WomanManager {
 	}
 		
 
-	/*
-	private boolean womanExists(String name, String surname, Date dob) throws SQLException {
-	    String query = "SELECT COUNT(*) FROM women WHERE name = ? AND surname = ? AND dob = ?";
-	    try (PreparedStatement stmt = c.prepareStatement(query)) {
-	        stmt.setString(1, name);
-	        stmt.setString(2, surname);
-	        stmt.setDate(3, dob);
-	        ResultSet rs = stmt.executeQuery();
-	        if (rs.next()) {
-	            return rs.getInt(1) > 0;
-	        }
-	    }
-	    return false;
-	}
-	
-	*/
+
 
 
 	@Override
@@ -108,7 +93,7 @@ public class JDBCWomanManager implements WomanManager {
 			p.setInt(1, id);
 			ResultSet rs = p.executeQuery();
 			while (rs.next()) {
-				// Create a new Woman
+				
 				Integer woman_id= rs.getInt("obstetrician_id");
 				String name= rs.getString("name");
 				String surname= rs.getString("surname");
@@ -130,7 +115,7 @@ public class JDBCWomanManager implements WomanManager {
 			PreparedStatement p = c.prepareStatement(sql);
 			ResultSet rs = p.executeQuery();
 			while (rs.next()) {
-				// Create a new Woman
+				
 				Integer woman_id= rs.getInt("obstetrician_id");
 				String name= rs.getString("name");
 				String surname= rs.getString("surname");

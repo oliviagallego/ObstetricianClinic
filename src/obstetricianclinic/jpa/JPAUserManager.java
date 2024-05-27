@@ -18,8 +18,7 @@ public class JPAUserManager implements UserManager {
 			em.getTransaction().begin();
 			em.createNativeQuery("PRAGMA foreign_keys=ON").executeUpdate();
 			em.getTransaction().commit();
-			//Create default roles
-			//if they don't exist already
+			
 			try {
 				this.getRole("manager");
 			}catch(NoResultException e) {

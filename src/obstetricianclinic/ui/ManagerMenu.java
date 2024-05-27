@@ -146,10 +146,7 @@ public class ManagerMenu {
 	}
 	
 	public static void registerLabStaff() throws IOException, Exception {
-		/*if (userMan == null) {
-	        System.out.println("UserManager has not been initialized");
-	        throw new IllegalStateException("UserManager is required but was not initialized.");
-	    }*/
+		
 		System.out.println("\nRegistration of a laboratory staff: ");
 		System.out.println("Please type the laboratory staff data:");
 		System.out.println("Name:");

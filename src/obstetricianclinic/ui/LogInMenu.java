@@ -43,13 +43,13 @@ public abstract class LogInMenu{
 					String hashedpassword= userMan.encryptPassword(password);
 					
 					User user = userMan.logIn(username, hashedpassword);
-					// User user = userMan.logIn("manager", "default0", "manager@obstetricianClinic.com");
+					
 
 					if (user != null) {
 		                if (user.getRole().getName().equals("manager")) {
 		                	ManagerMenu manMenu= new ManagerMenu(user, userMan, conMan, xmlMan);
 		                	manMenu.menu(user, userMan, conMan);
-		                    //ManagerMenu.menu(user, userMan, conMan);
+		                    
 
 		                } else if (user.getRole().getName().equals("obstetrician")) {
 		                    ObstetricianMenu.menu(user, userMan, conMan);

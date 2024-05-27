@@ -39,16 +39,7 @@ public class NewbornMenu {
 		
 		while (true) {
 			try {
-				/*//List of Newborns
-				if(pregnancy.getNewborns().size()==1) {
-					System.out.println("\n The newborn of these pregnancy is: "+pregnancy.getNewborns());
-				}else {
-					System.out.println("\n The newborns of these pregnancy are: ");
-					for(int i=0; i<pregnancy.getNewborns().size(); i++) {
-						System.out.println("\n"+i+" - "+pregnancy.getNewborns().get(i));
-					}
-				}
-				*/
+				
 				System.out.println("Menu of Newborns: ");
 				System.out.println("\nChoose an option, please:");
 				System.out.println("\n1. Register a newborns");
@@ -75,7 +66,7 @@ public class NewbornMenu {
 							break;
 						}
 						case 0: {
-							//conMan.closeConnection();
+							
 							return;
 						}
 						default: {

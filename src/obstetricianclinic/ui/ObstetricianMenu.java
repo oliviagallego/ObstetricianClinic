@@ -67,7 +67,7 @@ public class ObstetricianMenu {
 						}
 						
 						case 0: {
-							//conMan.closeConnection();
+							
 							return;
 						}
 						default: {
@@ -130,10 +130,10 @@ public static Woman searchWomanByNAndS(int id) throws IOException {
 
     if (listWomen.size() == 1) {
         System.out.println("One woman found: " + listWomen.get(0));
-        return listWomen.get(0);  // Return the single found woman
+        return listWomen.get(0);  
     }
 
-    // Multiple women found, let user choose
+   
     System.out.println("Multiple matches found, please choose one:");
     for (int i = 0; i < listWomen.size(); i++) {
         System.out.println((i + 1) + ". " + listWomen.get(i));
@@ -141,10 +141,14 @@ public static Woman searchWomanByNAndS(int id) throws IOException {
     System.out.println("Enter the number of the woman you choose:");
     int choice = Integer.parseInt(r.readLine()) - 1;  // Adjust for zero-based index
     if (choice >= 0 && choice < listWomen.size()) {
+    	// Assign the same obstetrician to the woman
+    	// For this woman
+    		// Get the diseases getDiseasesOfWoman(int womanid)
+    		// Get the pregnancies 
         return listWomen.get(choice);  // Return the selected woman
     } else {
         System.out.println("Invalid choice, please enter a valid number.");
-        return null;  // Return null if the input choice is out of range
+        return null;  
     }
 
    }

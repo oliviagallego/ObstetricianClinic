@@ -44,7 +44,6 @@ public class PregnancyMenu {
 		switch (choice) {
 						case 1: {
 							Pregnancy pregnancy=pregnancySearch(woman);
-							//subPregnancyMenu(pregSearch);
 							System.out.println(pregnancy);
 							break;
 						}
@@ -65,7 +64,7 @@ public class PregnancyMenu {
 							break;
 						}
 						case 0: {
-							//conMan.closeConnection();
+							
 							return;
 						}
 						default: {
@@ -94,26 +93,26 @@ public static Pregnancy pregnancySearch(Woman woman) throws IOException {
 	
 	if (listPregnancies.isEmpty()) {
         System.out.println("No pregnancy found with the date of conception provided.");
-        return null;  // Return null if no matches are found
+        return null;  
     }
 
     if (listPregnancies.size() == 1) {
         System.out.println("One pregnancy found: " + listPregnancies.get(0));
-        return listPregnancies.get(0);  // Return the single found pregnancy
+        return listPregnancies.get(0);  
     }
 
-    // Multiple pregnancies found, let user choose
+    
     System.out.println("Multiple matches found, please choose one:");
     for (int i = 0; i < listPregnancies.size(); i++) {
         System.out.println((i + 1) + ". " + listPregnancies.get(i));
     }
     System.out.println("Enter the number of the pregnancy you choose:");
-    int choice = Integer.parseInt(r.readLine()) - 1;  // Adjust for zero-based index
+    int choice = Integer.parseInt(r.readLine()) - 1;  
     if (choice >= 0 && choice < listPregnancies.size()) {
-        return listPregnancies.get(choice);  // Return the selected pregnancy
+        return listPregnancies.get(choice);  
     } else {
         System.out.println("Invalid choice, please enter a valid number.");
-        return null;  // Return null if the input choice is out of range
+        return null;  
     }
 	
 	}	
@@ -133,23 +132,7 @@ public static Pregnancy addPregancy(Woman woman) throws IOException {
 	    	Date dateConception = Date.valueOf(dateCLocalDate);
 	    	System.out.println("Birth report: ");
 	    	String textReport= r.readLine();
-	    	/*System.out.println("How many Newborns you need to add? ");
-	    	int number= Integer.parseInt(r.readLine());
-	    	while(number>0) {
-	    		System.out.println(number+" -Please type the Newborn data:");
-	    		System.out.println("Name:");
-	    		String name = r.readLine();
-	    		System.out.println("Surname:");
-	    		String surname = r.readLine();
-	    		System.out.println("Weight:");
-	    		Float weight = Float.parseFloat(r.readLine());
-	    		System.out.println("Gender (F/M):");
-	    		String gender = r.readLine();
-	    		//Quitamos el lastReport.getDate_Test() por que no corresponde al dob
-	    		Newborn newborn= new Newborn(name,surname,weight,gender, );
-	    		bornMan.addNewborn(newborn);
-	    		number--;
-	    	}*/
+	    	
 	    	Pregnancy p = new Pregnancy(dateConception,textReport, woman);
 	    	pregMan.addPregnancy(p);
 	    	return p;
@@ -160,51 +143,7 @@ public static Pregnancy addPregancy(Woman woman) throws IOException {
 	    	return null;
 	    }
 	}
-/*
-public static void subPregnancyMenu(Pregnancy pregnancy) {
-	while (true) {
-		try {
-			System.out.println("Pregnancys's Menu of:"+pregnancy.getDateConception());
-			System.out.println("\nChoose an option, please:");
-			System.out.println("\n1. View pregnancy's Data");
-			System.out.println("\n2. Update pregnancy's Data");
-			System.out.println("\n3. View Newborns's Data");
-			System.out.println("\n0. Exit");
 
-		
-    int choice = Integer.parseInt(r.readLine());
-	switch (choice) {
-					case 1: {
-						System.out.println(pregnancy);
-						break;
-					}
-					case 2: {
-						updatePregancy(pregnancy);
-						System.out.println(pregnancy);
-						break;
-					}
-					case 3: {
-						NewbornMenu.menu(pregnancy);
-						break;
-					}
-					case 0: {
-						return;
-					}
-					default: {
-						System.out.println(" ERROR: Invalid option.");
-					}
-					}
-
-				} catch (NumberFormatException e) {
-					System.out.println("Please write a number");
-					e.printStackTrace();
-				} catch (IOException e) {
-					System.out.println("I/O Exception.");
-					e.printStackTrace();
-				}
-			}
-
-}*/
 public static void updatePregancy(Pregnancy pregnancy) throws IOException {
 	System.out.println("Please what do you want to update of the pregnancy's data:");
 	System.out.println("\nChoose an option:");

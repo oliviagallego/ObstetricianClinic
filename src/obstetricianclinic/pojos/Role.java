@@ -59,7 +59,7 @@ public class Role implements Serializable {
 	}
 
 	public void addUser(User user) {
-		if (!users.contains(user)) {//check if user exist in the list
+		if (!users.contains(user)) {
 			users.add(user);
 		}
 	}

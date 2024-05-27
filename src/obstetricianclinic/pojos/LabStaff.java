@@ -35,7 +35,7 @@ public class LabStaff implements Serializable{
     private List<LabReport> labReports;
     
     
-	//Tenemos mil constructores pq?
+	
 	public LabStaff() {
 		super();
 		this.labReports = new ArrayList<LabReport>();

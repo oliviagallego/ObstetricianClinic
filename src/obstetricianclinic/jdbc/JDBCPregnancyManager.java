@@ -25,10 +25,7 @@ public class JDBCPregnancyManager implements PregnancyManager {
 	@Override
 	public void addPregnancy(Pregnancy pregnancy) {
 	    try {
-	        /*if (pregnancyExists(pregnancy.getDateConception(), pregnancy.getWoman().getId())) {
-	            System.out.println("A pregnancy record for this woman on the specified date of conception already exists. Please verify the information.");
-	            return;
-	        }*/
+	       
 	    	String sql = "INSERT INTO pregnancies (date_conception, birth_report, woman_id) VALUES (?, ?, ?);";
 	        PreparedStatement insert = c.prepareStatement(sql);
 	        insert.setDate(1, pregnancy.getDateConception());
@@ -44,21 +41,7 @@ public class JDBCPregnancyManager implements PregnancyManager {
 	}
 
 
-	/*private boolean pregnancyExists(Date dateConception, int womanId) throws SQLException {
-	    String query = "SELECT COUNT(*) FROM pregnancies WHERE (date_conception, woman_id) "+"VALUES (?, ?, ?); ";
-	    try (PreparedStatement stmt = c.prepareStatement(query)) {
-	        stmt.setDate(1, dateConception);
-	        stmt.setInt(2, womanId);
-	        try (ResultSet rs = stmt.executeQuery()) {
-	            if (rs.next()) {
-	                return rs.getInt(1) > 0;
-	            }
-	        }
-	    }
-	    return false;
-	}
 
-	*/
 	@Override
 	public List<Pregnancy> searchPregnancyByDateOfConception(Date dateOfConception) {
 		List<Pregnancy> pregnancies= new ArrayList<Pregnancy>();

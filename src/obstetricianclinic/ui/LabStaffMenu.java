@@ -24,10 +24,7 @@ public class LabStaffMenu {
 	private static LabStaffManager labStaffMan;
 	private static UserManager userMan;
 	public static void menu(User user, UserManager man, ConnectionManager conMan) {
-		/*if (user.getRole() == null || !user.getRole().getName().equals("labStaff")) {
-            System.out.println("Access Denied: You do not have the necessary permissions to access this menu.");
-            return;  MEJOR  LO DE DEBAJO IGUAL Q OBSTETRICIANMENU
-        }*/
+		
 		obstetricianMan = conMan.getObstetricianMan();
 		womanMan = conMan.getWomanMan();
 		labStaffMan = conMan.getLabStaffMan();
