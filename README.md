@@ -2,7 +2,7 @@
 
 ## Team
 - Jaime Martin Casado
-- Laura Gallego Pareces
+- Laura Gallego Paredes
 - Nicolás Sicilia Pascual
 - Olivia Gallego Toscano
 
