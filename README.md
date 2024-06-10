@@ -26,4 +26,4 @@ Explore our project in detail and see our progress:
 
 ## Presentation:
 For a comprehensive overview of our project, including its scope, methodologies, and visuals, please view our presentation:
-[View Presentation on Prezi](https://prezi.com/view/nlxj9AxzLNIvya5QYnrs/)
+[View Presentation on Prezi](https://prezi.com/view/5SPxCjie4rk1ql0qbVXc/)
