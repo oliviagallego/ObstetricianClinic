@@ -1,10 +1,10 @@
 # Obstetrician's Clinic Database
 
 ## Team
-- Jaime Martin Casado
-- Laura Gallego Paredes
-- Nicolás Sicilia Pascual
-- Olivia Gallego Toscano
+- Jaime Martin Casado (commits name: JaimeMarCasado)
+- Laura Gallego Paredes (commits name: LauraGP02)
+- Nicolás Sicilia Pascual (commits name: nicos)
+- Olivia Gallego Toscano (commits name: USUARIO or oliviagallego)
 
 ## Aim
 This project develops a database for a fictional obstetrician's clinic as a capstone for our database course. It demonstrates our ability to design and manage complex database systems effectively.
