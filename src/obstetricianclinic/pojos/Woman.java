@@ -44,7 +44,7 @@ public class Woman implements Serializable{
     @XmlTransient
     private List<LabReport> labReports;
 
-    // Constructor
+    
     public Woman() {
     	super();
     	this.diseases = new ArrayList<Disease>();

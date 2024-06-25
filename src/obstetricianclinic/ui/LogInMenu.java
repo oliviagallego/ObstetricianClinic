@@ -14,7 +14,7 @@ public abstract class LogInMenu{
 	private static UserManager userMan;
 	private static BufferedReader r = new BufferedReader(new InputStreamReader(System.in));
 	private static XMLManager xmlMan;
-	public static void main(String[] Args) throws SQLException { // throws NumberFormatException, IOException, Exception{
+	public static void main(String[] Args) throws SQLException { 
 			
 			try {
 				ConnectionManager conMan = new ConnectionManager();

@@ -11,7 +11,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
 
-//import obstetricianclinic.jpa.JPAUserManager; esta por programar
+
 public class ObstetricianMenu {
 	
 	private static BufferedReader r = new BufferedReader(new InputStreamReader(System.in));
@@ -21,7 +21,7 @@ public class ObstetricianMenu {
 	private static ObstetricianManager obstetricianMan;
 	
 	public static void menu(User user, UserManager userMan, ConnectionManager conMan) {
-		womanMan = conMan.getWomanMan();/* solo tenemos q hacer uso del método*/
+		womanMan = conMan.getWomanMan();
 		obstetricianMan = conMan.getObstetricianMan();
 		
 		Obstetrician obstetrician = obstetricianMan.getObstetricianFromUser(user.getUsername());
@@ -139,13 +139,10 @@ public static Woman searchWomanByNAndS(int id) throws IOException {
         System.out.println((i + 1) + ". " + listWomen.get(i));
     }
     System.out.println("Enter the number of the woman you choose:");
-    int choice = Integer.parseInt(r.readLine()) - 1;  // Adjust for zero-based index
+    int choice = Integer.parseInt(r.readLine()) - 1; 
     if (choice >= 0 && choice < listWomen.size()) {
-    	// Assign the same obstetrician to the woman
-    	// For this woman
-    		// Get the diseases getDiseasesOfWoman(int womanid)
-    		// Get the pregnancies 
-        return listWomen.get(choice);  // Return the selected woman
+    	
+        return listWomen.get(choice);  
     } else {
         System.out.println("Invalid choice, please enter a valid number.");
         return null;  

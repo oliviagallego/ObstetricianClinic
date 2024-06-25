@@ -79,7 +79,7 @@ public class JDBCObstetricianManager implements ObstetricianManager {
 	        ResultSet rs = p.executeQuery();
 
 	        while (rs.next()) {
-	            Integer obstetrician_id = rs.getInt("obstetrician_id"); // He cambiado el nombre de la columna a la que apunta
+	            Integer obstetrician_id = rs.getInt("obstetrician_id");
 	            name = rs.getString("name");
 	            surname = rs.getString("surname");
 	            username = rs.getString("username");

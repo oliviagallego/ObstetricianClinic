@@ -37,7 +37,7 @@ public class Obstetrician implements Serializable{
 	
 	
 	
-	//Mil constructores otra vez
+	
 	public Obstetrician() {
 		super();
 		this.women = new ArrayList<Woman>();

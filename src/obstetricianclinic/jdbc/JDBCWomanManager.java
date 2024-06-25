@@ -48,13 +48,13 @@ public class JDBCWomanManager implements WomanManager {
 	@Override
 	public void deleteWoman(int id) {
 		try {
-			String sql = "DELETE FROM women WHERE woman_id = ?"; //hemos puesto woman_id en vez de solo id
+			String sql = "DELETE FROM women WHERE woman_id = ?";
 			PreparedStatement p;
 			p = c.prepareStatement(sql);
 			p.setInt(1, id);
 			p.executeUpdate();
 			p.close();
-			System.out.println("The woman was deleted correctly");// hemos añadido un mensaje
+			System.out.println("The woman was deleted correctly");
 		} catch (SQLException e) {
 			System.out.println("Database error.");
 			e.printStackTrace();
